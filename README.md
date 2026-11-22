@@ -13,6 +13,10 @@ What is in the skill:
   by UI Automation.
 - `scripts/aut.py`: Function Block program generator with automatic layout and wire routing.
 - `scripts/tgml.py`: graphic (HMI) generator. `scripts/fuxa.py`: FUXA project generator for an MQTT view.
+- `examples/dh-ex2/`: a worked example, a district heating substation with controller, plant model, operator
+  graphic and MQTT view, as an agent built it with this skill.
+
+![District heating example: EBO graphic and FUXA view](examples/dh-ex2/screen.png)
 
 ## Install
 

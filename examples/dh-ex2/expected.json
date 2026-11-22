@@ -1,0 +1,53 @@
+{
+ "modules": [
+  "ALARM",
+  "OUTDOOR",
+  "TC1_DHW",
+  "TC2_HEAT"
+ ],
+ "constants": {
+  "TOUT_FILT_T": 900.0,
+  "DHW_ALM_DLY": 300.0,
+  "SUM_DLY": 3600.0,
+  "CRV_N20": 58.0,
+  "CRV_0": 41.0,
+  "CRV_P20": 20.0,
+  "TS_MIN": 18.0,
+  "TS_MAX": 70.0,
+  "HEAT_ALM_DLY": 600.0
+ },
+ "parameters": {
+  "OUTDOOR": {
+   "TOUT_FALLBACK": 0.0
+  },
+  "TC1_DHW": {
+   "DHW_ENABLE": 1.0,
+   "DHW_SP": 58.0,
+   "DHW_PID_P": 60.0,
+   "DHW_PID_I": 15.0,
+   "DHW_HI_LIM": 65.0,
+   "DHW_LO_LIM": 50.0
+  },
+  "TC2_HEAT": {
+   "SUM_STOP": 18.0,
+   "SUM_START": 16.0,
+   "HEAT_ENABLE": 1.0,
+   "HEAT_PID_P": 40.0,
+   "HEAT_PID_I": 60.0,
+   "HEAT_HI_LIM": 80.0,
+   "HEAT_LO_LIM": 8.0
+  }
+ },
+ "stats": {
+  "blocks": 56,
+  "wires": 67,
+  "constants": 9,
+  "public": 30,
+  "modules": [
+   "ALARM",
+   "OUTDOOR",
+   "TC1_DHW",
+   "TC2_HEAT"
+  ]
+ }
+}

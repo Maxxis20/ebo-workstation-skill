@@ -52,5 +52,8 @@ To check a generated file without the server, start the editor alone and use `Fi
 - `reference/MentaBlocks.xml`: the editor's block catalogue (pins, parameters). Not shipped: copy it from your
   own installation (findings, "The machine").
 - `examples/blink.aut`: smallest program that imports, compiles and runs.
+- `examples/dh-ex2/`: worked example (controller with four modules, plant model in closed loop, graphic, MQTT,
+  FUXA view) with the commands to load it. Read it for the patterns; do not copy it when asked to design something
+  from a description of your own.
 
 The WorkStation automation API needs an SDK licence key; do not work around it.
