@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ebo.sh - the EBO driver, for a bash on the Windows machine that runs EBO (Git Bash, which Claude Code uses).
-#   ebo.sh setup                 make the work folder C:\agentwork\ebo (once)
+#   ebo.sh check                 what is ready on this machine and what is not, one line each
+#   ebo.sh setup                 make the work folder C:\agentwork\ebo and fetch the block catalogue (once)
 #   ebo.sh logon                 start WorkStation if needed and log on (password from the environment, see below)
 #   ebo.sh run '<powershell>' [seconds]   run PowerShell with lib.ps1 + ebo.ps1 loaded, print its output
 #   ebo.sh put <local> <win path> | get <win path> <local> | shot [png] | sys '<powershell>' (plain PowerShell)
@@ -20,6 +21,7 @@ cli(){ ps -File "$(w "$S/win/cli.ps1")" "$@"; }
 tmp(){ local t; t=$(mktemp); mv "$t" "$t.ps1"; printf '\xef\xbb\xbf%s\n' "$1" > "$t.ps1"; echo "$t.ps1"; }   # with BOM: Windows PowerShell reads it as UTF-8
 case "${1:-}" in
   setup) cli setup ;;
+  check) cli check ;;
   run)   t=$(tmp "$2")
          if command -v timeout >/dev/null 2>&1; then timeout "${3:-100}" powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(w "$S/win/cli.ps1")" run "$(w "$t")" </dev/null | tr -d '\r' || { [ "${PIPESTATUS[0]}" = 124 ] && echo TIMEOUT; }
          else cli run "$(w "$t")"; fi; rm -f "$t" ;;
@@ -30,5 +32,5 @@ case "${1:-}" in
   shot)  if [ -n "${2:-}" ]; then cli shot "$(w "$2")" >/dev/null && echo "$2"; else cli shot; fi ;;
   mqtt)  cli mqtt "${2:-12}" ;;
   fuxa)  cli fuxa "$(w "$2")" ;;
-  *) sed -n 2,9p "$0"; exit 2 ;;
+  *) sed -n 2,10p "$0"; exit 2 ;;
 esac

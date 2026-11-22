@@ -15,6 +15,15 @@ Read `reference/findings.md` before touching WorkStation: what the machine needs
 time, the driver owns keyboard and mouse while it runs), what each driver function does, the `.aut` format with its traps (pin numbers, wire
 point offset), and what is still open.
 
+## First use on a machine
+
+Run `$E check` before anything else, and again whenever something basic fails. It prints one line per
+requirement. Fix every TODO yourself where you can (`$E setup` makes the work folder and copies the block
+catalogue from the user's own installation; `$E logon` starts WorkStation and logs on). Ask the user only for
+what needs their hands: typing the password into the box that `logon` opens, switching Classic Mode on, starting
+a stopped service, installing something. Tell them exactly what to do and wait. Also tell them, once, to keep
+their hands off keyboard and mouse while a driver command runs.
+
 ## Usual sequence
 
 ```bash

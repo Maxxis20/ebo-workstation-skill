@@ -35,20 +35,26 @@ In Git Bash:
 ```bash
 git clone https://github.com/Maxxis20/ebo-workstation-skill ~/.claude/skills/ebo-workstation
 cd ~/.claude/skills/ebo-workstation
-scripts/ebo.sh setup              # makes the work folder C:\agentwork\ebo
-cp "/c/Program Files (x86)/Schneider Electric EcoStruxure/Building Operation 7.1/WorkStation/MentaBlocks.xml" reference/
 ```
 
-The last line copies the Function Block editor's block catalogue from your own installation. It is Schneider's
-file, so it is not in this repository, and the program generator needs it.
+That is all you must do by hand. Start Claude Code and say what you want, for example "check that the EBO skill
+is ready on this machine" or straight away "build a Function Block program in EBO for an air handling unit
+with ...". The agent runs a check first, sets up what it can, and asks you for the rest:
 
-Then, once: start WorkStation, log on, open any Function Block program and switch `Show Classic Mode` on. It
-stays on.
+- **the WorkStation password**, in a Windows box on your screen (not in the chat);
+- **Classic Mode**, once: open any Function Block program in WorkStation and switch `Show Classic Mode` on;
+- anything missing on the machine (Python, a stopped Enterprise Server service).
 
-## First test
+It also fetches the Function Block editor's block catalogue from your own installation. That is Schneider's file,
+so it is not in this repository, and the program generator needs it.
+
+## By hand, if you want to see it work first
 
 ```bash
 E=~/.claude/skills/ebo-workstation/scripts/ebo.sh
+$E check                                                    # what is ready, what is not
+$E setup                                                    # work folder, block catalogue
+$E logon                                                    # starts WorkStation, asks for the password
 $E shot now.png                                             # a screenshot of your desktop
 $E run "Ws-LoggedOn"                                        # True when WorkStation is logged on
 $E put examples/blink.aut 'C:\agentwork\ebo\blink.aut'
@@ -57,9 +63,6 @@ $E run "Fb-Load '/Server 1' 'Blink' 'C:\agentwork\ebo\blink.aut'" 150
 
 **Hands off the keyboard and mouse while a command runs.** The driver brings WorkStation to the front, types and
 clicks. After about 40 seconds `/Server 1/Blink` exists, compiled and running.
-
-Then start Claude Code and ask for what you want, for example: "Build a Function Block program in EBO for an air
-handling unit with ..." The agent reads the skill by itself.
 
 **Password.** WorkStation logs off after 5 idle minutes, so the agent has to log on again now and then. It runs
 `ebo.sh logon`, and a Windows credential box opens on your screen: type the WorkStation password there. It goes
