@@ -1,4 +1,4 @@
-# ebo.ps1 - EBO WorkStation and Function Block editor operations, on top of lib.ps1. Console session only.
+# ebo.ps1 - EBO WorkStation and Function Block editor operations, on top of lib.ps1. Desktop session only.
 $script:WS  = 'SE.SBO.WorkStation'
 $script:FBE = 'tam32'
 function Fg-Root { $A::FromHandle([W32]::GetForegroundWindow()) }
@@ -39,10 +39,11 @@ function Cert-Dialog {
   $b = Ui-Find (Fg-Root) 'Trust certificate' $CT::Button 2
   if ($b) { Ui-Invoke $b; Start-Sleep 1 }
 }
-# Make sure WorkStation runs and is logged on: start it through its scheduled task if needed, then Ws-Logon.
+# Make sure WorkStation runs and is logged on: start it if needed, then Ws-Logon.
 function Ws-Ensure($user = 'admin') {
   if (-not (Ws-Proc)) {
-    Start-ScheduledTask EboWorkStation
+    $ws = 'C:\Program Files (x86)\Schneider Electric EcoStruxure\Building Operation 7.1\WorkStation'
+    Start-Process "$ws\SE.SBO.WorkStation.exe" -WorkingDirectory $ws
     $t = [Diagnostics.Stopwatch]::StartNew()
     while ($t.Elapsed.TotalSeconds -lt 90 -and -not (Ws-Proc)) { Start-Sleep 1 }
     if (-not (Ws-Proc)) { throw 'WorkStation did not start' }

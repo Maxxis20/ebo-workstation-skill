@@ -76,12 +76,18 @@ class Graphic:
         self.items.append(f'<Ellipse Fill="{off}" Height="{d}" Left="{x}" Stroke="#5F6368" StrokeWidth="1" Top="{y}" '
                           f'Width="{d}">{self._fill_bind(name, on, off)}</Ellipse>')
 
-    def pump(self, x, y, name, d=44):
-        """Circle with a triangle; green while the binary is 1."""
+    def pump(self, x, y, name, d=44, left=False):
+        """Circle with a triangle that shows the flow direction (to the right, or to the left). Colour by the value:
+        0 grey (stopped), 1 green (running), 2 and above red (fault). A plain binary gives grey / green."""
+        self._bind(name)
         self.items.append(f'<Ellipse Fill="#BDC1C6" Height="{d}" Left="{x}" Stroke="#3C4043" StrokeWidth="2" Top="{y}" '
-                          f'Width="{d}">{self._fill_bind(name, "#34A853", "#BDC1C6")}</Ellipse>')
+                          f'Width="{d}"><Bind Attribute="Fill" Name="{name}">'
+                          f'<ConvertValue AttributeValue="#BDC1C6" SignalLessOrEqualTo="0"/>'
+                          f'<ConvertValue AttributeValue="#34A853" SignalEqualTo="1"/>'
+                          f'<ConvertValue AttributeValue="#D93025" SignalMoreOrEqualTo="2"/></Bind></Ellipse>')
         c = d / 2
-        self.polygon([(x + c - 8, y + c - 11), (x + c + 12, y + c), (x + c - 8, y + c + 11)], fill="#FFFFFF", stroke="#3C4043")
+        k = -1 if left else 1
+        self.polygon([(x + c - 8 * k, y + c - 11), (x + c + 12 * k, y + c), (x + c - 8 * k, y + c + 11)], fill="#FFFFFF", stroke="#3C4043")
 
     def valve(self, x, y, s=18):
         """Two-way valve symbol centred on (x, y), with an actuator box on top."""

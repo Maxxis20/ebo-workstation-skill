@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """fuxa.py - FUXA project generator: one MQTT device, one tag per topic, one view with live values.
 
-For the FUXA 1.3.5 that runs on the VM beside the Mosquitto broker (findings, section MQTT). EBO publishes each
+For a FUXA 1.3.5 that runs beside the Mosquitto broker (findings, section MQTT). EBO publishes each
 data point on its own topic (the EBO path without the leading slash, e.g. "Server 1/Prog/MODULE/Signal") with the
 plain number as payload, so every tag is a raw MQTT tag whose address is the topic.
 

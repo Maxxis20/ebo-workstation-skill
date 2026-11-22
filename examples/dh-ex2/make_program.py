@@ -48,7 +48,9 @@ def build():
     te1 = x(m, "XPR", "TE1", "A", {"A": p.block("RI", "TE1_IN", [0], module=m)}, True)
     f1 = x(m, "XPB", "TE1_FAULT", "A<-20|A>120", {"A": te1}, True)
     p1 = x(m, "XPB", "P1_RUN", "A>0.5", {"A": sv(m, "DHW_ENABLE", 1)}, True)
-    en1 = x(m, "XPB", "DHW_CTRL_EN", "p&!f", {"p": p1, "f": f1})
+    pf1 = x(m, "XPB", "P1_FAULT", "A>0.5", {"A": p.block("RI", "P1_FLT_IN", [0], module=m)}, True)   # motor protection of P1 (HS)
+    x(m, "XPI", "P1_ST", "f?2:(r?1:0)", {"f": pf1, "r": p1}, True)        # 0 stopped, 1 running, 2 fault: for displays
+    en1 = x(m, "XPB", "DHW_CTRL_EN", "p&!f", {"p": p1, "f": f1})      # a P1 fault only alarms: tapping still flows through the exchanger
     tv1 = pid(m, "TV1", te1, sv(m, "DHW_SP", 58), en1, sv(m, "DHW_PID_P", 60), sv(m, "DHW_PID_I", 15))
     a1 = x(m, "XPB", "DHW_ALM_RAW", "e&(A>B|A<C)", {"A": te1, "B": sv(m, "DHW_HI_LIM", 65), "C": sv(m, "DHW_LO_LIM", 50), "e": en1})
     alm1 = p.block("DELAY", "DHW_TEMP_ALM", ["DHW_ALM_DLY", 0], public=True, module=m); p.wire(a1, alm1)
@@ -66,7 +68,9 @@ def build():
     f2a = x(m, "XPB", "TE2A_FAULT", "A<-20|A>120", {"A": te2a}, True)
     crv = p.block("CURVE", "HEAT_CURVE", [1, -20, "CRV_N20", 0, "CRV_0", 20, "CRV_P20"], module=m); p.wire(te2b_f, crv)
     sp2 = p.block("LIMIT", "HEAT_SP", ["TS_MIN", "TS_MAX"], public=True, module=m); p.wire(crv, sp2)
-    en2 = x(m, "XPB", "HEAT_CTRL_EN", "p&!f", {"p": p2, "f": f2a})
+    pf2 = x(m, "XPB", "P2_FAULT", "A>0.5", {"A": p.block("RI", "P2_FLT_IN", [0], module=m)}, True)   # motor protection of P2 (HS)
+    x(m, "XPI", "P2_ST", "f?2:(r?1:0)", {"f": pf2, "r": p2}, True)
+    en2 = x(m, "XPB", "HEAT_CTRL_EN", "p&!f&!g", {"p": p2, "f": f2a, "g": pf2})   # no flow without P2: close TV2, do not waste district heat
     tv2 = pid(m, "TV2", te2a, sp2, en2, sv(m, "HEAT_PID_P", 40), sv(m, "HEAT_PID_I", 60))
     a2 = x(m, "XPB", "HEAT_ALM_RAW", "A>B|A<C", {"A": te2a, "B": sv(m, "HEAT_HI_LIM", 80), "C": sv(m, "HEAT_LO_LIM", 8)})
     alm2 = p.block("DELAY", "HEAT_TEMP_ALM", ["HEAT_ALM_DLY", 0], public=True, module=m); p.wire(a2, alm2)
@@ -74,7 +78,7 @@ def build():
 
     # 4 ALARM
     m = "ALARM"
-    s = x(m, "XPB", "ALARM_SUM", "a|b|c|d|e", {"a": f2b, "b": f1, "c": alm1, "d": f2a, "e": alm2}, True)
+    s = x(m, "XPB", "ALARM_SUM", "a|b|c|d|e|f|g", {"a": f2b, "b": f1, "c": alm1, "d": f2a, "e": alm2, "f": pf1, "g": pf2}, True)
     p.wire(s, p.block("BO", "ALARM_OUT", module=m))
     return p
 

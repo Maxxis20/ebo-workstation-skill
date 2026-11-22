@@ -39,10 +39,10 @@
   }
  },
  "stats": {
-  "blocks": 56,
-  "wires": 67,
+  "blocks": 62,
+  "wires": 76,
   "constants": 9,
-  "public": 30,
+  "public": 34,
   "modules": [
    "ALARM",
    "OUTDOOR",

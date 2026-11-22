@@ -8,7 +8,8 @@ C, S = "DH-ex2", "DH-ex2-SIM"
 
 # program input -> public signal of the other program (both directions)
 PROG_BINDS = {
-    C: [("TE2B_IN", S, "PLANT", "TE2B"), ("TE1_IN", S, "PLANT", "TE1"), ("TE2A_IN", S, "PLANT", "TE2A")],
+    C: [("TE2B_IN", S, "PLANT", "TE2B"), ("TE1_IN", S, "PLANT", "TE1"), ("TE2A_IN", S, "PLANT", "TE2A"),
+        ("P1_FLT_IN", S, "PLANT", "P1_TRIP"), ("P2_FLT_IN", S, "PLANT", "P2_TRIP")],
     S: [("TV1_IN", C, "TC1_DHW", "TV1"), ("P1_IN", C, "TC1_DHW", "P1_RUN"),
         ("TV2_IN", C, "TC2_HEAT", "TV2"), ("P2_IN", C, "TC2_HEAT", "P2_RUN")],
 }
@@ -19,12 +20,15 @@ HMI = {
     "TV1_POS": (S, "PLANT", "TV1_POS"), "TV2_POS": (S, "PLANT", "TV2_POS"),
     "TE2B": (C, "OUTDOOR", "TE2B"), "TE2B_F": (C, "OUTDOOR", "TE2B_F"),
     "TE1": (C, "TC1_DHW", "TE1"), "DHW_SP": (C, "TC1_DHW", "DHW_SP"), "TV1": (C, "TC1_DHW", "TV1"),
-    "P1_RUN": (C, "TC1_DHW", "P1_RUN"),
+    "P1_ON": (S, "PLANT", "P1_ON"),
     "TE2A": (C, "TC2_HEAT", "TE2A"), "HEAT_SP": (C, "TC2_HEAT", "HEAT_SP"), "TV2": (C, "TC2_HEAT", "TV2"),
-    "P2_RUN": (C, "TC2_HEAT", "P2_RUN"), "SUMMER": (C, "TC2_HEAT", "SUMMER"),
+    "P2_ON": (S, "PLANT", "P2_ON"), "SUMMER": (C, "TC2_HEAT", "SUMMER"),
     "TE2B_FAULT": (C, "OUTDOOR", "TE2B_FAULT"), "TE1_FAULT": (C, "TC1_DHW", "TE1_FAULT"),
     "DHW_TEMP_ALM": (C, "TC1_DHW", "DHW_TEMP_ALM"), "TE2A_FAULT": (C, "TC2_HEAT", "TE2A_FAULT"),
     "HEAT_TEMP_ALM": (C, "TC2_HEAT", "HEAT_TEMP_ALM"), "ALARM_SUM": (C, "ALARM", "ALARM_SUM"),
+    "P1_ST": (C, "TC1_DHW", "P1_ST"), "P2_ST": (C, "TC2_HEAT", "P2_ST"),
+    "P1_FAULT": (C, "TC1_DHW", "P1_FAULT"), "P2_FAULT": (C, "TC2_HEAT", "P2_FAULT"),
+    "P1_TRIP": (S, "PLANT", "P1_TRIP"), "P2_TRIP": (S, "PLANT", "P2_TRIP"),
 }
 
 # MQTT data points: tag name -> (program, module, signal); topic = "Server 1/<program>/<module>/<signal>"

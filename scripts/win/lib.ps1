@@ -1,5 +1,5 @@
-# lib.ps1 - helpers for driving EBO WorkStation and the Function Block editor from the logged-on console session.
-# Dot-sourced by agent.ps1. Everything here must run in the interactive session (scheduled task EboAgent), not as SYSTEM.
+# lib.ps1 - helpers for driving EBO WorkStation and the Function Block editor from your desktop session.
+# Dot-sourced by cli.ps1. Everything here must run in the interactive session, not as a service.
 Add-Type -AssemblyName System.Windows.Forms, UIAutomationClient, UIAutomationTypes
 Add-Type @"
 using System; using System.Text; using System.Runtime.InteropServices;
@@ -152,6 +152,15 @@ function Top-Window($title, $sec = 10) {
 # Standard Windows file dialog: it opens with the focus in the File name box, so type the path and press Enter.
 # (The box is a combo box whose edit does not take a UI Automation value.)
 function FileDialog-Set($title, $path) {
-  if (-not (Wait-Fg ("^" + [regex]::Escape($title) + "$") 10)) { throw "file dialog '$title' did not come to the front (foreground: $(Fg-Title))" }
+  $pat = "^" + [regex]::Escape($title) + "$"
+  if (-not (Wait-Fg $pat 6)) {
+    # The dialog can open behind its owner and never get the focus (seen with the editor's Import): bring it forward.
+    $d = Top-Window $title 4
+    if ($d) {
+      [W32]::keybd_event(0x87, 0, 0, [UIntPtr]::Zero); [W32]::keybd_event(0x87, 0, 2, [UIntPtr]::Zero)
+      [void][W32]::SetForegroundWindow([IntPtr]$d.Current.NativeWindowHandle)
+    }
+    if (-not (Wait-Fg $pat 5)) { throw "file dialog '$title' did not come to the front (foreground: $(Fg-Title))" }
+  }
   Start-Sleep -Milliseconds 400; Keys '%n'; Start-Sleep -Milliseconds 150; Text $path; Start-Sleep -Milliseconds 200; Keys '{ENTER}'
 }

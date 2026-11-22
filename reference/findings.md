@@ -7,36 +7,34 @@ versions.
 
 ## The machine
 
-- A Windows 11 virtual machine on Proxmox VE with the QEMU guest agent installed. Everything the driver does goes
-  through the guest agent and the VM console; no RDP, no network path into the guest is needed.
-- EBO 7.1.1 installed with a valid licence: Enterprise Server (service `Building Operation 7.1 Enterprise Server`,
-  ports 80 / 443 / 4444) and WorkStation. No automation server hardware: programs are created directly under
-  `/Server 1`.
+- A Windows machine with EBO 7.1.1 installed and a valid licence: Enterprise Server (service
+  `Building Operation 7.1 Enterprise Server`, ports 80 / 443 / 4444) and WorkStation, both on that machine. No
+  automation server hardware: programs are created directly under `/Server 1`.
+- The driver runs on the same machine, in your own desktop session, and works WorkStation's windows: it takes the
+  keyboard and the mouse while a command runs. Hands off until it is done.
 - Program files: `C:\Program Files (x86)\Schneider Electric EcoStruxure\Building Operation 7.1\`.
   Data: `C:\ProgramData\Schneider Electric EcoStruxure\Building Operation 7.1\`.
 - **Block catalogue**: `scripts/aut.py` checks block names and parameter counts against the editor's own catalogue,
-  which is Schneider's file and not part of this skill. Fetch it once from your installation:
-  `scripts/ebo.sh get 'C:\Program Files (x86)\Schneider Electric EcoStruxure\Building Operation 7.1\WorkStation\MentaBlocks.xml' reference/MentaBlocks.xml`
-- A test machine, not a production server: the driver creates and deletes objects under `/Server 1` and types into
-  whatever window is in front.
+  which is Schneider's file and not part of this skill. Copy it once from your installation into `reference/`:
+  `...\Building Operation 7.1\WorkStation\MentaBlocks.xml`
+- A test installation, not a production server: the driver creates and deletes objects under `/Server 1` and
+  types into whatever window is in front.
 
 ## Ways in
 
 | Lane | How | Use for |
 |---|---|---|
-| Guest agent | `scripts/ebo.sh sys '<powershell>'`, runs as SYSTEM in session 0 | files, services, reading exports |
-| Console | `scripts/ebo.sh shot <png>` | seeing the desktop |
-| EBO driver | `scripts/ebo.sh run '<powershell>'`: runs in the console session (scheduled task `EboAgent`) with `win/lib.ps1` and `win/ebo.ps1` loaded | everything in WorkStation and the editor: by UI Automation names and menu command ids |
+| Plain PowerShell | `scripts/ebo.sh sys '<powershell>'` | files, services, reading exports |
+| Screen | `scripts/ebo.sh shot <png>` | seeing the desktop |
+| EBO driver | `scripts/ebo.sh run '<powershell>'`: PowerShell with `win/lib.ps1` and `win/ebo.ps1` loaded | everything in WorkStation and the editor: by UI Automation names and menu command ids |
 
-- The Windows account must be logged on at the console (autologon), since WorkStation needs a desktop. RDP takes
-  the console session away: do not use it while the driver runs.
-- A scheduled task `EboWorkStation` (interactive, that account) starts WorkStation in the console session;
-  `Ws-Ensure` uses it. Register tasks with `Register-ScheduledTask` (`New-ScheduledTaskAction -Execute <exe>`);
-  `schtasks /create /tr` broke on the path with spaces.
-- Console resolution 1600x1200. The default 1024x768 is too small for the editor, and the few fixed click
-  positions (graphics editor menu, clicks on a graphic) assume 1600x1200.
+- Screen: the driver finds WorkStation's elements by name and clicks where they are, so no fixed screen size is
+  needed. A few clicks are placed a fixed number of pixels from an element or a window corner (graphics editor
+  menu, the pencil beside "Show Classic Mode", some property fields); those offsets were measured at 100 %
+  display scaling. Everything here was worked out at 1600x1200, 100 %. 1024x768 is too small for the editor.
+  Other sizes and other scaling are not tested: if a click lands beside its target, take a screenshot and look.
 - `Show Classic Mode` switched on once in WorkStation (it stays on across log-ons).
-- Working folder on the VM: `C:\agentwork\ebo`.
+- Working folder: `C:\agentwork\ebo` (`ebo.sh setup` makes it; `ebo.sh put` copies a file there).
 
 ## What does not work
 
@@ -50,9 +48,10 @@ versions.
 
 - WorkStation log-on: user `admin`, server `localhost`. **`scripts/ebo.sh logon`** does it: starts
   WorkStation if it is not running, types user and password, and answers the certificate question. The password
-  comes from `EBO_ADMIN_PASSWORD` in the environment of one child process (see the head of `ebo.sh`) and travels
-  ssh stdin -> guest agent stdin -> `C:\agentwork\ebo\.pw`, which `Ws-Logon` reads and deletes; it is never
-  printed and never in argv. Safe to call when already logged on.
+  is typed by the user into a Windows credential box that `ebo.sh logon` opens (or comes from
+  `EBO_ADMIN_PASSWORD` in the environment of one child process, see the head of `ebo.sh`) and goes
+  into `C:\agentwork\ebo\.pw`, which `Ws-Logon` reads and deletes; it is never printed and never on a command
+  line. Safe to call when already logged on. Logging on by hand works just as well.
 - Log-on to `localhost` raises `Security Certificate Risk` ("issued for a different server's address"). The
   script presses `Trust certificate` for that log-on only, never ticks "Always trust this certificate", and
   does nothing for any other server address. Unanswered, the log-on ends with "Logon has timed out".
@@ -227,17 +226,15 @@ What the hand-written file needed, and no more:
 - View a graphic: double-click it in the System Tree (`Ws-Open`).
 - Generator: `scripts/tgml.py` (`Graphic.text/value/state/lamp/pump/valve/bar/step_button/pipe/rect`).
 
-## MQTT (works, 2026-11-21): EBO -> Mosquitto -> FUXA, all on the VM
+## MQTT (works, 2026-11-21): EBO -> Mosquitto -> FUXA, all on one machine
 
-Nothing leaves the VM: the broker listens on loopback, and FUXA is kept to loopback by a Windows firewall rule
+Nothing leaves the machine: the broker listens on loopback, and FUXA is kept to loopback by a Windows firewall rule
 that blocks inbound 1881 (FUXA 1.3.5 ignores `uiHost`).
 
 - **Broker**: Mosquitto 2.0.22, native Windows, service `mosquitto`, `127.0.0.1:1883`, anonymous. Silent install `/S`. Config `C:\Program Files\mosquitto\mosquitto.conf`
   ends with an "agent block" (listener, log); log `C:\agentwork\mqtt\log\mosquitto.log` shows every client and
   publish. Listening: **`ebo.sh mqtt [seconds]`** prints every "topic payload" the broker receives in that time.
-  (`mosquitto_sub.exe -W n` never ends by itself under the guest agent and blocks the next command; `-C n`, a
-  message count, does end.) `mosquitto_pub.exe` is beside it.
-  WSL was not needed (and is not installable offline without more work).
+  `mosquitto_pub.exe` is beside it.
 - **EBO side**, three objects:
   `/Server 1/IoT` (New > `IoT Interface`) > `Broker` (New > `MQTT client`, at most 4 per interface) > `DH`
   (New > `Data Group`, at most 10 per client). Type definitions: `Enterprise Server\definitions\iot\*.xml`.
@@ -262,11 +259,12 @@ that blocks inbound 1881 (FUXA 1.3.5 ignores `uiHost`).
 - **A property page that opens into a fresh work area tab is drawn but not exposed to UI Automation** (no combo
   boxes, no `PropertyGridContainer`); seen after a WorkStation start and after creating an object. Selecting
   another object and the first one again in the same tab exposes it. `Prop-Grid` does that by itself.
-- **FUXA 1.3.5** on the VM: portable Node.js 22 (`C:\agentwork\node`) and `@frangoteam/fuxa` with its
+- **FUXA 1.3.5**, as it was set up without internet access (with internet, `npm install -g @frangoteam/fuxa` and
+  `fuxa` do the same): portable Node.js 22 (`C:\agentwork\node`) and `@frangoteam/fuxa` with its
   `node_modules` packed on another machine for Windows (`npm_config_platform=win32 npm_config_arch=x64 npm install
   @frangoteam/fuxa --os=win32 --cpu=x64`, then delete `@serialport/bindings-cpp/build`, which holds that machine's binary
   that would be preferred over the Windows prebuild). App `C:\agentwork\fuxa\app`, data
-  `C:\agentwork\fuxa\data` (`--userDir`), scheduled task `Fuxa` (SYSTEM, at startup), log
+  `C:\agentwork\fuxa\data` (`--userDir`), started at boot, log
   `C:\agentwork\fuxa\fuxa.log`, `uiHost: "127.0.0.1"` in `data\_appdata\settings.js`, page
   `http://127.0.0.1:1881/`. A project is loaded with `POST /api/project` (json body, no log-on in this set-up).
   MQTT device = type `MQTTclient`, `property.address` `mqtt://127.0.0.1:1883`; a tag per topic: type `raw`,
@@ -297,11 +295,10 @@ that blocks inbound 1881 (FUXA 1.3.5 ignores `uiHost`).
 
 ## The driver (scripts/ebo.sh, win/lib.ps1, win/ebo.ps1), 2026-11-21
 
-`ebo.sh` never reads standard input, so it can be called inside a `while read` loop. One call at a time: the guest
-agent runs one command, and two drivers on one console type into each other's windows.
+`ebo.sh` never reads standard input, so it can be called inside a `while read` loop. One call at a time: two
+drivers on one desktop type into each other's windows.
 
-`ebo.sh setup` pushes the PowerShell files to `C:\agentwork\ebo` and registers the task; run it after every
-edit of `win/*`. `ebo.sh run '<powershell>' [seconds]` prints what the commands write. An error shows as `EXC:`
+`ebo.sh setup` makes the work folder `C:\agentwork\ebo`. `ebo.sh run '<powershell>' [seconds]` prints what the commands write. An error shows as `EXC:`
 with the stack, and the output before it is kept.
 
 | Function | Does |

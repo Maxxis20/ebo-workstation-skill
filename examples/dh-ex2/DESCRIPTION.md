@@ -1,7 +1,7 @@
 # DH-ex2 — District heating substation, heating and domestic hot water
 
 Description of operation. Source drawing: Finnish Energy, District Heating Substation Group, *Example connection 2: small
-house connection to old one-family house without DHW circulation pipe* (K2, p. 63). Controller: one Ouman Ouflex A base
+house connection to old one-family house without DHW circulation pipe* (publication K1/2013, p. 63). Controller: one Ouman Ouflex A base
 unit, no expansion module. Generated plan: `plan.json` from `make_plan.py` (do not edit the JSON by hand). Page layout:
 `layout.json` (hand layout, see `ouflex/ouflayout.py`, `layout_manual`).
 
