@@ -5,7 +5,7 @@ Energy's publication K1/2013 (District heating of buildings, regulations and gui
 first version with this skill from `DESCRIPTION.md` alone, in 18 minutes 39 seconds. Afterwards, on the
 engineer's review: pumps drawn where the K1 drawing has them, and pump fault alarms added.
 
-![The operator graphic in WorkStation, live values](screen.png)
+![The operator graphic in WorkStation, live values](hmi-normal.png)
 
 | File | What |
 |---|---|
@@ -26,7 +26,7 @@ engineer's review: pumps drawn where the K1 drawing has them, and pump fault ala
   - P2 fault: alarm, and TV2 closes to 0 %. Without flow on the heating side an open valve would only send
     district heat back unused.
 
-![P2 tripped: pump red, alarm lit, TV2 at 0 %](screen-pump-fault.png)
+![P2 tripped: pump red, alarm lit, TV2 at 0 %](hmi-pump-fault.png)
 
 ## Load it
 

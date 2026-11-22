@@ -15,7 +15,7 @@ What is in the skill:
 - `examples/dh-ex2/`: a worked example, a district heating substation (Finnish Energy K1/2013, example
   connection 2) with controller, plant model, operator graphic and MQTT view.
 
-![District heating example: the operator graphic in WorkStation](examples/dh-ex2/screen.png)
+![District heating example: the operator graphic in WorkStation](examples/dh-ex2/hmi-normal.png)
 
 ## What you need
 
