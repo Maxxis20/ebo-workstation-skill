@@ -17,22 +17,35 @@ import xml.etree.ElementTree as ET
 HERE = os.path.dirname(os.path.abspath(__file__))
 CATALOGUE = os.path.join(HERE, "..", "reference", "MentaBlocks.xml")
 
-# flag = last number in [x,y,0,flag]. Seen in the shipped macro library: bit 0 = public.
-# Parameter blocks carry 6 when private and 7 when public; SR carries 4 when private.
-BASE_FLAG = {"PVR": 6, "PVB": 6, "PVI": 6, "SR": 4}
+# flag = last number in [x,y,0,flag] = the three check boxes of the block dialog: 1 Public, 2 R/W, 4 Backup
+# (editor help, "Configure a Function Block"; confirmed on production programs: PVR 7 or 3, SR 4 or 5, ALARM 5).
+# These are the R/W and Backup bits a block gets when block() is not told otherwise.
+BASE_FLAG = {"PVR": 6, "PVB": 6, "PVI": 6, "SR": 4, "ALARM": 4, "SHR": 4, "SHB": 4, "SHI": 4, "DELI": 4,
+             "ACCUM": 6, "RAMP": 6, "DELB": 6, "PIDP": 2}
+# Unit codes EBO writes in place of a unit text (seen in production programs). A unit given by one of these
+# names is written as the code; anything else goes out as typed.
+UNITS = {"": "", "none": "0x10001", "°C": "0x280001", "degC": "0x280001", "%": "0x200001", "ppm": "0x200002",
+         "Pa": "0x230002", "s": "0x2e0007"}
+# Connection blocks as the editor writes them on an Enterprise Server. A BI without its parameter list
+# compiles alone, but two of them fail with "I/O terminal reused in I/O block".
+IO_DEFAULT = {"RI": ["0", "3", "", "0", "0.5", "60", "0", "", "0", "0", "100", "0", "0", "0", "0", "0", "40", "0", ""],
+              "BI": ["4", "", "0", "0", ".5", "0", "", "", "0", "0", "100", "0", "0", "0", "0", "0"]}
 # Pin numbers in the file are not always the order drawn on the block. PIDA: taken from the shipped macro
 # Heating/Control/HOTWATER.AUT (gain on 4, integral time on 5, tracking signal on 3) and its wire end points.
+# PIDP numbers its pins in the order drawn (tracking signal last), seen on production programs.
 PINS = {"PIDA": {"MV": 0, "SP": 1, "Mode": 2, "TSg": 3, "G": 4, "Ti": 5, "Td": 6, "DZ": 7},
-        "SR": {"s": 0, "r": 1}}
+        "PIDP": {"MV": 0, "SP": 1, "Mode": 2, "G": 3, "Ti": 4, "Td": 5, "DZ": 6, "TSg": 7},
+        "SR": {"s": 0, "r": 1}, "SHR": {"D": 0, "c": 1}, "ACCUM": {"i": 0, "rs": 1, "rv": 2}}
 SLOT = {"PIDA": {0: 0, 1: 1, 2: 2, 3: 7, 4: 3, 5: 4, 6: 5, 7: 6}}   # pin number -> position on the block, from the top
 EXPR = {"XPR", "XPB", "XPI"}                      # one parameter in braces, inputs = letters used
 OPERATOR = re.compile(r"^Op")                     # operator blocks (OpR, OpW, Op?:, Op- ...): not in the catalogue
 
 
 class Block:
-    def __init__(self, prog, typ, name, params, unit, desc, public, module, n_in):
+    def __init__(self, prog, typ, name, params, unit, desc, public, module, n_in, rw=None, backup=None):
         self.prog, self.typ, self.name, self.params = prog, typ, name, params
         self.unit, self.desc, self.public, self.module = unit, desc, public, module
+        self.rw, self.backup = rw, backup
         self.n_in = n_in
         self.id = None; self.x = self.y = 0
 
@@ -63,17 +76,29 @@ class Block:
             return 9, 3
         if t in ("AND", "OR", "XOR"):
             return 6, 6
-        return 10, 10
+        g = self.prog.geo.get(t)                                   # the editor's own shape, 5 px per cell
+        return (g[0], g[1]) if g else (10, 10)
 
     def out_xy(self):
         w, h = self.size()
+        g = self.prog.geo.get(self.typ)
+        if g and g[3] is not None and not self._special():
+            return self.x + w, self.y + g[3]
         return self.x + w, self.y + (h + 1) // 2
+
+    def _special(self):
+        """Types whose geometry is worked out here and not taken from the catalogue."""
+        t = self.typ
+        return (t in EXPR or t in ("RI", "BI", "II", "RO", "BO", "IO", "PIDA", "SR", "AND", "OR", "XOR")
+                or t in self.TWO_PARAM or t in self.SATELLITE)
 
     def in_xy(self, pin):
         w, h = self.size()
         n = max(1, self.n_in)
         if self.typ == "PIDA":
             dy = 3 + 3 * SLOT["PIDA"][pin]
+        elif not self._special() and self.typ in self.prog.geo and pin < len(self.prog.geo[self.typ][2]):
+            dy = self.prog.geo[self.typ][2][pin]
         elif self.typ in ("AND", "OR", "XOR"):
             dy = 1 + 4 * pin
         elif n == 1:
@@ -87,7 +112,13 @@ class Block:
         return self.x, self.y + dy
 
     def line(self):
-        flag = BASE_FLAG.get(self.typ, 0) | (1 if self.public else 0)
+        flag = BASE_FLAG.get(self.typ, 0)
+        if self.rw is not None:
+            flag = flag & ~2 | (2 if self.rw else 0)
+        if self.backup is not None:
+            flag = flag & ~4 | (4 if self.backup else 0)
+        flag |= 1 if self.public else 0
+        unit = UNITS.get(self.unit, self.unit)
         if self.typ in EXPR:
             par = "{" + str(self.params[0]) + "}"
         elif self.typ == "CURVE":
@@ -96,9 +127,12 @@ class Block:
             par = "(" + fmt(lim) + "," + ", ".join(pairs) + ")"
         elif self.typ == "COMENT":
             return f'#{self.id} "" [{self.x},{self.y},0,0] \'\',\'\' = COMENT {{Arial,-13,700,0,0,0,0,0,0 :{self.params[0]}}},5'
+        elif self.typ == "ALARM":
+            on, off, prio, text = self.params
+            par = f"({fmt(on)},{fmt(off)},{fmt(prio)},'','','{text}','{text}')"
         else:
             par = "(" + ",".join(fmt(v) for v in self.params) + ")"
-        return f'#{self.id} "{self.full_name}" [{self.x},{self.y},0,{flag}] \'{self.unit}\',\'{self.desc}\' = {self.typ} {par}'
+        return f'#{self.id} "{self.full_name}" [{self.x},{self.y},0,{flag}] \'{unit}\',\'{self.desc}\' = {self.typ} {par}'
 
 
 def fmt(v):
@@ -127,17 +161,30 @@ def expr_inputs(expr):
 class Program:
     def __init__(self, title="", cycle_ms=1000):
         self.title, self.cycle_ms = title, cycle_ms
-        self.blocks, self.wires, self.consts = [], [], []
+        self.blocks, self.wires, self.consts, self.binds = [], [], [], []
         self.cat = {}
+        self.geo = {}                                           # type -> (width, height, input rows, output row), cells
         if os.path.exists(CATALOGUE):
             for b in ET.parse(CATALOGUE).getroot().iter("block"):
+                sh, static = b.find("shape"), b.find("inputs") is None or b.find("inputs").get("type") == "static"
+                if sh is not None and static and int(sh.get("width", 0)) >= 25:
+                    outs = [int(o.get("offset")) // 5 for o in b.findall(".//output")]
+                    self.geo[b.get("name")] = (int(sh.get("width")) // 5, int(sh.get("height")) // 5,
+                                               [int(i.get("offset")) // 5 for i in b.findall(".//input")],
+                                               outs[0] if outs else None)
                 self.cat[b.get("name")] = (len(b.findall(".//input")),
                                            b.find("inputs").get("type") if b.find("inputs") is not None else "static",
                                            len(b.findall(".//parameter")))
 
     # --- content -----------------------------------------------------------------------------------
-    def block(self, typ, name="", params=(), unit="", desc="", public=False, module="", inputs=None):
+    def block(self, typ, name="", params=(), unit="", desc="", public=False, module="", inputs=None,
+              rw=None, backup=None):
+        """rw / backup: the R/W and Backup check boxes; None keeps what the block type usually carries."""
         params = list(params)
+        if typ in IO_DEFAULT and len(params) != len(IO_DEFAULT[typ]):
+            head, params = params, list(IO_DEFAULT[typ])            # RI: a single value given = filter time constant
+            if typ == "RI" and head:
+                params[0] = fmt(head[0])
         if typ in EXPR:
             n_in = len(expr_inputs(str(params[0])))
         elif inputs is not None:
@@ -146,7 +193,7 @@ class Program:
             n_in = self.cat[typ][0]
         else:
             n_in = 0
-        if typ in self.cat and typ not in EXPR and typ != "CURVE":
+        if typ in self.cat and typ not in EXPR and typ not in ("CURVE", "ALARM") and typ not in IO_DEFAULT:
             want = self.cat[typ][2]
             if len(params) != want:
                 raise ValueError(f"{typ} {name!r}: {len(params)} parameters given, catalogue lists {want}")
@@ -154,13 +201,26 @@ class Program:
             raise ValueError(f"{typ}: not in the block catalogue")
         if name and any(b.full_name == (f"{module}\\{name}" if module else name) for b in self.blocks):
             raise ValueError(f"duplicate block name {name!r}")
-        b = Block(self, typ, name, params, unit, desc, public, module, n_in)
+        b = Block(self, typ, name, params, unit, desc, public, module, n_in, rw, backup)
         self.blocks.append(b)
         return b
 
-    def const(self, name, value, unit=""):
-        """Named constant, usable as a block parameter (DELAY, FILT, CURVE, LIMIT ...)."""
-        self.consts.append((name, value, unit))
+    def alarm(self, name, src, text="", delay_on=0, delay_off=0, priority=0, module="", desc=""):
+        """ALARM block on a binary signal. On the server it becomes an alarm object below the module, named as the
+        block, with `text` as its message."""
+        a = self.block("ALARM", name, [delay_on, delay_off, priority, text], desc=desc, public=True, module=module)
+        self.wire(src, a)
+        return a
+
+    def const(self, name, value, unit="", public=True, bind=None):
+        """Named constant, usable as a block parameter (DELAY, FILT, CURVE, LIMIT ...).
+
+        public=True: shows as a property of the program object and can be changed and bound there, but cannot be
+        used inside an expression block. public=False: usable in XPR / XPB / XPI by its name, not visible outside.
+        bind: path of a value the constant follows ('../Folder/Object/Value'), stored in the file itself."""
+        self.consts.append((name, value, unit, public))
+        if bind:
+            self.binds.append((name, bind))
         return name
 
     def wire(self, src, dst, pin=0):
@@ -357,8 +417,11 @@ class Program:
             else:
                 L.append(f">{src.id}:0 = {{{{{jx},{jy}" + "".join("{" + pts(x) + "}" for x in br) + "}}")
         L += ["}", "[Const]", "{"]
-        L += [f"{n}~{fmt(v)}~'{u}'~1~1~''" for n, v, u in self.consts]
-        L += ["}", "[Fin]"]
+        L += [f"{n}~{fmt(v)}~'{UNITS.get(u, u)}'~{1 if pub else 0}~1~''" for n, v, u, pub in self.consts]
+        L += ["}"]
+        if self.binds:
+            L += ["[InitialBindings]", "{"] + [f"{n};{path}" for n, path in self.binds] + ["}"]
+        L += ["[Fin]"]
         return "\r\n".join(L) + "\r\n"
 
     def save(self, path):
@@ -375,7 +438,8 @@ class Program:
             if b.typ in ("PVR", "PVB", "PVI") and b.public and b.name:
                 par.setdefault(b.module, {})[b.name] = float(b.params[0])
         return {"modules": sorted({b.module for b in self.blocks if b.module}),
-                "constants": {n: float(v) for n, v, _u in self.consts}, "parameters": par, "stats": self.stats()}
+                "constants": {n: float(v) for n, v, _u, pub in self.consts if pub}, "parameters": par,
+                "stats": self.stats()}
 
     def stats(self):
         real = [b for b in self.blocks if b.typ != "COMENT"]

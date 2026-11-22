@@ -127,18 +127,19 @@ What the hand-written file needed, and no more:
 [Fin]
 ```
 
-- CRLF line ends, Latin-1. Header lines `#1,8,7` and `{41,27` copied from the shipped sample;
-  their meaning is not known.
+- CRLF line ends. The generator writes Latin-1, which the import takes; what EBO itself stores is UTF-8
+  (2026-11-22, production exports). Header lines `#1,8,7` and `{41,27` copied from the shipped sample; their
+  meaning is not known, and saved programs carry other numbers there.
 - Block line: `#id "name" [x,y,0,flag] 'unit','description' = TYPE (parameters)`. Parameters in
   the order `MentaBlocks.xml` lists them. x,y are grid cells (a block about 26 apart in x and 16
-  in y does not overlap). Flag 6 on the PVR and 0 elsewhere, copied from the sample; meaning not
-  known.
+  in y does not overlap). The flag is the three check boxes of the block dialog, see "The .aut format,
+  second round".
 - Connection: `>srcId:outPin = {{dstId,inPin}}`, pins counted from 0. The editor adds routing
   points and its own extra sections (`[InitialBindings]`, `[Ral]`, `[Entr]`, `[Dev]`, `[Print]`)
   on save; export a saved program to see them.
 - BO / RO blocks become the program's public Outputs in WorkStation.
-- Not tried yet: blocks with named or dynamic inputs (XPR / XPB expressions, PIDI), inputs
-  (RI / BI), HFB modules of our own, constants in `[Const]`, binding to other objects.
+- All of these were tried later and work: expressions, RI / BI, constants, bindings, ALARM, PIDP (sections
+  below). Still not generated: HFB (the format is known, see "What production programs showed").
 
 ## Loading a program a second time (2026-11-21)
 
@@ -185,8 +186,10 @@ What the hand-written file needed, and no more:
 - **A program output block (RO / BO) cannot be read as a source**: binding an input to `.../TV1_OUT` is stored
   but flagged with a red mark and no value arrives. Bind inputs to public signals instead (the PIDA output
   `TV1`, a public expression, a public parameter). Program inputs (RI) take such a binding and follow it.
-- An export in Standard mode does not carry these bindings (no `Reference` element for them), and the values in
-  an export are live ones. What an export holds (2026-11-21): parameter blocks (PVR / PVB / PVI), constants,
+- An export in Standard mode carries only the bindings that stay inside the exported objects (and absolute ones
+  to other servers); a binding to a neighbour object is left out. **Special mode keeps every binding**
+  (`Ws-Export path file 'Special'`), Library mode only the inside ones (2026-11-22). The values in an export are
+  live ones. What an export holds (2026-11-21): parameter blocks (PVR / PVB / PVI), constants,
   `FILT` outputs and the I/O blocks (RI / BI / RO / BO, under GUID names). **Public outputs of XPR / XPB / PIDA /
   LIMIT / SR / DELAY / CURVE are not in it.** To read a computed signal back, bind an RI of another program (or a
   graphic, or an MQTT data point) to it and read that.
@@ -194,11 +197,20 @@ What the hand-written file needed, and no more:
   sits in a module.
 - The Bindings view of a program with many signals needs well over 5 s to open and is paged; `Ws-Bind` waits up to
   40 s and makes sure its tab is closed afterwards.
-- Two BI blocks in one program do not compile on the server ("I/O terminal reused in I/O block: ..."); the
-  message comes from the editor started alone, the server-side editor only says compilation failed. Two RI
-  blocks are fine, so binary commands went in as RI and are compared with 0.5.
-- Constants of the table are not usable inside an expression block here (compile fails); feed them in from
-  parameter blocks.
+- Two BI blocks written as `BI ()` do not compile on the server ("I/O terminal reused in I/O block: ..."); the
+  message comes from the editor started alone, the server-side editor only says compilation failed. **With the
+  parameter list the editor itself writes, any number of BI blocks compile** (2026-11-22):
+  `BI (4,,0,0,.5,0,,,0,0,100,0,0,0,0,0)`, and for RI `RI (0,3,,0,0.5,60,0,,0,0,100,0,0,0,0,0,40,0,)`. `aut.py`
+  writes these by itself. (DH-ex2 was built before that and takes its binary commands as RI compared with 0.5.)
+- **A public constant cannot be used inside an expression block** (compile fails; the editor help says the
+  same). A private one can: fourth field of its `[Const]` line 0 instead of 1, `p.const(name, value,
+  public=False)`. A private constant is not a property of the program object, so it cannot be changed from
+  WorkStation.
+- **Bindings by file** (2026-11-22), instead of about 5 s of typing per point: export the object in Special mode,
+  write the bindings into the file (`ebox.py bind in.xml out.xml binds.json`), delete the object, `Ws-Import` the
+  file: about 7 s for a compiled program with all its bindings, and the inputs follow at once. Works for a
+  program and for anything else that exports its binding points. An import never replaces: with the old object
+  still there the new one arrives as `Name_2`.
 
 ## Graphics (TGML) (2026-11-21)
 
@@ -286,11 +298,16 @@ that blocks inbound 1881 (FUXA 1.3.5 ignores `uiHost`).
 
 ## Open
 
-- Read computed public signals back by script (the Variables view through UI Automation).
+- Read computed public signals back by script (the Variables view through UI Automation). A server value
+  (`server.point.AV`) bound to the signal can be made from a file now, but its value was absent from the export.
 - I/O modules and real field devices; outputs written to targets.
 - Clicks on the graphic by script use fixed screen positions (1600x1200, default panes).
 - Script program round trip.
-- HFB (hierarchical blocks) of our own, ALARM and TSCH blocks.
+- HFB (hierarchical blocks) written by the generator (format known), TSCH blocks, schedules from a file.
+- Whether the alarms and trend logs made from a file behave (they import and show; no alarm was tripped and no
+  log was read back).
+- Navigation between graphics (`Link`), status colours (`ConvertStatus`): seen in production graphics, not
+  generated.
 - MQTT in the other direction: a value written into EBO from the broker (section MQTT).
 
 ## The driver (scripts/ebo.sh, win/lib.ps1, win/ebo.ps1), 2026-11-21
@@ -307,7 +324,8 @@ with the stack, and the output before it is kept.
 | `Ws-Select '/Server 1/X'`, `Ws-Refresh` | select a System Tree item (expands parents), `F5` |
 | `Ws-New parent 'Function Block Program' name` | New Object dialog: filter, pick type, name, Create (about 6 s) |
 | `Ws-Delete path` | Delete key, answers `Confirm Delete` |
-| `Ws-Export path file` | context menu `Export...`, preview, Save As, result (about 15 s) |
+| `Ws-Export path file [mode]` | context menu `Export...`, preview, Save As, result (about 15 s). mode `Standard` (default), `Special` (keeps every binding) or `Library` |
+| `Ws-Import parent file` | `File > Import...`, file dialog, preview, Import, Close (about 7 s). Throws the preview's messages when it counts an error |
 | `Fbe-Open path` | `Ctrl+E` and wait for the editor window (about 17 s) |
 | `Fbe-Import $p file`, `Fbe-Save $p`, `Fbe-Exit $p` | editor File menu by command id; Save waits out "Generating application..." (about 5 s) and throws the editor's message on a compile error |
 | `Fb-Load parent name file` | create if missing, open, import, save, exit |
@@ -343,10 +361,13 @@ Sources: 256 files of the shipped macro library
 - Expression blocks take braces: `XPB {A<-45|A>50}`, `XPR {f?B:A}`, `XPI {e?1:3}`. Capital letter = analog
   input, lower case = binary. Inputs are pins in alphabetical order. Operators: `! * / % + - << >> < > <= >= =
   != & ^ |`, `a ? b : c`, functions `LN LOG EXP COS SIN TAN ACOS ASIN ATAN SQRT ABS INT`, `x**y`.
-- Flag (last number in the brackets): bit 0 = public. Parameter blocks PVR / PVB / PVI: 6 private, 7 public.
-  SR: 4 private. Others: 0 private, 1 public.
+- Flag (last number in the brackets) = the three check boxes of the block dialog (2026-11-22, editor help
+  "Configure a Function Block" and production programs): **1 Public, 2 R/W, 4 Backup**. So PVR 7 = public,
+  writable, kept over a power failure; 3 = the same without backup; 6 = private. SR 4 / 5, ALARM 5, DELAY 0 / 1
+  / 5, SHR 4 / 5, ACCUM 6, PIDA 3 / 6 / 7, PIDP 3. `aut.py`: `block(..., public=, rw=, backup=)`.
 - A name with a backslash, `MODULE\Signal`, puts the block in a module; modules show as groups in WorkStation.
-- Constants: `[Const]` lines `Name~value~'unit'~1~1~''`. A constant name can stand where a block parameter
+- Constants: `[Const]` lines `Name~value~'unit'~public~1~''` (public 1 or 0; the fifth field is 1 or 17,
+  meaning not known). A constant name can stand where a block parameter
   goes: `DELAY (DHW_ALM_DLY,0)`, `FILT (TOUT_FILT_T)`, `LIMIT (TS_MIN,TS_MAX)`, `CURVE (1,-20,CRV_N20, 0,CRV_0)`.
   In WorkStation they come out as properties of the program object, so they can be changed there.
 - `CURVE (limit, x1,y1, x2,y2, ...)`. `PIDA (ControlInt,UMin,UMax,StrokeTime)`. `ALARM`, `TSCH`, `AI`, `AO`,
@@ -375,11 +396,124 @@ Sources: 256 files of the shipped macro library
 
 ## Generator (scripts/aut.py)
 
-`Program.block(type, name, params, unit, public, module)`, `Program.const(name, value, unit)`,
-`Program.wire(src, dst, pin)` with pin a number, a PIDA / SR pin name or an expression letter. `save()` lays out
+`Program.block(type, name, params, unit, public, module, rw, backup)`, `Program.const(name, value, unit, public,
+bind)`, `Program.alarm(name, src, text, delay_on, delay_off, priority, module)`, `Program.wire(src, dst, pin)`
+with pin a number, a PIDA / PIDP / SR / SHR / ACCUM pin name or an expression letter. A unit given as `°C`, `%`,
+`Pa`, `s` or `ppm` is written as EBO's unit code; RI and BI get the parameter list the editor writes. Block
+sizes and pin rows come from the catalogue (shape and offsets in pixels, 5 per cell), which agreed with every
+hand measurement and with the wire end points of 1900 production blocks; only expressions, I/O blocks, PIDA and
+the constant operators are worked out in the code. `save()` lays out
 and routes: columns by signal depth shared by all modules, one band per module, set values one column before
 their first reader, every wire in right angles through a channel between columns and, when it skips columns or
 changes band, a lane above the destination band. Block and parameter counts are checked against
 `reference/MentaBlocks.xml`. An expression whose pin order would depend on how capitals sort against lower case
 is refused. `expected()` gives what an export must show.
+
+## What production programs showed (2026-11-22)
+
+Source: exports of a running EBO 3.2 site (14 Function Block programs, 15 to 490 blocks each, two Script
+programs, 15 graphics, about 150 alarms, 230 trend logs). Read with `scripts/ebox.py`. Everything marked
+"tried" was loaded into EBO 7.1 afterwards.
+
+- **PIDA and PIDP both have their own output wired to TSg**, in every loop (17 + 4), and the mode comes from
+  `XPI {a?1:3}`: the two traps found the hard way are simply how it is done. PIDP numbers its pins in the order
+  drawn: MV 0, SP 1, Mode 2, G 3, Ti 4, Td 5, DZ 6, TSg 7 (tried).
+- **ALARM block**: `ALARM (DelayOn,DelayOff,Priority,'guid','','alarm text','reset text')`, one binary input,
+  flag 5. On the server it becomes an `alarm.ChangeOfStateAlarm` object below the block's module, named as the
+  block, with message, priority and delay taken from the parameters and the monitored signal bound (tried, with
+  the fourth field left empty). So a program brings its own alarms: no clicking, and they survive a reload.
+- **Constant bindings travel in the file**: section `[InitialBindings]` after `[Const]`, one line
+  `ConstantName;../Folder/Object/Property` per public constant. Tried: the constant took the value of the
+  other program's signal right after the load, and the binding shows in a Special export. A line naming an RI
+  block is kept by the editor but has no effect. `p.const(name, value, bind='../X/M/Signal')`.
+- **HFB** (hierarchical block): the line `#n "Name" [x,y,0,0] '0x10001','' = HFB {}` is followed by `{`, the
+  inner diagram (block lines and wires, **ids starting again at 1**, further HFBs nested the same way) and `}`.
+  Inside, `HFAI` / `HFDI` are the analog / binary inputs and `HFAO` / `HFDO` the outputs, named; outside, the
+  HFB's input pins and outputs are numbered `0, 1, ...` (`>2:1 = ...` is the second output). Modules are a
+  separate thing: a block inside an HFB still carries `Module\Name`. Not generated yet.
+- **Expressions**: inputs need not be consecutive letters (`XPB {(A>=Z)&(A<=X)?1:0}` has pins A, X, Z); private
+  constants by name (`XPB {A<MinTemp|@A>MaxTemp}`); an `@` inside the text is only where the editor breaks the
+  line on the block.
+- **Wires**, complete grammar: `>src:out = {group group ...}`. A group is `{points;dst,pin}`; a fan-out is
+  `{points{branch}{branch}}` with branches nested as deep as needed; several groups side by side all start at
+  the output. A path ending in `x,y.` is an open end (a stub drawn to nowhere). `>0 = x,y,N {{x,y;...}}` lines
+  are frames drawn around a group of blocks, no signal.
+- **Other blocks met**, all in the catalogue and now laid out from it: `PRCNT (v0,v100)` (0 ... 100 % between two
+  values), `SHR (init)` sample and hold (pins D, c), `TRIG (mode)` one-cycle pulse (0 / 1 rising, 2 falling,
+  3 both), `RAMP (rate)`, `ACCUM (init)`, `DELB / DELI (init)` one cycle delay, `MAX ()`, `MIN ()`, `NOT ()`,
+  clock blocks `HOUR () SECOND () MONTH () WDAY ()` for time conditions, operators `Op?:` and `Op:?`
+  (multiplexers), `Op+ Op- Op/ Op> Op< Op= Op<= Op&& Op!!`. An RO can be read inside its own program (it has
+  an output).
+- **Unit codes** seen: `0x10001` none, `0x280001` °C, `0x200001` %, `0x200002` ppm, `0x230002` Pa, `0x2e0007` s;
+  `0xf0001` on air flows and `0x170001` on humidity (exact unit not checked). Tried: the import takes the codes.
+- After a save the file also has `[Ral]` (ends with `1,1000`: cycle time in ms), `[Entr]` (one `@"name",...`
+  line per RI, `$"name",...` per BI), `[Dev]`, `[Print]`. None of them is needed in a file to import.
+- Habits worth copying: modules named `Inputs`, `Outputs`, `Alarms`, `SP`, then one per loop; every setpoint a
+  public PVR; sensor fault alarm = `XPB {A<MinTemp|@A>MaxTemp}` into an ALARM block per sensor.
+
+## Objects from a file (works, 2026-11-22)
+
+Objects of built-in types need no type definition in the file, only `<OI NAME= TYPE=>` with `<PI Name= Value=>`
+values and `<PI><Reference Object= Property=/></PI>` bindings. A file written by `scripts/objects.py` and loaded
+with `Ws-Import` gave, in 7 s: a folder, an interval trend log, a change-of-value trend log, a trend chart of
+both, a change-of-state alarm, an out-of-range alarm, a deviation alarm against a setpoint signal, and analog /
+binary / string server values, all bound to signals of a program. Read back with a Special export: values and
+bindings as written.
+
+- File frame: `<ObjectSet ExportMode="Special" Note="TypesFirst" Version="7.1.1.132">`, `<MetaInformation>`
+  (ExportMode, RuntimeVersion, SourceVersion, ServerFullPath), `<ExportedObjects>`. A `<Types>` block is needed
+  only for objects with generated types (programs, graphics, menus).
+- A `Reference` is relative to the object that holds it: `Object="../../Program/MODULE" Property="Signal"`; a
+  reference to an object as such (a log shown in a chart) has no `Property`.
+- Types and properties (from the production exports):
+  `trend.TLog` Interval (ms), LogSize, Enabled, LogPoint -> signal;
+  `trend.TLogChangeOfValue` DeltaValue, LogSize, Enabled, LogPoint;
+  `trend.view.GraphicalTrendView` with one hidden child `trend.view.TrendLogSeriesProperties` per curve
+  (DisplayLog -> the log, Color);
+  `alarm.ChangeOfStateAlarm` MonitoredVariable, AlarmMessage, ResetMessage, AlarmPriority, ResetPriority,
+  TimeDelayToOffNormal (s);
+  `alarm.OutOfRangeAlarm` HighLimit, LowLimit, HighLimitMessage, LowLimitMessage, ResetMessage, priorities,
+  TimeDelayToOffNormal, Deadband;
+  `alarm.OutOfReferenceRangeAlarm` HighDiffLimit, LowDiffLimit, SetpointReference -> signal;
+  alarms also take Category -> `~/System/Alarm Control Panel/Alarm Handling/Categories/<name>` (the category
+  itself travels in a `<SupportingObjects Container=...>` block after the objects) and ShuntPoint -> signal;
+  `server.point.AV / BV / SV` Value (a number, or a binding);
+  `schedule.NSPDigitalSchedule`: hidden children `WS00001` ... `WS00007` (`DailySchedule`, DayOfWeek) each with
+  `TVP0000n` time-value pairs (Hour, Minute, Value; `Null="1"` ends an entry). Not generated.
+  `webservice.genericconsume.SimpleXml` (URL, PollingInterval) with child points (XPath) reads values from a
+  web service. **Its URL holds the service's access key in plain text**, and so does every export of it.
+- WorkStation's File menu also has `Import from xlsx...` (not looked into).
+- A whole program or graphic comes in the same way from its own export, compiled code included, so a program
+  built once can be put on another server without the editor.
+
+## Reading an export (scripts/ebox.py), 2026-11-22
+
+`ebox.py tree | binds | unpack | aut | bind`. `unpack` writes each program's text (`.aut`, with a summary:
+blocks by type, modules, HFBs, alarm blocks, bound constants), each graphic (`.tgml`), each Script program's
+source (`.txt`) and attached documents.
+
+- A **Script program** is type `script.Program`; parameter `File` holds an XML text `<PEObject ...>` with
+  `<Code>` (base64 of the source), `<ByteCode>` and `<BindingVars>` (name, line, kind). Inputs and outputs are
+  `<Variable>` entries of the type and bind like any other point.
+- The export of a program in a module-structured site shows RI / BI values under the block name in the module
+  that holds them (`Inputs`), with their bindings in Special mode.
+- A server backup (`.xbk`) is a zip: `Configuration/configuration.db` and `Historical/*.db` (SQLite), licence
+  and domain files, and the server version in a file name (`3.2.2.61.serverrevision`). Not opened further; a
+  backup holds the user database, so treat it as a secret.
+- Trend log data exported from a chart is CSV: `"Time stamp","Value","Events","Comment","User"`, time and decimal
+  comma in the locale of the WorkStation that wrote it.
+
+## Graphics seen in production (2026-11-22), not yet in tgml.py
+
+- Root attributes `UseGlobalScripts="True"`, `DisablePanAndZoom="True"`; content in `<Layer>` elements.
+- Navigation: a `<Link Name="..."/>` inside a component is a binding point for an object (another graphic, a
+  trend chart). A click on the component opens it; scripts do the same with
+  `invoke(link.getFullBindName(), "ViewObject")`. Other commands used with `invoke`: `OpenInNewWindow`,
+  `OpenInSelf`, `EditProperties`.
+- Status of a value, not only the value: `<ConvertStatus Error="#FF6000" Forced="#FFD100" Stored="#42B4E6"/>`
+  inside a `Bind` sets a colour by state; in a script `evt.getStatus()`, `evt.getUnit()`.
+- `<TargetArea>` gives a component an invisible click area (plus / minus boxes of a setpoint stepper),
+  `<Animate>` runs colour and size transitions on mouse over, `<TextBox>` is text with a frame and alignment in
+  both directions, `<Expose ExposedAttribute= Name=/>` makes an attribute of an inner element a property of the
+  component. Events used: OnDocumentLoad, OnSignalChange, OnMouseClick / Over / Out / Down / Up / Move.
 

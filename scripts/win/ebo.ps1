@@ -174,14 +174,19 @@ function Fb-Load($parent, $name, $file) {
 }
 
 # Export an object to an xml file (overwrites).
-function Ws-Export($path, $file) {
+# $mode: Standard (bindings inside the exported set), Special (every binding, also to objects outside it: the
+# one to use for reading bindings back) or Library (inside only, for re-use elsewhere).
+function Ws-Export($path, $file, $mode = 'Standard') {
   Remove-Item $file -ErrorAction SilentlyContinue
   Ws-Front; $t = Ws-Select $path; $txt = Ui-ById $t 'objectNameTextBlock' 2
   Ui-Click $txt -Right; Start-Sleep -Milliseconds 800
   $m = Ui-Find $A::RootElement 'Export...' $CT::MenuItem 5; if (-not $m) { Keys '{ESC}'; throw 'Export... not in the context menu' }
   Ui-Invoke $m
   if (-not (Wait-Fg '^Export preview' 10)) { throw 'Export preview did not open' }
-  Keys '{ENTER}'
+  $rb = @{ Standard = 'rbDefault'; Special = 'rbSpecial'; Library = 'rbLibrary' }[$mode]; if (-not $rb) { throw "export mode $mode ?" }
+  $r = Ui-ById (Fg-Root) $rb 5; if (-not $r) { throw "export preview: no $rb" }
+  $r.GetCurrentPattern([System.Windows.Automation.SelectionItemPattern]::Pattern).Select(); Start-Sleep -Milliseconds 300
+  Ui-Invoke (Ui-ById (Fg-Root) 'btnExport' 3)
   if (-not (Wait-Fg '^Save As' 10)) { throw 'Save As did not open' }
   Text $file; Keys '{ENTER}'
   $t0 = [Diagnostics.Stopwatch]::StartNew()
@@ -189,6 +194,36 @@ function Ws-Export($path, $file) {
   Start-Sleep 1; if ((Fg-Title) -match '^Export') { Keys '{ENTER}' }
   if (-not (Test-Path $file)) { throw "export file not written; foreground: $(Fg-Title)" }
   "exported $path -> $file ($((Get-Item $file).Length) bytes)"
+}
+
+# Import an export file (.xml) below $parent: File > Import..., file dialog, preview, Import, Close. The preview
+# counts errors; with any error nothing is imported and the first lines of the dialog are thrown.
+function Ws-Import($parent, $file) {
+  if (-not (Test-Path $file)) { throw "no file $file" }
+  Ws-Front; [void](Ws-Select $parent)
+  Ui-Click (Ui-Find (Ws-Root) 'File' $CT::MenuItem 5); Start-Sleep -Milliseconds 800
+  $m = Ui-Find $A::RootElement 'Import...' $CT::MenuItem 5; if (-not $m) { Keys '{ESC}'; throw 'Import... not in the File menu' }
+  Ui-Invoke $m
+  if (-not (Wait-Fg '^Open' 10)) { throw 'file dialog did not open' }
+  Keys '%n'; Start-Sleep -Milliseconds 400; Text $file; Keys '{ENTER}'
+  if (-not (Wait-Fg '^Import' 20)) { throw "import preview did not open; foreground: $(Fg-Title)" }
+  $b = Ui-ById (Fg-Root) 'buttonImport' 30; if (-not $b) { throw 'import preview: no Import button' }
+  $txt = (Ui-Find (Fg-Root) '' $CT::Text 2 -All) | % { $_.Current.Name }
+  $err = $txt | ? { $_ -match '^\d+ error' } | select -First 1
+  if ($err -and $err -notmatch '^0 ') {
+    Ui-Invoke (Ui-ById (Fg-Root) 'ErrorsButton' 2); Start-Sleep 1
+    $msg = ((Ui-Find (Fg-Root) '' $CT::Text 2 -All) | % { $_.Current.Name } | ? { $_ -and $_.Length -gt 25 } | select -First 6) -join ' | '
+    Ui-Invoke (Ui-ById (Fg-Root) 'buttonCancel' 3); throw "import refused: $err : $msg"
+  }
+  Ui-Invoke $b
+  $t0 = [Diagnostics.Stopwatch]::StartNew(); $c = $null
+  while ($t0.Elapsed.TotalSeconds -lt 120 -and -not $c) { Start-Sleep 1; $c = Ui-ById (Fg-Root) 'btnClose' 1 }
+  if (-not $c) { throw "import did not finish; foreground: $(Fg-Title)" }
+  $done = [bool]((Ui-Find (Fg-Root) '' $CT::Text 2 -All) | ? { $_.Current.Name -like 'Finished Importing*' })
+  $all = ((Ui-Find (Fg-Root) '' $CT::Text 2 -All) | % { $_.Current.Name } | ? { $_ }) -join ' | '
+  Ui-Invoke $c; Start-Sleep 1
+  if (-not $done) { throw "import: $all" }
+  "imported $file below $parent"
 }
 
 # Delete an object. WorkStation asks for confirmation in a dialog titled "Confirm Delete".
