@@ -19,15 +19,25 @@ class Graphic:
     def __init__(self, width, height, background="#F4F5F7"):
         self.w, self.h, self.bg = width, height, background
         self.items, self.binds = [], []
+        self.top = []                                           # drawn last, over everything: info boxes
 
     def _bind(self, name):
         if name not in self.binds:
             self.binds.append(name)
 
     # --- static -------------------------------------------------------------------------------------
-    def rect(self, x, y, w, h, fill="#FFFFFF", stroke="#9AA0A6", sw=1, radius=0):
+    def rect(self, x, y, w, h, fill="#FFFFFF", stroke="#9AA0A6", sw=1, radius=0, alt=None):
+        """alt=(signal, colour): the fill becomes that colour while the signal is 1 or more (also on airflow, drum)."""
+        inner = self._fill_bind(alt[0], alt[1], fill) if alt else ""
         self.items.append(f'<Rectangle Fill="{fill}" Height="{h}" Left="{x}" RadiusX="{radius}" RadiusY="{radius}" '
-                          f'Stroke="{stroke}" StrokeWidth="{sw}" Top="{y}" Width="{w}"/>')
+                          f'Stroke="{stroke}" StrokeWidth="{sw}" Top="{y}" Width="{w}">{inner}</Rectangle>')
+
+    def _alt(self, alt, base, attribute="Stroke"):
+        if not alt:
+            return ""
+        self._bind(alt[0])
+        return (f'<Bind Attribute="{attribute}" Name="{alt[0]}"><ConvertValue AttributeValue="{base}" '
+                f'SignalLessOrEqualTo="0"/><ConvertValue AttributeValue="{alt[1]}" SignalMoreOrEqualTo="1"/></Bind>')
 
     def line(self, x1, y1, x2, y2, stroke="#444444", sw=2):
         self.items.append(f'<Line Stroke="{stroke}" StrokeWidth="{sw}" X1="{x1}" X2="{x2}" Y1="{y1}" Y2="{y2}"/>')
@@ -76,18 +86,24 @@ class Graphic:
         self.items.append(f'<Ellipse Fill="{off}" Height="{d}" Left="{x}" Stroke="#5F6368" StrokeWidth="1" Top="{y}" '
                           f'Width="{d}">{self._fill_bind(name, on, off)}</Ellipse>')
 
-    def pump(self, x, y, name, d=44, left=False):
-        """Circle with a triangle that shows the flow direction (to the right, or to the left). Colour by the value:
-        0 grey (stopped), 1 green (running), 2 and above red (fault). A plain binary gives grey / green."""
+    def pump(self, x, y, name, d=44, left=False, direction=None):
+        """Circle with a triangle that shows the flow direction: direction "right" (default), "left", "up" or "down"
+        (left=True is the older way to say "left"). Colour by the value: 0 grey (stopped), 1 green (running), 2 and
+        above red (fault). A plain binary gives grey / green."""
         self._bind(name)
         self.items.append(f'<Ellipse Fill="#BDC1C6" Height="{d}" Left="{x}" Stroke="#3C4043" StrokeWidth="2" Top="{y}" '
                           f'Width="{d}"><Bind Attribute="Fill" Name="{name}">'
                           f'<ConvertValue AttributeValue="#BDC1C6" SignalLessOrEqualTo="0"/>'
                           f'<ConvertValue AttributeValue="#34A853" SignalEqualTo="1"/>'
                           f'<ConvertValue AttributeValue="#D93025" SignalMoreOrEqualTo="2"/></Bind></Ellipse>')
-        c = d / 2
-        k = -1 if left else 1
-        self.polygon([(x + c - 8 * k, y + c - 11), (x + c + 12 * k, y + c), (x + c - 8 * k, y + c + 11)], fill="#FFFFFF", stroke="#3C4043")
+        c = d / 2; a, b, w = d * 0.18, d * 0.27, d * 0.25           # back of the arrow, its tip, half its width
+        direction = direction or ("left" if left else "right")
+        k = -1 if direction in ("left", "up") else 1
+        if direction in ("left", "right"):
+            pts = [(x + c - a * k, y + c - w), (x + c + b * k, y + c), (x + c - a * k, y + c + w)]
+        else:
+            pts = [(x + c - w, y + c - a * k), (x + c, y + c + b * k), (x + c + w, y + c - a * k)]
+        self.polygon(pts, fill="#FFFFFF", stroke="#3C4043")
 
     def valve(self, x, y, s=18):
         """Two-way valve symbol centred on (x, y), with an actuator box on top."""
@@ -148,20 +164,66 @@ class Graphic:
         self.items.append(f'<Component Clip="False" ContentHeight="{sym.h}" ContentWidth="{sym.w}" Height="{h}" '
                           f'Left="{x}" Top="{y}" Width="{w}">' + "".join(sym.items) + rot + '</Component>')
 
-    def fan(self, x, y, name, d=60, blades=6, seconds=2.0):
-        """Fan: housing circle with an impeller that turns while the signal is 1 or more."""
+    def fan(self, x, y, name, d=60, blades=7, seconds=2.0):
+        """Fan seen along its shaft: housing ring and an impeller with swept blades that turns while the signal is 1
+        or more."""
         import math
-        self.items.append(f'<Ellipse Fill="#E8EAED" Height="{d}" Left="{x}" Stroke="#3C4043" StrokeWidth="2" Top="{y}" '
+        self.items.append(f'<Ellipse Fill="#DADCE0" Height="{d}" Left="{x}" Stroke="#3C4043" StrokeWidth="2.5" Top="{y}" '
                           f'Width="{d}"/>')
-        s = d * 0.8; c = s / 2; r = c * 0.95
+        m = d * 0.08
+        self.items.append(f'<Ellipse Fill="#F8F9FA" Height="{d - 2 * m}" Left="{x + m}" Stroke="#9AA0A6" StrokeWidth="1" '
+                          f'Top="{y + m}" Width="{d - 2 * m}"/>')
+        s = d - 2 * m - 2; c = s / 2; r0, r1 = c * 0.24, c * 0.96
+        pol = lambda r, a: (c + r * math.cos(a), c + r * math.sin(a))
+        f = lambda p: f"{p[0]:.1f},{p[1]:.1f}"
         imp = Graphic(s, s)
         for k in range(blades):
-            a0 = 2 * math.pi * k / blades; a1 = a0 + 0.55
-            p = [(c, c), (c + r * math.cos(a0), c + r * math.sin(a0)), (c + r * 0.8 * math.cos(a1), c + r * 0.8 * math.sin(a1))]
-            imp.path("M" + " L".join(f"{px:.1f},{py:.1f}" for px, py in p) + " Z", fill="#5F6368", stroke="None", sw=0)
-        imp.items.append(f'<Ellipse Fill="#3C4043" Height="{s * 0.2:.1f}" Left="{c - s * 0.1:.1f}" Stroke="None" '
-                         f'Top="{c - s * 0.1:.1f}" Width="{s * 0.2:.1f}"/>')
+            a = 2 * math.pi * k / blades
+            A, B = pol(r0, a), pol(r1, a + 0.95)                  # leading edge: root to tip, swept back
+            C, D = pol(r1, a + 0.95 + 0.42), pol(r0, a + 0.75)    # trailing edge back to the hub
+            c1, c2 = pol(c * 0.62, a + 0.15), pol(c * 0.9, a + 0.6)
+            c3, c4 = pol(c * 0.85, a + 1.15), pol(c * 0.5, a + 0.85)
+            imp.path(f"M{f(A)} C{f(c1)} {f(c2)} {f(B)} L{f(C)} C{f(c3)} {f(c4)} {f(D)} Z", fill="#5F6368", stroke="#3C4043", sw=0.8)
+        imp.items.append(f'<Ellipse Fill="#3C4043" Height="{2 * r0 * 1.25:.1f}" Left="{c - r0 * 1.25:.1f}" Stroke="None" '
+                         f'Top="{c - r0 * 1.25:.1f}" Width="{2 * r0 * 1.25:.1f}"/>')
+        imp.items.append(f'<Ellipse Fill="#BDC1C6" Height="{r0 * 0.9:.1f}" Left="{c - r0 * 0.45:.1f}" Stroke="None" '
+                         f'Top="{c - r0 * 0.45:.1f}" Width="{r0 * 0.9:.1f}"/>')
         self.place(imp, x + (d - s) / 2, y + (d - s) / 2, spin=name, seconds=seconds)
+
+    def airflow(self, x, y, length, height, name, colour="#9AA0A6", lines=3, seconds=2.0, sw=1.3, alt=None):
+        """Air shown as thin wavy streaks that drift along a duct while the signal is 1 or more: in a box from x, y,
+        `length` long (negative = moving to the left) and `height` high."""
+        self._bind(name)
+        L = abs(length); P = 48.0; h = P / 2; n = int(L // h) + 6
+        body = ""
+        for i in range(lines):
+            yy = height * (i + 0.5) / lines; amp = 3.5 + 1.5 * (i % 2); x0 = -P - (P / lines) * i
+            d = f"M{x0:.1f},{yy:.1f}"; up = 1
+            for k in range(n):
+                xa = x0 + k * h
+                d += f" C{xa + h / 3:.1f},{yy - up * amp * 4 / 3:.1f} {xa + 2 * h / 3:.1f},{yy - up * amp * 4 / 3:.1f} {xa + h:.1f},{yy:.1f}"
+                up = -up
+            body += f'<Path Fill="None" PathData="{d}" Stroke="{colour}" StrokeWidth="{sw}">{self._alt(alt, colour)}</Path>'
+        frm, to = (0, P) if length > 0 else (P, 0)
+        self.items.append(
+            f'<Component Clip="True" ContentHeight="{height}" ContentWidth="{L}" Height="{height}" Left="{x}" Top="{y}" '
+            f'Width="{L}"><Group>{body}<Translate><Animate Animation="Stop" Attribute="X" AutoReverse="False" '
+            f'CalcMode="Linear" Duration="{seconds}" Freeze="False" From="{frm}" To="{to}">{self._run(name)}</Animate>'
+            f'</Translate></Group></Component>')
+
+    def drum(self, x, y, w, h, name, seconds=1.2, spacing=9, colour="#9AA0A6", down=True, alt=None):
+        """A rotor seen from the side: lines across a box of w x h that travel down (or up) while the signal is 1 or
+        more, so the drum looks as if it turns. Draw the body first, then this over it."""
+        self._bind(name)
+        n = int(h // spacing) + 3
+        lines = "".join(f'<Line Stroke="{colour}" StrokeWidth="1.2" X1="0" X2="{w}" Y1="{spacing * (i - 1)}" Y2="{spacing * (i - 1)}">{self._alt(alt, colour)}</Line>'
+                        for i in range(n))
+        frm, to = (0, spacing) if down else (spacing, 0)
+        self.items.append(
+            f'<Component Clip="True" ContentHeight="{h}" ContentWidth="{w}" Height="{h}" Left="{x}" Top="{y}" Width="{w}">'
+            f'<Group>{lines}<Translate><Animate Animation="Stop" Attribute="Y" AutoReverse="False" CalcMode="Linear" '
+            f'Duration="{seconds}" Freeze="False" From="{frm}" To="{to}">{self._run(name)}</Animate></Translate></Group>'
+            f'</Component>')
 
     def flow(self, x, y, length, name, vertical=False, colour="#FFFFFF", seconds=1.0, thick=4):
         """Marks that run along a pipe while the signal is 1 or more: to the right (down when vertical).
@@ -192,6 +254,54 @@ class Graphic:
             f'<Ellipse Fill="{colour}" Height="{d}" Left="{x}" Stroke="#5F6368" StrokeWidth="1" Top="{y}" Width="{d}" '
             f'Visibility="Hidden"><Animate Animation="Stop" Attribute="Visibility" AutoReverse="False" '
             f'CalcMode="Discrete" Duration="1" From="Visible" To="Hidden">{self._run(name)}</Animate></Ellipse>')
+
+    def alarm_state(self, x, y, name, d=18, colour="#D93025", blink=True):
+        """Lamp for the state of an EBO alarm object (bind it to the alarm's AlarmState, or to the public signal of
+        an ALARM block): 0 normal grey; 1 alarm, not acknowledged: colour, blinking if blink; 2 acknowledged:
+        colour, steady; 3 gone but not acknowledged: white with a coloured ring; 4 disabled / 5 fault: grey."""
+        self._bind(name)
+        cv = lambda v, col: f'<ConvertValue AttributeValue="{col}" SignalEqualTo="{v}"/>'
+        self.items.append(
+            f'<Ellipse Fill="#BDC1C6" Height="{d}" Left="{x}" Stroke="#5F6368" StrokeWidth="1.5" Top="{y}" Width="{d}">'
+            f'<Bind Attribute="Fill" Name="{name}">{cv(0, "#BDC1C6")}{cv(1, colour)}{cv(2, colour)}{cv(3, "#FFFFFF")}'
+            f'<ConvertValue AttributeValue="#BDC1C6" SignalMoreOrEqualTo="4"/></Bind>'
+            f'<Bind Attribute="Stroke" Name="{name}">{cv(0, "#5F6368")}{cv(1, "#5F6368")}{cv(2, "#5F6368")}{cv(3, colour)}'
+            f'<ConvertValue AttributeValue="#5F6368" SignalMoreOrEqualTo="4"/></Bind></Ellipse>')
+        if blink:
+            self.items.append(
+                f'<Ellipse Fill="#BDC1C6" Height="{d}" Left="{x}" Stroke="#5F6368" StrokeWidth="1.5" Top="{y}" Width="{d}" '
+                f'Visibility="Hidden"><Animate Animation="Stop" Attribute="Visibility" AutoReverse="False" '
+                f'CalcMode="Discrete" Duration="1" From="Visible" To="Hidden"><Bind Attribute="Animation" Name="{name}">'
+                f'<ConvertValue AttributeValue="Stop" SignalLessOrEqualTo="0"/><ConvertValue AttributeValue="Start" '
+                f'SignalEqualTo="1"/><ConvertValue AttributeValue="Stop" SignalMoreOrEqualTo="2"/></Bind></Animate></Ellipse>')
+
+    def info(self, x, y, title, text, w=280, side="right", d=16):
+        """Small round "i" at x, y. A click on it opens a box with the title and the text (wrapped to the width
+        w); a click on the box or on the "i" closes it again. side: where the box opens ("right", "left",
+        "below", "above"). All boxes are drawn after everything else, so they lie on top."""
+        import textwrap
+        lines = []
+        for para in str(text).split("\n"):
+            lines += textwrap.wrap(para, max(10, int((w - 16) / 5.6))) or [""]
+        h = 30 + 15 * len(lines) + 8
+        bx, by = {"right": (d + 6, -4), "left": (-w - 6, -4), "below": (-w / 2 + d / 2, d + 6),
+                  "above": (-w / 2 + d / 2, -h - 6)}[side]
+        body = "".join(f'<Text FontFamily="{FONT}" FontSize="11" Left="{bx + 8}" Stroke="#202124" Top="{by + 28 + 15 * i}">'
+                       f'{escape(l)}</Text>' for i, l in enumerate(lines))
+        self.top.append(
+            f'<Component Clip="False" ContentHeight="{d}" ContentWidth="{d}" Height="{d}" Left="{x}" Top="{y}" Width="{d}">'
+            f'<Ellipse Fill="#1A73E8" Height="{d}" Left="0" Stroke="None" Top="0" Width="{d}"/>'
+            f'<Text FontFamily="{FONT}" FontSize="{d - 4}" FontWeight="Bold" HorizontalAlign="Center" Left="{d / 2}" '
+            f'Stroke="#FFFFFF" Top="1">i</Text>'
+            f'<Group Name="pop" Visibility="Hidden">'
+            f'<Rectangle Fill="#FFFDE7" Height="{h}" Left="{bx}" RadiusX="4" RadiusY="4" Stroke="#5F6368" StrokeWidth="1" '
+            f'Top="{by}" Width="{w}"/>'
+            f'<Text FontFamily="{FONT}" FontSize="12" FontWeight="Bold" Left="{bx + 8}" Stroke="#202124" Top="{by + 7}">'
+            f'{escape(title)}</Text>{body}</Group>'
+            f'<Script OnMouseClick="clk"><![CDATA[function clk(evt){{evt.preventDefault();'
+            f'var p=evt.getCurrentTarget().getChild("pop");'
+            f'p.setAttribute("Visibility",p.getAttribute("Visibility")=="Visible"?"Hidden":"Visible");}}]]></Script>'
+            f'</Component>')
 
     @classmethod
     def from_svg(cls, path):
@@ -239,7 +349,7 @@ class Graphic:
 
     # --- output -------------------------------------------------------------------------------------
     def tgml(self):
-        body = "\n    ".join(self.items)
+        body = "\n    ".join(self.items + self.top)
         return (f'<?xml version="1.0"?>\n<?tgml version="2.0"?>\n<Tgml Background="{self.bg}" Height="{self.h}" '
                 f'Stretch="Uniform" Width="{self.w}">\n'
                 f'    <Rectangle Fill="{self.bg}" Height="{self.h}" Left="0" Stroke="None" Top="0" Width="{self.w}"/>\n'

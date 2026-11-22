@@ -1,0 +1,142 @@
+[
+[
+"AHU/Inputs",
+"TE1",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/TE1/Value"
+],
+[
+"AHU/Inputs",
+"TE2",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/TE2/Value"
+],
+[
+"AHU/Inputs",
+"TE3",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/TE3/Value"
+],
+[
+"AHU/Inputs",
+"TE4",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/TE4/Value"
+],
+[
+"AHU/Inputs",
+"TE5",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/TE5/Value"
+],
+[
+"AHU/Inputs",
+"TE6",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/TE6/Value"
+],
+[
+"AHU/Inputs",
+"TE7",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/TE7/Value"
+],
+[
+"AHU/Inputs",
+"TE8",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/TE8/Value"
+],
+[
+"AHU/Inputs",
+"PE1",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/PE1/Value"
+],
+[
+"AHU/Inputs",
+"PE2",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/PE2/Value"
+],
+[
+"AHU/Inputs",
+"PDE1",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/PDE1/Value"
+],
+[
+"AHU/Inputs",
+"PDE2",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/PDE2/Value"
+],
+[
+"AHU/Inputs",
+"PDE3",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/PDE3/Value"
+],
+[
+"AHU/Inputs",
+"PDE4",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/PDE4/Value"
+],
+[
+"AHU/Inputs",
+"PDE10",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/PDE10/Value"
+],
+[
+"AHU/Inputs",
+"PDE20",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/PDE20/Value"
+],
+[
+"AHU/Inputs",
+"FA01",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/FA01/Value"
+],
+[
+"AHU/Inputs",
+"SB01",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/SB01/Value"
+],
+[
+"AHU/Inputs",
+"HS10",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/HS10/Value"
+],
+[
+"AHU/Inputs",
+"P1_Fdb",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/P1_Fdb/Value"
+],
+[
+"AHU/Inputs",
+"TF01_Fdb",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/TF01_Fdb/Value"
+],
+[
+"AHU/Inputs",
+"PF01_Fdb",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/PF01_Fdb/Value"
+],
+[
+"AHU/Inputs",
+"SC3_Fault",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/SC3_Fault/Value"
+],
+[
+"AHU/Inputs",
+"TE00",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/TE00/Value"
+],
+[
+"AHU/Inputs",
+"TE10_1",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/TE10_1/Value"
+],
+[
+"AHU/Inputs",
+"TE10_2",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/TE10_2/Value"
+],
+[
+"AHU/Inputs",
+"TE10_3",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/TE10_3/Value"
+],
+[
+"AHU/Inputs",
+"Reset_DI",
+"/Server 1/BACnet/IP Network/AHU01-MPC/Application/Reset_DI/Value"
+]
+]

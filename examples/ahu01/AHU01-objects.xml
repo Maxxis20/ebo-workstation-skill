@@ -1,0 +1,771 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ObjectSet ExportMode="Special" Note="TypesFirst" Version="7.1.1.132">
+  <MetaInformation>
+    <ExportMode Value="Special" />
+    <RuntimeVersion Value="7.1.1.132" />
+    <SourceVersion Value="7.1.1.132" />
+    <ServerFullPath Value="/Server 1" />
+  </MetaInformation>
+  <ExportedObjects>
+    <OI NAME="Trends" TYPE="system.base.Folder">
+      <OI NAME="TE00 outdoor" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE00" />
+        </PI>
+      </OI>
+      <OI NAME="TE6 intake" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE6" />
+        </PI>
+      </OI>
+      <OI NAME="TE3 after recovery" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE3" />
+        </PI>
+      </OI>
+      <OI NAME="TE4 after heating" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE4" />
+        </PI>
+      </OI>
+      <OI NAME="TE5 after cooling" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE5" />
+        </PI>
+      </OI>
+      <OI NAME="TE2 supply" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE2" />
+        </PI>
+      </OI>
+      <OI NAME="TE7 extract" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE7" />
+        </PI>
+      </OI>
+      <OI NAME="TE8 exhaust" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE8" />
+        </PI>
+      </OI>
+      <OI NAME="TE1 coil return water" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE1" />
+        </PI>
+      </OI>
+      <OI NAME="PE1 supply duct" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="PE1" />
+        </PI>
+      </OI>
+      <OI NAME="PE2 extract duct" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="PE2" />
+        </PI>
+      </OI>
+      <OI NAME="PDE4 rotor" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="PDE4" />
+        </PI>
+      </OI>
+      <OI NAME="PDE1 filter 2" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="PDE1" />
+        </PI>
+      </OI>
+      <OI NAME="PDE2 extract filter" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="PDE2" />
+        </PI>
+      </OI>
+      <OI NAME="PDE3 filter 1" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="PDE3" />
+        </PI>
+      </OI>
+      <OI NAME="TF01 speed" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Outputs" Retransmit="0" TransferRate="10" Property="TF01_Ctrl" />
+        </PI>
+      </OI>
+      <OI NAME="PF01 speed" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Outputs" Retransmit="0" TransferRate="10" Property="PF01_Ctrl" />
+        </PI>
+      </OI>
+      <OI NAME="SC3 rotor" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Outputs" Retransmit="0" TransferRate="10" Property="SC3_Ctrl" />
+        </PI>
+      </OI>
+      <OI NAME="TV1 heating valve" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Outputs" Retransmit="0" TransferRate="10" Property="TV1_Ctrl" />
+        </PI>
+      </OI>
+      <OI NAME="TV2 cooling valve" TYPE="trend.TLog">
+        <PI Name="Interval" Value="60000" />
+        <PI Name="LogSize" Value="20000" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="LogPoint">
+          <Reference DeltaFilter="0" Object="../../AHU/Outputs" Retransmit="0" TransferRate="10" Property="TV2_Ctrl" />
+        </PI>
+      </OI>
+      <OI NAME="Temperatures" TYPE="trend.view.GraphicalTrendView">
+        <PI Name="NOTE1" Value="AHU01 temperatures" />
+        <OI NAME="TE00 outdoor Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../TE00 outdoor" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE6 intake Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../TE6 intake" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE3 after recovery Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../TE3 after recovery" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE4 after heating Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../TE4 after heating" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE5 after cooling Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../TE5 after cooling" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE2 supply Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../TE2 supply" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE7 extract Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../TE7 extract" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE8 exhaust Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../TE8 exhaust" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE1 coil return water Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../TE1 coil return water" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+      </OI>
+      <OI NAME="Pressures" TYPE="trend.view.GraphicalTrendView">
+        <PI Name="NOTE1" Value="AHU01 pressures" />
+        <OI NAME="PE1 supply duct Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../PE1 supply duct" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="PE2 extract duct Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../PE2 extract duct" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="PDE4 rotor Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../PDE4 rotor" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="PDE1 filter 2 Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../PDE1 filter 2" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="PDE2 extract filter Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../PDE2 extract filter" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="PDE3 filter 1 Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../PDE3 filter 1" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+      </OI>
+      <OI NAME="Control signals" TYPE="trend.view.GraphicalTrendView">
+        <PI Name="NOTE1" Value="AHU01 control signals" />
+        <OI NAME="TF01 speed Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../TF01 speed" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="PF01 speed Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../PF01 speed" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="SC3 rotor Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../SC3 rotor" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TV1 heating valve Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../TV1 heating valve" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TV2 cooling valve Series" TYPE="trend.view.TrendLogSeriesProperties" hidden="1">
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../TV2 cooling valve" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+      </OI>
+    </OI>
+    <OI NAME="Schedules" TYPE="system.base.Folder">
+      <OI NAME="Time_Schedule" TYPE="schedule.NSPDigitalSchedule" DESCR="Occupied hours">
+        <OI NAME="WS00001" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Monday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="1" />
+          <OI NAME="TVP00001" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="6" />
+            <PI Name="Minute" Value="30" />
+            <PI Name="Value" Value="1" />
+          </OI>
+          <OI NAME="TVP00002" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="18" />
+            <PI Name="Minute" Value="30" />
+            <PI Name="Value" Null="1" />
+          </OI>
+        </OI>
+        <OI NAME="WS00002" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Tuesday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="2" />
+          <OI NAME="TVP00001" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="6" />
+            <PI Name="Minute" Value="30" />
+            <PI Name="Value" Value="1" />
+          </OI>
+          <OI NAME="TVP00002" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="18" />
+            <PI Name="Minute" Value="30" />
+            <PI Name="Value" Null="1" />
+          </OI>
+        </OI>
+        <OI NAME="WS00003" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Wednesday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="3" />
+          <OI NAME="TVP00001" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="6" />
+            <PI Name="Minute" Value="30" />
+            <PI Name="Value" Value="1" />
+          </OI>
+          <OI NAME="TVP00002" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="18" />
+            <PI Name="Minute" Value="30" />
+            <PI Name="Value" Null="1" />
+          </OI>
+        </OI>
+        <OI NAME="WS00004" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Thursday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="4" />
+          <OI NAME="TVP00001" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="6" />
+            <PI Name="Minute" Value="30" />
+            <PI Name="Value" Value="1" />
+          </OI>
+          <OI NAME="TVP00002" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="18" />
+            <PI Name="Minute" Value="30" />
+            <PI Name="Value" Null="1" />
+          </OI>
+        </OI>
+        <OI NAME="WS00005" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Friday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="5" />
+          <OI NAME="TVP00001" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="6" />
+            <PI Name="Minute" Value="30" />
+            <PI Name="Value" Value="1" />
+          </OI>
+          <OI NAME="TVP00002" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="18" />
+            <PI Name="Minute" Value="30" />
+            <PI Name="Value" Null="1" />
+          </OI>
+        </OI>
+        <OI NAME="WS00006" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Saturday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="6" />
+          <OI NAME="TVP00001" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="9" />
+            <PI Name="Value" Value="1" />
+          </OI>
+          <OI NAME="TVP00002" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="15" />
+            <PI Name="Value" Null="1" />
+          </OI>
+        </OI>
+        <OI NAME="WS00007" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Sunday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="7" />
+          <OI NAME="TVP00001" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="9" />
+            <PI Name="Value" Value="1" />
+          </OI>
+          <OI NAME="TVP00002" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="15" />
+            <PI Name="Value" Null="1" />
+          </OI>
+        </OI>
+      </OI>
+      <OI NAME="Night_Schedule" TYPE="schedule.NSPDigitalSchedule" DESCR="Window for night cooling / night heating">
+        <OI NAME="WS00001" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Monday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="1" />
+          <OI NAME="TVP00001" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="2" />
+            <PI Name="Value" Value="1" />
+          </OI>
+          <OI NAME="TVP00002" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="8" />
+            <PI Name="Value" Null="1" />
+          </OI>
+        </OI>
+        <OI NAME="WS00002" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Tuesday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="2" />
+          <OI NAME="TVP00001" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="2" />
+            <PI Name="Value" Value="1" />
+          </OI>
+          <OI NAME="TVP00002" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="8" />
+            <PI Name="Value" Null="1" />
+          </OI>
+        </OI>
+        <OI NAME="WS00003" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Wednesday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="3" />
+          <OI NAME="TVP00001" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="2" />
+            <PI Name="Value" Value="1" />
+          </OI>
+          <OI NAME="TVP00002" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="8" />
+            <PI Name="Value" Null="1" />
+          </OI>
+        </OI>
+        <OI NAME="WS00004" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Thursday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="4" />
+          <OI NAME="TVP00001" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="2" />
+            <PI Name="Value" Value="1" />
+          </OI>
+          <OI NAME="TVP00002" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="8" />
+            <PI Name="Value" Null="1" />
+          </OI>
+        </OI>
+        <OI NAME="WS00005" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Friday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="5" />
+          <OI NAME="TVP00001" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="2" />
+            <PI Name="Value" Value="1" />
+          </OI>
+          <OI NAME="TVP00002" TYPE="system.schedulecommon.propertytypes.tvp.OnOffTimeValuePair" hidden="1">
+            <PI Name="Hour" Value="8" />
+            <PI Name="Value" Null="1" />
+          </OI>
+        </OI>
+        <OI NAME="WS00006" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Saturday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="6" />
+        </OI>
+        <OI NAME="WS00007" TYPE="system.schedulecommon.propertytypes.DailySchedule" DESCR="Sunday" declared="1" hidden="1">
+          <PI Name="DayOfWeek" Value="7" />
+        </OI>
+      </OI>
+    </OI>
+    <OI NAME="Dashboard" TYPE="system.base.Folder">
+      <OI NAME="Supply air" TYPE="client.dashboard.widgets.PointGaugeWidget">
+        <PI Name="Min" Value="10" />
+        <PI Name="Max" Value="30" />
+        <PI Name="UseNeedle" Value="0" />
+        <PI Name="DESCR" Value="Supply air TE2, °C" />
+        <PI Name="DisplaySignal">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE2" />
+        </PI>
+        <OI NAME="Guide1" TYPE="client.dashboard.widgets.GuideProperties" hidden="1">
+          <PI Name="Value" Value="16" />
+          <PI Name="Color" Value="-15043608" />
+        </OI>
+        <OI NAME="Guide2" TYPE="client.dashboard.widgets.GuideProperties" hidden="1">
+          <PI Name="Value" Value="21.5" />
+          <PI Name="Color" Value="-2543579" />
+        </OI>
+      </OI>
+      <OI NAME="Supply pressure" TYPE="client.dashboard.widgets.PointGaugeWidget">
+        <PI Name="Min" Value="0" />
+        <PI Name="Max" Value="250" />
+        <PI Name="UseNeedle" Value="0" />
+        <PI Name="DESCR" Value="Supply duct PE1, Pa" />
+        <PI Name="DisplaySignal">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="PE1" />
+        </PI>
+        <OI NAME="Guide1" TYPE="client.dashboard.widgets.GuideProperties" hidden="1">
+          <PI Name="Value" Value="80" />
+          <PI Name="Color" Value="-14774722" />
+        </OI>
+      </OI>
+      <OI NAME="Extract pressure" TYPE="client.dashboard.widgets.PointGaugeWidget">
+        <PI Name="Min" Value="0" />
+        <PI Name="Max" Value="250" />
+        <PI Name="UseNeedle" Value="0" />
+        <PI Name="DESCR" Value="Extract duct PE2, Pa" />
+        <PI Name="DisplaySignal">
+          <Reference DeltaFilter="0" Object="../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="PE2" />
+        </PI>
+        <OI NAME="Guide1" TYPE="client.dashboard.widgets.GuideProperties" hidden="1">
+          <PI Name="Value" Value="60" />
+          <PI Name="Color" Value="-14774722" />
+        </OI>
+      </OI>
+      <OI NAME="Alarms" TYPE="client.dashboard.widgets.AlarmCountWidget">
+        <PI Name="DESCR" Value="Active alarms" />
+      </OI>
+      <OI NAME="Air temperatures" TYPE="client.dashboard.widgets.PointValueWidget">
+        <PI Name="DESCR" Value="Air temperatures, °C" />
+        <OI NAME="Outdoor TE00" TYPE="client.dashboard.widgets.PointGuideSeriesProperties" hidden="1">
+          <PI Name="WidgetIcon" Value="5" />
+          <PI Name="DisplaySignal">
+            <Reference DeltaFilter="0" Object="../../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE00" />
+          </PI>
+        </OI>
+        <OI NAME="After recovery TE3" TYPE="client.dashboard.widgets.PointGuideSeriesProperties" hidden="1">
+          <PI Name="WidgetIcon" Value="5" />
+          <PI Name="DisplaySignal">
+            <Reference DeltaFilter="0" Object="../../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE3" />
+          </PI>
+        </OI>
+        <OI NAME="Supply TE2" TYPE="client.dashboard.widgets.PointGuideSeriesProperties" hidden="1">
+          <PI Name="WidgetIcon" Value="5" />
+          <PI Name="DisplaySignal">
+            <Reference DeltaFilter="0" Object="../../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE2" />
+          </PI>
+        </OI>
+        <OI NAME="Extract TE7" TYPE="client.dashboard.widgets.PointGuideSeriesProperties" hidden="1">
+          <PI Name="WidgetIcon" Value="5" />
+          <PI Name="DisplaySignal">
+            <Reference DeltaFilter="0" Object="../../../AHU/Inputs" Retransmit="0" TransferRate="10" Property="TE7" />
+          </PI>
+        </OI>
+      </OI>
+      <OI NAME="Control" TYPE="client.dashboard.widgets.PointValueWidget">
+        <PI Name="DESCR" Value="Control signals, %" />
+        <OI NAME="Heat recovery SC3" TYPE="client.dashboard.widgets.PointGuideSeriesProperties" hidden="1">
+          <PI Name="WidgetIcon" Value="0" />
+          <PI Name="DisplaySignal">
+            <Reference DeltaFilter="0" Object="../../../AHU/Outputs" Retransmit="0" TransferRate="10" Property="SC3_Ctrl" />
+          </PI>
+        </OI>
+        <OI NAME="Heating valve TV1" TYPE="client.dashboard.widgets.PointGuideSeriesProperties" hidden="1">
+          <PI Name="WidgetIcon" Value="4" />
+          <PI Name="DisplaySignal">
+            <Reference DeltaFilter="0" Object="../../../AHU/Outputs" Retransmit="0" TransferRate="10" Property="TV1_Ctrl" />
+          </PI>
+        </OI>
+        <OI NAME="Cooling valve TV2" TYPE="client.dashboard.widgets.PointGuideSeriesProperties" hidden="1">
+          <PI Name="WidgetIcon" Value="2" />
+          <PI Name="DisplaySignal">
+            <Reference DeltaFilter="0" Object="../../../AHU/Outputs" Retransmit="0" TransferRate="10" Property="TV2_Ctrl" />
+          </PI>
+        </OI>
+        <OI NAME="Supply fan TF01" TYPE="client.dashboard.widgets.PointGuideSeriesProperties" hidden="1">
+          <PI Name="WidgetIcon" Value="0" />
+          <PI Name="DisplaySignal">
+            <Reference DeltaFilter="0" Object="../../../AHU/Outputs" Retransmit="0" TransferRate="10" Property="TF01_Ctrl" />
+          </PI>
+        </OI>
+      </OI>
+      <OI NAME="Temperatures 1 h" TYPE="client.dashboard.widgets.PeriodChartWidget">
+        <PI Name="Period" Value="17" />
+        <PI Name="DESCR" Value="Temperatures, last hour" />
+        <OI NAME="TE00 outdoor Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/TE00 outdoor" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE6 intake Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/TE6 intake" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE3 after recovery Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/TE3 after recovery" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE4 after heating Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/TE4 after heating" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE5 after cooling Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/TE5 after cooling" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE2 supply Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/TE2 supply" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE7 extract Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/TE7 extract" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TE8 exhaust Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/TE8 exhaust" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+      </OI>
+      <OI NAME="Control 1 h" TYPE="client.dashboard.widgets.PeriodChartWidget">
+        <PI Name="Period" Value="17" />
+        <PI Name="DESCR" Value="Control signals, last hour" />
+        <OI NAME="TF01 speed Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/TF01 speed" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="PF01 speed Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/PF01 speed" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="SC3 rotor Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/SC3 rotor" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TV1 heating valve Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/TV1 heating valve" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="TV2 cooling valve Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/TV2 cooling valve" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+      </OI>
+      <OI NAME="Pressures 24 h" TYPE="client.dashboard.widgets.PeriodChartWidget">
+        <PI Name="Period" Value="7" />
+        <PI Name="DESCR" Value="Duct pressures, 24 hours" />
+        <OI NAME="PE1 supply duct Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/PE1 supply duct" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="PE2 extract duct Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="3" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/PE2 extract duct" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+      </OI>
+      <OI NAME="Filters 7 d" TYPE="client.dashboard.widgets.PeriodChartWidget">
+        <PI Name="Period" Value="8" />
+        <PI Name="DESCR" Value="Filter pressure drops, 7 days" />
+        <OI NAME="PDE1 filter 2 Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="1" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/PDE1 filter 2" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="PDE2 extract filter Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="1" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/PDE2 extract filter" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="PDE3 filter 1 Series" TYPE="client.dashboard.widgets.ChartSeriesProperties" hidden="1">
+          <PI Name="ChartType" Value="3" />
+          <PI Name="CalculationMethod" Value="1" />
+          <PI Name="DisplayLog">
+            <Reference DeltaFilter="0" Object="../../../Trends/PDE3 filter 1" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+      </OI>
+      <OI NAME="Measurements" TYPE="client.dashboard.Dashboard">
+        <PI Name="ShowTime" Value="1" />
+        <OI NAME="Supply air" TYPE="client.dashboard.DashboardWidget" hidden="1">
+          <PI Name="ColumnSpan" Value="1" />
+          <PI Name="RowSpan" Value="1" />
+          <PI Name="Order" Value="0" />
+          <PI Name="InitialAddress">
+            <Reference DeltaFilter="0" Object="../../Supply air" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="Supply pressure" TYPE="client.dashboard.DashboardWidget" hidden="1">
+          <PI Name="ColumnSpan" Value="1" />
+          <PI Name="RowSpan" Value="1" />
+          <PI Name="Order" Value="1" />
+          <PI Name="InitialAddress">
+            <Reference DeltaFilter="0" Object="../../Supply pressure" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="Extract pressure" TYPE="client.dashboard.DashboardWidget" hidden="1">
+          <PI Name="ColumnSpan" Value="1" />
+          <PI Name="RowSpan" Value="1" />
+          <PI Name="Order" Value="2" />
+          <PI Name="InitialAddress">
+            <Reference DeltaFilter="0" Object="../../Extract pressure" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="Alarms" TYPE="client.dashboard.DashboardWidget" hidden="1">
+          <PI Name="ColumnSpan" Value="1" />
+          <PI Name="RowSpan" Value="1" />
+          <PI Name="Order" Value="3" />
+          <PI Name="InitialAddress">
+            <Reference DeltaFilter="0" Object="../../Alarms" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="Air temperatures" TYPE="client.dashboard.DashboardWidget" hidden="1">
+          <PI Name="ColumnSpan" Value="2" />
+          <PI Name="RowSpan" Value="1" />
+          <PI Name="Order" Value="4" />
+          <PI Name="InitialAddress">
+            <Reference DeltaFilter="0" Object="../../Air temperatures" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="Control" TYPE="client.dashboard.DashboardWidget" hidden="1">
+          <PI Name="ColumnSpan" Value="2" />
+          <PI Name="RowSpan" Value="1" />
+          <PI Name="Order" Value="5" />
+          <PI Name="InitialAddress">
+            <Reference DeltaFilter="0" Object="../../Control" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="Temperatures 1 h" TYPE="client.dashboard.DashboardWidget" hidden="1">
+          <PI Name="ColumnSpan" Value="2" />
+          <PI Name="RowSpan" Value="2" />
+          <PI Name="Order" Value="6" />
+          <PI Name="InitialAddress">
+            <Reference DeltaFilter="0" Object="../../Temperatures 1 h" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="Control 1 h" TYPE="client.dashboard.DashboardWidget" hidden="1">
+          <PI Name="ColumnSpan" Value="2" />
+          <PI Name="RowSpan" Value="2" />
+          <PI Name="Order" Value="7" />
+          <PI Name="InitialAddress">
+            <Reference DeltaFilter="0" Object="../../Control 1 h" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="Pressures 24 h" TYPE="client.dashboard.DashboardWidget" hidden="1">
+          <PI Name="ColumnSpan" Value="2" />
+          <PI Name="RowSpan" Value="2" />
+          <PI Name="Order" Value="8" />
+          <PI Name="InitialAddress">
+            <Reference DeltaFilter="0" Object="../../Pressures 24 h" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="Filters 7 d" TYPE="client.dashboard.DashboardWidget" hidden="1">
+          <PI Name="ColumnSpan" Value="2" />
+          <PI Name="RowSpan" Value="2" />
+          <PI Name="Order" Value="9" />
+          <PI Name="InitialAddress">
+            <Reference DeltaFilter="0" Object="../../Filters 7 d" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+        <OI NAME="Graphic" TYPE="client.dashboard.DashboardWidget" hidden="1">
+          <PI Name="ColumnSpan" Value="4" />
+          <PI Name="RowSpan" Value="3" />
+          <PI Name="Order" Value="10" />
+          <PI Name="InitialAddress">
+            <Reference DeltaFilter="0" Object="../../../Graphic" Retransmit="0" TransferRate="10" />
+          </PI>
+        </OI>
+      </OI>
+    </OI>
+  </ExportedObjects>
+</ObjectSet>

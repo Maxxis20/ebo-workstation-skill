@@ -79,7 +79,7 @@ class Block:
         g = self.prog.geo.get(t)                                   # the editor's own shape, 5 px per cell
         return (g[0], g[1]) if g else (10, 10)
 
-    def out_xy(self):
+    def out_xy(self, idx=0):
         w, h = self.size()
         g = self.prog.geo.get(self.typ)
         if g and g[3] is not None and not self._special():
@@ -135,6 +135,89 @@ class Block:
         return f'#{self.id} "{self.full_name}" [{self.x},{self.y},0,{flag}] \'{unit}\',\'{self.desc}\' = {self.typ} {par}'
 
 
+class Port:
+    """One output of a block that has several (an HFB): what wire() takes as a source."""
+    def __init__(self, block, idx):
+        self.block, self.idx = block, idx
+
+    def out_xy(self):
+        return self.block.out_xy(self.idx)
+
+
+def _b(s):
+    """The block behind a wire source (a Block, or a Port of one)."""
+    return s.block if isinstance(s, Port) else s
+
+
+def _k(s):
+    """Key of the net a wire source starts: block and output number."""
+    return (id(_b(s)), s.idx if isinstance(s, Port) else 0)
+
+
+class HFB(Block):
+    """Hierarchical function block: a diagram of its own, shown as one block on the level above.
+
+        f = p.hfb("Fan_Control", module="FAN")
+        pr = f.inp("Pressure"); run = f.inp("Run", binary=True)     # pins in, usable as sources inside
+        ... f.block(...), f.wire(...), f.alarm(...), f.hfb(...)      # the same calls as on the program
+        f.out("Ctrl", pid)                                          # pin out, fed by a block inside
+        p.wire(te, f, "Pressure"); p.wire(f.o("Ctrl"), ro)          # outside: pins by name
+
+    Pins are numbered in the order they are made (the editor numbers them by the block ids inside). Blocks
+    inside keep their own module names; constants are those of the program."""
+    def __init__(self, prog, name, module):
+        Block.__init__(self, prog, "HFB", name, [], "", "", False, module, 0)
+        self.inner = Program(_parent=prog)
+        self.inner._is_inner = True
+        self.in_names, self.out_names = [], []
+
+    n_in = property(lambda self: len(self.in_names), lambda self, v: None)
+
+    def __getattr__(self, k):                                     # block, wire, const, alarm, hfb ... of the inside
+        if k in ("block", "wire", "const", "alarm", "hfb", "blocks", "wires"):
+            return getattr(self.inner, k)
+        raise AttributeError(k)
+
+    def inp(self, name, binary=False):
+        self.in_names.append(name)
+        return self.inner.block("HFDI" if binary else "HFAI", name)
+
+    def out(self, name, src, binary=False):
+        self.out_names.append(name)
+        o = self.inner.block("HFDO" if binary else "HFAO", name)
+        self.inner.wire(src, o)
+        return self.o(name)
+
+    def o(self, name):
+        return Port(self, self.out_names.index(name))
+
+    # Seen on production programs: height 3 N + 7 cells for N = the larger pin count, made even; the pins of a
+    # side are spread at floor((H - 2) / (n - 1)) cells, centred. Exception seen in the editor (heights 14 and 20):
+    # a side with exactly two pins has them at rows 2 and H - 2. Three pins on a side: not seen yet.
+    def size(self):
+        n = max(len(self.in_names), len(self.out_names), 1)
+        h = 3 * n + 7
+        return 12, h + h % 2
+
+    def _row(self, i, n):
+        h = self.size()[1]
+        if n <= 1:
+            return h // 2
+        if n == 2:
+            return 2 if i == 0 else h - 2
+        step = (h - 2) // (n - 1)
+        return (h - step * (n - 1)) // 2 + step * i
+
+    def in_xy(self, pin):
+        return self.x, self.y + self._row(pin, len(self.in_names))
+
+    def out_xy(self, idx=0):
+        return self.x + self.size()[0], self.y + self._row(idx, len(self.out_names))
+
+    def line(self):
+        return f'#{self.id} "{self.full_name}" [{self.x},{self.y},0,0] \'\',\'\' = HFB {{}}'
+
+
 def fmt(v):
     if isinstance(v, bool):
         return "1" if v else "0"
@@ -154,12 +237,16 @@ def expr_inputs(expr):
 
 
 class Program:
-    def __init__(self, title="", cycle_ms=1000):
+    def __init__(self, title="", cycle_ms=1000, _parent=None):
         self.title, self.cycle_ms = title, cycle_ms
         self.blocks, self.wires, self.consts, self.binds = [], [], [], []
         self.cat = {}
         self.geo = {}                                           # type -> (width, height, input rows, output row), cells
-        if os.path.exists(CATALOGUE):
+        self._names = set()                                     # block names of the whole program, HFBs included
+        if _parent is not None:                                 # the inside of an HFB shares what is program-wide
+            self.consts, self.binds, self._names = _parent.consts, _parent.binds, _parent._names
+            self.cat, self.geo = _parent.cat, _parent.geo
+        elif os.path.exists(CATALOGUE):
             for b in ET.parse(CATALOGUE).getroot().iter("block"):
                 sh, static = b.find("shape"), b.find("inputs") is None or b.find("inputs").get("type") == "static"
                 if sh is not None and static and int(sh.get("width", 0)) >= 25:
@@ -194,11 +281,98 @@ class Program:
                 raise ValueError(f"{typ} {name!r}: {len(params)} parameters given, catalogue lists {want}")
         elif typ not in self.cat and not OPERATOR.match(typ) and typ != "COMENT":
             raise ValueError(f"{typ}: not in the block catalogue")
-        if name and any(b.full_name == (f"{module}\\{name}" if module else name) for b in self.blocks):
-            raise ValueError(f"duplicate block name {name!r}")
+        full = f"{module}\\{name}" if module else name
+        if name and typ not in ("HFAI", "HFDI", "HFAO", "HFDO"):
+            if full in self._names:
+                raise ValueError(f"duplicate block name {full!r}")
+            self._names.add(full)
         b = Block(self, typ, name, params, unit, desc, public, module, n_in, rw, backup)
         self.blocks.append(b)
         return b
+
+    def hfb(self, name, module=""):
+        """A hierarchical function block on this level; see class HFB."""
+        h = HFB(self, name, module)
+        self.blocks.append(h)
+        return h
+
+    def check(self):
+        """Wiring faults that the compiler would refuse or that are surely mistakes, as text lines: an input left
+        open, a binary signal on an analog pin or the other way round. Looks into HFBs. Empty list = nothing found."""
+        kind_out = {"XPB": "b", "XPR": "a", "XPI": "a", "HFAI": "a", "HFDI": "b", "OpB": "b", "OpR": "a", "OpW": "a"}
+        if os.path.exists(CATALOGUE) and not hasattr(Program, "_kinds"):
+            Program._kinds = {}
+            for b in ET.parse(CATALOGUE).getroot().iter("block"):
+                k = lambda t: "b" if t == "binary" else "a"
+                Program._kinds[b.get("name")] = ([k(i.get("type")) for i in b.findall(".//input")],
+                                                 [k(o.get("type")) for o in b.findall(".//output")])
+        kinds = getattr(Program, "_kinds", {})
+        def out_kind(s):
+            blk = _b(s)
+            if isinstance(blk, HFB):
+                o = [x for x in blk.inner.blocks if x.typ in ("HFAO", "HFDO")][s.idx]
+                return "b" if o.typ == "HFDO" else "a"
+            if blk.typ in kind_out:
+                return kind_out[blk.typ]
+            return (kinds.get(blk.typ, ([], []))[1] or [None])[0]
+        def in_kinds(d):
+            if isinstance(d, HFB):
+                return ["b" if x.typ == "HFDI" else "a" for x in d.inner.blocks if x.typ in ("HFAI", "HFDI")]
+            if d.typ in EXPR:
+                return ["a" if c.isupper() else "b" for c in expr_inputs(str(d.params[0]))]
+            if d.typ == "HFDO":
+                return ["b"]
+            if d.typ in kinds and self.cat.get(d.typ, (0, ""))[1] == "static":
+                return kinds[d.typ][0]
+            return None
+        bad = []
+        if not getattr(self, "_is_inner", False):               # program-wide rules, once
+            self._demote_shared()
+            pub = {n for n, _v, _u, p in self.consts if p}
+            for b in self.all_blocks():
+                if b.typ in EXPR:
+                    for n in pub:
+                        if re.search(r"(?<![A-Za-z0-9_\\])" + re.escape(n) + r"(?![A-Za-z0-9_])", str(b.params[0])):
+                            bad.append(f"{b.typ} {b.full_name}: public constant {n} inside an expression")
+        for b in self.blocks:
+            if b.typ == "COMENT":
+                continue
+            want = in_kinds(b); label = f"{b.typ} {b.full_name or '(no name)'}"
+            got = {p: s for s, d, p in self.wires if d is b}
+            if want is not None and b.typ not in ("RI", "BI", "II"):     # their input is the terminal, bound outside
+                for i, k in enumerate(want):
+                    if i not in got:
+                        bad.append(f"{label}: input {i} not connected")
+                    else:
+                        ok = out_kind(got[i])
+                        if ok and ok != k:
+                            bad.append(f"{label}: input {i} wants {'binary' if k == 'b' else 'analog'}, "
+                                       f"gets {'binary' if ok == 'b' else 'analog'} from {_b(got[i]).typ} {_b(got[i]).full_name}")
+            if isinstance(b, HFB):
+                bad += [f"{b.name} / {x}" for x in b.inner.check()]
+        return bad
+
+    def _demote_shared(self):
+        """The compiler refuses a public constant that is written in more than one place ("Public constant used
+        more than once: X", EBO 7.1). Such a constant is made private here: it keeps its value everywhere, but is
+        no longer a property of the program object. Names end up in self.demoted; save() says so."""
+        uses = {}
+        for b in self.all_blocks():
+            if b.typ not in EXPR and b.typ not in ("COMENT", "ALARM"):
+                for v in b.params:
+                    if isinstance(v, str):
+                        uses[v] = uses.get(v, 0) + 1
+        self.demoted = getattr(self, "demoted", [])
+        for i, (n, v, u, pub) in enumerate(self.consts):
+            if pub and uses.get(n, 0) > 1:
+                self.consts[i] = (n, v, u, False); self.demoted.append(n)
+
+    def all_blocks(self):
+        """Every block, those inside HFBs included."""
+        for b in self.blocks:
+            yield b
+            if isinstance(b, HFB):
+                yield from b.inner.all_blocks()
 
     def alarm(self, name, src, text="", delay_on=0, delay_off=0, priority=0, module="", desc=""):
         """ALARM block on a binary signal. On the server it becomes an alarm object below the module, named as the
@@ -219,11 +393,17 @@ class Program:
         return name
 
     def wire(self, src, dst, pin=0):
-        if isinstance(pin, str) and dst.typ in PINS:            # named pin
+        if isinstance(src, HFB):
+            raise ValueError(f"HFB {src.name!r}: name the output, wire(hfb.o('Name'), ...)")
+        if _b(src) not in self.blocks or dst not in self.blocks:
+            raise ValueError(f"wire {_b(src).name!r} -> {dst.name!r}: both ends must be on the same diagram level")
+        if isinstance(dst, HFB):
+            pin = dst.in_names.index(pin) if isinstance(pin, str) else pin
+        elif isinstance(pin, str) and dst.typ in PINS:          # named pin
             pin = PINS[dst.typ][pin]
         elif isinstance(pin, str):                              # letter of an expression block
             pin = expr_inputs(str(dst.params[0])).index(pin)
-        if dst.n_in and pin >= dst.n_in and self.cat.get(dst.typ, (0, "static"))[1] == "static":
+        if dst.n_in and pin >= dst.n_in and (isinstance(dst, HFB) or self.cat.get(dst.typ, (0, "static"))[1] == "static"):
             raise ValueError(f"{dst.typ} {dst.name!r} has no input {pin}")
         if any(w[1] is dst and w[2] == pin for w in self.wires):
             raise ValueError(f"{dst.typ} {dst.name!r} input {pin} wired twice")
@@ -239,7 +419,7 @@ class Program:
             bad = self.overlaps()
             if not bad:
                 return
-            b = next(b for b in self.blocks if (b.full_name or "?") == bad[0][0] and id(b) in self.routes)
+            b = next(_b(r[2]) for r in self.routes.values() if (_b(r[2]).full_name or "?") == bad[0][0])
             self._nudge[id(b)] = self._nudge.get(id(b), 0) + 1
 
     def _layout(self, x0, y0, gap_y, band_gap, pitch):
@@ -251,10 +431,11 @@ class Program:
         the lane to a track in the channel left of the destination column and drops to the pin. So no
         wire crosses a block. Set values sit one column before the first block that reads them, and
         constant operators sit directly left of the pin they feed."""
+        self.blocks = [b for b in self.blocks if not (b.typ == "COMENT" and b.module is None)]   # titles of a former pass
         B = [b for b in self.blocks if b.typ != "COMENT"]
         order = {id(b): i for i, b in enumerate(B)}
         sat = {id(b) for b in B if b.typ in Block.SATELLITE}
-        fwd = [(s, d, p) for s, d, p in self.wires if order[id(s)] < order[id(d)]]
+        fwd = [(_b(s), d, p) for s, d, p in self.wires if order[id(_b(s))] < order[id(d)]]
         depth = {id(b): 0 for b in B}
         for _ in range(len(B)):
             ch = False
@@ -267,8 +448,8 @@ class Program:
                 break
         has_in = {id(d) for _s, d, _p in self.wires}
         for b in B:                                             # sources as late as possible
-            if id(b) not in has_in and b.typ not in ("RI", "BI", "II") and id(b) not in sat:
-                use = [depth[id(d)] for s, d, _p in self.wires if s is b]
+            if id(b) not in has_in and b.typ not in ("RI", "BI", "II", "HFAI", "HFDI") and id(b) not in sat:
+                use = [depth[id(d)] for s, d, _p in self.wires if _b(s) is b]
                 if use:
                     depth[id(b)] = max(0, min(use) - 1)
         modules = []
@@ -276,14 +457,14 @@ class Program:
             if b.module not in modules:
                 modules.append(b.module)
         ncol = max(depth.values()) + 1
-        col = lambda b: depth[id(b)]
+        col = lambda b: depth[id(_b(b))]
         # nets: source -> destinations; classify each destination as adjacent or by lane
         nets = {}
         for s, d, p in self.wires:
-            if id(s) in sat:
+            if id(_b(s)) in sat:
                 continue
-            nets.setdefault(id(s), (s, []))[1].append((d, p))
-        adjacent = lambda s, d: col(d) == col(s) + 1 and d.module == s.module
+            nets.setdefault(_k(s), (s, []))[1].append((d, p))
+        adjacent = lambda s, d: col(d) == col(s) + 1 and d.module == _b(s).module
         tracks = [dict() for _ in range(ncol + 1)]              # tracks[c + 1] = channel right of column c
         lanes = {m: dict() for m in modules}
         for sid, (s, dst) in nets.items():
@@ -294,7 +475,7 @@ class Program:
                     lanes[d.module].setdefault(sid, len(lanes[d.module]))
         feeds_sat = [False] * (ncol + 1)                        # channel left of column c holds satellites
         for s, d, _p in self.wires:
-            if id(s) in sat:
+            if id(_b(s)) in sat:
                 feeds_sat[col(d)] = True
         colw = [max([b.size()[0] for b in B if col(b) == c and id(b) not in sat] or [10]) for c in range(ncol)]
         chan_x, X, x = [], [], x0
@@ -319,7 +500,7 @@ class Program:
                 bottom = max(bottom, yy)
             y = bottom + band_gap
         for s, d, p in self.wires:
-            if id(s) in sat:
+            if id(_b(s)) in sat:
                 ix, iy = d.in_xy(p); s.x, s.y = ix - 11, iy - 1
         # Track order inside each channel. A wire leaving a block runs right to its track; a wire entering a pin
         # comes from its track on the left. When an output and a foreign pin sit on the same row, the two pieces
@@ -354,13 +535,12 @@ class Program:
                     xd = chan_x[col(d)] + pitch * tracks[col(d)][sid]
                     br.append([(xs, ly), (xd, ly), (xd, iy)])
                 br[-1].append((d, p))
-            self.routes[sid] = ((xs, oy), br)
+            self.routes[sid] = ((xs, oy), br, s)
 
     def segments(self):
         """Every drawn wire piece as (net id, (x1, y1), (x2, y2)), from the routes of layout()."""
         seg = []
-        for sid, ((jx, jy), br) in self.routes.items():
-            s = next(b for b in self.blocks if id(b) == sid)
+        for sid, ((jx, jy), br, s) in self.routes.items():
             ox, oy = s.out_xy(); seg.append((sid, (ox, oy + 1), (jx, jy)))
             for path in br:
                 last = (jx, jy)
@@ -373,7 +553,7 @@ class Program:
     def overlaps(self):
         """Pairs of wire pieces of different nets that lie on top of each other (same line, shared length)."""
         seg, bad = self.segments(), []
-        name = lambda sid: next(b for b in self.blocks if id(b) == sid).full_name or "?"
+        name = lambda sid: _b(self.routes[sid][2]).full_name or "?"
         for i, (n1, a1, b1) in enumerate(seg):
             for n2, a2, b2 in seg[i + 1:]:
                 if n1 == n2:
@@ -392,25 +572,34 @@ class Program:
         self.blocks.append(t)
 
     # --- output ------------------------------------------------------------------------------------
-    def text(self):
+    def _body(self):
+        """Block and wire lines of this diagram level; an HFB is followed by its own level in braces."""
         if not hasattr(self, "routes"):
             self.layout()
         for i, b in enumerate(self.blocks, 1):
             b.id = i
-        L = ["[Aut]", "#1,8,7", "{41,27"]
-        L += [b.line() for b in self.blocks]
+        L = []
+        for b in self.blocks:
+            L.append(b.line())
+            if isinstance(b, HFB):
+                L += ["{"] + b.inner._body() + ["}"]
         def pts(path):
             return ";".join(f"{q[0].id},{q[1]}" if isinstance(q[0], Block) else f"{q[0]},{q[1]}" for q in path)
         for s, d, p in self.wires:                             # constant operators: one direct wire each
-            if id(s) not in self.routes:
+            if _k(s) not in self.routes:
                 L.append(f">{s.id}:0 = {{{{{d.id},{p}}}}}")
-        for sid, ((jx, jy), br) in sorted(self.routes.items(), key=lambda kv: next(b.id for b in self.blocks if id(b) == kv[0])):
-            src = next(b for b in self.blocks if id(b) == sid)
+        for sid, ((jx, jy), br, s) in sorted(self.routes.items(), key=lambda kv: (_b(kv[1][2]).id, kv[0][1])):
+            head = f">{_b(s).id}:{sid[1]} = "
             if len(br) == 1:
-                head = "" if len(br[0]) == 1 else f"{jx},{jy};"
-                L.append(f">{src.id}:0 = {{{{{head}{pts(br[0])}}}}}")
+                first = "" if len(br[0]) == 1 else f"{jx},{jy};"
+                L.append(head + f"{{{{{first}{pts(br[0])}}}}}")
             else:
-                L.append(f">{src.id}:0 = {{{{{jx},{jy}" + "".join("{" + pts(x) + "}" for x in br) + "}}")
+                L.append(head + f"{{{{{jx},{jy}" + "".join("{" + pts(x) + "}" for x in br) + "}}")
+        return L
+
+    def text(self):
+        self._demote_shared()
+        L = ["[Aut]", "#1,8,7", "{41,27"] + self._body()
         L += ["}", "[Const]", "{"]
         L += [f"{n}~{fmt(v)}~'{UNITS.get(u, u)}'~{1 if pub else 0}~1~''" for n, v, u, pub in self.consts]
         L += ["}"]
@@ -419,28 +608,41 @@ class Program:
         L += ["[Fin]"]
         return "\r\n".join(L) + "\r\n"
 
+    def all_overlaps(self):
+        out = list(self.overlaps())
+        for b in self.blocks:
+            if isinstance(b, HFB):
+                if not hasattr(b.inner, "routes"):
+                    b.inner.layout()
+                out += b.inner.all_overlaps()
+        return out
+
     def save(self, path):
         with open(path, "w", encoding="latin-1", newline="") as f:
             f.write(self.text())
-        for n1, n2, axis, at, lo, hi in self.overlaps():
+        if getattr(self, "demoted", None):
+            print(f"note: {len(self.demoted)} constants used in more than one place were written private "
+                  f"(EBO allows a public constant once): {', '.join(self.demoted)}", file=sys.stderr)
+        for n1, n2, axis, at, lo, hi in self.all_overlaps():
             print(f"warning: wires of {n1} and {n2} overlap at {axis} = {at}, {lo} ... {hi}", file=sys.stderr)
         return path
 
     def expected(self):
         """What an export of the loaded program must show: modules, constants, start values of parameter blocks."""
         par = {}
-        for b in self.blocks:
+        for b in self.all_blocks():
             if b.typ in ("PVR", "PVB", "PVI") and b.public and b.name:
                 par.setdefault(b.module, {})[b.name] = float(b.params[0])
-        return {"modules": sorted({b.module for b in self.blocks if b.module}),
+        return {"modules": sorted({b.module for b in self.all_blocks() if b.module and b.typ != "HFB"}),
                 "constants": {n: float(v) for n, v, _u, pub in self.consts if pub}, "parameters": par,
                 "stats": self.stats()}
 
     def stats(self):
-        real = [b for b in self.blocks if b.typ != "COMENT"]
+        real = [b for b in self.all_blocks() if b.typ not in ("COMENT", "HFB")]
         return {"blocks": len(real), "wires": len(self.wires), "constants": len(self.consts),
                 "public": sum(1 for b in real if b.public),
-                "modules": sorted({b.module for b in real if b.module})}
+                "modules": sorted({b.module for b in real if b.module}),
+                "hfb": sum(1 for b in self.all_blocks() if b.typ == "HFB")}
 
 
 if __name__ == "__main__":

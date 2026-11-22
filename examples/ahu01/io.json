@@ -1,0 +1,2330 @@
+{
+ "inputs": [
+  {
+   "tag": "TE00",
+   "kind": "AI",
+   "unit": "°C",
+   "range": "-50 ... 50",
+   "block": "Inputs/TE00"
+  },
+  {
+   "tag": "TE1",
+   "kind": "AI",
+   "unit": "°C",
+   "range": "0 ... 100",
+   "block": "Inputs/TE1"
+  },
+  {
+   "tag": "TE2",
+   "kind": "AI",
+   "unit": "°C",
+   "range": "-50 ... 100",
+   "block": "Inputs/TE2"
+  },
+  {
+   "tag": "TE3",
+   "kind": "AI",
+   "unit": "°C",
+   "range": "-50 ... 50",
+   "block": "Inputs/TE3"
+  },
+  {
+   "tag": "TE4",
+   "kind": "AI",
+   "unit": "°C",
+   "range": "-50 ... 80",
+   "block": "Inputs/TE4"
+  },
+  {
+   "tag": "TE5",
+   "kind": "AI",
+   "unit": "°C",
+   "range": "-50 ... 80",
+   "block": "Inputs/TE5"
+  },
+  {
+   "tag": "TE6",
+   "kind": "AI",
+   "unit": "°C",
+   "range": "-50 ... 50",
+   "block": "Inputs/TE6"
+  },
+  {
+   "tag": "TE7",
+   "kind": "AI",
+   "unit": "°C",
+   "range": "-50 ... 100",
+   "block": "Inputs/TE7"
+  },
+  {
+   "tag": "TE8",
+   "kind": "AI",
+   "unit": "°C",
+   "range": "-50 ... 50",
+   "block": "Inputs/TE8"
+  },
+  {
+   "tag": "TE10_1",
+   "kind": "AI",
+   "unit": "°C",
+   "range": "0 ... 50",
+   "block": "Inputs/TE10_1"
+  },
+  {
+   "tag": "TE10_2",
+   "kind": "AI",
+   "unit": "°C",
+   "range": "0 ... 50",
+   "block": "Inputs/TE10_2"
+  },
+  {
+   "tag": "TE10_3",
+   "kind": "AI",
+   "unit": "°C",
+   "range": "0 ... 50",
+   "block": "Inputs/TE10_3"
+  },
+  {
+   "tag": "PE1",
+   "kind": "AI",
+   "unit": "Pa",
+   "range": "0 ... 500",
+   "block": "Inputs/PE1"
+  },
+  {
+   "tag": "PE2",
+   "kind": "AI",
+   "unit": "Pa",
+   "range": "0 ... 500",
+   "block": "Inputs/PE2"
+  },
+  {
+   "tag": "PDE1",
+   "kind": "AI",
+   "unit": "Pa",
+   "range": "0 ... 500",
+   "block": "Inputs/PDE1"
+  },
+  {
+   "tag": "PDE2",
+   "kind": "AI",
+   "unit": "Pa",
+   "range": "0 ... 500",
+   "block": "Inputs/PDE2"
+  },
+  {
+   "tag": "PDE3",
+   "kind": "AI",
+   "unit": "Pa",
+   "range": "0 ... 500",
+   "block": "Inputs/PDE3"
+  },
+  {
+   "tag": "PDE4",
+   "kind": "AI",
+   "unit": "Pa",
+   "range": "0 ... 500",
+   "block": "Inputs/PDE4"
+  },
+  {
+   "tag": "PDE10",
+   "kind": "AI",
+   "unit": "Pa",
+   "range": "0 ... 2000",
+   "block": "Inputs/PDE10"
+  },
+  {
+   "tag": "PDE20",
+   "kind": "AI",
+   "unit": "Pa",
+   "range": "0 ... 2000",
+   "block": "Inputs/PDE20"
+  },
+  {
+   "tag": "FA01",
+   "kind": "DI",
+   "unit": "",
+   "block": "Inputs/FA01"
+  },
+  {
+   "tag": "SB01",
+   "kind": "DI",
+   "unit": "",
+   "block": "Inputs/SB01"
+  },
+  {
+   "tag": "HS10",
+   "kind": "DI",
+   "unit": "",
+   "block": "Inputs/HS10"
+  },
+  {
+   "tag": "P1_Fdb",
+   "kind": "DI",
+   "unit": "",
+   "block": "Inputs/P1_Fdb"
+  },
+  {
+   "tag": "TF01_Fdb",
+   "kind": "DI",
+   "unit": "",
+   "block": "Inputs/TF01_Fdb"
+  },
+  {
+   "tag": "PF01_Fdb",
+   "kind": "DI",
+   "unit": "",
+   "block": "Inputs/PF01_Fdb"
+  },
+  {
+   "tag": "SC3_Fault",
+   "kind": "DI",
+   "unit": "",
+   "block": "Inputs/SC3_Fault"
+  },
+  {
+   "tag": "Reset_DI",
+   "kind": "DI",
+   "unit": "",
+   "block": "Inputs/Reset_DI"
+  },
+  {
+   "tag": "HN_Pres_In",
+   "kind": "soft-binary",
+   "unit": "",
+   "block": "Inputs/HN_Pres_In"
+  },
+  {
+   "tag": "HN_Temp_In",
+   "kind": "soft-binary",
+   "unit": "",
+   "block": "Inputs/HN_Temp_In"
+  },
+  {
+   "tag": "Time_Schedule",
+   "kind": "soft-binary",
+   "unit": "",
+   "block": "Operation/Time_Schedule"
+  },
+  {
+   "tag": "Night_Schedule",
+   "kind": "soft-binary",
+   "unit": "",
+   "block": "Operation/Night_Schedule"
+  },
+  {
+   "tag": "Reset_Cmd",
+   "kind": "soft-binary",
+   "unit": "",
+   "block": "Inputs/Reset_Cmd",
+   "note": "write 1: one-cycle pulse, returns to 0 by itself"
+  },
+  {
+   "tag": "AOM",
+   "kind": "soft-analog",
+   "unit": "",
+   "block": "Operation/AOM"
+  },
+  {
+   "tag": "Season_Sel",
+   "kind": "soft-analog",
+   "unit": "",
+   "block": "Operation/Season_Sel"
+  },
+  {
+   "tag": "Heating_Mode",
+   "kind": "soft-binary",
+   "unit": "",
+   "block": "Operation/Heating_Mode"
+  }
+ ],
+ "outputs": [
+  {
+   "tag": "TF01_Ctrl",
+   "kind": "AO",
+   "signal": "Outputs/TF01_Ctrl",
+   "block": "Outputs/TF01_Ctrl_OUT",
+   "unit": "%"
+  },
+  {
+   "tag": "PF01_Ctrl",
+   "kind": "AO",
+   "signal": "Outputs/PF01_Ctrl",
+   "block": "Outputs/PF01_Ctrl_OUT",
+   "unit": "%"
+  },
+  {
+   "tag": "SC3_Ctrl",
+   "kind": "AO",
+   "signal": "Outputs/SC3_Ctrl",
+   "block": "Outputs/SC3_Ctrl_OUT",
+   "unit": "%"
+  },
+  {
+   "tag": "TV1_Ctrl",
+   "kind": "AO",
+   "signal": "Outputs/TV1_Ctrl",
+   "block": "Outputs/TV1_Ctrl_OUT",
+   "unit": "%"
+  },
+  {
+   "tag": "TV2_Ctrl",
+   "kind": "AO",
+   "signal": "Outputs/TV2_Ctrl",
+   "block": "Outputs/TV2_Ctrl_OUT",
+   "unit": "%"
+  },
+  {
+   "tag": "FZ01_Cmd",
+   "kind": "DO",
+   "signal": "Outputs/FZ01_Cmd",
+   "block": "Outputs/FZ01_Cmd_OUT",
+   "unit": ""
+  },
+  {
+   "tag": "FZ02_Cmd",
+   "kind": "DO",
+   "signal": "Outputs/FZ02_Cmd",
+   "block": "Outputs/FZ02_Cmd_OUT",
+   "unit": ""
+  },
+  {
+   "tag": "TF01_Cmd",
+   "kind": "DO",
+   "signal": "Outputs/TF01_Cmd",
+   "block": "Outputs/TF01_Cmd_OUT",
+   "unit": ""
+  },
+  {
+   "tag": "PF01_Cmd",
+   "kind": "DO",
+   "signal": "Outputs/PF01_Cmd",
+   "block": "Outputs/PF01_Cmd_OUT",
+   "unit": ""
+  },
+  {
+   "tag": "SC3_Cmd",
+   "kind": "DO",
+   "signal": "Outputs/SC3_Cmd",
+   "block": "Outputs/SC3_Cmd_OUT",
+   "unit": ""
+  },
+  {
+   "tag": "P1_Cmd",
+   "kind": "DO",
+   "signal": "Outputs/P1_Cmd",
+   "block": "Outputs/P1_Cmd_OUT",
+   "unit": ""
+  }
+ ],
+ "setpoints": [
+  {
+   "path": "Operation/AOM",
+   "default": 2,
+   "unit": "",
+   "type": "PVI",
+   "range": "0 off / 1 manual on / 2 automatic"
+  },
+  {
+   "path": "Operation/Season_Sel",
+   "default": 0,
+   "unit": "",
+   "type": "PVI",
+   "range": "0 auto / 1 heating / 2 cooling"
+  },
+  {
+   "path": "Operation/Season_Cool_OT",
+   "default": 11,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "5 ... 20"
+  },
+  {
+   "path": "Operation/Season_Heat_OT",
+   "default": 9,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "0 ... 15"
+  },
+  {
+   "path": "Operation/Night_Cool_Start_T",
+   "default": 22,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "20 ... 30"
+  },
+  {
+   "path": "Operation/Night_Cool_Stop_T",
+   "default": 19,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "15 ... 25"
+  },
+  {
+   "path": "Operation/Night_Cool_OT_Min",
+   "default": 12,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "0 ... 20"
+  },
+  {
+   "path": "Operation/Night_Cool_OT_Max",
+   "default": 19,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "10 ... 25"
+  },
+  {
+   "path": "Operation/Night_Cool_Mode",
+   "default": 1,
+   "unit": "",
+   "type": "PVB",
+   "range": "0 / 1"
+  },
+  {
+   "path": "Operation/Night_Heat_Start_T",
+   "default": 18,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "15 ... 22"
+  },
+  {
+   "path": "Operation/Night_Heat_Stop_T",
+   "default": 20,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "17 ... 25"
+  },
+  {
+   "path": "Operation/Night_Heat_OT_Min",
+   "default": -15,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "-30 ... 0"
+  },
+  {
+   "path": "Operation/Night_Heat_OT_Max",
+   "default": 0,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "-10 ... 10"
+  },
+  {
+   "path": "Operation/Night_Heat_Mode",
+   "default": 1,
+   "unit": "",
+   "type": "PVB",
+   "range": "0 / 1"
+  },
+  {
+   "path": "Inputs/Freeze_SP",
+   "default": 6,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "3 ... 10"
+  },
+  {
+   "path": "Alarms/Supply_Fire_Temp",
+   "default": 50,
+   "unit": "°C",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "Alarms/Exhaust_Fire_Temp",
+   "default": 50,
+   "unit": "°C",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "FAN/Low_Speed_Mode",
+   "default": 0,
+   "unit": "",
+   "type": "PVB",
+   "range": "0 / 1"
+  },
+  {
+   "path": "FAN/Low_Speed_Temp_SP",
+   "default": -10,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "-30 ... 0"
+  },
+  {
+   "path": "FAN/Low_Speed_Deviation",
+   "default": 2,
+   "unit": "K",
+   "type": "PVR",
+   "range": "0.5 ... 5"
+  },
+  {
+   "path": "FAN/Supply_Pressure_Set",
+   "default": 80,
+   "unit": "Pa",
+   "type": "PVR",
+   "range": "20 ... 400"
+  },
+  {
+   "path": "FAN/Supply_Gain",
+   "default": 0.05,
+   "unit": "%/Pa",
+   "type": "PVR",
+   "range": "0.001 ... 1"
+  },
+  {
+   "path": "FAN/Supply_Integral_T",
+   "default": 60,
+   "unit": "s",
+   "type": "PVR",
+   "range": "5 ... 600"
+  },
+  {
+   "path": "FAN/Supply_Deriv_Time",
+   "default": 0,
+   "unit": "s",
+   "type": "PVR",
+   "range": "0 ... 60"
+  },
+  {
+   "path": "FAN/Supply_Dead_Zone",
+   "default": 1,
+   "unit": "Pa",
+   "type": "PVR",
+   "range": "0 ... 10"
+  },
+  {
+   "path": "Inputs/TF01_K",
+   "default": 350,
+   "unit": "",
+   "type": "PVR",
+   "range": "1 ... 2000"
+  },
+  {
+   "path": "Alarms/Supply_Pres_Dev",
+   "default": 25,
+   "unit": "%",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "FAN/Exhaust_Pressure_Set",
+   "default": 60,
+   "unit": "Pa",
+   "type": "PVR",
+   "range": "20 ... 400"
+  },
+  {
+   "path": "FAN/Exhaust_Gain",
+   "default": 0.05,
+   "unit": "%/Pa",
+   "type": "PVR",
+   "range": "0.001 ... 1"
+  },
+  {
+   "path": "FAN/Exhaust_Integral_T",
+   "default": 60,
+   "unit": "s",
+   "type": "PVR",
+   "range": "5 ... 600"
+  },
+  {
+   "path": "FAN/Exhaust_Deriv_Time",
+   "default": 0,
+   "unit": "s",
+   "type": "PVR",
+   "range": "0 ... 60"
+  },
+  {
+   "path": "FAN/Exhaust_Dead_Zone",
+   "default": 1,
+   "unit": "Pa",
+   "type": "PVR",
+   "range": "0 ... 10"
+  },
+  {
+   "path": "Inputs/PF01_K",
+   "default": 350,
+   "unit": "",
+   "type": "PVR",
+   "range": "1 ... 2000"
+  },
+  {
+   "path": "Alarms/Exhaust_Pres_Dev",
+   "default": 25,
+   "unit": "%",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "Alarms/PDE3_Filter",
+   "default": 1,
+   "unit": "",
+   "type": "PVB",
+   "range": "0 / 1"
+  },
+  {
+   "path": "Alarms/PDE1_Filter",
+   "default": 1,
+   "unit": "",
+   "type": "PVB",
+   "range": "0 / 1"
+  },
+  {
+   "path": "Alarms/PDE2_Filter",
+   "default": 1,
+   "unit": "",
+   "type": "PVB",
+   "range": "0 / 1"
+  },
+  {
+   "path": "Operation/Heating_Mode",
+   "default": 0,
+   "unit": "",
+   "type": "PVB",
+   "range": "0 / 1"
+  },
+  {
+   "path": "ST/ET_X1",
+   "default": 18,
+   "unit": "°C",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "ST/SP_Y1",
+   "default": 21.5,
+   "unit": "°C",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "ST/ET_X2",
+   "default": 23,
+   "unit": "°C",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "ST/SP_Y2",
+   "default": 16,
+   "unit": "°C",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "ST/ST_Fault_SP",
+   "default": 19,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "15 ... 25"
+  },
+  {
+   "path": "ST/Night_Heat_ST",
+   "default": 27,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "18 ... 35"
+  },
+  {
+   "path": "ST/Night_Cool_ST",
+   "default": 17,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "15 ... 25"
+  },
+  {
+   "path": "ST/PreHeat_Heat_ST",
+   "default": 9,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "-10 ... 15"
+  },
+  {
+   "path": "ST/Cool_Recovery_Hist",
+   "default": 2,
+   "unit": "K",
+   "type": "PVR",
+   "range": "0.5 ... 5"
+  },
+  {
+   "path": "ST/Temp_Derivative_Time",
+   "default": 0,
+   "unit": "s",
+   "type": "PVR",
+   "range": "0 ... 60"
+  },
+  {
+   "path": "ST/Temp_Dead_Zone",
+   "default": 0.1,
+   "unit": "K",
+   "type": "PVR",
+   "range": "0 ... 1"
+  },
+  {
+   "path": "ST/Neutral_Zone",
+   "default": 0.5,
+   "unit": "K",
+   "type": "PVR",
+   "range": "0.2 ... 3"
+  },
+  {
+   "path": "ST/HRU_Gain",
+   "default": 1.5,
+   "unit": "",
+   "type": "PVR",
+   "range": "0.1 ... 20"
+  },
+  {
+   "path": "ST/HRU_Ti",
+   "default": 45,
+   "unit": "s",
+   "type": "PVR",
+   "range": "10 ... 600"
+  },
+  {
+   "path": "ST/CCH_Gain",
+   "default": 2,
+   "unit": "",
+   "type": "PVR",
+   "range": "0.1 ... 20"
+  },
+  {
+   "path": "ST/CCH_Ti",
+   "default": 45,
+   "unit": "s",
+   "type": "PVR",
+   "range": "10 ... 600"
+  },
+  {
+   "path": "ST/HC_Gain",
+   "default": 1.5,
+   "unit": "",
+   "type": "PVR",
+   "range": "0.1 ... 20"
+  },
+  {
+   "path": "ST/HC_Ti",
+   "default": 45,
+   "unit": "s",
+   "type": "PVR",
+   "range": "10 ... 600"
+  },
+  {
+   "path": "ST/Cool_Gain",
+   "default": 2.5,
+   "unit": "",
+   "type": "PVR",
+   "range": "0.1 ... 20"
+  },
+  {
+   "path": "ST/Cool_Ti",
+   "default": 45,
+   "unit": "s",
+   "type": "PVR",
+   "range": "10 ... 600"
+  },
+  {
+   "path": "ST/Coil_Heat_ST",
+   "default": 10,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "5 ... 30"
+  },
+  {
+   "path": "Alarms/PDE4_Frost",
+   "default": 1,
+   "unit": "",
+   "type": "PVB",
+   "range": "0 / 1"
+  },
+  {
+   "path": "Alarms/PDE4_Frost_Temp",
+   "default": 0,
+   "unit": "°C",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "HRU/HRU_Efficiency_Cal",
+   "default": 1,
+   "unit": "",
+   "type": "PVB",
+   "range": "0 / 1"
+  },
+  {
+   "path": "HRU/HRU_Efficiency_Start",
+   "default": 50,
+   "unit": "%",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "HRU/HRU_Efficiency_Stop",
+   "default": 45,
+   "unit": "%",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "P1/P1_Start_OT",
+   "default": 9,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "0 ... 15"
+  },
+  {
+   "path": "P1/P1_Stop_OT",
+   "default": 11,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "2 ... 20"
+  },
+  {
+   "path": "P1/P1_Start_TE1",
+   "default": 12,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "5 ... 20"
+  },
+  {
+   "path": "P1/P1_Stop_TE1",
+   "default": 14,
+   "unit": "°C",
+   "type": "PVR",
+   "range": "7 ... 25"
+  },
+  {
+   "path": "P1/P1_Ex_Day",
+   "default": 1,
+   "unit": "",
+   "type": "PVI",
+   "range": "WDAY value of Monday, verify"
+  },
+  {
+   "path": "ST/Frost_HRU_Ctrl",
+   "default": 50,
+   "unit": "%",
+   "type": "PVR",
+   "range": "0 ... 100"
+  },
+  {
+   "path": "Alarms/Supply_Temp_Dev",
+   "default": 5,
+   "unit": "K",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "Alarms/HRU_Temp_SP",
+   "default": 5,
+   "unit": "°C",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "Alarms/HRU_Efficiency_SP",
+   "default": 40,
+   "unit": "%",
+   "type": "PVR",
+   "range": ""
+  },
+  {
+   "path": "Alarms/HRU_Ctrl_SP",
+   "default": 90,
+   "unit": "%",
+   "type": "PVR",
+   "range": ""
+  }
+ ],
+ "alarms": [
+  {
+   "path": "Alarms/Freeze_Alm",
+   "class": "A",
+   "priority": 1,
+   "text": "Freeze protection tripped: coil return water or supply air too cold. Unit stopped",
+   "delay_s": 0,
+   "condition": "Freeze_Latch"
+  },
+  {
+   "path": "Alarms/Fire_Alm",
+   "class": "A",
+   "priority": 1,
+   "text": "Fire alarm from the fire panel. Unit stopped",
+   "delay_s": 0,
+   "condition": "Fire_Latch"
+  },
+  {
+   "path": "Alarms/Stop_Alm",
+   "class": "A",
+   "priority": 1,
+   "text": "Emergency stop button pressed. Unit stopped",
+   "delay_s": 0,
+   "condition": "Stop_Latch"
+  },
+  {
+   "path": "Alarms/P1_Alm",
+   "class": "A",
+   "priority": 1,
+   "text": "Heating coil pump P1 not running. Unit stopped",
+   "delay_s": 0,
+   "condition": "P1_Latch"
+  },
+  {
+   "path": "Alarms/HN_Pres_Alm",
+   "class": "A",
+   "priority": 1,
+   "text": "Heat supply water pressure alarm. Unit stopped",
+   "delay_s": 0,
+   "condition": "HN_Pres_Latch"
+  },
+  {
+   "path": "Alarms/HN_Temp_Alm",
+   "class": "A",
+   "priority": 1,
+   "text": "Heat supply water temperature alarm. Unit stopped",
+   "delay_s": 0,
+   "condition": "HN_Temp_Latch"
+  },
+  {
+   "path": "Alarms/Supply_Fire_Alm",
+   "class": "A",
+   "priority": 1,
+   "text": "Supply air temperature at fire limit. Unit stopped",
+   "delay_s": 0,
+   "condition": "Supply_Fire_Latch"
+  },
+  {
+   "path": "Alarms/Exhaust_Fire_Alm",
+   "class": "A",
+   "priority": 1,
+   "text": "Extract air temperature at fire limit. Unit stopped",
+   "delay_s": 0,
+   "condition": "Exhaust_Fire_Latch"
+  },
+  {
+   "path": "Alarms/TE00_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Outdoor temperature sensor TE00 faulty",
+   "delay_s": 180,
+   "condition": "bad_TE00"
+  },
+  {
+   "path": "Alarms/TE1_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Temperature sensor TE1 faulty",
+   "delay_s": 180,
+   "condition": "bad_TE1"
+  },
+  {
+   "path": "Alarms/TE2_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Temperature sensor TE2 faulty",
+   "delay_s": 180,
+   "condition": "bad_TE2"
+  },
+  {
+   "path": "Alarms/TE3_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Temperature sensor TE3 faulty",
+   "delay_s": 180,
+   "condition": "bad_TE3"
+  },
+  {
+   "path": "Alarms/TE4_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Temperature sensor TE4 faulty",
+   "delay_s": 180,
+   "condition": "bad_TE4"
+  },
+  {
+   "path": "Alarms/TE5_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Temperature sensor TE5 faulty",
+   "delay_s": 180,
+   "condition": "bad_TE5"
+  },
+  {
+   "path": "Alarms/TE6_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Temperature sensor TE6 faulty",
+   "delay_s": 180,
+   "condition": "bad_TE6"
+  },
+  {
+   "path": "Alarms/TE7_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Temperature sensor TE7 faulty",
+   "delay_s": 180,
+   "condition": "bad_TE7"
+  },
+  {
+   "path": "Alarms/TE8_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Temperature sensor TE8 faulty",
+   "delay_s": 180,
+   "condition": "bad_TE8"
+  },
+  {
+   "path": "Alarms/TE10_1_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Room temperature sensor TE10.1 faulty",
+   "delay_s": 180,
+   "condition": "bad_TE10_1"
+  },
+  {
+   "path": "Alarms/TE10_2_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Room temperature sensor TE10.2 faulty",
+   "delay_s": 180,
+   "condition": "bad_TE10_2"
+  },
+  {
+   "path": "Alarms/TE10_3_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Room temperature sensor TE10.3 faulty",
+   "delay_s": 180,
+   "condition": "bad_TE10_3"
+  },
+  {
+   "path": "Alarms/Supply_Temp_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Supply air temperature deviates from setpoint",
+   "delay_s": 300,
+   "condition": "Supply_Temp_Cond"
+  },
+  {
+   "path": "Alarms/Supply_Pres_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Supply duct pressure deviates from setpoint",
+   "delay_s": 900,
+   "condition": "Supply_Pres_Cond"
+  },
+  {
+   "path": "Alarms/Exhaust_Pres_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Extract duct pressure deviates from setpoint",
+   "delay_s": 900,
+   "condition": "Exhaust_Pres_Cond"
+  },
+  {
+   "path": "Alarms/TF01_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Supply fan TF01 commanded but not running",
+   "delay_s": 900,
+   "condition": "Supply_Fdb_Cond"
+  },
+  {
+   "path": "Alarms/PF01_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Extract fan PF01 commanded but not running",
+   "delay_s": 900,
+   "condition": "Exhaust_Fdb_Cond"
+  },
+  {
+   "path": "Alarms/HRU_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Heat recovery drive SC3 fault",
+   "delay_s": 180,
+   "condition": "HRU_Fault_Cond"
+  },
+  {
+   "path": "Alarms/HRU_Frost_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Heat recovery icing: rotor speed limited",
+   "delay_s": 180,
+   "condition": "Frost_Cond"
+  },
+  {
+   "path": "Alarms/HRU_Efficiency_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Heat recovery efficiency low",
+   "delay_s": 300,
+   "condition": "HRU_Eff_Cond"
+  },
+  {
+   "path": "Alarms/HeatR_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Heating coil gives no heat although the valve is open",
+   "delay_s": 300,
+   "condition": "HeatR_Cond"
+  },
+  {
+   "path": "Alarms/CoolR_Alm",
+   "class": "B",
+   "priority": 2,
+   "text": "Cooling coil gives no cooling although the valve is open",
+   "delay_s": 300,
+   "condition": "CoolR_Cond"
+  },
+  {
+   "path": "Alarms/PDE3_Alm",
+   "class": "C",
+   "priority": 3,
+   "text": "Supply filter stage 1 dirty",
+   "delay_s": 300,
+   "condition": "PDE3_Cond"
+  },
+  {
+   "path": "Alarms/PDE1_Alm",
+   "class": "C",
+   "priority": 3,
+   "text": "Supply filter stage 2 dirty",
+   "delay_s": 300,
+   "condition": "PDE1_Cond"
+  },
+  {
+   "path": "Alarms/PDE2_Alm",
+   "class": "C",
+   "priority": 3,
+   "text": "Extract filter dirty",
+   "delay_s": 300,
+   "condition": "PDE2_Cond"
+  }
+ ],
+ "states": [
+  {
+   "path": "Inputs/Reset_Pulse",
+   "kind": "binary",
+   "block": "TRIG",
+   "meaning": "one-cycle alarm reset pulse"
+  },
+  {
+   "path": "Inputs/bad_TE00",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/bad_TE1",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/bad_TE2",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/bad_TE3",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/bad_TE4",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/bad_TE5",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/bad_TE6",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/bad_TE7",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/bad_TE8",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/bad_TE10_1",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/bad_TE10_2",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/bad_TE10_3",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/OT_OK",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "TE00 healthy"
+  },
+  {
+   "path": "Inputs/OT",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "outdoor temperature in use (TE00, or OT_Fault_Value while TE00 is faulty)"
+  },
+  {
+   "path": "Inputs/Room_N",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "number of healthy room sensors"
+  },
+  {
+   "path": "Inputs/Room_OK",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "at least one room sensor healthy"
+  },
+  {
+   "path": "Inputs/Room_Avg",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "mean of the healthy room sensors"
+  },
+  {
+   "path": "Inputs/DM_Sample",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/DM_Day_Tick",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Inputs/DM_Sum",
+   "kind": "analog",
+   "block": "ACCUM",
+   "meaning": "ACCUM"
+  },
+  {
+   "path": "Inputs/DM_Cnt",
+   "kind": "analog",
+   "block": "ACCUM",
+   "meaning": "ACCUM"
+  },
+  {
+   "path": "Inputs/DM_Sum_Held",
+   "kind": "analog",
+   "block": "SHR",
+   "meaning": "SHR"
+  },
+  {
+   "path": "Inputs/DM_Cnt_Held",
+   "kind": "analog",
+   "block": "SHR",
+   "meaning": "SHR"
+  },
+  {
+   "path": "Inputs/OT_Day_Mean",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "mean outdoor temperature of the previous day"
+  },
+  {
+   "path": "Operation/Auto_Season",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "season from the daily mean (before the selector)"
+  },
+  {
+   "path": "Operation/Season_Mode",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "1 cooling season (summer sequence), 0 heating season"
+  },
+  {
+   "path": "Operation/HS10_Ext",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "extended run from HS10 active"
+  },
+  {
+   "path": "Operation/Operation",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "normal operation"
+  },
+  {
+   "path": "Operation/NC_Room",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "Operation/NC_OT",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Operation/NC_OT_D",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "DELAY"
+  },
+  {
+   "path": "Operation/NC_Room_D",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "DELAY"
+  },
+  {
+   "path": "Operation/Night_Cooling",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "night cooling running"
+  },
+  {
+   "path": "Operation/NH_Room",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "Operation/NH_Room_D",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "DELAY"
+  },
+  {
+   "path": "Operation/NH_OT",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Operation/NH_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Operation/Night_Heating",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "night heating running"
+  },
+  {
+   "path": "Operation/Run",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "unit running"
+  },
+  {
+   "path": "Operation/Run_Mode",
+   "kind": "integer",
+   "block": "XPI",
+   "meaning": "0 stopped, 1 normal, 2 night cooling, 3 night heating, 4 stopped by critical alarm"
+  },
+  {
+   "path": "Alarms/Freeze_Cause",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Alarms/Fire_Cause",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Alarms/Stop_Cause",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Alarms/Supply_Fire_Cause",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Alarms/Exhaust_Fire_Cause",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Alarms/Freeze_Latch",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "Alarms/Fire_Latch",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "Alarms/Stop_Latch",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "Alarms/P1_Latch",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "Alarms/HN_Pres_Latch",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "Alarms/HN_Temp_Latch",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "Alarms/Supply_Fire_Latch",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "Alarms/Exhaust_Fire_Latch",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "Alarms/Critical_Alarm",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "any critical latch set"
+  },
+  {
+   "path": "Alarms/Freeze_Group",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "freeze latch or pump latch set"
+  },
+  {
+   "path": "FAN/Cold",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "FAN/Low_Speed_Cmd",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "low speed mode active"
+  },
+  {
+   "path": "FAN/Supply_LowSpd_SP",
+   "kind": "analog",
+   "block": "CURVE",
+   "meaning": "CURVE"
+  },
+  {
+   "path": "FAN/Exhaust_LowSpd_SP",
+   "kind": "analog",
+   "block": "CURVE",
+   "meaning": "CURVE"
+  },
+  {
+   "path": "FAN/Supply_Released",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "supply fan released (= TF01_Cmd)"
+  },
+  {
+   "path": "FAN/Supply_Pressure_SP",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "supply duct pressure setpoint in use"
+  },
+  {
+   "path": "FAN/Supply_PIDP",
+   "kind": "analog",
+   "block": "PIDP",
+   "meaning": "PIDP"
+  },
+  {
+   "path": "FAN/Supply_Speed",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "Inputs/Supply_Flow",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "supply air flow m3/s"
+  },
+  {
+   "path": "FAN/Supply_Pres_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "FAN/Supply_Fdb_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "FAN/Exhaust_Released",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "extract fan released"
+  },
+  {
+   "path": "FAN/Exhaust_Pressure_SP",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "extract duct pressure setpoint in use"
+  },
+  {
+   "path": "FAN/Exhaust_PIDP",
+   "kind": "analog",
+   "block": "PIDP",
+   "meaning": "PIDP"
+  },
+  {
+   "path": "FAN/Exhaust_Speed",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "Inputs/Exhaust_Flow",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "extract air flow m3/s"
+  },
+  {
+   "path": "FAN/Exhaust_Pres_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "FAN/Exhaust_Fdb_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Alarms/PDE3_Limit",
+   "kind": "analog",
+   "block": "CURVE",
+   "meaning": "CURVE"
+  },
+  {
+   "path": "Alarms/PDE3_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Alarms/PDE1_Limit",
+   "kind": "analog",
+   "block": "CURVE",
+   "meaning": "CURVE"
+  },
+  {
+   "path": "Alarms/PDE1_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Alarms/PDE2_Limit",
+   "kind": "analog",
+   "block": "CURVE",
+   "meaning": "CURVE"
+  },
+  {
+   "path": "Alarms/PDE2_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "ST/Temp_SP_Curve",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "ST/Temp_SP",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "ST/Heat_Temp_SP",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "ST/Cool_Temp_SP",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "ST/Active_SP",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "supply temperature setpoint of the active sequence"
+  },
+  {
+   "path": "ST/Heat_Active",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "ST/Cool_Active",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "ST/PreHeat_Pulse",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "start-up pre-heat pulse"
+  },
+  {
+   "path": "ST/HRU_Hold",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "rotor held at 100 % after start"
+  },
+  {
+   "path": "ST/Cool_Recovery",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "cooling recovery by the rotor"
+  },
+  {
+   "path": "ST/Temp_Active",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "ST/Rotor_Cools",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "ST/CCH_Avail",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "ST/Stage_CCH",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "ST/Stage_HC",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "ST/Cool_Side",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "ST/Stage_Cool",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "ST/Heat_Side",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "ST/HRU_PIDA",
+   "kind": "analog",
+   "block": "PIDA",
+   "meaning": "PIDA"
+  },
+  {
+   "path": "ST/CCH_PIDA",
+   "kind": "analog",
+   "block": "PIDA",
+   "meaning": "PIDA"
+  },
+  {
+   "path": "ST/HC_PIDA",
+   "kind": "analog",
+   "block": "PIDA",
+   "meaning": "PIDA"
+  },
+  {
+   "path": "ST/Cool_PIDA",
+   "kind": "analog",
+   "block": "PIDA",
+   "meaning": "PIDA"
+  },
+  {
+   "path": "ST/HRU_Act",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "ST/CCH_Act",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "ST/HC_Act",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "ST/Cool_Act",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "ST/SC3_Seq",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "ST/TV2_Heat_Seq",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "ST/TV1_Seq",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "ST/TV2_Cool_Seq",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "ST/TV2_Seq",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "ST/Coil_En",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "coil return water control enabled"
+  },
+  {
+   "path": "ST/Coil_Heat_PIDA",
+   "kind": "analog",
+   "block": "PIDA",
+   "meaning": "PIDA"
+  },
+  {
+   "path": "ST/Coil_Heat_Ctrl",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "coil return water control output"
+  },
+  {
+   "path": "HRU/PDE4_SP",
+   "kind": "analog",
+   "block": "CURVE",
+   "meaning": "CURVE"
+  },
+  {
+   "path": "HRU/Frost_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "rotor icing condition"
+  },
+  {
+   "path": "HRU/Frost_Active",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "rotor frost limit active"
+  },
+  {
+   "path": "HRU/Eff_En",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "HRU/Eff_Calc",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "efficiency being calculated"
+  },
+  {
+   "path": "HRU/HRU_Efficiency",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "temperature efficiency %"
+  },
+  {
+   "path": "P1/P1_OT_Need",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "P1/P1_Air_Need",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "P1/P1_Water_Need",
+   "kind": "binary",
+   "block": "SR",
+   "meaning": "SR"
+  },
+  {
+   "path": "P1/P1_Ex_Window",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "P1/P1_Ex",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "weekly exercise running"
+  },
+  {
+   "path": "P1/P1_Need",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "P1/P1_Run",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "pump command before the output"
+  },
+  {
+   "path": "P1/P1_Fault_Cond",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "pump commanded, no feedback (delayed)"
+  },
+  {
+   "path": "Outputs/FZ01_Cmd",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "DELAY"
+  },
+  {
+   "path": "Outputs/FZ02_Cmd",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "DELAY"
+  },
+  {
+   "path": "Outputs/TF01_Cmd",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "DELAY"
+  },
+  {
+   "path": "Outputs/PF01_Cmd",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "DELAY"
+  },
+  {
+   "path": "Outputs/P1_Cmd",
+   "kind": "binary",
+   "block": "DELAY",
+   "meaning": "DELAY"
+  },
+  {
+   "path": "Outputs/TF01_Ctrl",
+   "kind": "analog",
+   "block": "LIMIT",
+   "meaning": "LIMIT"
+  },
+  {
+   "path": "Outputs/PF01_Ctrl",
+   "kind": "analog",
+   "block": "LIMIT",
+   "meaning": "LIMIT"
+  },
+  {
+   "path": "Outputs/SC3_Seq_Final",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "Outputs/SC3_Ctrl",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "Outputs/SC3_Cmd",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Outputs/TV2_Ctrl",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "Outputs/TV1_Ctrl",
+   "kind": "analog",
+   "block": "XPR",
+   "meaning": "XPR"
+  },
+  {
+   "path": "Alarms/Supply_Temp_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Alarms/HRU_Fault_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Alarms/HRU_Eff_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Alarms/HeatR_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  },
+  {
+   "path": "Alarms/CoolR_Cond",
+   "kind": "binary",
+   "block": "XPB",
+   "meaning": "XPB"
+  }
+ ],
+ "constants": [
+  {
+   "name": "OT_Fault_Value",
+   "default": 0,
+   "unit": "°C"
+  },
+  {
+   "name": "HS10_Run_Time",
+   "default": 3600,
+   "unit": "s"
+  },
+  {
+   "name": "Night_Cond_Delay",
+   "default": 60,
+   "unit": "s"
+  },
+  {
+   "name": "Low_Speed_Delay_Off",
+   "default": 600,
+   "unit": "s"
+  },
+  {
+   "name": "Temp_X1",
+   "default": -20,
+   "unit": "°C"
+  },
+  {
+   "name": "Press_Y1",
+   "default": 50,
+   "unit": "Pa"
+  },
+  {
+   "name": "Temp_X2",
+   "default": -15,
+   "unit": "°C"
+  },
+  {
+   "name": "Press_Y2",
+   "default": 65,
+   "unit": "Pa"
+  },
+  {
+   "name": "Temp_X3",
+   "default": -10,
+   "unit": "°C"
+  },
+  {
+   "name": "Press_Y3",
+   "default": 75,
+   "unit": "Pa"
+  },
+  {
+   "name": "Temp_X4",
+   "default": -5,
+   "unit": "°C"
+  },
+  {
+   "name": "Press_Y4",
+   "default": 80,
+   "unit": "Pa"
+  },
+  {
+   "name": "Temp1_X1",
+   "default": -20,
+   "unit": "°C"
+  },
+  {
+   "name": "Press1_Y1",
+   "default": 40,
+   "unit": "Pa"
+  },
+  {
+   "name": "Temp1_X2",
+   "default": -15,
+   "unit": "°C"
+  },
+  {
+   "name": "Press1_Y2",
+   "default": 50,
+   "unit": "Pa"
+  },
+  {
+   "name": "Temp1_X3",
+   "default": -10,
+   "unit": "°C"
+  },
+  {
+   "name": "Press1_Y3",
+   "default": 55,
+   "unit": "Pa"
+  },
+  {
+   "name": "Temp1_X4",
+   "default": -5,
+   "unit": "°C"
+  },
+  {
+   "name": "Press1_Y4",
+   "default": 60,
+   "unit": "Pa"
+  },
+  {
+   "name": "Supply_Fan_Delay",
+   "default": 60,
+   "unit": "s"
+  },
+  {
+   "name": "Supply_ControlInt",
+   "default": 1,
+   "unit": "s"
+  },
+  {
+   "name": "Supply_Ctrl_Min_SP",
+   "default": 20,
+   "unit": "%"
+  },
+  {
+   "name": "Supply_Ctrl_Max_SP",
+   "default": 60,
+   "unit": "%"
+  },
+  {
+   "name": "Supply_StrokeTime",
+   "default": 20,
+   "unit": "s"
+  },
+  {
+   "name": "Exhaust_Fan_Delay",
+   "default": 30,
+   "unit": "s"
+  },
+  {
+   "name": "Exhaust_ControlInt",
+   "default": 1,
+   "unit": "s"
+  },
+  {
+   "name": "Exhaust_Ctrl_Min_SP",
+   "default": 20,
+   "unit": "%"
+  },
+  {
+   "name": "Exhaust_Ctrl_Max_SP",
+   "default": 60,
+   "unit": "%"
+  },
+  {
+   "name": "Exhaust_StrokeTime",
+   "default": 20,
+   "unit": "s"
+  },
+  {
+   "name": "PDE3_X1",
+   "default": 0,
+   "unit": "%"
+  },
+  {
+   "name": "PDE3_Y1",
+   "default": 10,
+   "unit": "Pa"
+  },
+  {
+   "name": "PDE3_X2",
+   "default": 100,
+   "unit": "%"
+  },
+  {
+   "name": "PDE3_Y2",
+   "default": 150,
+   "unit": "Pa"
+  },
+  {
+   "name": "PDE1_X1",
+   "default": 0,
+   "unit": "%"
+  },
+  {
+   "name": "PDE1_Y1",
+   "default": 10,
+   "unit": "Pa"
+  },
+  {
+   "name": "PDE1_X2",
+   "default": 100,
+   "unit": "%"
+  },
+  {
+   "name": "PDE1_Y2",
+   "default": 150,
+   "unit": "Pa"
+  },
+  {
+   "name": "PDE2_X1",
+   "default": 0,
+   "unit": "%"
+  },
+  {
+   "name": "PDE2_Y1",
+   "default": 10,
+   "unit": "Pa"
+  },
+  {
+   "name": "PDE2_X2",
+   "default": 100,
+   "unit": "%"
+  },
+  {
+   "name": "PDE2_Y2",
+   "default": 150,
+   "unit": "Pa"
+  },
+  {
+   "name": "Night_Heat_Min_Temp",
+   "default": 18,
+   "unit": "°C"
+  },
+  {
+   "name": "Night_Heat_Max_Temp",
+   "default": 35,
+   "unit": "°C"
+  },
+  {
+   "name": "Night_Cool_Min_Temp",
+   "default": 15,
+   "unit": "°C"
+  },
+  {
+   "name": "Night_Cool_Max_Temp",
+   "default": 25,
+   "unit": "°C"
+  },
+  {
+   "name": "PreHeat_Heat_Delay",
+   "default": 1,
+   "unit": "s"
+  },
+  {
+   "name": "HRU_Preheat_Del",
+   "default": 1200,
+   "unit": "s"
+  },
+  {
+   "name": "Stage_Up_Delay",
+   "default": 30,
+   "unit": "s"
+  },
+  {
+   "name": "Stage_Down_Delay",
+   "default": 30,
+   "unit": "s"
+  },
+  {
+   "name": "PreHeat_Valve",
+   "default": 75,
+   "unit": "%"
+  },
+  {
+   "name": "PreHeat_Valve_HM",
+   "default": 50,
+   "unit": "%"
+  },
+  {
+   "name": "Coil_Heat_OFF_SP",
+   "default": 12,
+   "unit": "K"
+  },
+  {
+   "name": "Coil_Heat_ON_SP",
+   "default": 10,
+   "unit": "K"
+  },
+  {
+   "name": "Coil_Gain",
+   "default": 5,
+   "unit": ""
+  },
+  {
+   "name": "Coil_Ti",
+   "default": 60,
+   "unit": "s"
+  },
+  {
+   "name": "PDE4_X1",
+   "default": 0,
+   "unit": "%"
+  },
+  {
+   "name": "PDE4_Y1",
+   "default": 100,
+   "unit": "Pa"
+  },
+  {
+   "name": "PDE4_X2",
+   "default": 100,
+   "unit": "%"
+  },
+  {
+   "name": "PDE4_Y2",
+   "default": 300,
+   "unit": "Pa"
+  },
+  {
+   "name": "Frost_Hold",
+   "default": 300,
+   "unit": "s"
+  },
+  {
+   "name": "HRU_Eff_Min_dT",
+   "default": 3,
+   "unit": "K"
+  },
+  {
+   "name": "P1_Ex_Hour",
+   "default": 10,
+   "unit": ""
+  },
+  {
+   "name": "P1_Ex_Time",
+   "default": 60,
+   "unit": "s"
+  },
+  {
+   "name": "P1_Off_Delay",
+   "default": 300,
+   "unit": "s"
+  },
+  {
+   "name": "P1_Fdb_Delay",
+   "default": 30,
+   "unit": "s"
+  },
+  {
+   "name": "HeatR_Valve_SP",
+   "default": 30,
+   "unit": "%"
+  },
+  {
+   "name": "HeatR_dT",
+   "default": 1,
+   "unit": "K"
+  },
+  {
+   "name": "CoolR_Valve_SP",
+   "default": 30,
+   "unit": "%"
+  },
+  {
+   "name": "CoolR_dT",
+   "default": 1,
+   "unit": "K"
+  }
+ ]
+}

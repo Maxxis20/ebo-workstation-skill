@@ -4,6 +4,7 @@
     ebox.py tree   export.xml                  object tree with types, values and bindings
     ebox.py unpack export.xml outdir           program text (.aut), graphics (.tgml), script source (.txt), documents
     ebox.py binds  export.xml                  every binding: object, property -> target
+    ebox.py values export.xml [regex]          the values the objects had when exported (not computed signals)
     ebox.py aut    program.aut                 summary of a program text: blocks by type, modules, HFBs, constants
     ebox.py xbk    backup.xbk outdir [name]    programs and graphics out of a server backup (name: only paths holding it)
     ebox.py bind   in.xml out.xml binds.json [/Server 1]
@@ -243,7 +244,13 @@ def bind(src, dst, pairs, parent="/Server 1"):
         m = root.find("MetaInformation/" + tag)
         if m is not None:
             m.set("Value", "Special")
-    tree.write(dst, encoding="UTF-8", xml_declaration=True)
+    import io
+    buf = io.BytesIO(); tree.write(buf, encoding="UTF-8", xml_declaration=True)
+    # The import reads an embedded file only from a CDATA section ("Empty binary file" otherwise); the XML
+    # library writes plain text, so the sections are put back.
+    text = re.sub(r"(<FileContents\b[^>]*>)([^<]+)(</FileContents>)", r"\1<![CDATA[\2]]>\3", buf.getvalue().decode("utf-8"))
+    with open(dst, "w", encoding="utf-8", newline="") as f:
+        f.write(text)
     return len(pairs)
 
 
@@ -316,6 +323,14 @@ def main(a):
             pis = oi.findall("PI"); nb = sum(1 for x in pis if x.find("Reference") is not None)
             print(f"{'  ' * (p.count('/') - 1)}{oi.get('NAME')}  [{ex.base(oi.get('TYPE'))}]"
                   + (f"  {len(pis)} values" if pis else "") + (f", {nb} bound" if nb else ""))
+    elif cmd == "values":                                       # live values at the moment of the export
+        pat = a[2] if len(a) > 2 else ""
+        for p, oi in ex.objects():
+            for pi in oi.findall("PI"):
+                if pi.get("Value") is not None and not re.match(r"[0-9A-F]{8}-", pi.get("Name")):
+                    line = f"{p}/{pi.get('Name')} = {pi.get('Value')}"
+                    if re.search(pat, line):
+                        print(line)
     elif cmd == "binds":
         for p, point, obj, prop in ex.binds():
             print(f"{p} . {point}  <-  {obj}" + (f" . {prop}" if prop else ""))

@@ -1,0 +1,463 @@
+{
+ "reads": [
+  "TF01_Ctrl",
+  "PF01_Ctrl",
+  "SC3_Ctrl",
+  "TV1_Ctrl",
+  "TV2_Ctrl",
+  "FZ01_Cmd",
+  "FZ02_Cmd",
+  "TF01_Cmd",
+  "PF01_Cmd",
+  "SC3_Cmd",
+  "P1_Cmd"
+ ],
+ "provides": [
+  {
+   "tag": "TE00",
+   "kind": "analog",
+   "signal": "PLANT/TE00"
+  },
+  {
+   "tag": "TE1",
+   "kind": "analog",
+   "signal": "PLANT/TE1"
+  },
+  {
+   "tag": "TE2",
+   "kind": "analog",
+   "signal": "PLANT/TE2"
+  },
+  {
+   "tag": "TE3",
+   "kind": "analog",
+   "signal": "PLANT/TE3"
+  },
+  {
+   "tag": "TE4",
+   "kind": "analog",
+   "signal": "PLANT/TE4"
+  },
+  {
+   "tag": "TE5",
+   "kind": "analog",
+   "signal": "PLANT/TE5"
+  },
+  {
+   "tag": "TE6",
+   "kind": "analog",
+   "signal": "PLANT/TE6"
+  },
+  {
+   "tag": "TE7",
+   "kind": "analog",
+   "signal": "PLANT/TE7"
+  },
+  {
+   "tag": "TE8",
+   "kind": "analog",
+   "signal": "PLANT/TE8"
+  },
+  {
+   "tag": "TE10_1",
+   "kind": "analog",
+   "signal": "PLANT/TE10_1"
+  },
+  {
+   "tag": "TE10_2",
+   "kind": "analog",
+   "signal": "PLANT/TE10_2"
+  },
+  {
+   "tag": "TE10_3",
+   "kind": "analog",
+   "signal": "PLANT/TE10_3"
+  },
+  {
+   "tag": "PE1",
+   "kind": "analog",
+   "signal": "PLANT/PE1"
+  },
+  {
+   "tag": "PE2",
+   "kind": "analog",
+   "signal": "PLANT/PE2"
+  },
+  {
+   "tag": "PDE1",
+   "kind": "analog",
+   "signal": "PLANT/PDE1"
+  },
+  {
+   "tag": "PDE2",
+   "kind": "analog",
+   "signal": "PLANT/PDE2"
+  },
+  {
+   "tag": "PDE3",
+   "kind": "analog",
+   "signal": "PLANT/PDE3"
+  },
+  {
+   "tag": "PDE4",
+   "kind": "analog",
+   "signal": "PLANT/PDE4"
+  },
+  {
+   "tag": "PDE10",
+   "kind": "analog",
+   "signal": "PLANT/PDE10"
+  },
+  {
+   "tag": "PDE20",
+   "kind": "analog",
+   "signal": "PLANT/PDE20"
+  },
+  {
+   "tag": "FA01",
+   "kind": "binary",
+   "signal": "PLANT/FA01"
+  },
+  {
+   "tag": "SB01",
+   "kind": "binary",
+   "signal": "PLANT/SB01"
+  },
+  {
+   "tag": "HS10",
+   "kind": "binary",
+   "signal": "PLANT/HS10"
+  },
+  {
+   "tag": "P1_Fdb",
+   "kind": "binary",
+   "signal": "PLANT/P1_Fdb"
+  },
+  {
+   "tag": "TF01_Fdb",
+   "kind": "binary",
+   "signal": "PLANT/TF01_Fdb"
+  },
+  {
+   "tag": "PF01_Fdb",
+   "kind": "binary",
+   "signal": "PLANT/PF01_Fdb"
+  },
+  {
+   "tag": "SC3_Fault",
+   "kind": "binary",
+   "signal": "PLANT/SC3_Fault"
+  },
+  {
+   "tag": "Reset_DI",
+   "kind": "binary",
+   "signal": "PLANT/Reset_DI"
+  }
+ ],
+ "optional_provides": [
+  {
+   "tag": "HN_Pres_In",
+   "kind": "binary",
+   "signal": "PLANT/HN_Pres_In",
+   "note": "soft input of the controller (Inputs/HN_Pres_In); bind only to test the heat supply alarms"
+  },
+  {
+   "tag": "HN_Temp_In",
+   "kind": "binary",
+   "signal": "PLANT/HN_Temp_In",
+   "note": "soft input of the controller (Inputs/HN_Temp_In); bind only to test the heat supply alarms"
+  }
+ ],
+ "test": [
+  {
+   "path": "TEST/OT_Manual",
+   "default": -5.0,
+   "unit": "degC",
+   "meaning": "Outdoor temperature; with OT_Profile 1 or 2 the mean of the profile"
+  },
+  {
+   "path": "TEST/OT_Profile",
+   "default": 0,
+   "unit": "",
+   "meaning": "0 = OT_Manual as is, 1 = sine around OT_Manual (peak at 15:00 for a 24 h period), 2 = sawtooth (rises from mean - A to mean + A over one period)"
+  },
+  {
+   "path": "TEST/OT_Amplitude",
+   "default": 4.0,
+   "unit": "",
+   "meaning": "Profile amplitude A, K"
+  },
+  {
+   "path": "TEST/OT_Period",
+   "default": 24.0,
+   "unit": "",
+   "meaning": "Profile period, h (use a divisor of 24 so that it is continuous at midnight)"
+  },
+  {
+   "path": "TEST/Room_Load",
+   "default": 0.0,
+   "unit": "",
+   "meaning": "Room load dT_load added to the room temperature target, K (+2 occupancy/solar, -2 cold)"
+  },
+  {
+   "path": "TEST/Room_Tau",
+   "default": 10800.0,
+   "unit": "s",
+   "meaning": "Room time constant, s (10800 for tests, 183600 = 51 h as fitted)"
+  },
+  {
+   "path": "TEST/HW_Supply_T",
+   "default": 50.0,
+   "unit": "degC",
+   "meaning": "Heating coil water supply temperature (drop to provoke a freeze trip)"
+  },
+  {
+   "path": "TEST/HC_Capacity",
+   "default": 2.5,
+   "unit": "",
+   "meaning": "Heating coil size factor on the fitted effectiveness 0.16 (1 = as fitted: too small to heat alone at -5 degC)"
+  },
+  {
+   "path": "TEST/CC_Water_T",
+   "default": 7.0,
+   "unit": "degC",
+   "meaning": "Cooling coil water temperature (7 chilled; 30 for warm water with controller Heating_Mode = 1)"
+  },
+  {
+   "path": "TEST/Dirt_PDE1",
+   "default": 1.0,
+   "unit": "",
+   "meaning": "Supply filter stage 2 dirt factor (1 clean ... 2.5 dirty; alarm from about 1.75 at 60 %)"
+  },
+  {
+   "path": "TEST/Dirt_PDE3",
+   "default": 1.0,
+   "unit": "",
+   "meaning": "Supply filter stage 1 dirt factor"
+  },
+  {
+   "path": "TEST/Dirt_PDE2",
+   "default": 1.0,
+   "unit": "",
+   "meaning": "Extract filter dirt factor"
+  },
+  {
+   "path": "TEST/Ice_Auto",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = icing builds by the MODEL.md rule (outdoor below -5 degC and rotor above 50 %); 0 = no icing (as in the recorded data)"
+  },
+  {
+   "path": "TEST/Ice_Force",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = heat recovery icing builds regardless of temperature (PDE4 rises, time constant Ice_Tau)"
+  },
+  {
+   "path": "TEST/Noise_On",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = sensor noise on (0.03 K on temperatures, 1 % on pressures)"
+  },
+  {
+   "path": "TEST/Settle",
+   "default": 1,
+   "unit": "",
+   "meaning": "While 1: the first Settle_Time s after program start or after a 0 -> 1 switch all slow lags run at 20 s"
+  },
+  {
+   "path": "TEST/Fire_Alarm",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = fire panel contact opens (FA01 = 0)"
+  },
+  {
+   "path": "TEST/Stop_Pressed",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = emergency stop pressed (SB01 = 0)"
+  },
+  {
+   "path": "TEST/HS10_Press",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = extended run button held (HS10 = 1); set 1 then 0 for a press"
+  },
+  {
+   "path": "TEST/Reset_Press",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = panel reset button held (Reset_DI = 1); set 1 then 0"
+  },
+  {
+   "path": "TEST/TF01_Fail",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = supply fan drive trips: fan stops, TF01_Fdb = 0"
+  },
+  {
+   "path": "TEST/PF01_Fail",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = extract fan drive trips: fan stops, PF01_Fdb = 0"
+  },
+  {
+   "path": "TEST/P1_Fail",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = pump P1 fails: no circulation, P1_Fdb = 0"
+  },
+  {
+   "path": "TEST/SC3_Fail",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = heat exchanger drive fault: rotor stops, SC3_Fault = 0"
+  },
+  {
+   "path": "TEST/HN_Pres_Alarm",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = heat supply pressure alarm on PLANT/HN_Pres_In (optional binding)"
+  },
+  {
+   "path": "TEST/HN_Temp_Alarm",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = heat supply temperature alarm on PLANT/HN_Temp_In (optional binding)"
+  },
+  {
+   "path": "TEST/TE00_Offset",
+   "default": 0.0,
+   "unit": "",
+   "meaning": "Offset added to TE00, K"
+  },
+  {
+   "path": "TEST/TE00_Broken",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = TE00 broken, reads -199 degC"
+  },
+  {
+   "path": "TEST/TE1_Offset",
+   "default": 0.0,
+   "unit": "",
+   "meaning": "Offset added to TE1, K"
+  },
+  {
+   "path": "TEST/TE1_Broken",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = TE1 broken, reads -199 degC"
+  },
+  {
+   "path": "TEST/TE2_Offset",
+   "default": 0.0,
+   "unit": "",
+   "meaning": "Offset added to TE2, K"
+  },
+  {
+   "path": "TEST/TE2_Broken",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = TE2 broken, reads -199 degC"
+  },
+  {
+   "path": "TEST/TE3_Offset",
+   "default": 0.0,
+   "unit": "",
+   "meaning": "Offset added to TE3, K"
+  },
+  {
+   "path": "TEST/TE3_Broken",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = TE3 broken, reads -199 degC"
+  },
+  {
+   "path": "TEST/TE6_Offset",
+   "default": 0.0,
+   "unit": "",
+   "meaning": "Offset added to TE6, K"
+  },
+  {
+   "path": "TEST/TE6_Broken",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = TE6 broken, reads -199 degC"
+  },
+  {
+   "path": "TEST/TE7_Offset",
+   "default": 0.0,
+   "unit": "",
+   "meaning": "Offset added to TE7, K"
+  },
+  {
+   "path": "TEST/TE7_Broken",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = TE7 broken, reads -199 degC"
+  },
+  {
+   "path": "TEST/TE10_1_Offset",
+   "default": 0.0,
+   "unit": "",
+   "meaning": "Offset added to TE10_1, K"
+  },
+  {
+   "path": "TEST/TE10_1_Broken",
+   "default": 0,
+   "unit": "",
+   "meaning": "1 = TE10_1 broken, reads -199 degC"
+  }
+ ],
+ "constants": [
+  {
+   "name": "Fan_Ramp",
+   "value": 3.333,
+   "unit": "",
+   "meaning": "fan drive ramp, %/s (0-100 % in 30 s)"
+  },
+  {
+   "name": "Damper_Rate",
+   "value": 1.111,
+   "unit": "",
+   "meaning": "damper travel, %/s (90 s stroke)"
+  },
+  {
+   "name": "Valve_Rate",
+   "value": 0.8333,
+   "unit": "",
+   "meaning": "valve travel, %/s (120 s stroke)"
+  },
+  {
+   "name": "P_Tau",
+   "value": 5,
+   "unit": "s",
+   "meaning": "duct pressure lag"
+  },
+  {
+   "name": "Ice_Tau",
+   "value": 3600,
+   "unit": "s",
+   "meaning": "heat recovery icing time constant"
+  },
+  {
+   "name": "Fdb_Delay",
+   "value": 3,
+   "unit": "s",
+   "meaning": "fan drive running feedback delay"
+  },
+  {
+   "name": "Pump_Fdb_Delay",
+   "value": 2,
+   "unit": "s",
+   "meaning": "pump running feedback delay"
+  },
+  {
+   "name": "Settle_Time",
+   "value": 600,
+   "unit": "s",
+   "meaning": "fast settling time after start"
+  }
+ ]
+}

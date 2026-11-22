@@ -1,0 +1,1382 @@
+[
+ {
+  "tag": "TE00",
+  "group": "AHU01_Meas",
+  "target": "Inputs/TE00",
+  "label": "Temperature TE00",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "TE00",
+  "topic": "Server 1/AHU01/AHU/Inputs/TE00"
+ },
+ {
+  "tag": "TE1",
+  "group": "AHU01_Meas",
+  "target": "Inputs/TE1",
+  "label": "Temperature TE1",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "TE1",
+  "topic": "Server 1/AHU01/AHU/Inputs/TE1"
+ },
+ {
+  "tag": "TE2",
+  "group": "AHU01_Meas",
+  "target": "Inputs/TE2",
+  "label": "Temperature TE2",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "TE2",
+  "topic": "Server 1/AHU01/AHU/Inputs/TE2"
+ },
+ {
+  "tag": "TE3",
+  "group": "AHU01_Meas",
+  "target": "Inputs/TE3",
+  "label": "Temperature TE3",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "TE3",
+  "topic": "Server 1/AHU01/AHU/Inputs/TE3"
+ },
+ {
+  "tag": "TE4",
+  "group": "AHU01_Meas",
+  "target": "Inputs/TE4",
+  "label": "Temperature TE4",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "TE4",
+  "topic": "Server 1/AHU01/AHU/Inputs/TE4"
+ },
+ {
+  "tag": "TE5",
+  "group": "AHU01_Meas",
+  "target": "Inputs/TE5",
+  "label": "Temperature TE5",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "TE5",
+  "topic": "Server 1/AHU01/AHU/Inputs/TE5"
+ },
+ {
+  "tag": "TE6",
+  "group": "AHU01_Meas",
+  "target": "Inputs/TE6",
+  "label": "Temperature TE6",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "TE6",
+  "topic": "Server 1/AHU01/AHU/Inputs/TE6"
+ },
+ {
+  "tag": "TE7",
+  "group": "AHU01_Meas",
+  "target": "Inputs/TE7",
+  "label": "Temperature TE7",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "TE7",
+  "topic": "Server 1/AHU01/AHU/Inputs/TE7"
+ },
+ {
+  "tag": "TE8",
+  "group": "AHU01_Meas",
+  "target": "Inputs/TE8",
+  "label": "Temperature TE8",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "TE8",
+  "topic": "Server 1/AHU01/AHU/Inputs/TE8"
+ },
+ {
+  "tag": "TE10_1",
+  "group": "AHU01_Meas",
+  "target": "Inputs/TE10_1",
+  "label": "Temperature TE10_1",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "TE10_1",
+  "topic": "Server 1/AHU01/AHU/Inputs/TE10_1"
+ },
+ {
+  "tag": "TE10_2",
+  "group": "AHU01_Meas",
+  "target": "Inputs/TE10_2",
+  "label": "Temperature TE10_2",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "TE10_2",
+  "topic": "Server 1/AHU01/AHU/Inputs/TE10_2"
+ },
+ {
+  "tag": "TE10_3",
+  "group": "AHU01_Meas",
+  "target": "Inputs/TE10_3",
+  "label": "Temperature TE10_3",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "TE10_3",
+  "topic": "Server 1/AHU01/AHU/Inputs/TE10_3"
+ },
+ {
+  "tag": "OT_DAY",
+  "group": "AHU01_Meas",
+  "target": "Inputs/OT_Day_Mean",
+  "label": "Previous day outdoor mean",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "OT_Day_Mean",
+  "topic": "Server 1/AHU01/AHU/Inputs/OT_Day_Mean"
+ },
+ {
+  "tag": "ROOM_AVG",
+  "group": "AHU01_Meas",
+  "target": "Inputs/Room_Avg",
+  "label": "Room mean",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "Room_Avg",
+  "topic": "Server 1/AHU01/AHU/Inputs/Room_Avg"
+ },
+ {
+  "tag": "PE1",
+  "group": "AHU01_Meas",
+  "target": "Inputs/PE1",
+  "label": "Pressure PE1",
+  "unit": "Pa",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "PE1",
+  "topic": "Server 1/AHU01/AHU/Inputs/PE1"
+ },
+ {
+  "tag": "PE2",
+  "group": "AHU01_Meas",
+  "target": "Inputs/PE2",
+  "label": "Pressure PE2",
+  "unit": "Pa",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "PE2",
+  "topic": "Server 1/AHU01/AHU/Inputs/PE2"
+ },
+ {
+  "tag": "PDE1",
+  "group": "AHU01_Meas",
+  "target": "Inputs/PDE1",
+  "label": "Pressure PDE1",
+  "unit": "Pa",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "PDE1",
+  "topic": "Server 1/AHU01/AHU/Inputs/PDE1"
+ },
+ {
+  "tag": "PDE2",
+  "group": "AHU01_Meas",
+  "target": "Inputs/PDE2",
+  "label": "Pressure PDE2",
+  "unit": "Pa",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "PDE2",
+  "topic": "Server 1/AHU01/AHU/Inputs/PDE2"
+ },
+ {
+  "tag": "PDE3",
+  "group": "AHU01_Meas",
+  "target": "Inputs/PDE3",
+  "label": "Pressure PDE3",
+  "unit": "Pa",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "PDE3",
+  "topic": "Server 1/AHU01/AHU/Inputs/PDE3"
+ },
+ {
+  "tag": "PDE4",
+  "group": "AHU01_Meas",
+  "target": "Inputs/PDE4",
+  "label": "Pressure PDE4",
+  "unit": "Pa",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "PDE4",
+  "topic": "Server 1/AHU01/AHU/Inputs/PDE4"
+ },
+ {
+  "tag": "PDE10",
+  "group": "AHU01_Meas",
+  "target": "Inputs/PDE10",
+  "label": "Pressure PDE10",
+  "unit": "Pa",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "PDE10",
+  "topic": "Server 1/AHU01/AHU/Inputs/PDE10"
+ },
+ {
+  "tag": "PDE20",
+  "group": "AHU01_Meas",
+  "target": "Inputs/PDE20",
+  "label": "Pressure PDE20",
+  "unit": "Pa",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "PDE20",
+  "topic": "Server 1/AHU01/AHU/Inputs/PDE20"
+ },
+ {
+  "tag": "Q_SUP",
+  "group": "AHU01_Meas",
+  "target": "Inputs/Supply_Flow",
+  "label": "Supply air flow",
+  "unit": "m3/s",
+  "digits": 2,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "Supply_Flow",
+  "topic": "Server 1/AHU01/AHU/Inputs/Supply_Flow"
+ },
+ {
+  "tag": "Q_EXH",
+  "group": "AHU01_Meas",
+  "target": "Inputs/Exhaust_Flow",
+  "label": "Extract air flow",
+  "unit": "m3/s",
+  "digits": 2,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "Exhaust_Flow",
+  "topic": "Server 1/AHU01/AHU/Inputs/Exhaust_Flow"
+ },
+ {
+  "tag": "HRU_EFF",
+  "group": "AHU01_Meas",
+  "target": "HRU/HRU_Efficiency",
+  "label": "Heat recovery efficiency",
+  "unit": "%",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "HRU"
+  ],
+  "property": "HRU_Efficiency",
+  "topic": "Server 1/AHU01/AHU/HRU/HRU_Efficiency"
+ },
+ {
+  "tag": "FZ01",
+  "group": "AHU01_Ctrl",
+  "target": "Outputs/FZ01_Cmd",
+  "label": "Outdoor air damper open",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Outputs"
+  ],
+  "property": "FZ01_Cmd",
+  "topic": "Server 1/AHU01/AHU/Outputs/FZ01_Cmd"
+ },
+ {
+  "tag": "FZ02",
+  "group": "AHU01_Ctrl",
+  "target": "Outputs/FZ02_Cmd",
+  "label": "Exhaust air damper open",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Outputs"
+  ],
+  "property": "FZ02_Cmd",
+  "topic": "Server 1/AHU01/AHU/Outputs/FZ02_Cmd"
+ },
+ {
+  "tag": "SC3",
+  "group": "AHU01_Ctrl",
+  "target": "Outputs/SC3_Ctrl",
+  "label": "Rotor speed",
+  "unit": "%",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Outputs"
+  ],
+  "property": "SC3_Ctrl",
+  "topic": "Server 1/AHU01/AHU/Outputs/SC3_Ctrl"
+ },
+ {
+  "tag": "SC3_CMD",
+  "group": "AHU01_Ctrl",
+  "target": "Outputs/SC3_Cmd",
+  "label": "Rotor start",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Outputs"
+  ],
+  "property": "SC3_Cmd",
+  "topic": "Server 1/AHU01/AHU/Outputs/SC3_Cmd"
+ },
+ {
+  "tag": "TV1",
+  "group": "AHU01_Ctrl",
+  "target": "Outputs/TV1_Ctrl",
+  "label": "Heating valve",
+  "unit": "%",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Outputs"
+  ],
+  "property": "TV1_Ctrl",
+  "topic": "Server 1/AHU01/AHU/Outputs/TV1_Ctrl"
+ },
+ {
+  "tag": "P1_CMD",
+  "group": "AHU01_Ctrl",
+  "target": "Outputs/P1_Cmd",
+  "label": "Pump P1 command",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Outputs"
+  ],
+  "property": "P1_Cmd",
+  "topic": "Server 1/AHU01/AHU/Outputs/P1_Cmd"
+ },
+ {
+  "tag": "TV2",
+  "group": "AHU01_Ctrl",
+  "target": "Outputs/TV2_Ctrl",
+  "label": "Cooling valve",
+  "unit": "%",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Outputs"
+  ],
+  "property": "TV2_Ctrl",
+  "topic": "Server 1/AHU01/AHU/Outputs/TV2_Ctrl"
+ },
+ {
+  "tag": "TF01",
+  "group": "AHU01_Ctrl",
+  "target": "Outputs/TF01_Ctrl",
+  "label": "Supply fan speed",
+  "unit": "%",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Outputs"
+  ],
+  "property": "TF01_Ctrl",
+  "topic": "Server 1/AHU01/AHU/Outputs/TF01_Ctrl"
+ },
+ {
+  "tag": "TF01_CMD",
+  "group": "AHU01_Ctrl",
+  "target": "Outputs/TF01_Cmd",
+  "label": "Supply fan start",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Outputs"
+  ],
+  "property": "TF01_Cmd",
+  "topic": "Server 1/AHU01/AHU/Outputs/TF01_Cmd"
+ },
+ {
+  "tag": "PF01",
+  "group": "AHU01_Ctrl",
+  "target": "Outputs/PF01_Ctrl",
+  "label": "Extract fan speed",
+  "unit": "%",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Outputs"
+  ],
+  "property": "PF01_Ctrl",
+  "topic": "Server 1/AHU01/AHU/Outputs/PF01_Ctrl"
+ },
+ {
+  "tag": "PF01_CMD",
+  "group": "AHU01_Ctrl",
+  "target": "Outputs/PF01_Cmd",
+  "label": "Extract fan start",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Outputs"
+  ],
+  "property": "PF01_Cmd",
+  "topic": "Server 1/AHU01/AHU/Outputs/PF01_Cmd"
+ },
+ {
+  "tag": "RUN",
+  "group": "AHU01_Ctrl",
+  "target": "Operation/Run",
+  "label": "Unit running",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Operation"
+  ],
+  "property": "Run",
+  "topic": "Server 1/AHU01/AHU/Operation/Run"
+ },
+ {
+  "tag": "RUN_MODE",
+  "group": "AHU01_Ctrl",
+  "target": "Operation/Run_Mode",
+  "label": "Run mode (0 stopped, 1 normal, 2 night cooling, 3 night heating, 4 alarm stop)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Operation"
+  ],
+  "property": "Run_Mode",
+  "topic": "Server 1/AHU01/AHU/Operation/Run_Mode"
+ },
+ {
+  "tag": "AOM",
+  "group": "AHU01_Ctrl",
+  "target": "Operation/AOM",
+  "label": "Mode selector (0 off, 1 manual, 2 auto)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Operation"
+  ],
+  "property": "AOM",
+  "topic": "Server 1/AHU01/AHU/Operation/AOM"
+ },
+ {
+  "tag": "SEASON_SEL",
+  "group": "AHU01_Ctrl",
+  "target": "Operation/Season_Sel",
+  "label": "Season selector (0 auto, 1 heating, 2 cooling)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Operation"
+  ],
+  "property": "Season_Sel",
+  "topic": "Server 1/AHU01/AHU/Operation/Season_Sel"
+ },
+ {
+  "tag": "SEASON",
+  "group": "AHU01_Ctrl",
+  "target": "Operation/Season_Mode",
+  "label": "Season in use (0 heating, 1 cooling)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Operation"
+  ],
+  "property": "Season_Mode",
+  "topic": "Server 1/AHU01/AHU/Operation/Season_Mode"
+ },
+ {
+  "tag": "NIGHT_COOL",
+  "group": "AHU01_Ctrl",
+  "target": "Operation/Night_Cooling",
+  "label": "Night cooling",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Operation"
+  ],
+  "property": "Night_Cooling",
+  "topic": "Server 1/AHU01/AHU/Operation/Night_Cooling"
+ },
+ {
+  "tag": "NIGHT_HEAT",
+  "group": "AHU01_Ctrl",
+  "target": "Operation/Night_Heating",
+  "label": "Night heating",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Operation"
+  ],
+  "property": "Night_Heating",
+  "topic": "Server 1/AHU01/AHU/Operation/Night_Heating"
+ },
+ {
+  "tag": "HEAT_MODE",
+  "group": "AHU01_Ctrl",
+  "target": "Operation/Heating_Mode",
+  "label": "Warm water in cooling coil (0 chilled, 1 warm)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Operation"
+  ],
+  "property": "Heating_Mode",
+  "topic": "Server 1/AHU01/AHU/Operation/Heating_Mode"
+ },
+ {
+  "tag": "HS10_EXT",
+  "group": "AHU01_Ctrl",
+  "target": "Operation/HS10_Ext",
+  "label": "Extended run active",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Operation"
+  ],
+  "property": "HS10_Ext",
+  "topic": "Server 1/AHU01/AHU/Operation/HS10_Ext"
+ },
+ {
+  "tag": "P1_FDB",
+  "group": "AHU01_Ctrl",
+  "target": "Inputs/P1_Fdb",
+  "label": "Pump P1 running",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "P1_Fdb",
+  "topic": "Server 1/AHU01/AHU/Inputs/P1_Fdb"
+ },
+ {
+  "tag": "TF01_FDB",
+  "group": "AHU01_Ctrl",
+  "target": "Inputs/TF01_Fdb",
+  "label": "Supply fan running",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "TF01_Fdb",
+  "topic": "Server 1/AHU01/AHU/Inputs/TF01_Fdb"
+ },
+ {
+  "tag": "PF01_FDB",
+  "group": "AHU01_Ctrl",
+  "target": "Inputs/PF01_Fdb",
+  "label": "Extract fan running",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "PF01_Fdb",
+  "topic": "Server 1/AHU01/AHU/Inputs/PF01_Fdb"
+ },
+ {
+  "tag": "SC3_OK",
+  "group": "AHU01_Ctrl",
+  "target": "Inputs/SC3_Fault",
+  "label": "Rotor drive healthy (1 = normal)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "SC3_Fault",
+  "topic": "Server 1/AHU01/AHU/Inputs/SC3_Fault"
+ },
+ {
+  "tag": "HS10",
+  "group": "AHU01_Ctrl",
+  "target": "Inputs/HS10",
+  "label": "Extended run button",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "HS10",
+  "topic": "Server 1/AHU01/AHU/Inputs/HS10"
+ },
+ {
+  "tag": "SB01",
+  "group": "AHU01_Ctrl",
+  "target": "Inputs/SB01",
+  "label": "Emergency stop (1 = normal)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "SB01",
+  "topic": "Server 1/AHU01/AHU/Inputs/SB01"
+ },
+ {
+  "tag": "FA01",
+  "group": "AHU01_Ctrl",
+  "target": "Inputs/FA01",
+  "label": "Fire alarm contact (1 = normal)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Inputs"
+  ],
+  "property": "FA01",
+  "topic": "Server 1/AHU01/AHU/Inputs/FA01"
+ },
+ {
+  "tag": "FROST",
+  "group": "AHU01_Ctrl",
+  "target": "HRU/Frost_Active",
+  "label": "Rotor frost limit active",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "HRU"
+  ],
+  "property": "Frost_Active",
+  "topic": "Server 1/AHU01/AHU/HRU/Frost_Active"
+ },
+ {
+  "tag": "FREEZE",
+  "group": "AHU01_Ctrl",
+  "target": "Alarms/Freeze_Latch",
+  "label": "Freeze protection tripped",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "Freeze_Latch",
+  "topic": "Server 1/AHU01/AHU/Alarms/Freeze_Latch"
+ },
+ {
+  "tag": "ACT_SP",
+  "group": "AHU01_Ctrl",
+  "target": "ST/Active_SP",
+  "label": "Supply temperature setpoint in use",
+  "unit": "°C",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "ST"
+  ],
+  "property": "Active_SP",
+  "topic": "Server 1/AHU01/AHU/ST/Active_SP"
+ },
+ {
+  "tag": "PE1_SP",
+  "group": "AHU01_Ctrl",
+  "target": "FAN/Supply_Pressure_SP",
+  "label": "Supply pressure setpoint in use",
+  "unit": "Pa",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "FAN"
+  ],
+  "property": "Supply_Pressure_SP",
+  "topic": "Server 1/AHU01/AHU/FAN/Supply_Pressure_SP"
+ },
+ {
+  "tag": "PE2_SP",
+  "group": "AHU01_Ctrl",
+  "target": "FAN/Exhaust_Pressure_SP",
+  "label": "Extract pressure setpoint in use",
+  "unit": "Pa",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "FAN"
+  ],
+  "property": "Exhaust_Pressure_SP",
+  "topic": "Server 1/AHU01/AHU/FAN/Exhaust_Pressure_SP"
+ },
+ {
+  "tag": "PDE4_SP",
+  "group": "AHU01_Ctrl",
+  "target": "HRU/PDE4_SP",
+  "label": "Rotor frost pressure limit",
+  "unit": "Pa",
+  "digits": 1,
+  "path": [
+   "AHU01",
+   "AHU",
+   "HRU"
+  ],
+  "property": "PDE4_SP",
+  "topic": "Server 1/AHU01/AHU/HRU/PDE4_SP"
+ },
+ {
+  "tag": "CRIT",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/Critical_Alarm",
+  "label": "Critical alarm",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "Critical_Alarm",
+  "topic": "Server 1/AHU01/AHU/Alarms/Critical_Alarm"
+ },
+ {
+  "tag": "Freeze_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/Freeze_Alm",
+  "label": "Freeze protection (class A)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "Freeze_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/Freeze_Alm"
+ },
+ {
+  "tag": "Fire_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/Fire_Alm",
+  "label": "Fire alarm FA01 (class A)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "Fire_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/Fire_Alm"
+ },
+ {
+  "tag": "Stop_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/Stop_Alm",
+  "label": "Emergency stop SB01 (class A)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "Stop_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/Stop_Alm"
+ },
+ {
+  "tag": "P1_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/P1_Alm",
+  "label": "Pump P1 not running (class A)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "P1_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/P1_Alm"
+ },
+ {
+  "tag": "HN_Pres_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/HN_Pres_Alm",
+  "label": "Heat supply pressure (class A)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "HN_Pres_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/HN_Pres_Alm"
+ },
+ {
+  "tag": "HN_Temp_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/HN_Temp_Alm",
+  "label": "Heat supply temperature (class A)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "HN_Temp_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/HN_Temp_Alm"
+ },
+ {
+  "tag": "Supply_Fire_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/Supply_Fire_Alm",
+  "label": "Supply air fire limit (class A)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "Supply_Fire_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/Supply_Fire_Alm"
+ },
+ {
+  "tag": "Exhaust_Fire_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/Exhaust_Fire_Alm",
+  "label": "Extract air fire limit (class A)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "Exhaust_Fire_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/Exhaust_Fire_Alm"
+ },
+ {
+  "tag": "TE00_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/TE00_Alm",
+  "label": "Sensor TE00 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "TE00_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/TE00_Alm"
+ },
+ {
+  "tag": "TE1_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/TE1_Alm",
+  "label": "Sensor TE1 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "TE1_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/TE1_Alm"
+ },
+ {
+  "tag": "TE2_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/TE2_Alm",
+  "label": "Sensor TE2 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "TE2_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/TE2_Alm"
+ },
+ {
+  "tag": "TE3_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/TE3_Alm",
+  "label": "Sensor TE3 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "TE3_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/TE3_Alm"
+ },
+ {
+  "tag": "TE4_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/TE4_Alm",
+  "label": "Sensor TE4 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "TE4_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/TE4_Alm"
+ },
+ {
+  "tag": "TE5_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/TE5_Alm",
+  "label": "Sensor TE5 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "TE5_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/TE5_Alm"
+ },
+ {
+  "tag": "TE6_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/TE6_Alm",
+  "label": "Sensor TE6 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "TE6_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/TE6_Alm"
+ },
+ {
+  "tag": "TE7_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/TE7_Alm",
+  "label": "Sensor TE7 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "TE7_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/TE7_Alm"
+ },
+ {
+  "tag": "TE8_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/TE8_Alm",
+  "label": "Sensor TE8 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "TE8_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/TE8_Alm"
+ },
+ {
+  "tag": "TE10_1_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/TE10_1_Alm",
+  "label": "Sensor TE10.1 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "TE10_1_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/TE10_1_Alm"
+ },
+ {
+  "tag": "TE10_2_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/TE10_2_Alm",
+  "label": "Sensor TE10.2 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "TE10_2_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/TE10_2_Alm"
+ },
+ {
+  "tag": "TE10_3_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/TE10_3_Alm",
+  "label": "Sensor TE10.3 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "TE10_3_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/TE10_3_Alm"
+ },
+ {
+  "tag": "Supply_Temp_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/Supply_Temp_Alm",
+  "label": "Supply temp. deviation (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "Supply_Temp_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/Supply_Temp_Alm"
+ },
+ {
+  "tag": "Supply_Pres_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/Supply_Pres_Alm",
+  "label": "Supply pressure dev. (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "Supply_Pres_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/Supply_Pres_Alm"
+ },
+ {
+  "tag": "Exhaust_Pres_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/Exhaust_Pres_Alm",
+  "label": "Extract pressure dev. (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "Exhaust_Pres_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/Exhaust_Pres_Alm"
+ },
+ {
+  "tag": "TF01_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/TF01_Alm",
+  "label": "Supply fan TF01 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "TF01_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/TF01_Alm"
+ },
+ {
+  "tag": "PF01_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/PF01_Alm",
+  "label": "Extract fan PF01 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "PF01_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/PF01_Alm"
+ },
+ {
+  "tag": "HRU_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/HRU_Alm",
+  "label": "Rotor drive SC3 (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "HRU_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/HRU_Alm"
+ },
+ {
+  "tag": "HRU_Frost_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/HRU_Frost_Alm",
+  "label": "Rotor icing (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "HRU_Frost_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/HRU_Frost_Alm"
+ },
+ {
+  "tag": "HRU_Efficiency_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/HRU_Efficiency_Alm",
+  "label": "Rotor efficiency low (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "HRU_Efficiency_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/HRU_Efficiency_Alm"
+ },
+ {
+  "tag": "HeatR_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/HeatR_Alm",
+  "label": "Heating coil no effect (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "HeatR_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/HeatR_Alm"
+ },
+ {
+  "tag": "CoolR_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/CoolR_Alm",
+  "label": "Cooling coil no effect (class B)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "CoolR_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/CoolR_Alm"
+ },
+ {
+  "tag": "PDE3_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/PDE3_Alm",
+  "label": "Supply filter 1 dirty (class C)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "PDE3_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/PDE3_Alm"
+ },
+ {
+  "tag": "PDE1_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/PDE1_Alm",
+  "label": "Supply filter 2 dirty (class C)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "PDE1_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/PDE1_Alm"
+ },
+ {
+  "tag": "PDE2_Alm",
+  "group": "AHU01_Alarms",
+  "target": "Alarms/PDE2_Alm",
+  "label": "Extract filter dirty (class C)",
+  "unit": "",
+  "digits": null,
+  "path": [
+   "AHU01",
+   "AHU",
+   "Alarms"
+  ],
+  "property": "PDE2_Alm",
+  "topic": "Server 1/AHU01/AHU/Alarms/PDE2_Alm"
+ }
+]

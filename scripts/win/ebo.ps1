@@ -153,6 +153,20 @@ function Fbe-Save($p) {
       $msg = ((Fg-Root).FindAll($TS::Descendants, [System.Windows.Automation.Condition]::TrueCondition) | % { $_.Current.Name } | ? { $_ -and $_ -ne 'OK' -and $_ -ne 'Close' }) -join ' '
       Keys '{ENTER}'; throw "editor says: $msg"
     }
+    # A program of a controller that is not connected (MP-C / RP-C made offline): the progress box stays up with
+    # "Save successful. Downloading to device... Download failed, device is offline." and an Ok button (only the
+    # last line is readable from outside). Saved is saved.
+    if ($t.Elapsed.TotalSeconds -gt 4 -and -not (Fg-Title)) {
+      $txt = ((Fg-Root).FindAll($TS::Descendants, [System.Windows.Automation.Condition]::TrueCondition) | % { $_.Current.Name }) -join ' '
+      if ($txt -match 'device is offline') {
+        Keys '{ENTER}'; Log 'saved to the server; not downloaded, the device is offline'
+        $w = [Diagnostics.Stopwatch]::StartNew()                 # the box takes a moment to go; then the editor is in front again
+        while ($w.Elapsed.TotalSeconds -lt 8 -and (Fg-Title) -notlike '*Function Block Editor') { Start-Sleep -Milliseconds 400; if (-not (Fg-Title)) { Keys '{ENTER}' } }
+        if ((Fg-Title) -notlike '*Function Block Editor') { [void][W32]::SetForegroundWindow($p.MainWindowHandle); Start-Sleep 1 }
+        return
+      }
+      if ($txt -match 'failed' -and $txt -notmatch 'Download failed') { Keys '{ENTER}'; throw "editor says: $txt" }
+    }
     Start-Sleep -Milliseconds 300
   }
   if ((Fg-Title) -notlike '*Function Block Editor') { throw "after Save the foreground window is '$(Fg-Title)'" }
@@ -164,13 +178,55 @@ function Fbe-Exit($p) {
 }
 
 # The whole chain: make the program if it is not there, import the text file, save (compiles), exit.
-function Fb-Load($parent, $name, $file) {
+# Compiler messages for a program file, without the server: the editor started alone opens the file and runs
+# Options > Simulate, which compiles and names the fault ("Public constant used more than once: X"), where a save
+# to the server only says "Compilation of program failed". One message per run. Returns 'compiles' when none came.
+function Fb-Check($file) {
+  if (-not (Test-Path $file)) { throw "no file $file" }
+  Get-Process $FBE -ea 0 | ? { $_.MainWindowTitle -like '*Menta Editor*' } | Stop-Process -Force
+  $ws = 'C:\Program Files (x86)\Schneider Electric EcoStruxure\Building Operation 7.1\WorkStation'
+  $p = Start-Process "$ws\$FBE.exe" -WorkingDirectory $ws -PassThru
+  $t = [Diagnostics.Stopwatch]::StartNew()
+  while ($t.Elapsed.TotalSeconds -lt 30) { Start-Sleep 1; $p.Refresh(); if ($p.MainWindowTitle -like '*Menta Editor*') { break } }
+  if ($p.MainWindowTitle -notlike '*Menta Editor*') { throw 'the editor did not start alone' }
+  $res = 'compiles'
+  try {
+    Activate 'Menta Editor' | Out-Null; Menu-Do $p.MainWindowHandle 'File' 'Open*'
+    if (-not (Wait-Fg '^Open' 8)) { throw "Open dialog did not show; foreground: $(Fg-Title)" }
+    FileDialog-Set 'Open' $file; Start-Sleep 3
+    if ((Fg-Title) -notlike '*Menta Editor*') { Keys 'y'; Start-Sleep 3 }        # "not a ... program, continue?"
+    Menu-Do $p.MainWindowHandle 'Options' 'Simulate'
+    $t = [Diagnostics.Stopwatch]::StartNew()
+    while ($t.Elapsed.TotalSeconds -lt 15) {
+      Start-Sleep -Milliseconds 500
+      if ((Fg-Title) -eq 'tam32') {
+        $res = ((Fg-Root).FindAll($TS::Descendants, [System.Windows.Automation.Condition]::TrueCondition) | % { $_.Current.Name } | ? { $_ -and $_ -ne 'OK' -and $_ -ne 'Close' }) -join ' '
+        Keys '{ENTER}'; break
+      }
+    }
+  } finally { Start-Sleep 1; Get-Process $FBE -ea 0 | ? { $_.Id -eq $p.Id } | Stop-Process -Force }
+  $res
+}
+
+# $type: 'Function Block Program' on a server; 'SpaceLogic Function Block Program' in the Application of an MP-C / RP-C.
+function Fb-Load($parent, $name, $file, $type = 'Function Block Program') {
   $sw = [Diagnostics.Stopwatch]::StartNew(); Ws-Front
-  if (-not (Ws-TreeItem "$parent/$name")) { Log (Ws-New $parent 'Function Block Program' $name) }
+  # An editor left over from an earlier, failed load of a program with this name belongs to another (perhaps
+  # deleted) object; Fbe-Open would take it for the right one, and a save from it ends with "Failed to parse
+  # Menta application". So no editor with this name may be open at the start, and none is left behind on a failure.
+  Get-Process $FBE -ErrorAction SilentlyContinue | ? { $_.MainWindowTitle -like "$name - *Function Block Editor" } | Stop-Process -Force
+  Start-Sleep -Milliseconds 500
+  if (-not (Ws-TreeItem "$parent/$name")) { Log (Ws-New $parent $type $name) }
   $p = Fbe-Open "$parent/$name"; Log "editor open $([int]$sw.Elapsed.TotalSeconds) s"
-  Fbe-Import $p $file; Log "imported $([int]$sw.Elapsed.TotalSeconds) s"
-  Fbe-Save $p; Log "saved $([int]$sw.Elapsed.TotalSeconds) s"
-  Fbe-Exit $p; Log "editor closed $([int]$sw.Elapsed.TotalSeconds) s"
+  try {
+    Fbe-Import $p $file; Log "imported $([int]$sw.Elapsed.TotalSeconds) s"
+    Start-Sleep ([int][Math]::Min(15, 2 + (Get-Item $file).Length / 12000))     # let a large import settle before the save
+    Fbe-Save $p; Log "saved $([int]$sw.Elapsed.TotalSeconds) s"
+    Fbe-Exit $p; Log "editor closed $([int]$sw.Elapsed.TotalSeconds) s"
+  } catch {
+    Get-Process $FBE -ErrorAction SilentlyContinue | ? { $_.Id -eq $p.Id } | Stop-Process -Force
+    throw
+  }
 }
 
 # Export an object to an xml file (overwrites).
@@ -228,10 +284,17 @@ function Ws-Import($parent, $file) {
 
 # Delete an object. WorkStation asks for confirmation in a dialog titled "Confirm Delete".
 function Ws-Delete($path) {
+  # a path that ends in a slash (an empty variable at its end) would name the parent: seen deleting a whole MQTT client
+  if ($path -match '/\s*$' -or $path -notmatch '^/[^/]+/[^/]') { throw "Ws-Delete: refusing path '$path'" }
   Ws-Front; if (-not (Ws-TreeItem $path)) { return "not there: $path" }
   $t = ''
   foreach ($try in 1..3) {                                   # right after another delete the tree is still refreshing
-    Start-Sleep -Milliseconds (500 * $try); [void](Ws-Select $path); Keys '{DEL}'; Start-Sleep -Milliseconds 1200
+    Start-Sleep -Milliseconds (500 * $try); [void](Ws-Select $path); Start-Sleep -Milliseconds 400
+    # While the tree is still refreshing after an earlier delete, the click of Ws-Select can land on another row
+    # (seen: the parent, which DEL then removed). Press DEL only when the wanted item is the selected one.
+    $it = Ws-TreeItem $path
+    if (-not $it -or -not $it.GetCurrentPattern([System.Windows.Automation.SelectionItemPattern]::Pattern).Current.IsSelected) { Start-Sleep 2; continue }
+    Keys '{DEL}'; Start-Sleep -Milliseconds 1200
     $t = Fg-Title
     if ($t -notlike '*WorkStation (7*') { $y = Ui-Find (Fg-Root) 'Yes' $CT::Button 2; if ($y) { Ui-Invoke $y } else { Keys '{ENTER}' } }
     $t0 = [Diagnostics.Stopwatch]::StartNew()

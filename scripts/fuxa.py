@@ -12,6 +12,9 @@ plain number as payload, so every tag is a raw MQTT tag whose address is the top
     f.value(36, 120, te1, digits=1); f.lamp(300, 112, f.tag("P1", "Server 1/DH/TC1/P1_RUN"), on="#34a853")
     f.save("project.json")          # then: ebo.sh fuxa project.json ; ebo.sh run "Web-Top 'http://127.0.0.1:1881/' 'FUXA' 800 600 780 520"
 
+Static shapes besides text / box / line: circle, polygon, polyline (no live binding). A lamp takes `ranges` for a
+value with more than two states.
+
 Coordinates are svg pixels from the top left of the view; a text's y is its baseline. Forms proven 2026-11-21:
 a live number is a group type "svg-ext-value" holding one text; a lamp is a group type "svg-ext-gauge_semaphore"
 holding one ellipse, coloured by value range. FUXA does not draw a unit and ignores zero decimals, so write the
@@ -46,13 +49,29 @@ class Fuxa:
                         f'font-weight="{weight}" fill="{fill}" text-anchor="{anchor}" stroke="none" '
                         f'xml:space="preserve">{escape(str(s))}</text>')
 
-    def box(self, x, y, w, h, fill="#ffffff", stroke="#9aa0a6", radius=8):
+    def box(self, x, y, w, h, fill="#ffffff", stroke="#9aa0a6", radius=8, width=1):
         self.svg.append(f'<rect id="{self._id("svg")}" x="{x}" y="{y}" width="{w}" height="{h}" rx="{radius}" '
-                        f'ry="{radius}" fill="{fill}" stroke="{stroke}" stroke-width="1"/>')
+                        f'ry="{radius}" fill="{fill}" stroke="{stroke}" stroke-width="{width}"/>')
 
-    def line(self, x1, y1, x2, y2, stroke="#5f6368", width=2):
+    def line(self, x1, y1, x2, y2, stroke="#5f6368", width=2, dash=None):
+        d = f' stroke-dasharray="{dash}"' if dash else ""
         self.svg.append(f'<line id="{self._id("svg")}" x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{stroke}" '
+                        f'stroke-width="{width}"{d}/>')
+
+    def circle(self, cx, cy, r, fill="#ffffff", stroke="#5f6368", width=1.5):
+        """Static circle (no live value: use lamp() for one that changes colour)."""
+        self.svg.append(f'<circle id="{self._id("svg")}" cx="{cx}" cy="{cy}" r="{r}" fill="{fill}" stroke="{stroke}" '
                         f'stroke-width="{width}"/>')
+
+    def polygon(self, points, fill="#5f6368", stroke="none", width=1):
+        """Closed static shape through [(x, y), ...]: arrows, valve bodies, triangles."""
+        pts = " ".join(f"{x},{y}" for x, y in points)
+        self.svg.append(f'<polygon id="{self._id("svg")}" points="{pts}" fill="{fill}" stroke="{stroke}" stroke-width="{width}"/>')
+
+    def polyline(self, points, stroke="#5f6368", width=1.5, fill="none"):
+        """Open static line through [(x, y), ...]: filter zig-zags, coil loops, pipe runs with corners."""
+        pts = " ".join(f"{x},{y}" for x, y in points)
+        self.svg.append(f'<polyline id="{self._id("svg")}" points="{pts}" fill="{fill}" stroke="{stroke}" stroke-width="{width}"/>')
 
     def value(self, x, y, tag, digits=1, size=22, fill="#0b57d0", anchor="start"):
         """Live number of a tag."""
@@ -64,14 +83,17 @@ class Fuxa:
                            "property": {"variableId": tag, "events": [], "actions": [],
                                         "ranges": [{"type": "unit", "min": 0, "max": 0, "text": "", "fractionDigits": digits}]}}
 
-    def lamp(self, x, y, tag, on="#34a853", off="#bdc1c6", r=10):
-        """Circle that takes colour `on` while the tag is 1 and `off` while it is 0. x, y is the centre."""
+    def lamp(self, x, y, tag, on="#34a853", off="#bdc1c6", r=10, ranges=None, stroke="#5f6368"):
+        """Circle that takes colour `on` while the tag is 1 and `off` while it is 0. x, y is the centre.
+        ranges=[(min, max, colour), ...] replaces on / off, for a value with more states (a mode 0 ... 4, an
+        alarm state 0 ... 5); the circle is drawn in the first range's colour until a value arrives."""
         self._known(tag); gid = self._id("LMP")
+        rs = [{"min": a, "max": b, "color": c} for a, b, c in ranges] if ranges else \
+             [{"min": 0, "max": 0, "color": off}, {"min": 1, "max": 1, "color": on}]
         self.svg.append(f'<g id="{gid}" type="svg-ext-gauge_semaphore"><ellipse id="{gid}_e" cx="{x}" cy="{y}" rx="{r}" '
-                        f'ry="{r}" fill="{off}" stroke="#5f6368" stroke-width="1.5"/></g>')
+                        f'ry="{r}" fill="{rs[0]["color"]}" stroke="{stroke}" stroke-width="1.5"/></g>')
         self.items[gid] = {"id": gid, "type": "svg-ext-gauge_semaphore", "name": self.tags[tag]["name"], "label": "HtmlSemaphore",
-                           "property": {"variableId": tag, "events": [], "actions": [],
-                                        "ranges": [{"min": 0, "max": 0, "color": off}, {"min": 1, "max": 1, "color": on}]}}
+                           "property": {"variableId": tag, "events": [], "actions": [], "ranges": rs}}
 
     def _known(self, tag):
         if tag not in self.tags:

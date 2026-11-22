@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """objects.py - write an EBO import file (.xml) with objects that need no editor: folders, trend logs, alarms,
-values, trend charts, dashboards with their widgets. Load it with the driver: Ws-Import '/Server 1' 'C:\\agentwork\\ebo\\X.xml' (about 7 s).
+values, weekly schedules, trend charts, dashboards with their widgets. Load it with the driver: Ws-Import '/Server 1' 'C:\\agentwork\\ebo\\X.xml' (about 7 s).
 
     from objects import ObjectSet
     s = ObjectSet(parent="/Server 1")                 # where the file will be imported
@@ -100,6 +100,48 @@ class ObjectSet:
                          "LowLimitMessage": text or name, "ResetMessage": text or name, "HighLimitPriority": priority,
                          "LowLimitPriority": priority, "TimeDelayToOffNormal": delay},
                         {"MonitoredVariable": target, "SetpointReference": setpoint}, descr)
+
+    DAYS = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+
+    def schedule(self, where, name, week, descr=""):
+        """Digital weekly schedule (on / off). week: {day: [("06:30", "18:30"), ...]} with day 1 = Monday ... 7 =
+        Sunday, or the strings "mon-fri", "sat-sun", "all". Bind a program input to its Value."""
+        days = {}
+        for k, spans in week.items():
+            for d in {"mon-fri": range(1, 6), "sat-sun": (6, 7), "all": range(1, 8)}.get(k, (k,)):
+                days.setdefault(d, []).extend(spans)
+        sc = self.obj(where, "schedule.NSPDigitalSchedule", name, descr=descr)
+        T = "system.schedulecommon.propertytypes."
+        for d in range(1, 8):
+            ws = ET.SubElement(sc, "OI", {"NAME": f"WS{d:05d}", "TYPE": T + "DailySchedule", "DESCR": self.DAYS[d - 1],
+                                          "declared": "1", "hidden": "1"})
+            ET.SubElement(ws, "PI", {"Name": "DayOfWeek", "Value": str(d)})
+            n = 0
+            for a, b in sorted(days.get(d, [])):
+                for t, on in ((a, True), (b, False)):
+                    n += 1; hh, mm = (int(v) for v in t.split(":"))
+                    tv = ET.SubElement(ws, "OI", {"NAME": f"TVP{n:05d}", "TYPE": T + "tvp.OnOffTimeValuePair", "hidden": "1"})
+                    ET.SubElement(tv, "PI", {"Name": "Hour", "Value": str(hh)})
+                    if mm:
+                        ET.SubElement(tv, "PI", {"Name": "Minute", "Value": str(mm)})
+                    ET.SubElement(tv, "PI", {"Name": "Value", "Value": "1"} if on else {"Name": "Value", "Null": "1"})
+        self.path[id(sc)] = self.path[id(self.top if where is None else where)] + "/" + name
+        return sc
+
+    def mqtt_group(self, where, name, targets, seconds=10, event_driven=True):
+        """Data group of an MQTT client (iot.DataGroup): the points it publishes. targets: absolute paths
+        '/Server 1/Program/MODULE/Signal'. Import below the MQTT client: ObjectSet(parent='/Server 1/IoT/Broker'),
+        where=None. Each point goes out under the topic of its own path, on change and every `seconds`."""
+        e = self.obj(where, "iot.DataGroup", name)
+        me = self.path[id(e)]
+        dp = ET.SubElement(e, "PI", {"Name": "DataPoints"})
+        for t in targets:
+            t_obj, t_prop = t.rsplit("/", 1)
+            ET.SubElement(dp, "Reference", {"DeltaFilter": "0", "Object": posixpath.relpath(t_obj, me),
+                                            "Property": t_prop, "Retransmit": "0", "TransferRate": str(seconds)})
+        for k, v in (("EnableInterval", 1), ("EventDriven", int(event_driven)), ("Interval", seconds)):
+            ET.SubElement(e, "PI", {"Name": k, "Value": str(v)})
+        return e
 
     # --- dashboards (shown in WebStation; WorkStation only lists their settings) -------------------------------
     W = "client.dashboard.widgets."

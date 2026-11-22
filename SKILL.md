@@ -51,7 +51,7 @@ import never replaces an object (delete first, or it arrives as `Name_2`); one `
 
 Things that need no clicking at all (findings, "What production programs showed" and "Objects from a file"):
 alarms as ALARM blocks in the program (`p.alarm(...)`), constants bound in the program file
-(`p.const(..., bind=)`), trend logs / alarms / server values / trend charts from `objects.py`, and many bindings
+(`p.const(..., bind=)`), trend logs / alarms / server values / weekly schedules / trend charts from `objects.py`, and many bindings
 at once: Special export, `ebox.py bind`, delete, `Ws-Import` (7 s instead of 5 s per point).
 
 WorkStation logs off when idle (5 minutes for the built-in administrators): run `$E logon` first (starts it if
@@ -67,8 +67,8 @@ To check a generated file without the server, start the editor alone and use `Fi
 - `scripts/aut.py`: Function Block program generator (blocks, constants, wires, layout, routing).
 - `scripts/tgml.py`: graphic (HMI) generator: shapes, live values, state colours, click-to-change, movement (turning
   fan, marks running along a pipe, blinking lamp), symbols from SVG files, component files for the editor's library.
-- `scripts/objects.py`: import file writer for objects without an editor: folders, trend logs, alarms, values, charts,
-  dashboards with gauges, live values, period charts and embedded graphics (shown in WebStation).
+- `scripts/objects.py`: import file writer for objects without an editor: folders, trend logs, alarms, values, weekly
+  schedules, charts, dashboards with gauges, live values, period charts and embedded graphics (shown in WebStation).
 - `scripts/ebox.py`: export reader (object tree, bindings, unpack program text / graphics / script source,
   program text summary with HFBs), binding writer, and programs / graphics out of a server backup (`xbk`).
 - `scripts/fuxa.py`: FUXA project generator (MQTT device, tags, a view with live numbers and lamps).
@@ -79,5 +79,8 @@ To check a generated file without the server, start the editor alone and use `Fi
 - `examples/dh-ex2/`: worked example (controller with four modules, plant model in closed loop, graphic, MQTT,
   FUXA view) with the commands to load it. Read it for the patterns; do not copy it when asked to design something
   from a description of your own.
+- `examples/ahu01/`: larger worked example (air handling unit: hierarchical blocks, staged PID controllers, alarms,
+  simulation, animated graphic with info boxes and season colours, schedules, dashboard, MP-C controller, MQTT /
+  FUXA); `deploy.sh` there is the pattern for loading a whole set and binding it from one file.
 
 The WorkStation automation API needs an SDK licence key; do not work around it.

@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ObjectSet ExportMode="Special" Note="TypesFirst" Version="7.1.1.132">
+  <MetaInformation>
+    <ExportMode Value="Special" />
+    <RuntimeVersion Value="7.1.1.132" />
+    <SourceVersion Value="7.1.1.132" />
+    <ServerFullPath Value="/Server 1" />
+  </MetaInformation>
+  <ExportedObjects>
+    <OI NAME="AHU01_Meas" TYPE="iot.DataGroup">
+      <PI Name="DataPoints">
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="TE00" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="TE1" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="TE2" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="TE3" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="TE4" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="TE5" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="TE6" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="TE7" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="TE8" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="TE10_1" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="TE10_2" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="TE10_3" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="OT_Day_Mean" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="Room_Avg" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="PE1" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="PE2" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="PDE1" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="PDE2" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="PDE3" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="PDE4" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="PDE10" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="PDE20" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="Supply_Flow" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="Exhaust_Flow" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/HRU" Property="HRU_Efficiency" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="EnableInterval" Value="1" />
+      <PI Name="EventDriven" Value="1" />
+      <PI Name="Interval" Value="10" />
+    </OI>
+    <OI NAME="AHU01_Ctrl" TYPE="iot.DataGroup">
+      <PI Name="DataPoints">
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Outputs" Property="FZ01_Cmd" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Outputs" Property="FZ02_Cmd" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Outputs" Property="SC3_Ctrl" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Outputs" Property="SC3_Cmd" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Outputs" Property="TV1_Ctrl" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Outputs" Property="P1_Cmd" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Outputs" Property="TV2_Ctrl" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Outputs" Property="TF01_Ctrl" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Outputs" Property="TF01_Cmd" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Outputs" Property="PF01_Ctrl" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Outputs" Property="PF01_Cmd" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Operation" Property="Run" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Operation" Property="Run_Mode" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Operation" Property="AOM" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Operation" Property="Season_Sel" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Operation" Property="Season_Mode" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Operation" Property="Night_Cooling" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Operation" Property="Night_Heating" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Operation" Property="Heating_Mode" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Operation" Property="HS10_Ext" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="P1_Fdb" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="TF01_Fdb" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="PF01_Fdb" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="SC3_Fault" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="HS10" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="SB01" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Inputs" Property="FA01" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/HRU" Property="Frost_Active" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="Freeze_Latch" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/ST" Property="Active_SP" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/FAN" Property="Supply_Pressure_SP" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/FAN" Property="Exhaust_Pressure_SP" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/HRU" Property="PDE4_SP" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="EnableInterval" Value="1" />
+      <PI Name="EventDriven" Value="1" />
+      <PI Name="Interval" Value="10" />
+    </OI>
+    <OI NAME="AHU01_Alarms" TYPE="iot.DataGroup">
+      <PI Name="DataPoints">
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="Critical_Alarm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="Freeze_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="Fire_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="Stop_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="P1_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="HN_Pres_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="HN_Temp_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="Supply_Fire_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="Exhaust_Fire_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="TE00_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="TE1_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="TE2_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="TE3_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="TE4_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="TE5_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="TE6_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="TE7_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="TE8_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="TE10_1_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="TE10_2_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="TE10_3_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="Supply_Temp_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="Supply_Pres_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="Exhaust_Pres_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="TF01_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="PF01_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="HRU_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="HRU_Frost_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="HRU_Efficiency_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="HeatR_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="CoolR_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="PDE3_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="PDE1_Alm" Retransmit="0" TransferRate="10" />
+        <Reference DeltaFilter="0" Object="../../../AHU01/AHU/Alarms" Property="PDE2_Alm" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="EnableInterval" Value="1" />
+      <PI Name="EventDriven" Value="1" />
+      <PI Name="Interval" Value="10" />
+    </OI>
+  </ExportedObjects>
+</ObjectSet>

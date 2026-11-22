@@ -14,6 +14,12 @@ What is in the skill:
 - `scripts/tgml.py`: graphic (HMI) generator. `scripts/fuxa.py`: FUXA project generator for an MQTT view.
 - `examples/dh-ex2/`: a worked example, a district heating substation (Finnish Energy K1/2013, example
   connection 2) with controller, plant model, operator graphic and MQTT view.
+- `examples/ahu01/`: a larger worked example, a generic air handling unit: controller with one PID per heating /
+  cooling stage in 20 hierarchical blocks and 33 alarms, plant simulation, animated operator graphic with info
+  boxes, weekly schedules, trend logs and dashboard, the same program prepared in an MP-C controller, MQTT and a
+  FUXA view. `deploy.sh` there loads the lot. How it runs: `examples/ahu01/README.md`.
+
+![Air handling unit example: the operator graphic](examples/ahu01/AHU01-HMI_preview.png)
 
 ![District heating example: the operator graphic in WorkStation](examples/dh-ex2/hmi-normal.png)
 

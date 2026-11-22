@@ -1,0 +1,827 @@
+[
+[
+"AHU01/AHU/Inputs",
+"TE00",
+"/Server 1/AHU01/SIM/PLANT/TE00"
+],
+[
+"AHU01/AHU/Inputs",
+"TE1",
+"/Server 1/AHU01/SIM/PLANT/TE1"
+],
+[
+"AHU01/AHU/Inputs",
+"TE2",
+"/Server 1/AHU01/SIM/PLANT/TE2"
+],
+[
+"AHU01/AHU/Inputs",
+"TE3",
+"/Server 1/AHU01/SIM/PLANT/TE3"
+],
+[
+"AHU01/AHU/Inputs",
+"TE4",
+"/Server 1/AHU01/SIM/PLANT/TE4"
+],
+[
+"AHU01/AHU/Inputs",
+"TE5",
+"/Server 1/AHU01/SIM/PLANT/TE5"
+],
+[
+"AHU01/AHU/Inputs",
+"TE6",
+"/Server 1/AHU01/SIM/PLANT/TE6"
+],
+[
+"AHU01/AHU/Inputs",
+"TE7",
+"/Server 1/AHU01/SIM/PLANT/TE7"
+],
+[
+"AHU01/AHU/Inputs",
+"TE8",
+"/Server 1/AHU01/SIM/PLANT/TE8"
+],
+[
+"AHU01/AHU/Inputs",
+"TE10_1",
+"/Server 1/AHU01/SIM/PLANT/TE10_1"
+],
+[
+"AHU01/AHU/Inputs",
+"TE10_2",
+"/Server 1/AHU01/SIM/PLANT/TE10_2"
+],
+[
+"AHU01/AHU/Inputs",
+"TE10_3",
+"/Server 1/AHU01/SIM/PLANT/TE10_3"
+],
+[
+"AHU01/AHU/Inputs",
+"PE1",
+"/Server 1/AHU01/SIM/PLANT/PE1"
+],
+[
+"AHU01/AHU/Inputs",
+"PE2",
+"/Server 1/AHU01/SIM/PLANT/PE2"
+],
+[
+"AHU01/AHU/Inputs",
+"PDE1",
+"/Server 1/AHU01/SIM/PLANT/PDE1"
+],
+[
+"AHU01/AHU/Inputs",
+"PDE2",
+"/Server 1/AHU01/SIM/PLANT/PDE2"
+],
+[
+"AHU01/AHU/Inputs",
+"PDE3",
+"/Server 1/AHU01/SIM/PLANT/PDE3"
+],
+[
+"AHU01/AHU/Inputs",
+"PDE4",
+"/Server 1/AHU01/SIM/PLANT/PDE4"
+],
+[
+"AHU01/AHU/Inputs",
+"PDE10",
+"/Server 1/AHU01/SIM/PLANT/PDE10"
+],
+[
+"AHU01/AHU/Inputs",
+"PDE20",
+"/Server 1/AHU01/SIM/PLANT/PDE20"
+],
+[
+"AHU01/AHU/Inputs",
+"FA01",
+"/Server 1/AHU01/SIM/PLANT/FA01"
+],
+[
+"AHU01/AHU/Inputs",
+"SB01",
+"/Server 1/AHU01/SIM/PLANT/SB01"
+],
+[
+"AHU01/AHU/Inputs",
+"HS10",
+"/Server 1/AHU01/SIM/PLANT/HS10"
+],
+[
+"AHU01/AHU/Inputs",
+"P1_Fdb",
+"/Server 1/AHU01/SIM/PLANT/P1_Fdb"
+],
+[
+"AHU01/AHU/Inputs",
+"TF01_Fdb",
+"/Server 1/AHU01/SIM/PLANT/TF01_Fdb"
+],
+[
+"AHU01/AHU/Inputs",
+"PF01_Fdb",
+"/Server 1/AHU01/SIM/PLANT/PF01_Fdb"
+],
+[
+"AHU01/AHU/Inputs",
+"SC3_Fault",
+"/Server 1/AHU01/SIM/PLANT/SC3_Fault"
+],
+[
+"AHU01/AHU/Inputs",
+"Reset_DI",
+"/Server 1/AHU01/SIM/PLANT/Reset_DI"
+],
+[
+"AHU01/AHU/Inputs",
+"HN_Pres_In",
+"/Server 1/AHU01/SIM/PLANT/HN_Pres_In"
+],
+[
+"AHU01/AHU/Inputs",
+"HN_Temp_In",
+"/Server 1/AHU01/SIM/PLANT/HN_Temp_In"
+],
+[
+"AHU01/SIM/IN",
+"TF01_Ctrl",
+"/Server 1/AHU01/AHU/Outputs/TF01_Ctrl"
+],
+[
+"AHU01/SIM/IN",
+"PF01_Ctrl",
+"/Server 1/AHU01/AHU/Outputs/PF01_Ctrl"
+],
+[
+"AHU01/SIM/IN",
+"SC3_Ctrl",
+"/Server 1/AHU01/AHU/Outputs/SC3_Ctrl"
+],
+[
+"AHU01/SIM/IN",
+"TV1_Ctrl",
+"/Server 1/AHU01/AHU/Outputs/TV1_Ctrl"
+],
+[
+"AHU01/SIM/IN",
+"TV2_Ctrl",
+"/Server 1/AHU01/AHU/Outputs/TV2_Ctrl"
+],
+[
+"AHU01/SIM/IN",
+"FZ01_Cmd",
+"/Server 1/AHU01/AHU/Outputs/FZ01_Cmd"
+],
+[
+"AHU01/SIM/IN",
+"FZ02_Cmd",
+"/Server 1/AHU01/AHU/Outputs/FZ02_Cmd"
+],
+[
+"AHU01/SIM/IN",
+"TF01_Cmd",
+"/Server 1/AHU01/AHU/Outputs/TF01_Cmd"
+],
+[
+"AHU01/SIM/IN",
+"PF01_Cmd",
+"/Server 1/AHU01/AHU/Outputs/PF01_Cmd"
+],
+[
+"AHU01/SIM/IN",
+"SC3_Cmd",
+"/Server 1/AHU01/AHU/Outputs/SC3_Cmd"
+],
+[
+"AHU01/SIM/IN",
+"P1_Cmd",
+"/Server 1/AHU01/AHU/Outputs/P1_Cmd"
+],
+[
+"AHU01/AHU/Operation",
+"Time_Schedule",
+"/Server 1/AHU01/Schedules/Time_Schedule/Value"
+],
+[
+"AHU01/AHU/Operation",
+"Night_Schedule",
+"/Server 1/AHU01/Schedules/Night_Schedule/Value"
+],
+[
+"AHU01/Graphic",
+"RUN",
+"/Server 1/AHU01/AHU/Operation/Run"
+],
+[
+"AHU01/Graphic",
+"RUN_MODE",
+"/Server 1/AHU01/AHU/Operation/Run_Mode"
+],
+[
+"AHU01/Graphic",
+"AOM",
+"/Server 1/AHU01/AHU/Operation/AOM"
+],
+[
+"AHU01/Graphic",
+"SEASON_SEL",
+"/Server 1/AHU01/AHU/Operation/Season_Sel"
+],
+[
+"AHU01/Graphic",
+"SEASON",
+"/Server 1/AHU01/AHU/Operation/Season_Mode"
+],
+[
+"AHU01/Graphic",
+"NIGHT_COOL",
+"/Server 1/AHU01/AHU/Operation/Night_Cooling"
+],
+[
+"AHU01/Graphic",
+"NIGHT_HEAT",
+"/Server 1/AHU01/AHU/Operation/Night_Heating"
+],
+[
+"AHU01/Graphic",
+"HEAT_MODE",
+"/Server 1/AHU01/AHU/Operation/Heating_Mode"
+],
+[
+"AHU01/Graphic",
+"CRIT",
+"/Server 1/AHU01/AHU/Alarms/Critical_Alarm"
+],
+[
+"AHU01/Graphic",
+"RESET",
+"/Server 1/AHU01/AHU/Inputs/Reset_Cmd"
+],
+[
+"AHU01/Graphic",
+"FZ01",
+"/Server 1/AHU01/AHU/Outputs/FZ01_Cmd"
+],
+[
+"AHU01/Graphic",
+"FZ02",
+"/Server 1/AHU01/AHU/Outputs/FZ02_Cmd"
+],
+[
+"AHU01/Graphic",
+"TE00",
+"/Server 1/AHU01/AHU/Inputs/TE00"
+],
+[
+"AHU01/Graphic",
+"TE1",
+"/Server 1/AHU01/AHU/Inputs/TE1"
+],
+[
+"AHU01/Graphic",
+"TE2",
+"/Server 1/AHU01/AHU/Inputs/TE2"
+],
+[
+"AHU01/Graphic",
+"TE3",
+"/Server 1/AHU01/AHU/Inputs/TE3"
+],
+[
+"AHU01/Graphic",
+"TE4",
+"/Server 1/AHU01/AHU/Inputs/TE4"
+],
+[
+"AHU01/Graphic",
+"TE5",
+"/Server 1/AHU01/AHU/Inputs/TE5"
+],
+[
+"AHU01/Graphic",
+"TE6",
+"/Server 1/AHU01/AHU/Inputs/TE6"
+],
+[
+"AHU01/Graphic",
+"TE7",
+"/Server 1/AHU01/AHU/Inputs/TE7"
+],
+[
+"AHU01/Graphic",
+"TE8",
+"/Server 1/AHU01/AHU/Inputs/TE8"
+],
+[
+"AHU01/Graphic",
+"TE10_1",
+"/Server 1/AHU01/AHU/Inputs/TE10_1"
+],
+[
+"AHU01/Graphic",
+"TE10_2",
+"/Server 1/AHU01/AHU/Inputs/TE10_2"
+],
+[
+"AHU01/Graphic",
+"TE10_3",
+"/Server 1/AHU01/AHU/Inputs/TE10_3"
+],
+[
+"AHU01/Graphic",
+"TE00_BAD",
+"/Server 1/AHU01/AHU/Inputs/bad_TE00"
+],
+[
+"AHU01/Graphic",
+"TE1_BAD",
+"/Server 1/AHU01/AHU/Inputs/bad_TE1"
+],
+[
+"AHU01/Graphic",
+"TE2_BAD",
+"/Server 1/AHU01/AHU/Inputs/bad_TE2"
+],
+[
+"AHU01/Graphic",
+"TE3_BAD",
+"/Server 1/AHU01/AHU/Inputs/bad_TE3"
+],
+[
+"AHU01/Graphic",
+"TE4_BAD",
+"/Server 1/AHU01/AHU/Inputs/bad_TE4"
+],
+[
+"AHU01/Graphic",
+"TE5_BAD",
+"/Server 1/AHU01/AHU/Inputs/bad_TE5"
+],
+[
+"AHU01/Graphic",
+"TE6_BAD",
+"/Server 1/AHU01/AHU/Inputs/bad_TE6"
+],
+[
+"AHU01/Graphic",
+"TE7_BAD",
+"/Server 1/AHU01/AHU/Inputs/bad_TE7"
+],
+[
+"AHU01/Graphic",
+"TE8_BAD",
+"/Server 1/AHU01/AHU/Inputs/bad_TE8"
+],
+[
+"AHU01/Graphic",
+"TE10_1_BAD",
+"/Server 1/AHU01/AHU/Inputs/bad_TE10_1"
+],
+[
+"AHU01/Graphic",
+"TE10_2_BAD",
+"/Server 1/AHU01/AHU/Inputs/bad_TE10_2"
+],
+[
+"AHU01/Graphic",
+"TE10_3_BAD",
+"/Server 1/AHU01/AHU/Inputs/bad_TE10_3"
+],
+[
+"AHU01/Graphic",
+"OT_DAY",
+"/Server 1/AHU01/AHU/Inputs/OT_Day_Mean"
+],
+[
+"AHU01/Graphic",
+"ROOM_AVG",
+"/Server 1/AHU01/AHU/Inputs/Room_Avg"
+],
+[
+"AHU01/Graphic",
+"PE1",
+"/Server 1/AHU01/AHU/Inputs/PE1"
+],
+[
+"AHU01/Graphic",
+"PE2",
+"/Server 1/AHU01/AHU/Inputs/PE2"
+],
+[
+"AHU01/Graphic",
+"PDE1",
+"/Server 1/AHU01/AHU/Inputs/PDE1"
+],
+[
+"AHU01/Graphic",
+"PDE2",
+"/Server 1/AHU01/AHU/Inputs/PDE2"
+],
+[
+"AHU01/Graphic",
+"PDE3",
+"/Server 1/AHU01/AHU/Inputs/PDE3"
+],
+[
+"AHU01/Graphic",
+"PDE4",
+"/Server 1/AHU01/AHU/Inputs/PDE4"
+],
+[
+"AHU01/Graphic",
+"PDE10",
+"/Server 1/AHU01/AHU/Inputs/PDE10"
+],
+[
+"AHU01/Graphic",
+"PDE20",
+"/Server 1/AHU01/AHU/Inputs/PDE20"
+],
+[
+"AHU01/Graphic",
+"PE1_SP",
+"/Server 1/AHU01/AHU/FAN/Supply_Pressure_SP"
+],
+[
+"AHU01/Graphic",
+"PE2_SP",
+"/Server 1/AHU01/AHU/FAN/Exhaust_Pressure_SP"
+],
+[
+"AHU01/Graphic",
+"Q_SUP",
+"/Server 1/AHU01/AHU/Inputs/Supply_Flow"
+],
+[
+"AHU01/Graphic",
+"Q_EXH",
+"/Server 1/AHU01/AHU/Inputs/Exhaust_Flow"
+],
+[
+"AHU01/Graphic",
+"SC3",
+"/Server 1/AHU01/AHU/Outputs/SC3_Ctrl"
+],
+[
+"AHU01/Graphic",
+"SC3_CMD",
+"/Server 1/AHU01/AHU/Outputs/SC3_Cmd"
+],
+[
+"AHU01/Graphic",
+"SC3_OK",
+"/Server 1/AHU01/AHU/Inputs/SC3_Fault"
+],
+[
+"AHU01/Graphic",
+"FROST",
+"/Server 1/AHU01/AHU/HRU/Frost_Active"
+],
+[
+"AHU01/Graphic",
+"PDE4_SP",
+"/Server 1/AHU01/AHU/HRU/PDE4_SP"
+],
+[
+"AHU01/Graphic",
+"HRU_EFF",
+"/Server 1/AHU01/AHU/HRU/HRU_Efficiency"
+],
+[
+"AHU01/Graphic",
+"TV1",
+"/Server 1/AHU01/AHU/Outputs/TV1_Ctrl"
+],
+[
+"AHU01/Graphic",
+"P1_CMD",
+"/Server 1/AHU01/AHU/Outputs/P1_Cmd"
+],
+[
+"AHU01/Graphic",
+"P1_FDB",
+"/Server 1/AHU01/AHU/Inputs/P1_Fdb"
+],
+[
+"AHU01/Graphic",
+"FREEZE",
+"/Server 1/AHU01/AHU/Alarms/Freeze_Latch"
+],
+[
+"AHU01/Graphic",
+"TV2",
+"/Server 1/AHU01/AHU/Outputs/TV2_Ctrl"
+],
+[
+"AHU01/Graphic",
+"TF01",
+"/Server 1/AHU01/AHU/Outputs/TF01_Ctrl"
+],
+[
+"AHU01/Graphic",
+"TF01_CMD",
+"/Server 1/AHU01/AHU/Outputs/TF01_Cmd"
+],
+[
+"AHU01/Graphic",
+"TF01_FDB",
+"/Server 1/AHU01/AHU/Inputs/TF01_Fdb"
+],
+[
+"AHU01/Graphic",
+"PF01",
+"/Server 1/AHU01/AHU/Outputs/PF01_Ctrl"
+],
+[
+"AHU01/Graphic",
+"PF01_CMD",
+"/Server 1/AHU01/AHU/Outputs/PF01_Cmd"
+],
+[
+"AHU01/Graphic",
+"PF01_FDB",
+"/Server 1/AHU01/AHU/Inputs/PF01_Fdb"
+],
+[
+"AHU01/Graphic",
+"ACT_SP",
+"/Server 1/AHU01/AHU/ST/Active_SP"
+],
+[
+"AHU01/Graphic",
+"HS10",
+"/Server 1/AHU01/AHU/Inputs/HS10"
+],
+[
+"AHU01/Graphic",
+"HS10_EXT",
+"/Server 1/AHU01/AHU/Operation/HS10_Ext"
+],
+[
+"AHU01/Graphic",
+"SB01",
+"/Server 1/AHU01/AHU/Inputs/SB01"
+],
+[
+"AHU01/Graphic",
+"FA01",
+"/Server 1/AHU01/AHU/Inputs/FA01"
+],
+[
+"AHU01/Graphic",
+"PE1_SET",
+"/Server 1/AHU01/AHU/FAN/Supply_Pressure_Set"
+],
+[
+"AHU01/Graphic",
+"PE2_SET",
+"/Server 1/AHU01/AHU/FAN/Exhaust_Pressure_Set"
+],
+[
+"AHU01/Graphic",
+"ET_X1",
+"/Server 1/AHU01/AHU/ST/ET_X1"
+],
+[
+"AHU01/Graphic",
+"SP_Y1",
+"/Server 1/AHU01/AHU/ST/SP_Y1"
+],
+[
+"AHU01/Graphic",
+"ET_X2",
+"/Server 1/AHU01/AHU/ST/ET_X2"
+],
+[
+"AHU01/Graphic",
+"SP_Y2",
+"/Server 1/AHU01/AHU/ST/SP_Y2"
+],
+[
+"AHU01/Graphic",
+"COIL_ST",
+"/Server 1/AHU01/AHU/ST/Coil_Heat_ST"
+],
+[
+"AHU01/Graphic",
+"FREEZE_SP",
+"/Server 1/AHU01/AHU/Inputs/Freeze_SP"
+],
+[
+"AHU01/Graphic",
+"FROST_LIM",
+"/Server 1/AHU01/AHU/ST/Frost_HRU_Ctrl"
+],
+[
+"AHU01/Graphic",
+"Freeze_Alm",
+"/Server 1/AHU01/AHU/Alarms/Freeze_Alm"
+],
+[
+"AHU01/Graphic",
+"Fire_Alm",
+"/Server 1/AHU01/AHU/Alarms/Fire_Alm"
+],
+[
+"AHU01/Graphic",
+"Stop_Alm",
+"/Server 1/AHU01/AHU/Alarms/Stop_Alm"
+],
+[
+"AHU01/Graphic",
+"P1_Alm",
+"/Server 1/AHU01/AHU/Alarms/P1_Alm"
+],
+[
+"AHU01/Graphic",
+"HN_Pres_Alm",
+"/Server 1/AHU01/AHU/Alarms/HN_Pres_Alm"
+],
+[
+"AHU01/Graphic",
+"HN_Temp_Alm",
+"/Server 1/AHU01/AHU/Alarms/HN_Temp_Alm"
+],
+[
+"AHU01/Graphic",
+"Supply_Fire_Alm",
+"/Server 1/AHU01/AHU/Alarms/Supply_Fire_Alm"
+],
+[
+"AHU01/Graphic",
+"Exhaust_Fire_Alm",
+"/Server 1/AHU01/AHU/Alarms/Exhaust_Fire_Alm"
+],
+[
+"AHU01/Graphic",
+"TE00_Alm",
+"/Server 1/AHU01/AHU/Alarms/TE00_Alm"
+],
+[
+"AHU01/Graphic",
+"TE1_Alm",
+"/Server 1/AHU01/AHU/Alarms/TE1_Alm"
+],
+[
+"AHU01/Graphic",
+"TE2_Alm",
+"/Server 1/AHU01/AHU/Alarms/TE2_Alm"
+],
+[
+"AHU01/Graphic",
+"TE3_Alm",
+"/Server 1/AHU01/AHU/Alarms/TE3_Alm"
+],
+[
+"AHU01/Graphic",
+"TE4_Alm",
+"/Server 1/AHU01/AHU/Alarms/TE4_Alm"
+],
+[
+"AHU01/Graphic",
+"TE5_Alm",
+"/Server 1/AHU01/AHU/Alarms/TE5_Alm"
+],
+[
+"AHU01/Graphic",
+"TE6_Alm",
+"/Server 1/AHU01/AHU/Alarms/TE6_Alm"
+],
+[
+"AHU01/Graphic",
+"TE7_Alm",
+"/Server 1/AHU01/AHU/Alarms/TE7_Alm"
+],
+[
+"AHU01/Graphic",
+"TE8_Alm",
+"/Server 1/AHU01/AHU/Alarms/TE8_Alm"
+],
+[
+"AHU01/Graphic",
+"TE10_1_Alm",
+"/Server 1/AHU01/AHU/Alarms/TE10_1_Alm"
+],
+[
+"AHU01/Graphic",
+"TE10_2_Alm",
+"/Server 1/AHU01/AHU/Alarms/TE10_2_Alm"
+],
+[
+"AHU01/Graphic",
+"TE10_3_Alm",
+"/Server 1/AHU01/AHU/Alarms/TE10_3_Alm"
+],
+[
+"AHU01/Graphic",
+"Supply_Temp_Alm",
+"/Server 1/AHU01/AHU/Alarms/Supply_Temp_Alm"
+],
+[
+"AHU01/Graphic",
+"Supply_Pres_Alm",
+"/Server 1/AHU01/AHU/Alarms/Supply_Pres_Alm"
+],
+[
+"AHU01/Graphic",
+"Exhaust_Pres_Alm",
+"/Server 1/AHU01/AHU/Alarms/Exhaust_Pres_Alm"
+],
+[
+"AHU01/Graphic",
+"TF01_Alm",
+"/Server 1/AHU01/AHU/Alarms/TF01_Alm"
+],
+[
+"AHU01/Graphic",
+"PF01_Alm",
+"/Server 1/AHU01/AHU/Alarms/PF01_Alm"
+],
+[
+"AHU01/Graphic",
+"HRU_Alm",
+"/Server 1/AHU01/AHU/Alarms/HRU_Alm"
+],
+[
+"AHU01/Graphic",
+"HRU_Frost_Alm",
+"/Server 1/AHU01/AHU/Alarms/HRU_Frost_Alm"
+],
+[
+"AHU01/Graphic",
+"HRU_Efficiency_Alm",
+"/Server 1/AHU01/AHU/Alarms/HRU_Efficiency_Alm"
+],
+[
+"AHU01/Graphic",
+"HeatR_Alm",
+"/Server 1/AHU01/AHU/Alarms/HeatR_Alm"
+],
+[
+"AHU01/Graphic",
+"CoolR_Alm",
+"/Server 1/AHU01/AHU/Alarms/CoolR_Alm"
+],
+[
+"AHU01/Graphic",
+"PDE3_Alm",
+"/Server 1/AHU01/AHU/Alarms/PDE3_Alm"
+],
+[
+"AHU01/Graphic",
+"PDE1_Alm",
+"/Server 1/AHU01/AHU/Alarms/PDE1_Alm"
+],
+[
+"AHU01/Graphic",
+"PDE2_Alm",
+"/Server 1/AHU01/AHU/Alarms/PDE2_Alm"
+],
+[
+"AHU01/Graphic",
+"B_OT",
+"/Server 1/AHU01/SIM/TEST/OT_Manual"
+],
+[
+"AHU01/Graphic",
+"B_HWT",
+"/Server 1/AHU01/SIM/TEST/HW_Supply_T"
+],
+[
+"AHU01/Graphic",
+"B_FIRE",
+"/Server 1/AHU01/SIM/TEST/Fire_Alarm"
+],
+[
+"AHU01/Graphic",
+"B_ESTOP",
+"/Server 1/AHU01/SIM/TEST/Stop_Pressed"
+],
+[
+"AHU01/Graphic",
+"B_P1F",
+"/Server 1/AHU01/SIM/TEST/P1_Fail"
+],
+[
+"AHU01/Graphic",
+"B_SC3F",
+"/Server 1/AHU01/SIM/TEST/SC3_Fail"
+],
+[
+"AHU01/Graphic",
+"B_TF01F",
+"/Server 1/AHU01/SIM/TEST/TF01_Fail"
+],
+[
+"AHU01/Graphic",
+"B_ICE",
+"/Server 1/AHU01/SIM/TEST/Ice_Force"
+]
+]

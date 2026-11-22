@@ -1,0 +1,315 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ObjectSet ExportMode="Special" Note="TypesFirst" Version="7.1.1.132">
+  <MetaInformation>
+    <ExportMode Value="Special" />
+    <RuntimeVersion Value="7.1.1.132" />
+    <SourceVersion Value="7.1.1.132" />
+    <ServerFullPath Value="/Server 1" />
+  </MetaInformation>
+  <ExportedObjects>
+    <OI NAME="TF01_Ctrl" TYPE="bacnet.mpx.point.VoltageOutput">
+      <PI Name="ElecBottomOfScale" Value="0" />
+      <PI Name="ElecTopOfScale" Value="10" />
+      <PI Name="EngBottomOfScale" Value="0" />
+      <PI Name="EngTopOfScale" Value="100" />
+      <PI Name="DESCR" Value="TF01_Ctrl 0-10 V = 0-100 %" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Uc 1" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="Value">
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="48551C47-709D-4352-93A8-88613CC1CD8E" />
+      </PI>
+    </OI>
+    <OI NAME="PF01_Ctrl" TYPE="bacnet.mpx.point.VoltageOutput">
+      <PI Name="ElecBottomOfScale" Value="0" />
+      <PI Name="ElecTopOfScale" Value="10" />
+      <PI Name="EngBottomOfScale" Value="0" />
+      <PI Name="EngTopOfScale" Value="100" />
+      <PI Name="DESCR" Value="PF01_Ctrl 0-10 V = 0-100 %" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Uc 2" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="Value">
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="086EB418-C374-4F95-B12A-A7124E445112" />
+      </PI>
+    </OI>
+    <OI NAME="SC3_Ctrl" TYPE="bacnet.mpx.point.VoltageOutput">
+      <PI Name="ElecBottomOfScale" Value="0" />
+      <PI Name="ElecTopOfScale" Value="10" />
+      <PI Name="EngBottomOfScale" Value="0" />
+      <PI Name="EngTopOfScale" Value="100" />
+      <PI Name="DESCR" Value="SC3_Ctrl 0-10 V = 0-100 %" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Uc 3" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="Value">
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="72D85EA0-45FA-4584-B245-E3B2264BC310" />
+      </PI>
+    </OI>
+    <OI NAME="TV1_Ctrl" TYPE="bacnet.mpx.point.VoltageOutput">
+      <PI Name="ElecBottomOfScale" Value="0" />
+      <PI Name="ElecTopOfScale" Value="10" />
+      <PI Name="EngBottomOfScale" Value="0" />
+      <PI Name="EngTopOfScale" Value="100" />
+      <PI Name="DESCR" Value="TV1_Ctrl 0-10 V = 0-100 %" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Uc 4" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="Value">
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="02585782-7577-4177-9BDF-7905E2BED10C" />
+      </PI>
+    </OI>
+    <OI NAME="TV2_Ctrl" TYPE="bacnet.mpx.point.VoltageOutput">
+      <PI Name="ElecBottomOfScale" Value="0" />
+      <PI Name="ElecTopOfScale" Value="10" />
+      <PI Name="EngBottomOfScale" Value="0" />
+      <PI Name="EngTopOfScale" Value="100" />
+      <PI Name="DESCR" Value="TV2_Ctrl 0-10 V = 0-100 %" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Uc 5" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="Value">
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="CF778439-233A-40EC-9299-6851317E31BC" />
+      </PI>
+    </OI>
+    <OI NAME="FZ01_Cmd" TYPE="bacnet.mpx.point.DigitalOutput">
+      <PI Name="DESCR" Value="FZ01_Cmd" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/DO 1" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="Value">
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="356ED64F-1515-4A7B-8D91-D7690C76C31C" />
+      </PI>
+    </OI>
+    <OI NAME="FZ02_Cmd" TYPE="bacnet.mpx.point.DigitalOutput">
+      <PI Name="DESCR" Value="FZ02_Cmd" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/DO 2" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="Value">
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="9804B4D9-6E92-4594-9E13-C4FE74664B9B" />
+      </PI>
+    </OI>
+    <OI NAME="TF01_Cmd" TYPE="bacnet.mpx.point.DigitalOutput">
+      <PI Name="DESCR" Value="TF01_Cmd" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/DO 3" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="Value">
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="21B1E605-D642-402A-B0B9-0ED190BAFE91" />
+      </PI>
+    </OI>
+    <OI NAME="PF01_Cmd" TYPE="bacnet.mpx.point.DigitalOutput">
+      <PI Name="DESCR" Value="PF01_Cmd" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/DO 4" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="Value">
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="EDA413B9-C5D2-429F-B132-8EF461E09356" />
+      </PI>
+    </OI>
+    <OI NAME="SC3_Cmd" TYPE="bacnet.mpx.point.DigitalOutput">
+      <PI Name="DESCR" Value="SC3_Cmd" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/DO 5" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="Value">
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="77D6D6B5-D758-4EDD-9CE3-8E84C9133154" />
+      </PI>
+    </OI>
+    <OI NAME="P1_Cmd" TYPE="bacnet.mpx.point.DigitalOutput">
+      <PI Name="DESCR" Value="P1_Cmd" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/DO 6" Retransmit="0" TransferRate="10" />
+      </PI>
+      <PI Name="Value">
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="3E1444BF-9435-4002-993D-259DD0458A2F" />
+      </PI>
+    </OI>
+    <OI NAME="TE1" TYPE="bacnet.mpx.point.TemperatureInput">
+      <PI Name="DESCR" Value="TE1" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 1" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="TE2" TYPE="bacnet.mpx.point.TemperatureInput">
+      <PI Name="DESCR" Value="TE2" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 2" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="TE3" TYPE="bacnet.mpx.point.TemperatureInput">
+      <PI Name="DESCR" Value="TE3" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 3" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="TE4" TYPE="bacnet.mpx.point.TemperatureInput">
+      <PI Name="DESCR" Value="TE4" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 4" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="TE5" TYPE="bacnet.mpx.point.TemperatureInput">
+      <PI Name="DESCR" Value="TE5" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 5" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="TE6" TYPE="bacnet.mpx.point.TemperatureInput">
+      <PI Name="DESCR" Value="TE6" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 6" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="TE7" TYPE="bacnet.mpx.point.TemperatureInput">
+      <PI Name="DESCR" Value="TE7" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 7" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="TE8" TYPE="bacnet.mpx.point.TemperatureInput">
+      <PI Name="DESCR" Value="TE8" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 8" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="PE1" TYPE="bacnet.mpx.point.VoltageInput">
+      <PI Name="ElecBottomOfScale" Value="0" />
+      <PI Name="ElecTopOfScale" Value="10" />
+      <PI Name="EngBottomOfScale" Value="0" />
+      <PI Name="EngTopOfScale" Value="500" />
+      <PI Name="DESCR" Value="PE1 0-10 V = 0 ... 500 Pa" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 9" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="PE2" TYPE="bacnet.mpx.point.VoltageInput">
+      <PI Name="ElecBottomOfScale" Value="0" />
+      <PI Name="ElecTopOfScale" Value="10" />
+      <PI Name="EngBottomOfScale" Value="0" />
+      <PI Name="EngTopOfScale" Value="500" />
+      <PI Name="DESCR" Value="PE2 0-10 V = 0 ... 500 Pa" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 10" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="PDE1" TYPE="bacnet.mpx.point.VoltageInput">
+      <PI Name="ElecBottomOfScale" Value="0" />
+      <PI Name="ElecTopOfScale" Value="10" />
+      <PI Name="EngBottomOfScale" Value="0" />
+      <PI Name="EngTopOfScale" Value="500" />
+      <PI Name="DESCR" Value="PDE1 0-10 V = 0 ... 500 Pa" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 11" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="PDE2" TYPE="bacnet.mpx.point.VoltageInput">
+      <PI Name="ElecBottomOfScale" Value="0" />
+      <PI Name="ElecTopOfScale" Value="10" />
+      <PI Name="EngBottomOfScale" Value="0" />
+      <PI Name="EngTopOfScale" Value="500" />
+      <PI Name="DESCR" Value="PDE2 0-10 V = 0 ... 500 Pa" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 12" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="PDE3" TYPE="bacnet.mpx.point.VoltageInput">
+      <PI Name="ElecBottomOfScale" Value="0" />
+      <PI Name="ElecTopOfScale" Value="10" />
+      <PI Name="EngBottomOfScale" Value="0" />
+      <PI Name="EngTopOfScale" Value="500" />
+      <PI Name="DESCR" Value="PDE3 0-10 V = 0 ... 500 Pa" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 13" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="PDE4" TYPE="bacnet.mpx.point.VoltageInput">
+      <PI Name="ElecBottomOfScale" Value="0" />
+      <PI Name="ElecTopOfScale" Value="10" />
+      <PI Name="EngBottomOfScale" Value="0" />
+      <PI Name="EngTopOfScale" Value="500" />
+      <PI Name="DESCR" Value="PDE4 0-10 V = 0 ... 500 Pa" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 14" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="PDE10" TYPE="bacnet.mpx.point.VoltageInput">
+      <PI Name="ElecBottomOfScale" Value="0" />
+      <PI Name="ElecTopOfScale" Value="10" />
+      <PI Name="EngBottomOfScale" Value="0" />
+      <PI Name="EngTopOfScale" Value="2000" />
+      <PI Name="DESCR" Value="PDE10 0-10 V = 0 ... 2000 Pa" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 15" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="PDE20" TYPE="bacnet.mpx.point.VoltageInput">
+      <PI Name="ElecBottomOfScale" Value="0" />
+      <PI Name="ElecTopOfScale" Value="10" />
+      <PI Name="EngBottomOfScale" Value="0" />
+      <PI Name="EngTopOfScale" Value="2000" />
+      <PI Name="DESCR" Value="PDE20 0-10 V = 0 ... 2000 Pa" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 16" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="FA01" TYPE="bacnet.mpx.point.DigitalInput">
+      <PI Name="DESCR" Value="FA01" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 17" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="SB01" TYPE="bacnet.mpx.point.DigitalInput">
+      <PI Name="DESCR" Value="SB01" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 18" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="HS10" TYPE="bacnet.mpx.point.DigitalInput">
+      <PI Name="DESCR" Value="HS10" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 19" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="P1_Fdb" TYPE="bacnet.mpx.point.DigitalInput">
+      <PI Name="DESCR" Value="P1_Fdb" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Ub 20" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="TF01_Fdb" TYPE="bacnet.mpx.point.DigitalInput">
+      <PI Name="DESCR" Value="TF01_Fdb" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Uc 6" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="PF01_Fdb" TYPE="bacnet.mpx.point.DigitalInput">
+      <PI Name="DESCR" Value="PF01_Fdb" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Uc 7" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="SC3_Fault" TYPE="bacnet.mpx.point.DigitalInput">
+      <PI Name="DESCR" Value="SC3_Fault" />
+      <PI Name="Terminal">
+        <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Uc 8" Retransmit="0" TransferRate="10" />
+      </PI>
+    </OI>
+    <OI NAME="TE00" TYPE="server.point.AV">
+      <PI Name="Value" Value="-5" />
+    </OI>
+    <OI NAME="TE10_1" TYPE="server.point.AV">
+      <PI Name="Value" Value="21" />
+    </OI>
+    <OI NAME="TE10_2" TYPE="server.point.AV">
+      <PI Name="Value" Value="21" />
+    </OI>
+    <OI NAME="TE10_3" TYPE="server.point.AV">
+      <PI Name="Value" Value="21" />
+    </OI>
+    <OI NAME="Reset_DI" TYPE="server.point.BV">
+      <PI Name="Value" Value="0" />
+    </OI>
+  </ExportedObjects>
+</ObjectSet>
