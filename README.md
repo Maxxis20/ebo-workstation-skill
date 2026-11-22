@@ -84,6 +84,8 @@ target. Very small screens (1024x768) do not fit the editor.
 - The WorkStation automation API would be the proper way in. It needs an SDK licence key, and this skill does
   not work around that.
 - One command at a time, and nobody else on the keyboard while it runs.
+- WebStation in the Brave browser: clicks on a graphic do nothing until "Block fingerprinting" is switched off
+  for that site (lion icon > Advanced options). Not a fault of the graphic; details in the findings.
 - Slow where the user interface is slow: about 10 s per MQTT data point, about 6 s per bound point.
 - The engineering is still yours: check what the agent built before it goes anywhere near a real plant.
 
