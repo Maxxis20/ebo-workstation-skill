@@ -288,8 +288,10 @@ function Ws-Delete($path) {
   if ($path -match '/\s*$' -or $path -notmatch '^/[^/]+/[^/]') { throw "Ws-Delete: refusing path '$path'" }
   Ws-Front; if (-not (Ws-TreeItem $path)) { return "not there: $path" }
   $t = ''
-  foreach ($try in 1..3) {                                   # right after another delete the tree is still refreshing
-    Start-Sleep -Milliseconds (500 * $try); [void](Ws-Select $path); Start-Sleep -Milliseconds 400
+  foreach ($try in 1..5) {                                   # right after another delete the tree is still refreshing
+    Start-Sleep -Milliseconds (500 * $try)
+    try { [void](Ws-Select $path) } catch { Start-Sleep 2; continue }      # the tree may be mid-refresh: try again
+    Start-Sleep -Milliseconds 400
     # While the tree is still refreshing after an earlier delete, the click of Ws-Select can land on another row
     # (seen: the parent, which DEL then removed). Press DEL only when the wanted item is the selected one.
     $it = Ws-TreeItem $path

@@ -17,7 +17,7 @@
         <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Uc 1" Retransmit="0" TransferRate="10" />
       </PI>
       <PI Name="Value">
-        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="48551C47-709D-4352-93A8-88613CC1CD8E" />
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="77C38EA5-B5E1-4A32-BDC3-FBEEFF9B93BF" />
       </PI>
     </OI>
     <OI NAME="PF01_Ctrl" TYPE="bacnet.mpx.point.VoltageOutput">
@@ -30,7 +30,7 @@
         <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Uc 2" Retransmit="0" TransferRate="10" />
       </PI>
       <PI Name="Value">
-        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="086EB418-C374-4F95-B12A-A7124E445112" />
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="95799B9E-B71D-410E-A59B-04BBA134F9DD" />
       </PI>
     </OI>
     <OI NAME="SC3_Ctrl" TYPE="bacnet.mpx.point.VoltageOutput">
@@ -43,7 +43,7 @@
         <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Uc 3" Retransmit="0" TransferRate="10" />
       </PI>
       <PI Name="Value">
-        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="72D85EA0-45FA-4584-B245-E3B2264BC310" />
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="8CFBCCAE-D124-43E4-8F0C-13D8A3A3CFB5" />
       </PI>
     </OI>
     <OI NAME="TV1_Ctrl" TYPE="bacnet.mpx.point.VoltageOutput">
@@ -56,7 +56,7 @@
         <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Uc 4" Retransmit="0" TransferRate="10" />
       </PI>
       <PI Name="Value">
-        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="02585782-7577-4177-9BDF-7905E2BED10C" />
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="47E360AE-316C-4DB3-B50A-6EC5F8BC02EC" />
       </PI>
     </OI>
     <OI NAME="TV2_Ctrl" TYPE="bacnet.mpx.point.VoltageOutput">
@@ -69,7 +69,7 @@
         <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/Uc 5" Retransmit="0" TransferRate="10" />
       </PI>
       <PI Name="Value">
-        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="CF778439-233A-40EC-9299-6851317E31BC" />
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="5EC90CC8-823B-4D36-86AF-74497CD74DA5" />
       </PI>
     </OI>
     <OI NAME="FZ01_Cmd" TYPE="bacnet.mpx.point.DigitalOutput">
@@ -78,7 +78,7 @@
         <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/DO 1" Retransmit="0" TransferRate="10" />
       </PI>
       <PI Name="Value">
-        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="356ED64F-1515-4A7B-8D91-D7690C76C31C" />
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="B35B6FC3-BC03-4313-AA44-13E230CD317C" />
       </PI>
     </OI>
     <OI NAME="FZ02_Cmd" TYPE="bacnet.mpx.point.DigitalOutput">
@@ -87,7 +87,7 @@
         <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/DO 2" Retransmit="0" TransferRate="10" />
       </PI>
       <PI Name="Value">
-        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="9804B4D9-6E92-4594-9E13-C4FE74664B9B" />
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="139B613C-F401-49D3-AA6D-6DAD4238D8F2" />
       </PI>
     </OI>
     <OI NAME="TF01_Cmd" TYPE="bacnet.mpx.point.DigitalOutput">
@@ -96,7 +96,7 @@
         <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/DO 3" Retransmit="0" TransferRate="10" />
       </PI>
       <PI Name="Value">
-        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="21B1E605-D642-402A-B0B9-0ED190BAFE91" />
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="85E36F13-A6BF-4B47-83A9-BEF013ED40F6" />
       </PI>
     </OI>
     <OI NAME="PF01_Cmd" TYPE="bacnet.mpx.point.DigitalOutput">
@@ -105,7 +105,7 @@
         <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/DO 4" Retransmit="0" TransferRate="10" />
       </PI>
       <PI Name="Value">
-        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="EDA413B9-C5D2-429F-B132-8EF461E09356" />
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="6A7F840C-914A-449D-9713-A612C6601A05" />
       </PI>
     </OI>
     <OI NAME="SC3_Cmd" TYPE="bacnet.mpx.point.DigitalOutput">
@@ -114,7 +114,7 @@
         <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/DO 5" Retransmit="0" TransferRate="10" />
       </PI>
       <PI Name="Value">
-        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="77D6D6B5-D758-4EDD-9CE3-8E84C9133154" />
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="6DF11830-7519-4A75-B57B-8DAAEB9355D6" />
       </PI>
     </OI>
     <OI NAME="P1_Cmd" TYPE="bacnet.mpx.point.DigitalOutput">
@@ -123,7 +123,7 @@
         <Reference DeltaFilter="0" Object="../../IO Resources/Onboard IO/DO 6" Retransmit="0" TransferRate="10" />
       </PI>
       <PI Name="Value">
-        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="3E1444BF-9435-4002-993D-259DD0458A2F" />
+        <Reference DeltaFilter="0" Object="../AHU/Outputs" Retransmit="0" TransferRate="10" Property="1A2925B6-E37C-4704-874C-1BC346466989" />
       </PI>
     </OI>
     <OI NAME="TE1" TYPE="bacnet.mpx.point.TemperatureInput">

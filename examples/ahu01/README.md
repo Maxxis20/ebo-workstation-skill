@@ -7,6 +7,7 @@ loaded into EcoStruxure Building Operation 7.1 by script (skill `ebo-workstation
 | File | What |
 |---|---|
 | `DESCRIPTION.md` | description of operation: plant, I/O list, functions, alarms, setpoints, texts of the info boxes |
+| `FUNCTIONAL_DESCRIPTION.html` | the same unit as an engineer's functional description (open in a browser): plant, the MP-C-36A in a distributed BACnet/IP system, I/O list, description of operation, alarms, setpoints. Checked against the program on 2026-11-22 |
 | `make_program.py` -> `AHU01.aut`, `io.json` | controller program: about 600 blocks in 20 hierarchical blocks, 33 alarm blocks, 8 modules, one PID per heating / cooling stage. `--only NAME` builds one function group alone. Notes and a test plan: `PROGRAM_NOTES.md` |
 | `make_sim.py` -> `AHU01-SIM.aut`, `sim_io.json` | plant simulation (175 blocks) from a model fitted to trend data of a real unit (not included): test conditions and fault switches in module `TEST`. `SIM_NOTES.md`, `check_sim.py` |
 | `make_hmi.py [--bench]` -> `AHU01-HMI.tgml`, `hmi_binds.json` | operator graphic: two ducts, components in plant order, turning fans, drifting air and running water marks, air colours by season, an info box per component, setpoints, alarm lamps, test bench panel. `HMI_NOTES.md`, preview `AHU01-HMI_preview.png` |
@@ -23,9 +24,9 @@ open the schedule in WorkStation to change the hours, or set the mode selector t
 graphic and in `AHU01/SIM/TEST`. The dashboard is `AHU01/Dashboard/Measurements` in WebStation.
 
 Seen on the bench (2026-11-22), outdoor -5 °C, heating season: pre-heat loads the heating valve with 75 %, then the
-heating coil controller takes over; 10 minutes after the start supply air 19.3 °C at a setpoint of 19.5, heating
-valve 16 %, heat recovery 100 %, fans still ramping towards 80 / 60 Pa (the model's own calculation for the settled
-state: fans 46 / 35 %, valve 15 %). Cooling season at 30 °C outdoors with extract air cooler than outdoor air: the
+heating coil controller takes over; settled: supply air 19.4 °C at a setpoint of 19.4, heating valve 15 %, heat
+recovery 100 %, ducts 79 / 59 Pa at 80 / 60 with the fans at 46 / 34 % (the model's own calculation: 46 / 35 %,
+valve 15 %). Cooling season at 30 °C outdoors with extract air cooler than outdoor air: the
 rotor leaves the heating side, comes back as cooling recovery up to 100 %, then the cooling valve is released and
 controls at a few percent; the supply temperature swings about +/- 0.8 K around the setpoint for a while (the
 simulated cooling coil is strong at small openings; `ST/Cool_Gain` is the value to lower).
@@ -70,15 +71,11 @@ controller is the other way). An automation server (AS-P) cannot be prepared lik
 
 ## Over MQTT, with a FUXA view (seen working 2026-11-22: 92 of 92 topics on the broker, live values in FUXA)
 
-The Data Groups are imported from `AHU01-mqtt.xml` (written by `make_mqtt.py`); the dialog picker of
-`mqtt_points.ps1` picked wrong rows on modules with many signals and is no longer used for the points. The whole
-script takes about 2 minutes. Text below this line that speaks of chunks, the picker or "not verified" predates that.
-
 `./deploy_fuxa.sh` (same arguments as `deploy.sh`), after `deploy.sh`. It has EBO publish 92 signals of the
 program to the Mosquitto broker on the same machine and loads a FUXA view of the unit that reads them back
 (findings, section MQTT, for broker and FUXA).
 
-- `make_mqtt.py` -> `mqtt_points.json`, `mqtt_points.ps1`: the points (measurements, control outputs, states and
+- `make_mqtt.py` -> `mqtt_points.json`, `AHU01-mqtt.xml`, `mqtt_points.ps1`: the points (measurements, control outputs, states and
   modes, setpoints in use, critical alarm and the 33 alarms; the graphic's binds less the sensor fault flags and
   the operator setpoints), each checked to be a public signal of `AHU01.aut` and to agree with `hmi_binds.json`.
   Three Data Groups under the MQTT client `/Server 1/IoT/Broker`: `AHU01_Meas` (25), `AHU01_Ctrl` (33),
@@ -93,19 +90,15 @@ program to the Mosquitto broker on the same machine and loads a FUXA view of the
   run mode, selectors, season, night modes, critical alarm; extract duct on top (right to left), supply duct
   below (left to right), rotor across both, coils with pump and valves, fans and dampers as lamps, live values;
   alarm lamps on the right. Read-only; numbers and lamps only (what FUXA can be given without clicking).
-- `deploy_fuxa.sh`: makes the IoT Interface and the client if missing, deletes and re-creates the three groups,
-  fills them in chunks of 17 points (one `ebo.sh run` each, about 20 to 30 minutes in all), lists what the
-  broker receives for 25 s and counts the topics, then `ebo.sh fuxa AHU01.fuxa.json`. Show it with
+- `deploy_fuxa.sh`: makes the IoT Interface and the client if missing, deletes the three groups and imports them
+  again from `AHU01-mqtt.xml` (written by `make_mqtt.py` with `objects.py` `mqtt_group()`), lists what the broker
+  receives for 25 s and counts the topics, then `ebo.sh fuxa AHU01.fuxa.json`. About 2 minutes. Show it with
   `ebo.sh run "Log (Web-Top 'http://127.0.0.1:1881/' 'FUXA' 0 0 1600 1000)"`.
 
-After a new `deploy.sh`: run `deploy_fuxa.sh` again. The groups live outside the folder, so they survive the delete
-and import, but whether their data points find the re-imported signals again is not verified; the script deletes
-and re-creates the groups, so it does not depend on it.
+After a new `deploy.sh`: run `deploy_fuxa.sh` again (the groups point into the folder that was deleted and imported).
 
-Not verified: everything on the EBO machine. In particular the picker on modules with many signals (`Alarms` has 72, `Inputs`
-61, where the DH-ex2 run had at most 6): `mqtt_points.ps1` skips rows scrolled out of view and walks the list with
-the arrow key when the signal is not among the visible rows (a guess at how the list behaves), and reports a
-point it cannot pick as `MISSING` instead of stopping. The number of data points one group accepts is not known.
+`mqtt_points.ps1` (data points picked in the dialog, one by one) is kept for reference only: on modules with many
+signals it picked wrong rows (32 of 92 right). The import file is the way that works.
 
 ## Not verified
 
