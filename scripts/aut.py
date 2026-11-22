@@ -144,17 +144,12 @@ def fmt(v):
 
 
 def expr_inputs(expr):
-    """Input letters of an expression, in pin order.
-
-    The editor sorts them alphabetically. Whether capitals sort before lower case is not known, so
-    an expression is refused unless both orders give the same pins: use early capitals for analog
-    inputs and later lower-case letters for binary ones. Names of constants (two letters or more)
-    are not inputs."""
-    letters = sorted(set(re.findall(r"(?<![A-Za-z0-9_])([A-Za-z])(?![A-Za-z0-9_])", expr)))
+    """Input letters of an expression, in pin order: alphabetical with capitals and lower case mixed
+    (a, B, C, d), which is how production programs are wired. Capital = analog input, lower case =
+    binary. Names of constants (two letters or more) are not inputs."""
+    letters = sorted(set(re.findall(r"(?<![A-Za-z0-9_])([A-Za-z])(?![A-Za-z0-9_])", expr)), key=str.lower)
     if len({c.lower() for c in letters}) != len(letters):
         raise ValueError(f"expression {expr!r} uses one letter in both cases")
-    if letters != sorted(letters, key=str.lower):
-        raise ValueError(f"expression {expr!r}: pin order ambiguous, keep capitals alphabetically before lower case")
     return letters
 
 

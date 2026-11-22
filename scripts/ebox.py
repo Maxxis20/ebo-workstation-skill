@@ -5,6 +5,7 @@
     ebox.py unpack export.xml outdir           program text (.aut), graphics (.tgml), script source (.txt), documents
     ebox.py binds  export.xml                  every binding: object, property -> target
     ebox.py aut    program.aut                 summary of a program text: blocks by type, modules, HFBs, constants
+    ebox.py xbk    backup.xbk outdir [name]    programs and graphics out of a server backup (name: only paths holding it)
     ebox.py bind   in.xml out.xml binds.json [/Server 1]
                                                write bindings into an export, for Ws-Import. binds.json:
                                                [["FB/MODULE", "TE1_IN", "/Server 1/Other/MOD/TE1"], ...]
@@ -246,6 +247,46 @@ def bind(src, dst, pairs, parent="/Server 1"):
     return len(pairs)
 
 
+# ---- server backup ---------------------------------------------------------------------------------------------
+def xbk_unpack(path, out, only=""):
+    """A backup (.xbk) is a zip. Program text and graphics are members UDT/pu/udt/<a>/<b>___AutFile.cdata and
+    ...___FILE.cdata: plain gzip, named after the object's type udt.<a>.<b>. Which object has that type is in
+    Configuration/configuration.db, table ObjectInstance (Id, ParentId, TypeName, NAME). Nothing else is read:
+    the same database holds the user accounts."""
+    import sqlite3, tempfile, zipfile
+    z = zipfile.ZipFile(path); os.makedirs(out, exist_ok=True)
+    with tempfile.TemporaryDirectory() as tmp:
+        db = z.extract("Configuration/configuration.db", tmp)
+        con = sqlite3.connect(db)
+        rows = {r[0]: r[1:] for r in con.execute("SELECT Id, ParentId, TypeName, NAME FROM ObjectInstance")}
+        con.close()
+    def full(i):
+        parts = []
+        while i in rows and len(parts) < 40:
+            parts.append(rows[i][2] or ""); i = rows[i][0]
+        return "/".join(reversed(parts))
+    by_type = {}
+    for i, (_p, typ, _n) in rows.items():
+        if typ and typ.startswith("udt."):
+            by_type.setdefault(typ, full(i))
+    done = []
+    for m in z.namelist():
+        k = re.match(r"UDT/pu/udt/([^/]+)/([^/]+?)___(AutFile|FILE)\.cdata$", m)
+        if not k:
+            continue
+        who = by_type.get(f"udt.{k.group(1)}.{k.group(2)}", f"{k.group(1)}.{k.group(2)}")
+        if only and only not in who:
+            continue
+        raw = z.read(m)
+        try:
+            raw = gzip.decompress(raw)
+        except OSError:
+            pass
+        fn = os.path.join(out, _safe(who.strip("/").replace("/", "__")) + (".aut" if k.group(3) == "AutFile" else ".tgml"))
+        open(fn, "wb").write(raw); done.append((who, fn, len(raw)))
+    return done
+
+
 # ---- command line -----------------------------------------------------------------------------------------------
 def main(a):
     if len(a) < 2:
@@ -258,6 +299,10 @@ def main(a):
         except UnicodeDecodeError:
             text = raw.decode("latin-1")
         print(aut_summary(text)); return 0
+    if cmd == "xbk":
+        for who, fn, n in sorted(xbk_unpack(a[1], a[2], a[3] if len(a) > 3 else "")):
+            print(f"{who}  ->  {fn}  ({n} bytes)")
+        return 0
     if cmd == "bind":
         n = bind(a[1], a[2], json.load(open(a[3])), a[4] if len(a) > 4 else "/Server 1")
         print(f"{n} bindings written to {a[2]}"); return 0

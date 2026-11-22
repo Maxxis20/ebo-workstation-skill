@@ -436,6 +436,50 @@ function Web-Top($url, $title, $x, $y, $w, $h) {
   [void][W32Top]::SetWindowPos($p.MainWindowHandle, [IntPtr](-1), $x, $y, $w, $h, 0x0010); "window '$title' on top"
 }
 # Take web windows out of the way (not on top any more, minimised). Ws-Ensure does this before a log-on; call Web-Top again afterwards.
+# WebStation in an Edge window of its own. $path: object to show, e.g. '/Server 1/Folder/Dashboard'.
+# The server's certificate is its own, made for another name: for https://localhost only, the warning page is
+# passed (Advanced, Continue). No other address is ever passed.
+function Web-Station($path = '', $x = 0, $y = 0, $w = 1600, $h = 1150) {
+  $url = 'https://localhost/' + $(if ($path) { '#' + (($path -split '/' | % { [uri]::EscapeDataString($_) }) -join '/') } else { '' })
+  Get-Process msedge -ea 0 | ? { $_.MainWindowTitle -match 'Building Operation|Privacy error' } | % { [void]$_.CloseMainWindow() }; Start-Sleep 1
+  Start-Process 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' -ArgumentList "--app=$url", '--no-first-run', "--window-size=$w,$h", "--window-position=$x,$y"
+  $t = [Diagnostics.Stopwatch]::StartNew(); $p = $null
+  while ($t.Elapsed.TotalSeconds -lt 40) {
+    Start-Sleep 1
+    $p = Get-Process msedge -ea 0 | ? { $_.MainWindowTitle -match 'Building Operation|Privacy error' } | select -First 1
+    if ($p -and $p.MainWindowTitle -match 'Privacy error') {
+      $r = Ui-Root $p.MainWindowHandle
+      $adv = Ui-Find $r 'Advanced' $CT::Button 3; if ($adv) { Ui-Invoke $adv; Start-Sleep 1 }
+      $go = Ui-Find $r 'Continue to localhost (unsafe)' $CT::Hyperlink 3; if ($go) { Ui-Invoke $go }
+      Start-Sleep 3
+    } elseif ($p) { break }
+  }
+  if (-not $p) { throw 'WebStation window did not open' }
+  [void][W32Top]::SetWindowPos($p.MainWindowHandle, [IntPtr](-1), $x, $y, $w, $h, 0x0010)
+  "WebStation window open: $($p.MainWindowTitle)"
+}
+function Web-Proc { Get-Process msedge -ea 0 | ? { $_.MainWindowTitle -match 'Building Operation' } | select -First 1 }
+# Log on at the WebStation form. Password from C:\agentwork\ebo\.pw (written by `ebo.sh weblogon` from the vault),
+# set straight into the field, never typed or echoed; the file is removed at once.
+function Web-Logon($user = 'admin') {
+  if (-not (Web-Proc)) { [void](Web-Station) }
+  $r = Ui-Root (Web-Proc).MainWindowHandle
+  $pwBox = Ui-ById $r 'txtPassWord' 15; if (-not $pwBox) { return 'no log-on form: already logged on' }
+  $f = 'C:\agentwork\ebo\.pw'; if (-not (Test-Path $f)) { throw 'no password file' }
+  $pw = [IO.File]::ReadAllText($f); Remove-Item $f -Force
+  Ui-SetValue (Ui-ById $r 'txtUserID' 3) $user; Ui-SetValue $pwBox $pw; $pw = $null
+  Ui-Invoke (Ui-ById $r 'login' 3)
+  $t = [Diagnostics.Stopwatch]::StartNew()
+  while ($t.Elapsed.TotalSeconds -lt 40) {
+    Start-Sleep 1
+    if (-not (Ui-ById $r 'txtPassWord' 0.5)) {
+      # Edge offers to keep the password: always refused
+      $no = Ui-Find $A::RootElement 'Not now' $CT::Button 6; if ($no) { Ui-Invoke $no }
+      return 'logged on to WebStation'
+    }
+  }
+  throw 'WebStation log-on did not complete'
+}
 function Web-Back {
   Get-Process msedge -ea 0 | ? { $_.MainWindowHandle -ne 0 } | % { [void][W32Top]::SetWindowPos($_.MainWindowHandle, [IntPtr](-2), 0, 0, 0, 0, 0x0013); [void][W32]::ShowWindow($_.MainWindowHandle, 6) }
 }

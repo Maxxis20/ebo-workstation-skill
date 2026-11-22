@@ -65,10 +65,12 @@ To check a generated file without the server, start the editor alone and use `Fi
 ## Files
 
 - `scripts/aut.py`: Function Block program generator (blocks, constants, wires, layout, routing).
-- `scripts/tgml.py`: graphic (HMI) generator: shapes, live values, state colours, click-to-change.
-- `scripts/objects.py`: import file writer for objects without an editor: folders, trend logs, alarms, values, charts.
+- `scripts/tgml.py`: graphic (HMI) generator: shapes, live values, state colours, click-to-change, movement (turning
+  fan, marks running along a pipe, blinking lamp), symbols from SVG files, component files for the editor's library.
+- `scripts/objects.py`: import file writer for objects without an editor: folders, trend logs, alarms, values, charts,
+  dashboards with gauges, live values, period charts and embedded graphics (shown in WebStation).
 - `scripts/ebox.py`: export reader (object tree, bindings, unpack program text / graphics / script source,
-  program text summary with HFBs) and binding writer.
+  program text summary with HFBs), binding writer, and programs / graphics out of a server backup (`xbk`).
 - `scripts/fuxa.py`: FUXA project generator (MQTT device, tags, a view with live numbers and lamps).
 - `scripts/ebo.sh`, `scripts/win/cli.ps1`, `scripts/win/lib.ps1`, `scripts/win/ebo.ps1`: driver.
 - `reference/MentaBlocks.xml`: the editor's block catalogue (pins, parameters). Not shipped: copy it from your

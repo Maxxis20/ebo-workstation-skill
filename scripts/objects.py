@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """objects.py - write an EBO import file (.xml) with objects that need no editor: folders, trend logs, alarms,
-values, trend charts. Load it with the driver: Ws-Import '/Server 1' 'C:\\agentwork\\ebo\\X.xml' (about 7 s).
+values, trend charts, dashboards with their widgets. Load it with the driver: Ws-Import '/Server 1' 'C:\\agentwork\\ebo\\X.xml' (about 7 s).
 
     from objects import ObjectSet
     s = ObjectSet(parent="/Server 1")                 # where the file will be imported
@@ -101,6 +101,62 @@ class ObjectSet:
                          "LowLimitPriority": priority, "TimeDelayToOffNormal": delay},
                         {"MonitoredVariable": target, "SetpointReference": setpoint}, descr)
 
+    # --- dashboards (shown in WebStation; WorkStation only lists their settings) -------------------------------
+    W = "client.dashboard.widgets."
+    ICON = {"none": 0, "co2": 1, "cooling": 2, "electricity": 3, "heating": 4, "temperature": 5, "water": 6,
+            "lights": 7, "blinds": 8}
+    PERIOD = {"today": 0, "this week": 1, "this month": 2, "this year": 3, "last hour": 17, "last 24 hours": 7,
+              "last 7 days": 8, "last 30 days": 9, "last 12 months": 10}
+    CHART = {"bar": 0, "area": 1, "curve": 2, "line": 3}
+    CALC = {"max": 1, "min": 2, "average": 3, "sum": 4, "delta": 5, "meter": 6}
+
+    def gauge(self, where, name, target, lo=0, hi=100, guides=(), title="", needle=False):
+        """Round gauge of a live signal. guides: (value, '#RRGGBB') marks on the scale."""
+        g = self.obj(where, self.W + "PointGaugeWidget", name,
+                     {"Min": lo, "Max": hi, "UseNeedle": needle, **({"DESCR": title} if title else {})},
+                     {"DisplaySignal": target})
+        for i, (v, col) in enumerate(guides, 1):
+            self.obj(g, self.W + "GuideProperties", f"Guide{i}", {"Value": v, "Color": _colour(col)}, hidden=True)
+        return g
+
+    def point_values(self, where, name, points, title=""):
+        """Big live numbers. points: (label, target, icon name from ICON)."""
+        w = self.obj(where, self.W + "PointValueWidget", name, {"DESCR": title} if title else None)
+        for label, target, icon in points:
+            self.obj(w, self.W + "PointGuideSeriesProperties", label, {"WidgetIcon": self.ICON[icon]},
+                     {"DisplaySignal": target}, hidden=True)
+        return w
+
+    def period_chart(self, where, name, logs, period="last 24 hours", kind="line", calc="average", title=""):
+        """Chart of trend logs made in this set over a period (PERIOD), drawn as CHART, each bucket by CALC."""
+        w = self.obj(where, self.W + "PeriodChartWidget", name,
+                     {"Period": self.PERIOD[period], **({"DESCR": title} if title else {})})
+        for log in logs:
+            self.obj(w, self.W + "ChartSeriesProperties", log.get("NAME") + " Series",
+                     {"ChartType": self.CHART[kind], "CalculationMethod": self.CALC[calc]},
+                     {"DisplayLog": self.where(log) + "/"}, hidden=True)
+        return w
+
+    def log_gauge(self, where, name, log, lo=0, hi=100, period="last 24 hours", calc="average", title=""):
+        """Gauge of a trend log's average / max / sum over a period."""
+        return self.obj(where, self.W + "LogGaugeWidget", name,
+                        {"Min": lo, "Max": hi, "Period": self.PERIOD[period], "CalculationMethod": self.CALC[calc],
+                         **({"DESCR": title} if title else {})}, {"DisplayLog": self.where(log) + "/"})
+
+    def alarm_count(self, where, name, title=""):
+        """Number of active alarms with a small history curve."""
+        return self.obj(where, self.W + "AlarmCountWidget", name, {"DESCR": title} if title else None)
+
+    def dashboard(self, where, name, tiles, show_time=True):
+        """Dashboard page. tiles: (widget object from this set, or absolute path of any object that can be shown:
+        a graphic, a trend chart; columns, rows), placed in the order given."""
+        d = self.obj(where, "client.dashboard.Dashboard", name, {"ShowTime": show_time})
+        for i, (w, cols, rows) in enumerate(tiles):
+            path = w if isinstance(w, str) else self.where(w)
+            self.obj(d, "client.dashboard.DashboardWidget", path.rsplit("/", 1)[-1],
+                     {"ColumnSpan": cols, "RowSpan": rows, "Order": i}, {"InitialAddress": path + "/"}, hidden=True)
+        return d
+
     # --- output ------------------------------------------------------------------------------------------------
     def save(self, path):
         root = ET.Element("ObjectSet", {"ExportMode": "Special", "Note": "TypesFirst", "Version": self.version})
@@ -112,6 +168,14 @@ class ObjectSet:
         ET.indent(root)
         ET.ElementTree(root).write(path, encoding="UTF-8", xml_declaration=True)
         return path
+
+
+def _colour(c):
+    """'#RRGGBB' -> EBO colour number (signed 32 bit ARGB, opaque)."""
+    if isinstance(c, int):
+        return c
+    v = 0xFF000000 | int(c.lstrip("#"), 16)
+    return v - (1 << 32) if v >= (1 << 31) else v
 
 
 def _fmt(v):

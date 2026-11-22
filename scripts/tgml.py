@@ -123,6 +123,120 @@ class Graphic:
             f'setValue(b.getFullBindName(),Math.min({hi},Math.max({lo},parseFloat(c.getAttribute("Val"))+parseFloat(c.getAttribute("Step")))));}}'
             f']]></Script></Component>')
 
+    # --- movement (forms of the shipped snippets RotationClockwise, FlowX, Blink) --------------------
+    @staticmethod
+    def _run(name):
+        """Bind that starts an animation while the signal is 1 or more and stops it at 0."""
+        return (f'<Bind Attribute="Animation" Name="{name}"><ConvertValue AttributeValue="Stop" SignalLessOrEqualTo="0"/>'
+                f'<ConvertValue AttributeValue="Start" SignalMoreOrEqualTo="1"/></Bind>')
+
+    def path(self, d, fill="None", stroke="#3C4043", sw=1.5):
+        """Free shape from path data, the same letters as an SVG path: M L H V C S Q A Z."""
+        self.items.append(f'<Path Fill="{fill}" PathData="{d}" Stroke="{stroke}" StrokeWidth="{sw}"/>')
+
+    def place(self, sym, x, y, w=None, h=None, spin=None, seconds=2.0):
+        """Put another Graphic in as a component at x, y, scaled to w x h. spin: bind name; while that signal is
+        1 or more the whole symbol turns around its centre, one turn in `seconds`."""
+        w, h = w or sym.w, h or sym.h
+        for n in sym.binds:
+            self._bind(n)
+        rot = ""
+        if spin:
+            self._bind(spin)
+            rot = (f'<Rotate><Animate Animation="Stop" Attribute="Angle" CalcMode="Linear" Duration="{seconds}" '
+                   f'From="0" To="360">{self._run(spin)}</Animate></Rotate>')
+        self.items.append(f'<Component Clip="False" ContentHeight="{sym.h}" ContentWidth="{sym.w}" Height="{h}" '
+                          f'Left="{x}" Top="{y}" Width="{w}">' + "".join(sym.items) + rot + '</Component>')
+
+    def fan(self, x, y, name, d=60, blades=6, seconds=2.0):
+        """Fan: housing circle with an impeller that turns while the signal is 1 or more."""
+        import math
+        self.items.append(f'<Ellipse Fill="#E8EAED" Height="{d}" Left="{x}" Stroke="#3C4043" StrokeWidth="2" Top="{y}" '
+                          f'Width="{d}"/>')
+        s = d * 0.8; c = s / 2; r = c * 0.95
+        imp = Graphic(s, s)
+        for k in range(blades):
+            a0 = 2 * math.pi * k / blades; a1 = a0 + 0.55
+            p = [(c, c), (c + r * math.cos(a0), c + r * math.sin(a0)), (c + r * 0.8 * math.cos(a1), c + r * 0.8 * math.sin(a1))]
+            imp.path("M" + " L".join(f"{px:.1f},{py:.1f}" for px, py in p) + " Z", fill="#5F6368", stroke="None", sw=0)
+        imp.items.append(f'<Ellipse Fill="#3C4043" Height="{s * 0.2:.1f}" Left="{c - s * 0.1:.1f}" Stroke="None" '
+                         f'Top="{c - s * 0.1:.1f}" Width="{s * 0.2:.1f}"/>')
+        self.place(imp, x + (d - s) / 2, y + (d - s) / 2, spin=name, seconds=seconds)
+
+    def flow(self, x, y, length, name, vertical=False, colour="#FFFFFF", seconds=1.0, thick=4):
+        """Marks that run along a pipe while the signal is 1 or more: to the right (down when vertical).
+        Draw the pipe first, then this over it; a negative length runs the other way."""
+        self._bind(name)
+        n = int(abs(length) // 20) + 2; k = 1 if length > 0 else -1; L = abs(length)
+        if vertical:
+            marks = "".join(f'<Rectangle Fill="{colour}" Height="8" Left="0" Stroke="None" Top="{20 * i - 20}" '
+                            f'Width="{thick}"/>' for i in range(n))
+            box = f'ContentHeight="{L}" ContentWidth="{thick}" Height="{L}" Width="{thick}"'; axis = "Y"
+        else:
+            marks = "".join(f'<Rectangle Fill="{colour}" Height="{thick}" Left="{20 * i - 20}" Stroke="None" Top="0" '
+                            f'Width="8"/>' for i in range(n))
+            box = f'ContentHeight="{thick}" ContentWidth="{L}" Height="{thick}" Width="{L}"'; axis = "X"
+        frm, to = (0, 20) if k > 0 else (20, 0)
+        self.items.append(
+            f'<Component Clip="True" {box} Left="{x}" Top="{y}"><Group>{marks}'
+            f'<Translate><Animate Animation="Stop" Attribute="{axis}" AutoReverse="False" CalcMode="Linear" '
+            f'Duration="{seconds}" Freeze="False" From="{frm}" To="{to}">{self._run(name)}</Animate></Translate>'
+            f'</Group></Component>')
+
+    def alarm_lamp(self, x, y, name, d=18, colour="#D93025"):
+        """Lamp that is grey at 0 and blinks in `colour` while the signal is 1 or more."""
+        self.items.append(f'<Ellipse Fill="#BDC1C6" Height="{d}" Left="{x}" Stroke="#5F6368" StrokeWidth="1" Top="{y}" '
+                          f'Width="{d}"/>')
+        self._bind(name)
+        self.items.append(
+            f'<Ellipse Fill="{colour}" Height="{d}" Left="{x}" Stroke="#5F6368" StrokeWidth="1" Top="{y}" Width="{d}" '
+            f'Visibility="Hidden"><Animate Animation="Stop" Attribute="Visibility" AutoReverse="False" '
+            f'CalcMode="Discrete" Duration="1" From="Visible" To="Hidden">{self._run(name)}</Animate></Ellipse>')
+
+    @classmethod
+    def from_svg(cls, path):
+        """Read the plain shapes of an SVG file (path, rect, circle, ellipse, line, polygon, polyline with fill /
+        stroke given as attributes or in style=) into a Graphic, to place() or to save_component(). Transforms,
+        gradients, text and CSS classes are not read. EBO graphics are TGML, not SVG, but a path's data is the same."""
+        import re, xml.etree.ElementTree as ET
+        root = ET.parse(path).getroot()
+        num = lambda v, d=0.0: float(re.sub(r"[a-z%]+$", "", v)) if v else d
+        vb = [float(v) for v in re.split(r"[ ,]+", root.get("viewBox", "").strip()) if v]
+        g = cls(vb[2] if len(vb) == 4 else num(root.get("width"), 100), vb[3] if len(vb) == 4 else num(root.get("height"), 100))
+        for e in root.iter():
+            tag = e.tag.split("}")[-1]
+            st = dict(kv.split(":", 1) for kv in (e.get("style") or "").split(";") if ":" in kv)
+            col = lambda k, d: {"none": "None"}.get((st.get(k) or e.get(k) or d).strip(), (st.get(k) or e.get(k) or d).strip())
+            fill, stroke = col("fill", "#000000"), col("stroke", "none")
+            sw = num(st.get("stroke-width") or e.get("stroke-width"), 1.0)
+            if tag == "path" and e.get("d"):
+                g.path(" ".join(e.get("d").split()), fill, stroke, sw)
+            elif tag == "rect":
+                g.rect(num(e.get("x")), num(e.get("y")), num(e.get("width")), num(e.get("height")), fill, stroke, sw, num(e.get("rx")))
+            elif tag in ("circle", "ellipse"):
+                rx = num(e.get("r") or e.get("rx")); ry = num(e.get("r") or e.get("ry"))
+                g.items.append(f'<Ellipse Fill="{fill}" Height="{2 * ry}" Left="{num(e.get("cx")) - rx}" Stroke="{stroke}" '
+                               f'StrokeWidth="{sw}" Top="{num(e.get("cy")) - ry}" Width="{2 * rx}"/>')
+            elif tag == "line":
+                g.line(num(e.get("x1")), num(e.get("y1")), num(e.get("x2")), num(e.get("y2")), stroke, sw)
+            elif tag in ("polygon", "polyline") and e.get("points"):
+                v = [float(t) for t in re.split(r"[ ,]+", e.get("points").strip()) if t]
+                d = "M" + " L".join(f"{v[i]},{v[i + 1]}" for i in range(0, len(v) - 1, 2)) + (" Z" if tag == "polygon" else "")
+                g.path(d, fill, stroke, sw)
+        return g
+
+    def save_component(self, path, name, description=""):
+        """Write this drawing as a component file (.tgmlcomponent) for the Graphics Editor's library: put it in a
+        folder below ...\\Graphics Editor\\Components and it shows in the Components pane, to drag into any graphic.
+        Its bind names become the component's binding points."""
+        body = "".join(self.items)
+        with open(path, "w", encoding="utf-8", newline="\r\n") as f:
+            f.write(f'<?xml version="1.0"?>\n<Component Clip="False" ContentHeight="{self.h}" ContentWidth="{self.w}" '
+                    f'Height="{self.h}" Left="0" Name="{escape(name)}" Top="0" Width="{self.w}">{body}'
+                    f'<Metadata Name="Name" Value="{escape(name)}"/><Metadata Name="Description" '
+                    f'Value="{escape(description)}"/></Component>\n')
+        return path
+
     # --- output -------------------------------------------------------------------------------------
     def tgml(self):
         body = "\n    ".join(self.items)

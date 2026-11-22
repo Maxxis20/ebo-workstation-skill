@@ -304,10 +304,12 @@ that blocks inbound 1881 (FUXA 1.3.5 ignores `uiHost`).
 - Clicks on the graphic by script use fixed screen positions (1600x1200, default panes).
 - Script program round trip.
 - HFB (hierarchical blocks) written by the generator (format known), TSCH blocks, schedules from a file.
-- Whether the alarms and trend logs made from a file behave (they import and show; no alarm was tripped and no
-  log was read back).
+- Whether alarms made from a file trip (they import and show; trend logs made from a file do record, seen in a
+  dashboard chart).
 - Navigation between graphics (`Link`), status colours (`ConvertStatus`): seen in production graphics, not
   generated.
+- A component file written by `save_component` was not yet opened from the Graphics Editor's Components pane.
+- Dashboard widgets not tried: point table, pie, heat map, period over period, consumption, Sankey, group.
 - MQTT in the other direction: a value written into EBO from the broker (section MQTT).
 
 ## The driver (scripts/ebo.sh, win/lib.ps1, win/ebo.ps1), 2026-11-21
@@ -325,6 +327,7 @@ with the stack, and the output before it is kept.
 | `Ws-New parent 'Function Block Program' name` | New Object dialog: filter, pick type, name, Create (about 6 s) |
 | `Ws-Delete path` | Delete key, answers `Confirm Delete` |
 | `Ws-Export path file [mode]` | context menu `Export...`, preview, Save As, result (about 15 s). mode `Standard` (default), `Special` (keeps every binding) or `Library` |
+| `Web-Station [path]`, `Web-Logon` | WebStation in an Edge window of its own, logged on |
 | `Ws-Import parent file` | `File > Import...`, file dialog, preview, Import, Close (about 7 s). Throws the preview's messages when it counts an error |
 | `Fbe-Open path` | `Ctrl+E` and wait for the editor window (about 17 s) |
 | `Fbe-Import $p file`, `Fbe-Save $p`, `Fbe-Exit $p` | editor File menu by command id; Save waits out "Generating application..." (about 5 s) and throws the editor's message on a compile error |
@@ -431,6 +434,10 @@ programs, 15 graphics, about 150 alarms, 230 trend logs). Read with `scripts/ebo
   Inside, `HFAI` / `HFDI` are the analog / binary inputs and `HFAO` / `HFDO` the outputs, named; outside, the
   HFB's input pins and outputs are numbered `0, 1, ...` (`>2:1 = ...` is the second output). Modules are a
   separate thing: a block inside an HFB still carries `Module\Name`. Not generated yet.
+- **Expression pins are sorted alphabetically without regard to case** (`a, B, C, D, e`), seen on a 446-block
+  program where only that order gives every pin a source of the right kind. `aut.py` follows it.
+- **HFB pins outside follow the block ids of the inner HFAI / HFDI (inputs) and HFAO / HFDO (outputs)**, not
+  their position on the sheet.
 - **Expressions**: inputs need not be consecutive letters (`XPB {(A>=Z)&(A<=X)?1:0}` has pins A, X, Z); private
   constants by name (`XPB {A<MinTemp|@A>MaxTemp}`); an `@` inside the text is only where the editor breaks the
   line on the block.
@@ -498,8 +505,15 @@ source (`.txt`) and attached documents.
 - The export of a program in a module-structured site shows RI / BI values under the block name in the module
   that holds them (`Inputs`), with their bindings in Special mode.
 - A server backup (`.xbk`) is a zip: `Configuration/configuration.db` and `Historical/*.db` (SQLite), licence
-  and domain files, and the server version in a file name (`3.2.2.61.serverrevision`). Not opened further; a
-  backup holds the user database, so treat it as a secret.
+  and domain files, and the server version in a file name (`3.2.2.61.serverrevision`). A backup holds the user
+  database, so treat it as a secret. **Programs and graphics come out with `ebox.py xbk backup.xbk outdir
+  [name]`**: the text is not in the database but in zip members `UDT/pu/udt/<a>/<b>___AutFile.cdata` (plain
+  gzip of the `.aut`; graphics `___FILE.cdata`), named after the object's type `udt.<a>.<b>`; the object path
+  for a type comes from table `ObjectInstance (Id, ParentId, TypeName, NAME)`. Further tables, read by hand
+  once: `ConfiguredVariableValue` (current values per module object: the setpoints as the operators left
+  them, which differ from the start values in the text), `ForcedVariables`, `BindingEntry` (SubjectId,
+  SubjectPropertyId, TargetId, TargetProperty: the subject reads from the target). A program of another
+  server shows in a database only as a `system.placeholder.NetworkObject`.
 - Trend log data exported from a chart is CSV: `"Time stamp","Value","Events","Comment","User"`, time and decimal
   comma in the locale of the WorkStation that wrote it.
 
@@ -516,4 +530,80 @@ source (`.txt`) and attached documents.
   `<Animate>` runs colour and size transitions on mouse over, `<TextBox>` is text with a frame and alignment in
   both directions, `<Expose ExposedAttribute= Name=/>` makes an attribute of an inner element a property of the
   component. Events used: OnDocumentLoad, OnSignalChange, OnMouseClick / Over / Out / Down / Up / Move.
+
+## Dashboards from a file (works, 2026-11-22)
+
+A dashboard is shown by WebStation only; WorkStation lists its settings. Everything below was written by
+`objects.py`, loaded with `Ws-Import` and seen live in WebStation.
+
+- `client.dashboard.Dashboard` (ShowTime, BackgroundColor, MinColumnSize 250, Margin, Gap) holds one hidden
+  child `client.dashboard.DashboardWidget` per tile: InitialAddress -> the object shown, ColumnSpan, RowSpan,
+  Order. **A tile shows any object that has a view**: a widget, a graphic, a trend chart. So a tile of one's
+  own design is simply a graphic from `tgml.py`; there is no way to add a new widget type.
+- Widgets are ordinary objects beside the dashboard (type `client.dashboard.widgets.<X>`), each usable on
+  several dashboards:
+  `PointGaugeWidget` DisplaySignal -> signal, Min, Max, UseNeedle, hidden children `GuideProperties` (Value,
+  Color) for marks on the scale;
+  `PointValueWidget` with hidden children `PointGuideSeriesProperties` (DisplaySignal, WidgetIcon 0 none,
+  1 CO2, 2 cooling, 3 electricity, 4 heating, 5 temperature, 6 water, 7 lights, 8 blinds);
+  `PeriodChartWidget` Period, with children `ChartSeriesProperties` (DisplayLog -> trend log, ChartType 0 bar,
+  1 area, 2 curve, 3 line, CalculationMethod 1 max, 2 min, 3 average, 4 sum, 5 delta, 6 meter consumption);
+  `LogGaugeWidget` DisplayLog, Period, CalculationMethod, Min, Max;
+  `AlarmCountWidget` (needs nothing).
+  Period: 0 today, 1 this week, 2 this month, 3 this year, 17 last hour, 7 last 24 hours, 8 last 7 days,
+  9 last 30 days, 10 last 12 months. A colour is a signed 32-bit ARGB number (`-65536` = red).
+- `objects.py`: `gauge`, `point_values`, `period_chart`, `log_gauge`, `alarm_count`, `dashboard(where, name,
+  [(widget or path, columns, rows), ...])`.
+- **Every object type with its properties is described in the server's own files**:
+  `...\Enterprise Server\definitions\<area>\...\<Type>.xml` (`ObjectType Name=, Base=`, then `Parameter`,
+  `ObjectReference`, `PropertyReference` and `Table` entries with type, default and the enumerations). A
+  `Table` of type T means hidden child objects of type T. That is the way to find what a type not listed here
+  takes; the guess made from these files was accepted at the first import. Areas there include alarm, trend,
+  schedule, client (dashboards, panels), notification, report, modbus, bacnet, opcua, webservice, iot.
+
+## WebStation by script (2026-11-22)
+
+- `Web-Station '/Server 1/Folder/Object'` opens `https://localhost/#/Server%201/...` in an Edge window of its
+  own (`msedge --app=`: no tabs, no address bar). The server's certificate is not issued for `localhost`, so
+  Edge shows "Your connection isn't private": for localhost only, the function goes on through
+  Advanced > Continue.
+- `Web-Logon` (this copy has no verb for it: log on to WebStation by hand in the window `Web-Station` opens) fills the log-on form (`txtUserID`, `txtPassWord`, button `login`,
+  all reachable through UI Automation) with the password set straight into the field, and answers Edge's
+  offer to keep the password with "Not now".
+- In PowerShell a variable `$a` is the same as `$A`: a script line that assigns `$a` destroys the driver's
+  `$A` (AutomationElement) for the rest of that call. Do not use `$a`, `$ct`, `$ts` as names in `ebo.sh run`.
+
+## Movement and components of one's own (works, 2026-11-22)
+
+Read from the 846 components and 31 snippets shipped with the Graphics Editor
+(`C:\ProgramData\Schneider Electric EcoStruxure\Building Operation 7.1\Graphics Editor\Components` and
+`Snippets`), then tried with `tgml.py` in a graphic bound to a running pump signal.
+
+- **A component is TGML, not SVG**: a file `Name.tgmlcomponent` whose root is `<Component ContentWidth=
+  ContentHeight= Width= Height= Name=>` holding the same elements as a graphic, `<Expose ExposedAttribute=
+  Name=/>` for what the user of the component may set, `<Metadata Name="Name" Value=/>` and `Description`. A
+  `.png` of the same name beside it is the picture in the Components pane. A component placed in a graphic is
+  the same `<Component>` element with `Left` and `Top`; Width / Height against ContentWidth / ContentHeight
+  scale it. A snippet (`.tgmlsnippet`, root `<Snippet>`) is a piece of behaviour to drop on an element.
+- **`<Path PathData="M.. L.. C.. Z">` takes the same path letters as an SVG path**, so a drawing made as SVG
+  carries over shape by shape: `Graphic.from_svg(file)` reads path, rect, circle, ellipse, line, polygon and
+  polyline with their fill and stroke (no transforms, gradients or text), and `place()` puts the result into
+  a graphic, `save_component()` writes it as a component file.
+- **Movement = an `<Animate>` inside the thing that moves**, started and stopped by a bind on its `Animation`
+  attribute:
+  `<Animate Animation="Stop" Attribute=.. From=.. To=.. Duration="seconds" CalcMode="Linear"><Bind
+  Attribute="Animation" Name="X"><ConvertValue AttributeValue="Stop" SignalLessOrEqualTo="0"/><ConvertValue
+  AttributeValue="Start" SignalMoreOrEqualTo="1"/></Bind></Animate>`. It repeats while started.
+  - turning: wrap it in `<Rotate>` (Attribute `Angle`, 0 to 360) as a child of a Component; it turns around the
+    component's middle (`fan()`, `place(..., spin=)`). A static `<Rotate Angle= Center=/>` just tilts.
+  - running marks on a pipe: `<Translate>` with Attribute `X` or `Y` on a group of marks, inside a
+    `<Component Clip="True">` as long as the pipe; moving by one mark spacing and repeating looks endless
+    (`flow()`).
+  - blinking: Attribute `Visibility`, `CalcMode="Discrete"`, From `Visible` To `Hidden`, Duration 1
+    (`alarm_lamp()`).
+  - also in the library: `<Sequence Interval=..>` on a group shows its members one after another as frames;
+    Attribute `Fill` / `Stroke` / `ScaleX` / `Opacity` for colour and size transitions; a script can start any
+    animation with `setAttribute("Animation", "Start")`.
+- The shipped components keep their logic in shared functions (`_setAnalogueFans(evt)` ...) that a graphic gets
+  with `UseGlobalScripts="True"` and the snippet "GlobalScripts"; what `tgml.py` writes needs none of that.
 
