@@ -1,6 +1,6 @@
 # cli.ps1 - the driver's entry point on the Windows machine that runs EBO. Called by ../ebo.sh, or directly:
 #   powershell -NoProfile -ExecutionPolicy Bypass -File cli.ps1 <verb> [arg1] [arg2]
-# Verbs: check | setup | run <file.ps1> | put <from> <to> | get <from> <to> | shot [png] | logon [user] | mqtt [seconds] | fuxa <project.json>
+# Verbs: check | setup | run <file.ps1> | put <from> <to> | get <from> <to> | shot [png] | logon [user] [server] | firstlogon [user] [server] | mqtt [seconds] | fuxa <project.json>
 # Must run in your own desktop session (it works WorkStation's windows), not as a service.
 param([string]$Verb = '', [string]$A1 = '', [string]$A2 = '')
 $ErrorActionPreference = 'Stop'
@@ -29,7 +29,7 @@ switch ($Verb) {
       "TODO  EBO 7.1 WorkStation not found at $ebo (found: $(if ($other) { $other } else { 'nothing' })). This skill was made on 7.1.1."
     }
     $svc = Get-Service | ? { $_.DisplayName -like 'Building Operation*Enterprise Server*' } | select -First 1
-    if (-not $svc) { 'TODO  no Enterprise Server service on this machine: programs are created under /Server 1 of a local Enterprise Server' }
+    if (-not $svc) { 'INFO  no Enterprise Server service on this machine: fine when the server is elsewhere (a container, another machine): EBO_SERVER=<address> ebo.sh logon' }
     elseif ($svc.Status -ne 'Running') { "TODO  Enterprise Server service is $($svc.Status): start it (needs administrator rights): $($svc.DisplayName)" }
     else { 'OK    Enterprise Server service is running' }
     if (Test-Path $work) { "OK    work folder $work" } else { "TODO  work folder missing: run ebo.sh setup" }
@@ -37,7 +37,7 @@ switch ($Verb) {
     if (-not (Ws-Proc)) { 'TODO  WorkStation is not running: run ebo.sh logon (starts it and asks the user for the password in a Windows box)' }
     elseif (Ws-LoggedOn) { 'OK    WorkStation is running and logged on' }
     else { 'TODO  WorkStation is logged off: run ebo.sh logon (the user types the password in a Windows box)' }
-    'INFO  Classic Mode cannot be seen from outside. If Fb-Load says "is Classic Mode on?": ask the user to open any Function Block program in WorkStation and switch "Show Classic Mode" on, once.'
+    'INFO  Classic Mode: the driver switches "Show Classic Mode" on itself when it opens a program and finds it off. If Fb-Load still says "is Classic Mode on?": ask the user to open any Function Block program in WorkStation and switch it on, once.'
     Add-Type -AssemblyName System.Drawing
     $g = [Drawing.Graphics]::FromHwnd([IntPtr]::Zero); $dpi = [int]$g.DpiX; $g.Dispose()
     $b = [Windows.Forms.Screen]::PrimaryScreen.Bounds
@@ -67,19 +67,21 @@ switch ($Verb) {
     $bmp.Save($A1, [Drawing.Imaging.ImageFormat]::Png); $bmp.Dispose()
     $A1
   }
-  'logon' {
+  { $_ -in 'logon', 'firstlogon' } {
     # The password comes from the environment of this process, or from a Windows credential box, and goes into a file that Ws-Logon reads and deletes.
     # It is never printed and never on a command line.
     . "$here\lib.ps1"; . "$here\ebo.ps1"
     New-Item -ItemType Directory -Force $work | Out-Null
     $user = if ($A1) { $A1 } else { 'admin' }
+    $server = if ($A2) { $A2 } else { 'localhost' }; $first = $Verb -eq 'firstlogon'
     if ($env:EBO_ADMIN_PASSWORD) { [IO.File]::WriteAllText("$work\.pw", $env:EBO_ADMIN_PASSWORD) }
-    elseif (-not ((Ws-Proc) -and (Ws-LoggedOn))) {
+    elseif ($first -or -not ((Ws-Proc) -and (Ws-LoggedOn) -and ((Ws-Server) -in '', $server))) {
       # Nothing in the environment: ask the person at the machine, in a Windows credential box. The agent never sees it.
-      $c = Get-Credential -UserName $user -Message 'EBO WorkStation log-on for the driver. The password stays on this machine.'
+      $msg = if ($first) { "NEW password for $user on the EBO server at $server (first log-on: the default one is replaced by this). It stays on this machine." } else { "EBO WorkStation log-on to $server for the driver. The password stays on this machine." }
+      $c = Get-Credential -UserName $user -Message $msg
       if ($c) { [IO.File]::WriteAllText("$work\.pw", $c.GetNetworkCredential().Password) }
     }
-    try { Log (Ws-Ensure $user) }
+    try { Log (Ws-Ensure $user $server -First:$first) }
     catch { if ("$($_.Exception.Message)" -eq 'no password file') { 'logon: no password given. Log on to WorkStation by hand, or run this again and fill in the box.' } else { "EXC: $($_.Exception.Message)" } }
     finally { Remove-Item "$work\.pw" -Force -ErrorAction SilentlyContinue }
   }
@@ -93,5 +95,5 @@ switch ($Verb) {
     $c = & curl.exe -s -o NUL -w '%{http_code}' -X POST -H 'Content-Type: application/json' --data-binary "@$A1" http://127.0.0.1:1881/api/project
     if ("$c".Trim() -eq '200') { 'FUXA project loaded' } else { "FUXA answered: $c"; exit 1 }
   }
-  default { 'verbs: check | setup | run <file.ps1> | put <from> <to> | get <from> <to> | shot [png] | logon [user] | mqtt [seconds] | fuxa <project.json>'; exit 2 }
+  default { 'verbs: check | setup | run <file.ps1> | put <from> <to> | get <from> <to> | shot [png] | logon [user] [server] | firstlogon [user] [server] | mqtt [seconds] | fuxa <project.json>'; exit 2 }
 }

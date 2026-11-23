@@ -3,6 +3,8 @@
 #   ebo.sh check                 what is ready on this machine and what is not, one line each
 #   ebo.sh setup                 make the work folder C:\agentwork\ebo and fetch the block catalogue (once)
 #   ebo.sh logon                 start WorkStation if needed and log on (password from the environment, see below)
+#                                another server: EBO_SERVER=<address> ebo.sh logon (logs off the other one first; default localhost)
+#   ebo.sh firstlogon            a server nobody has logged on to yet: default password in, the password you give becomes the new one
 #   ebo.sh run '<powershell>' [seconds]   run PowerShell with lib.ps1 + ebo.ps1 loaded, print its output
 #   ebo.sh put <local> <win path> | get <win path> <local> | shot [png] | sys '<powershell>' (plain PowerShell)
 #   ebo.sh mqtt [seconds]        everything the local MQTT broker receives in that time (default 12), as "topic payload" lines
@@ -26,11 +28,11 @@ case "${1:-}" in
          if command -v timeout >/dev/null 2>&1; then timeout "${3:-100}" powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(w "$S/win/cli.ps1")" run "$(w "$t")" </dev/null | tr -d '\r' || { [ "${PIPESTATUS[0]}" = 124 ] && echo TIMEOUT; }
          else cli run "$(w "$t")"; fi; rm -f "$t" ;;
   sys)   t=$(tmp "$2"); ps -File "$(w "$t")" || true; rm -f "$t" ;;
-  logon) ${EBO_SECRET_RUN:-} powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(w "$S/win/cli.ps1")" logon "${EBO_ADMIN_USER:-admin}" </dev/null | tr -d '\r' ;;
+  logon|firstlogon) ${EBO_SECRET_RUN:-} powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(w "$S/win/cli.ps1")" "$1" "${EBO_ADMIN_USER:-admin}" "${EBO_SERVER:-localhost}" </dev/null | tr -d '\r' ;;
   put)   case "$3" in [A-Za-z]:*) cli put "$(w "$2")" "$3" ;; *) cli put "$(w "$2")" "$(w "$3")" ;; esac ;;
   get)   cli get "$2" "$(w "$3")" ;;
   shot)  if [ -n "${2:-}" ]; then cli shot "$(w "$2")" >/dev/null && echo "$2"; else cli shot; fi ;;
   mqtt)  cli mqtt "${2:-12}" ;;
   fuxa)  cli fuxa "$(w "$2")" ;;
-  *) sed -n 2,10p "$0"; exit 2 ;;
+  *) sed -n 2,12p "$0"; exit 2 ;;
 esac

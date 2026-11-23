@@ -230,7 +230,13 @@ def bind(src, dst, pairs, parent="/Server 1"):
         if oi is None:
             raise KeyError(f"no object {obj} in {src}")
         t_obj, t_prop = target.rsplit("/", 1)
-        rel = posixpath.relpath(t_obj, posixpath.join(parent, obj.strip("/")))
+        # A target outside the place of import (another server: the file goes below /Server 1/Servers/X and the
+        # target is on the Enterprise Server) is stored as the absolute path; a relative one would climb above the
+        # server's own root and the server drops it ("A reference pointing above server root?").
+        if (t_obj + "/").startswith(parent.rstrip("/") + "/"):
+            rel = posixpath.relpath(t_obj, posixpath.join(parent, obj.strip("/")))
+        else:
+            rel = t_obj
         pi = next((p for p in oi.findall("PI") if p.get("Name") == point), None)
         if pi is None:
             pi = ET.Element("PI", {"Name": point}); oi.insert(0, pi)

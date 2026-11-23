@@ -1,6 +1,6 @@
 ---
 name: ebo-workstation
-description: Drive Schneider EcoStruxure Building Operation (EBO 7.1 WorkStation, Enterprise Server, the Function Block editor / Menta) on the Windows machine it is installed on, without hand clicking - create Function Block programs, load their logic from a generated .aut text file, save, read live values back, build and bind graphics, publish values over MQTT. Use when the task is to build, change, inspect or verify an EBO Function Block program or graphic, to read an EBO export xml, or when the user mentions Schneider EBO, EcoStruxure Building Operation, WorkStation, Enterprise Server, SmartX, AS-P, Menta or .aut files.
+description: Drive Schneider EcoStruxure Building Operation (EBO 7.1 WorkStation, Enterprise Server, the Function Block editor / Menta) on the Windows machine it is installed on, without hand clicking - create Function Block programs, load their logic from a generated .aut text file, save, read live values back, build and bind graphics, publish values over MQTT; also EBO servers run as containers (Enterprise Server, Edge Server) and bindings between two servers. Use when the task is to build, change, inspect or verify an EBO Function Block program or graphic, to read an EBO export xml, or when the user mentions Schneider EBO, EcoStruxure Building Operation, WorkStation, Enterprise Server, SmartX, AS-P, Edge Server, EBO-Servers containers, Menta or .aut files.
 ---
 
 # EBO WorkStation by script
@@ -49,6 +49,18 @@ reload of a program drops its own input bindings, so bind again after every `Fb-
 computed public signals; a public constant cannot be used in an expression (`const(..., public=False)` can); an
 import never replaces an object (delete first, or it arrives as `Name_2`); one `ebo.sh` call at a time.
 
+Another server than the one on this machine (a server in a container, findings "Servers in containers"):
+`EBO_SERVER=<address> $E logon`; a server nobody has logged on to yet: `EBO_SERVER=<address> $E firstlogon`; plain
+`$E logon` goes back to localhost. Starting a container means accepting Schneider's EULA and needs licences: that
+is the user's decision, ask first.
+
+Two servers (an Edge / automation server below the Enterprise Server; findings, "An Edge Server below an Enterprise
+Server"): bind on the side of the lower server. Going down, the lower server's input is bound to the Enterprise
+Server's value by absolute path (`ebox.py bind` does that; a relative path above the lower server's root is dropped
+silently and reads 0). Going up, do not let the Enterprise Server read the lower server's value (reads 0, no
+error): make plain value points on the Enterprise Server (`objects.py value()`), bind the lower program's output
+blocks (`<tag>_OUT`) to them with `Ws-Bind`, and read those points.
+
 Things that need no clicking at all (findings, "What production programs showed" and "Objects from a file"):
 alarms as ALARM blocks in the program (`p.alarm(...)`), constants bound in the program file
 (`p.const(..., bind=)`), trend logs / alarms / server values / weekly schedules / trend charts from `objects.py`, and many bindings
@@ -57,7 +69,7 @@ at once: Special export, `ebox.py bind`, delete, `Ws-Import` (7 s instead of 5 s
 WorkStation logs off when idle (5 minutes for the built-in administrators): run `$E logon` first (starts it if
 needed, logs on, harmless when already logged on). When it has to log on, a Windows credential box opens on the
 screen for the user to fill in: tell them to look at the screen. **Never ask for the password in the chat and
-never read it from anywhere yourself.** Classic Mode must be on.
+never read it from anywhere yourself.** Classic Mode must be on (the driver switches it on when it finds it off).
 
 To check a generated file without the server, start the editor alone and use `File > Open`, then
 `Options > Simulate` (findings, "Started alone").

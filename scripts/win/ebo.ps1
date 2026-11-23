@@ -9,38 +9,66 @@ function Ws-Front {
 }
 function Ws-LoggedOn { [bool](Ui-ById (Ws-Root) 'TreeView' 1) -and -not (Ui-ById (Ws-Root) 'LogOnButton' 1) }
 
-# Log on at the WorkStation log-on screen. The password comes from C:\agentwork\ebo\.pw (written by `ebo.sh logon`
-# straight from the vault) and the file is removed at once. Nothing is echoed.
-function Ws-Logon($user = 'admin') {
+# Address of the server WorkStation is connected to, from its title "<server> - <address> - Building Operation WorkStation (7...)".
+function Ws-Server {
+  $sb = New-Object Text.StringBuilder 400; [void][W32]::GetWindowText((Ws-Proc).MainWindowHandle, $sb, 400)
+  if ("$sb" -match ' - (\S+) - Building Operation WorkStation') { $Matches[1] } else { '' }
+}
+# Log on at the WorkStation log-on screen, to the server at $server. The password comes from C:\agentwork\ebo\.pw
+# (written by `ebo.sh logon`) and the file is removed at once. Nothing is echoed.
+# -First is for a server nobody has logged on to yet (fresh database, new container): the product's default
+# password (same as the user name) is typed, the server answers with 'Change Password', and the given password
+# is set as the new one. A fresh server also asks for a default workspace: Engineering is picked.
+function Ws-Logon($user = 'admin', $server = 'localhost', [switch]$First) {
   Ws-Front; $r = Ws-Root
   $b = Ui-ById $r 'LogOnButton' 3; if (-not $b) { return 'already logged on' }
   $f = 'C:\agentwork\ebo\.pw'; if (-not (Test-Path $f)) { throw 'no password file' }
   $pw = [IO.File]::ReadAllText($f); Remove-Item $f -Force
+  $sv = Ui-ById $r 'PART_EditableTextBox' 3
+  if ($sv.GetCurrentPattern([System.Windows.Automation.ValuePattern]::Pattern).Current.Value -ne $server) { Ui-SetValue $sv $server; Start-Sleep -Milliseconds 500 }
   $edits = Ui-Find $r $null $CT::Edit 3 -All
   Ui-Click $edits[0]; Start-Sleep -Milliseconds 300; Keys '^a'; Text $user; Keys '{TAB}'; Start-Sleep -Milliseconds 200
-  Text $pw; $pw = $null; Keys '{ENTER}'
+  if ($First) { Text $user } else { Text $pw; $pw = $null }
+  Keys '{ENTER}'; $changed = $false
   $t = [Diagnostics.Stopwatch]::StartNew()
-  while ($t.Elapsed.TotalSeconds -lt 45) {
-    if ((Fg-Title) -eq 'Security Certificate Risk') { Cert-Dialog }
-    if (Ws-LoggedOn) { return 'logged on' }
-    $msg = Ui-Find (Ws-Root) 'Wrong user name or password.' $CT::Text 0.3
-    if ($msg -and -not $msg.Current.IsOffscreen) { throw 'WorkStation says: Wrong user name or password.' }
+  while ($t.Elapsed.TotalSeconds -lt 60) {
+    $fg = Fg-Title
+    if ($fg -eq 'Security Certificate Risk') { Cert-Dialog $server }
+    elseif ($fg -eq 'Change Password') {
+      if (-not $First) { throw 'the server asks for a password change: a first log-on, use ebo.sh firstlogon' }
+      # Pasted, not typed: a key the layout maps differently would land in both boxes and nobody would know the password.
+      $ed = Ui-Find (Fg-Root) $null $CT::Edit 3 -All; if ($ed.Count -ne 3) { throw "Change Password has $($ed.Count) boxes, 3 expected" }
+      try {
+        Ui-Click $ed[0]; Start-Sleep -Milliseconds 300; Text $user
+        foreach ($i in 1, 2) { Ui-Click $ed[$i]; Start-Sleep -Milliseconds 300; Set-Clipboard $pw; Keys '^v'; Start-Sleep -Milliseconds 300 }
+      } finally { Set-Clipboard ' '; $pw = $null }
+      Keys '{ENTER}'; $changed = $true; Start-Sleep 3
+    }
+    elseif (Ws-LoggedOn) { if ($First -and -not $changed) { return 'logged on, no password change was asked' }; return 'logged on' }
+    else {
+      $w = Ui-Find (Ws-Root) 'Engineering' $CT::Button 0.3                      # 'Select default workspace', once per user
+      if ($w -and -not $w.Current.IsOffscreen) { Ui-Invoke $w; Start-Sleep 3 }
+      $msg = Ui-Find (Ws-Root) 'Wrong user name or password.' $CT::Text 0.3
+      if ($msg -and -not $msg.Current.IsOffscreen) { throw 'WorkStation says: Wrong user name or password.' }
+    }
     Start-Sleep -Milliseconds 500
   }
   throw "log-on did not complete; foreground: $(Fg-Title)"
 }
-# At log-on to localhost WorkStation shows 'Security Certificate Risk' ("The certificate presented by this server
-# was issued for a different server's address"), with Trust certificate / Cancel and a box "Always trust this
-# certificate". The script presses Trust certificate for this log-on only and leaves the box alone; it is the
-# server on the same machine. For any other server address it does nothing and the log-on times out.
-function Cert-Dialog {
-  $server = try { (Ui-ById (Ws-Root) 'PART_EditableTextBox' 1).GetCurrentPattern([System.Windows.Automation.ValuePattern]::Pattern).Current.Value } catch { '' }
-  if ($server -ne 'localhost') { Start-Sleep 5; return }
+# At log-on WorkStation shows 'Security Certificate Risk' for a server whose certificate it cannot check: "issued for
+# a different server's address" (localhost, or a server reached by IP), and "expired or not valid yet" for a server
+# whose date does not agree with this machine's clock. The script presses Trust certificate for this log-on only,
+# never ticks "Always trust this certificate", and only when the server box holds the address the caller named.
+# Anything else it leaves alone and the log-on times out.
+function Cert-Dialog($server = 'localhost') {
+  $shown = try { (Ui-ById (Ws-Root) 'PART_EditableTextBox' 1).GetCurrentPattern([System.Windows.Automation.ValuePattern]::Pattern).Current.Value } catch { '' }
+  if ($shown -ne $server) { Start-Sleep 5; return }
   $b = Ui-Find (Fg-Root) 'Trust certificate' $CT::Button 2
   if ($b) { Ui-Invoke $b; Start-Sleep 1 }
 }
-# Make sure WorkStation runs and is logged on: start it if needed, then Ws-Logon.
-function Ws-Ensure($user = 'admin') {
+# Make sure WorkStation runs and is logged on to $server: start it if needed, log off
+# first when it is connected to another server, then Ws-Logon.
+function Ws-Ensure($user = 'admin', $server = 'localhost', [switch]$First) {
   if (-not (Ws-Proc)) {
     $ws = 'C:\Program Files (x86)\Schneider Electric EcoStruxure\Building Operation 7.1\WorkStation'
     Start-Process "$ws\SE.SBO.WorkStation.exe" -WorkingDirectory $ws
@@ -51,9 +79,16 @@ function Ws-Ensure($user = 'admin') {
   }
   $t = [Diagnostics.Stopwatch]::StartNew()
   while ($t.Elapsed.TotalSeconds -lt 60 -and -not (Ws-LoggedOn) -and -not (Ui-ById (Ws-Root) 'LogOnButton' 1)) { Start-Sleep 1 }
-  if (Ws-LoggedOn) { return 'already logged on' }
+  if (Ws-LoggedOn) {
+    $now = Ws-Server
+    if (-not $now -or $now -eq $server) { return "already logged on$(if ($now) { " to $now" })" }
+    Ws-Front; Keys '+{F4}'                                    # log off
+    $t = [Diagnostics.Stopwatch]::StartNew()
+    while ($t.Elapsed.TotalSeconds -lt 30 -and -not (Ui-ById (Ws-Root) 'LogOnButton' 1)) { Start-Sleep 1 }
+    if (-not (Ui-ById (Ws-Root) 'LogOnButton' 1)) { throw "log-off from $now did not reach the log-on screen; foreground: $(Fg-Title)" }
+  }
   Web-Back                                                   # a window kept on top would lie over the log-on form
-  Ws-Logon $user
+  "$(Ws-Logon $user $server -First:$First) to $server"
 }
 
 # System Tree item by path under the server, e.g. '/Server 1/Folder/Program'. Tree item names are '/' + object name.
@@ -65,7 +100,13 @@ function Ws-TreeItem($path) {
       (New-Object System.Windows.Automation.PropertyCondition($A::NameProperty, "/$n")))
     $next = $null
     for ($i = 0; $i -lt 20 -and -not $next; $i++) {
-      $next = $node.FindFirst($TS::Descendants, $c)
+      # Direct children only: with a server below Servers the same name exists deeper down (Servers/Edge1/AHU01
+      # comes before AHU01), and the first descendant of that name would be the wrong object.
+      foreach ($e in $node.FindAll($TS::Descendants, $c)) {
+        $w = [System.Windows.Automation.TreeWalker]::RawViewWalker; $u = $w.GetParent($e)
+        while ($u -and $u.Current.ControlType -ne $CT::TreeItem -and -not [System.Windows.Automation.Automation]::Compare($u, $node)) { $u = $w.GetParent($u) }
+        if ($u -and [System.Windows.Automation.Automation]::Compare($u, $node)) { $next = $e; break }
+      }
       if (-not $next) {
         try { $node.GetCurrentPattern([System.Windows.Automation.ExpandCollapsePattern]::Pattern).Expand() } catch {}
         Start-Sleep -Milliseconds 300
@@ -117,6 +158,8 @@ function Fbe-Open($path) {
     # With the program's tab already open, Ctrl+E can stop at the tab. The pencil left of "Show Classic Mode" starts the editor.
     if (-not $pencil -and $t.Elapsed.TotalSeconds -gt 14) {
       $c = Ui-ById (Ws-Root) 'ShowClassicMode' 3
+      # A user who never switched Classic Mode on (new server) gets the embedded editor: switch it on, it then stays on.
+      if ($c) { try { $tp = $c.GetCurrentPattern([System.Windows.Automation.TogglePattern]::Pattern); if ("$($tp.Current.ToggleState)" -eq 'Off') { Keys '{ESC}'; $tp.Toggle(); Start-Sleep 3; $c = Ui-ById (Ws-Root) 'ShowClassicMode' 3 } } catch {} }
       if ($c) { $r = $c.Current.BoundingRectangle; Ws-Front; Click ([int]($r.X - 72)) ([int]($r.Y + 11)) }
       $pencil = $true
     }
@@ -524,7 +567,7 @@ function Web-Station($path = '', $x = 0, $y = 0, $w = 1600, $h = 1150) {
   "WebStation window open: $($p.MainWindowTitle)"
 }
 function Web-Proc { Get-Process msedge -ea 0 | ? { $_.MainWindowTitle -match 'Building Operation' } | select -First 1 }
-# Log on at the WebStation form. Password from C:\agentwork\ebo\.pw (written by `ebo.sh weblogon` from the vault),
+# Log on at the WebStation form. Password from C:\agentwork\ebo\.pw (written by the caller),
 # set straight into the field, never typed or echoed; the file is removed at once.
 function Web-Logon($user = 'admin') {
   if (-not (Web-Proc)) { [void](Web-Station) }

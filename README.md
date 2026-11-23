@@ -8,7 +8,8 @@ same dialogs you would click.
 What is in the skill:
 
 - `reference/findings.md`: how WorkStation and the Function Block editor behave when driven from outside, the
-  `.aut` program text format with its traps, bindings, graphics (TGML), MQTT.
+  `.aut` program text format with its traps, bindings, graphics (TGML), MQTT, the servers as containers
+  (Enterprise Server, Edge Server) and bindings between two servers.
 - `scripts/ebo.sh` + `scripts/win/`: the driver. PowerShell that works WorkStation by UI Automation.
 - `scripts/aut.py`: Function Block program generator with automatic layout and wire routing.
 - `scripts/tgml.py`: graphic (HMI) generator. `scripts/fuxa.py`: FUXA project generator for an MQTT view.
@@ -29,6 +30,9 @@ Everything on one Windows machine, your laptop is fine:
 
 - EcoStruxure Building Operation 7.1.1, Enterprise Server and WorkStation, **with a valid licence**. A test
   installation, never a production server: the driver creates and deletes objects under `/Server 1`.
+  The server may also run elsewhere, for instance Schneider's container image of the Enterprise Server or Edge
+  Server on a Linux machine (`reference/findings.md`, "Servers in containers"); WorkStation stays on Windows and
+  must be the same build. Licences and Schneider's EULA apply there just the same.
 - Claude Code for Windows (it brings Git Bash, which runs `ebo.sh`).
 - Python 3.
 - For the MQTT part only: Mosquitto on `127.0.0.1:1883`, and FUXA (`npm install -g @frangoteam/fuxa`) on

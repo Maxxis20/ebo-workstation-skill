@@ -33,7 +33,7 @@ versions.
   menu, the pencil beside "Show Classic Mode", some property fields); those offsets were measured at 100 %
   display scaling. Everything here was worked out at 1600x1200, 100 %. 1024x768 is too small for the editor.
   Other sizes and other scaling are not tested: if a click lands beside its target, take a screenshot and look.
-- `Show Classic Mode` switched on once in WorkStation (it stays on across log-ons).
+- `Show Classic Mode` on (it stays on across log-ons; the driver switches it on when it finds it off).
 - Working folder: `C:\agentwork\ebo` (`ebo.sh setup` makes it; `ebo.sh put` copies a file there).
 
 ## What does not work
@@ -54,7 +54,10 @@ versions.
   line. Safe to call when already logged on. Logging on by hand works just as well.
 - Log-on to `localhost` raises `Security Certificate Risk` ("issued for a different server's address"). The
   script presses `Trust certificate` for that log-on only, never ticks "Always trust this certificate", and
-  does nothing for any other server address. Unanswered, the log-on ends with "Logon has timed out".
+  does nothing for a server address other than the one asked for. Unanswered, the log-on ends with "Logon has
+  timed out".
+- Another server: `EBO_SERVER=<address> ebo.sh logon`; a new server: `ebo.sh firstlogon` (section "Servers in
+  containers").
 - Log off: `Shift+F4`.
 
 ## WorkStation by keyboard and mouse (1600x1200 coordinates unless said)
@@ -322,7 +325,7 @@ with the stack, and the output before it is kept.
 
 | Function | Does |
 |---|---|
-| `Ws-LoggedOn`, `Ws-Ensure [user]`, `Ws-Logon [user]` | log-on state; start WorkStation and log on (used by `ebo.sh logon`, which supplies the password file) |
+| `Ws-LoggedOn`, `Ws-Server`, `Ws-Ensure [user] [server] [-First]`, `Ws-Logon [user] [server] [-First]` | log-on state; address of the connected server; start WorkStation and log on (used by `ebo.sh logon` / `firstlogon`, which supply the password file). `Ws-Ensure` logs off first when another server is connected |
 | `Ws-Select '/Server 1/X'`, `Ws-Refresh` | select a System Tree item (expands parents), `F5` |
 | `Ws-New parent 'Function Block Program' name` | New Object dialog: filter, pick type, name, Create (about 6 s) |
 | `Ws-Delete path` | Delete key, answers `Confirm Delete` |
@@ -693,3 +696,90 @@ Read from the 846 components and 31 snippets shipped with the Graphics Editor
   bindings, read back from an export; about 5 minutes).
 - Not possible to check without the device: download, the live values, the alarms.
 
+## Servers in containers, and more than one server (2026-11-23)
+
+Schneider publishes the EBO servers as Linux container images: repository
+`github.com/SchneiderElectricBuildings/EBO-Servers`, images `ghcr.io/schneiderelectricbuildings/ebo-enterprise-server`,
+`ebo-edge-server` and `ebo-enterprise-central`, one tag per EBO build (5.0.1 up to 8.0.1 when looked at, linux/amd64
+only). WorkStation and the editors stay Windows programs: the container replaces the server half only, and
+WorkStation must be the same build as the server (7.1.1.132 here).
+
+- **Licence and EULA come first, and they are the user's business, not the agent's.** The images are Schneider's
+  and, by their README, subject to commercial licensing; activated licences are required. The server starts only
+  with `NSP_ACCEPT_EULA=Yes`, which is accepting Schneider's end user licence agreement: read it, tell the user
+  what it says, and start a container with that setting only when the user has said yes. With `No` the container
+  exits with "EULA must be accepted before the server can start". A server without activated licences says so
+  itself (system alarm "Licensing violation", a notice in WorkStation, and `System > LicenseManager`). This skill
+  does not deal with licences and nothing in it is a way around them.
+- **Start** (Docker, published ports; the README's own example uses an ipvlan network, which a server needs when it
+  must talk BACnet/IP or Modbus to field devices):
+  `docker run -d --name es1 -h es1 --ulimit nofile=8192:8192 --restart unless-stopped -p 80:80 -p 443:443 -p 4444:4444
+  -e NSP_ACCEPT_EULA=<the user's answer> --mount source=es1-db,target=/var/sbo
+  ghcr.io/schneiderelectricbuildings/ebo-enterprise-server:7.1.1.132`.
+  `Server state = ServerRunning` in the log after about 5 s. The database lives in the volume (`/var/sbo`): remove
+  the volume and the server is new again. Log: `docker logs <name>`.
+- **Weight**: image 1.1 GB; about 130 MB of memory and well under 1 % of a core idle, 140 MB with the AHU01 example
+  running; database volume 80 MB.
+- **First log-on of a new server** (a container, or a fresh database): user `admin` with the product's default
+  password (the same as the user name), the certificate question, then a forced `Change Password` dialog (Old /
+  New / Confirm), then `Select default workspace`. `EBO_SERVER=<address> ebo.sh firstlogon` does all of it; the
+  new password is the one the user types into the credential box (or `EBO_ADMIN_PASSWORD`). It is pasted, not
+  typed: a key that the keyboard layout maps differently would go wrong the same way in both boxes and nobody would
+  know the password.
+- **Certificate question** for a server reached by address: "issued for a different server's address", and
+  "expired or not valid yet" as well when the dates of the two machines do not agree. The driver presses
+  `Trust certificate` for that one log-on, never ticks "Always trust", and only for the address named in `EBO_SERVER`.
+- **Classic Mode is off for a user who never switched it on** (so on every new server): `Ctrl+E` then opens the
+  embedded editor and the pencil button is missing. `Fbe-Open` reads the toggle state of the `ShowClassicMode`
+  button and switches it on.
+- **Everything else is the same as on the Windows server.** The root is `/Server 1` there too, so paths and
+  scripts do not change: `EBO_SERVER=<address> examples/ahu01/deploy.sh` loaded the whole AHU01 set (two programs,
+  graphic, trend logs, schedules, dashboard, 165 bindings) unchanged.
+- **Two servers, one WorkStation**: the window title is `<server name> - <address> - Building Operation
+  WorkStation`. `Ws-Server` reads the address, and `ebo.sh logon` logs off first (`Shift+F4`, no question asked)
+  when WorkStation is connected to another server than the one asked for. Plain `ebo.sh logon` means `localhost`.
+
+### Edge Server
+
+- The Edge Server image (`ebo-edge-server`, log line `Type = Edge Server CS`) is the software form of an
+  automation server. It **runs alone**: WorkStation logs on to it directly, programs and graphics load as on the
+  Enterprise Server, no Enterprise Server is needed. Its tree has `System` only (no `Servers`).
+- `System > LicenseManager` is a folder on it; `LicenseStatus` in there holds one object per licensed feature:
+  Automation Server, Enterprise Server (the connection to one), Field Devices, Server I/O, BACnet IP, Personal
+  Dashboards, SAML Authentication, Meter Management, MQTT Read/Write, Microsoft SQL Server, OPC UA, AVEVA PI
+  System, Serial Modbus, BACnet MS/TP, SmartDrivers, SNMP Notifications, TimescaleDB, WebStation, Zoning Tool.
+  So field buses and protocols are licensed one by one: check there before planning a test with devices.
+- `/opt/sbo/firmware` in the image holds Zigbee firmware only: firmware for field controllers has to come from
+  elsewhere. Not tried: field devices of any kind, BACnet/IP, Modbus, firmware updates.
+
+### An Edge Server below an Enterprise Server
+
+- **Attach**: log on to the Enterprise Server, select `Servers`, `Ctrl+N` (the only type offered is Server), name,
+  `Create`; next page Address / Protocol `https` / Port 443 / Username / Password of the lower server; `Next`
+  shows an optional "Create Server from a Backup Set" page; `Create`. The lower server keeps its content, takes
+  the new name (its log: `/Server 1 -> /Edge1`) and appears as `/Server 1/Servers/Edge1/...`. Done with
+  `ebo.sh run` steps so far, there is no driver function for it.
+- **The same name twice in the tree**: `Servers/Edge1/AHU01` now comes before `AHU01`. The driver's tree lookup
+  matches direct children only, so `/Server 1/AHU01` is the Enterprise Server's own folder. (It used to take the
+  first descendant of that name and exported the wrong object without any error.)
+- **Bindings across servers, the rule: bind on the side of the lower server.**
+  - Down (the lower server uses a value of the Enterprise Server): an input on the lower server bound to the
+    Enterprise Server's value, written as the **absolute path** (`Object="/Server 1/AHU01/SIM/PLANT"`). A relative
+    path that climbs above the lower server's root is dropped at import (its log: "A reference pointing above
+    server root?") and the point reads 0 with no error on screen. `ebox.py bind` writes the absolute form when the
+    target lies outside the place of import. Seen live: a change on the Enterprise Server reached the lower
+    server's program input within seconds.
+  - Up (the Enterprise Server uses a value of the lower server): **do not let the Enterprise Server read it.**
+    A program input or a server value on the Enterprise Server bound to a signal of the lower server read 0, with
+    the binding shown as made and no error (cause not found; the capture showed the lower server never opening a
+    connection of its own, and the two machines' clocks were months apart). What works: plain value points on the
+    Enterprise Server (`objects.py value()` without a source: BV for commands, AV for control signals), the lower
+    server's program **output blocks** (`RO` / `BO`, shown as `<tag>_OUT`) bound to those points' `Value` with
+    `Ws-Bind`, and the Enterprise Server's logic reading the points. The values then follow at once.
+  - Proven with the AHU01 example split in two: plant simulation on the Enterprise Server, controller and graphic
+    on the Edge Server (its own SIM program deleted). After Reset the unit ran in closed loop across the servers.
+  - Deleting and re-importing a folder on one server leaves the other server's references to it dead (its log:
+    `No Driver Module for Path ... of type system.NullType`): bind those again (`Ws-Bind`, in place).
+- **Reading values by eye**: open the program, `Variables` tab, expand the module, then `Inputs` / `Outputs`:
+  live values with units. The Graphics Viewer tab of a program is not a reliable reading.
+- Server log of a Windows Enterprise Server: `...\Building Operation 7.1\Enterprise Server\db\logs\trace.log`.
