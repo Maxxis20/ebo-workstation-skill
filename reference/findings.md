@@ -700,8 +700,7 @@ Read from the 846 components and 31 snippets shipped with the Graphics Editor
 
 Schneider publishes the EBO servers as Linux container images: repository
 `github.com/SchneiderElectricBuildings/EBO-Servers`, images `ghcr.io/schneiderelectricbuildings/ebo-enterprise-server`,
-`ebo-edge-server` and `ebo-enterprise-central`, one tag per EBO build (5.0.1 up to 8.0.1 when looked at, linux/amd64
-only). WorkStation and the editors stay Windows programs: the container replaces the server half only, and
+`ebo-edge-server` and `ebo-enterprise-central`, one tag per EBO build (see Versions below; linux/amd64 only). WorkStation and the editors stay Windows programs: the container replaces the server half only, and
 WorkStation must be the same build as the server (7.1.1.132 here).
 
 - **Licence and EULA come first, and they are the user's business, not the agent's.** The images are Schneider's
@@ -711,6 +710,24 @@ WorkStation must be the same build as the server (7.1.1.132 here).
   exits with "EULA must be accepted before the server can start". A server without activated licences says so
   itself (system alarm "Licensing violation", a notice in WorkStation, and `System > LicenseManager`). This skill
   does not deal with licences and nothing in it is a way around them.
+- **Versions**: the image tag is the EBO build, so a specific version is chosen in the `docker run` line. Tags in
+  the registry on 2026-11-23:
+  - Enterprise Server: 6.0.1.93, 6.0.2.112, 6.0.3.112, 7.0.1.71, 7.0.2.348, 7.0.3.142, 7.0.7010.1, 7.0.7010.3,
+    7.1.0.10002, 7.1.1.132, 7.1.2.171, 7.1.2.9000, 8.0.1.20, and 18 hotfix tags (`HF-604-CP-10-14000-Consolidation`,
+    `HF-712-CP-2-5000-Consolidation` ...).
+  - Edge Server: the same builds without 7.1.2.9000, and also 5.0.1.128, 5.0.2.109, 5.0.3.117, 6.0.4.90; 22 hotfix
+    tags.
+  - The list as it is now (no account needed):
+    `T=$(curl -s "https://ghcr.io/token?scope=repository:schneiderelectricbuildings/ebo-edge-server:pull" | python3 -c 'import json,sys;print(json.load(sys.stdin)["token"])')`,
+    then `curl -s -H "Authorization: Bearer $T" "https://ghcr.io/v2/schneiderelectricbuildings/ebo-edge-server/tags/list?n=200"`.
+  - WorkStation must be the same build as the server it logs on to, so another server version needs its own
+    WorkStation installation. Keep an Edge Server and the Enterprise Server above it on the same build.
+  - The database follows the version: use one volume per version (`es-7.1.2-db`), do not point an older image at a
+    volume a newer one has opened. A newer image on an older volume means an upgrade (the image has
+    `prepare-upgrade` and `get-upgrade-log` in `/opt/sbo/bin`); not tried.
+  - A tag can be published again with other content. To stay on exactly what was tested, note the digest
+    (`docker images --digests`) and start from `image@sha256:<digest>`, or keep a `docker save` copy.
+  - Only 7.1.1.132 was run for these notes; the rest is the tag list.
 - **Start** (Docker, published ports; the README's own example uses an ipvlan network, which a server needs when it
   must talk BACnet/IP or Modbus to field devices):
   `docker run -d --name es1 -h es1 --ulimit nofile=8192:8192 --restart unless-stopped -p 80:80 -p 443:443 -p 4444:4444
