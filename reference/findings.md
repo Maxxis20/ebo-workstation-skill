@@ -851,6 +851,10 @@ creating and exporting are proven, live values are not.
   the RS-485 ports and USB; there is no Modbus TCP on the controller (Modbus TCP devices go under a server).
 - **Firmware**: a controller on old firmware (2.00) refuses the device at the commit with "Unsupported object
   type - structured-view" in the `Create New Object` log: the Modbus object needs newer controller firmware.
+  Changing the Modbus object itself is refused the same way ("Unknown property '.../Modbus/BaudRate'"), and
+  its blue arrow never clears.
+- **Port**: the Modbus object's `Port reference` is empty at first; `...` opens "Choose an available port" with
+  the controller's RS-485 ports. Set it, and Baud rate / Parity / Stop bits to match the devices.
 - **Device**: `Ws-New '<controller>/IO Resources/Modbus' 'Modbus Device' 'Name'` (type
   `bacnet.mpx.modbus.MasterDevice`). Properties: `Device address` (the slave address, empty at first), `Poll
   register` and `Poll code` (what is read to decide the device is online), `Device identification`.
