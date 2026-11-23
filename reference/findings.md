@@ -841,3 +841,30 @@ Done with an RP-C-16A on the same network as the machine that runs the Enterpris
   centre, account needed). Read its release notes for the allowed upgrade path first. Not done here: the upgrade
   itself, physical inputs and outputs.
 
+### Modbus RTU on a SpaceLogic controller: device, register points, bindings (basics, 2026-11-23)
+
+Seen on an RP-C-16A object under a 7.1 server. Made on a controller object that is not tied to hardware, so
+creating and exporting are proven, live values are not.
+
+- **Where**: `<controller>/IO Resources/Modbus` (type `bacnet.mpx.modbus.network.Modbus`). Serial only: Framing
+  mode `RTU` (fixed), Baud rate, Parity, Stop bits, poll intervals in its properties. `IO Resources/Ports` lists
+  the RS-485 ports and USB; there is no Modbus TCP on the controller (Modbus TCP devices go under a server).
+- **Firmware**: a controller on old firmware (2.00) refuses the device at the commit with "Unsupported object
+  type - structured-view" in the `Create New Object` log: the Modbus object needs newer controller firmware.
+- **Device**: `Ws-New '<controller>/IO Resources/Modbus' 'Modbus Device' 'Name'` (type
+  `bacnet.mpx.modbus.MasterDevice`). Properties: `Device address` (the slave address, empty at first), `Poll
+  register` and `Poll code` (what is read to decide the device is online), `Device identification`.
+- **Points**, New below the device: `Modbus Analog Input Point`, `Modbus Digital Input Point`, `Modbus Integer
+  Input Point`, `Modbus Multistate Input Point`, the same four as `... Output Point`, and `Modbus Point Group`
+  (`Ws-New '<device>' 'Modbus Analog Input Point' 'Name'`, about 14 s each). Types in an export:
+  `bacnet.mpx.modbus.point.AnalogInput`, `AnalogOutput`, `BinaryInput`, `BinaryOutput`, `IntegerOutput` ...
+  Each is also a BACnet object of the controller (`ForeignAddress` `<analog-input, 11>`), numbered by the server.
+- **Register settings** are on the point's Basic page under `Modbus Settings`: `Register number`, `Register
+  type` (16 bit unsigned by default; pick the 32-bit / float form and word order the device uses), `Bit mask`
+  for bits out of a register. Inputs are read, outputs are written.
+- **Bindings**: as for the controller's own I/O points. A program input reads the point's `Value`
+  (`Program/Inputs . X <- ../../<path to point> . Value`); an output point takes its value from a program
+  **output block** (`<tag>_OUT`), bound with `Ws-Bind` or with `ebox.py bind` on an export. Bind again after a
+  reload of the program.
+- **After changes**: a blue arrow on the device or a point means it has not gone to the controller yet
+  (`Device > Download ...`).
