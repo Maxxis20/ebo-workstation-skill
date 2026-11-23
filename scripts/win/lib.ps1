@@ -84,6 +84,20 @@ function Click($x, $y, [switch]$Right) {
   [W32]::mouse_event($d, 0, 0, 0, [UIntPtr]::Zero); Start-Sleep -Milliseconds 40; [W32]::mouse_event($u, 0, 0, 0, [UIntPtr]::Zero)
 }
 
+# Drag with the left button from one screen point to another. The moves are real mouse input (absolute
+# mouse_event), in small steps with a first nudge: SetCursorPos alone moves the pointer but WPF sees no drag.
+function Mouse-To($x, $y) {
+  $b = [Windows.Forms.Screen]::PrimaryScreen.Bounds
+  [W32]::mouse_event(0x8001, [uint32][int]($x * 65535 / ($b.Width - 1)), [uint32][int]($y * 65535 / ($b.Height - 1)), 0, [UIntPtr]::Zero)
+}
+function Drag($x1, $y1, $x2, $y2, $steps = 30) {
+  Mouse-To $x1 $y1; Start-Sleep -Milliseconds 250
+  [W32]::mouse_event(2, 0, 0, 0, [UIntPtr]::Zero); Start-Sleep -Milliseconds 300
+  foreach ($d in 3, 6, 10, 14) { Mouse-To ($x1 + $d) ($y1 + $d); Start-Sleep -Milliseconds 60 }
+  for ($i = 1; $i -le $steps; $i++) { Mouse-To ([int]($x1 + ($x2 - $x1) * $i / $steps)) ([int]($y1 + ($y2 - $y1) * $i / $steps)); Start-Sleep -Milliseconds 40 }
+  Mouse-To ($x2 + 2) $y2; Start-Sleep -Milliseconds 100; Mouse-To $x2 $y2; Start-Sleep -Milliseconds 600
+  [W32]::mouse_event(4, 0, 0, 0, [UIntPtr]::Zero)
+}
 # ---- classic Win32 menus (the Function Block editor, tam32.exe): no focus and no coordinates needed -----------
 function Menu-List($hwnd) {
   $m = [W32]::GetMenu($hwnd); $out = @()

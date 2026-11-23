@@ -61,6 +61,11 @@ silently and reads 0). Going up, do not let the Enterprise Server read the lower
 error): make plain value points on the Enterprise Server (`objects.py value()`), bind the lower program's output
 blocks (`<tag>_OUT`) to them with `Ws-Bind`, and read those points.
 
+A real BACnet/IP controller (SpaceLogic RP-C / MP-C; findings, "A real field controller on a container server"):
+the server needs the device network itself (a container on host or ipvlan networking, not published ports), then
+Device Discovery, `Initialize ID`, the device object with `Ws-New`, and the discovered row dragged onto it
+(`Drag`). A blue arrow on an object means Download / Upload to the device is still owed.
+
 Things that need no clicking at all (findings, "What production programs showed" and "Objects from a file"):
 alarms as ALARM blocks in the program (`p.alarm(...)`), constants bound in the program file
 (`p.const(..., bind=)`), trend logs / alarms / server values / weekly schedules / trend charts from `objects.py`, and many bindings

@@ -800,3 +800,44 @@ WorkStation must be the same build as the server (7.1.1.132 here).
 - **Reading values by eye**: open the program, `Variables` tab, expand the module, then `Inputs` / `Outputs`:
   live values with units. The Graphics Viewer tab of a program is not a reliable reading.
 - Server log of a Windows Enterprise Server: `...\Building Operation 7.1\Enterprise Server\db\logs\trace.log`.
+
+### A real field controller on a container server (SpaceLogic RP-C, 2026-11-23)
+
+Done with an RP-C-16A on the same network as the machine that runs the Enterprise Server container.
+
+- **No ARM, so no Raspberry Pi**: every tag of the server images is `linux/amd64` only. Hardware for an Edge
+  Server container is a small x86 machine.
+- **The container needs the network itself for BACnet/IP.** With published TCP ports only (`-p 443:443` ...) the
+  server hears no broadcasts and finds no devices. Start it with `--network host` (or on an ipvlan network as in
+  Schneider's README) instead of `-p`; it still serves 80 / 443 / 4444. Then
+  `Ws-New '/Server 1' 'BACnet Interface' 'BACnet'`; the log says `IP Network opened network #1 at <address>:47808`.
+  With host networking only one server container can run on that machine's address.
+- **A controller that was hosted by another server does not answer**: ping only, no Who-Is, no ReadProperty, no
+  TCP port; it broadcasts a Who-Is for its former server's device instance every 30 s and Device Discovery does
+  not list it. After its reset button it shows up under **ID initialization required**.
+- **Hosting it**, on the server root, tab `Device Discovery`, type `BACnet devices`, binoculars = Discover all:
+  1. right-click the row, `Initialize ID`, dialog `Assign device ID` (a free BACnet device instance): the row
+     gets a name, model, firmware version, and `Not hosted`;
+  2. make the device object: `Ws-New '/Server 1/BACnet/IP Network' 'RP-C-16A' 'Name'`;
+  3. **drag** the discovered row onto that object in the System Tree. `Progress` lists Add IP Address to
+     whitelist, Associate with device, Download, Upload. No menu command does this and the object's ID and
+     serial fields cannot be typed.
+- **Drag by script**: `Drag x1 y1 x2 y2` in `lib.ps1`. Moving the pointer with SetCursorPos while the button is
+  down only selects the row; WPF starts a drag on real mouse-move input (absolute `mouse_event`). Expand the
+  tree to the target first (`Ws-TreeItem '<path>'`): the Device Discovery view shows the tree collapsed.
+- **`Ui-Click` on an element whose rectangle is empty clicks at 0,0** and opens the window's system menu: look at
+  `Ui-Center` first, or click by position.
+- **Programs**: `Fb-Load '<device>/Application' 'Name' file.aut 'SpaceLogic Function Block Program'`; the save
+  downloads to the controller. Seen running in the device: `Executed by` = BACnet device, Status Running,
+  `Number of cycles` counting. A blue arrow on an object in the tree means it still has to go to the device
+  (`Device > Download ...`) or come from it (`Upload ...`). With a live device `Fbe-Save` can end with "after
+  Save the foreground window is ''" although save and download went through (the wait at the end is too short).
+- **Firmware**: a controller on much older firmware than the server (2.00 under a 7.1 server) was hosted and ran
+  a small program; the server raised "Failure upgrading database download" on it. `Device > Upgrade firmware >
+  Select device firmware` opens `Select Firmware`: a list (empty until a package is added), `Browse` for a file on
+  the WorkStation machine, Download firmware (optimized / force), Compress, Show upgrade status, activation
+  Manually / Immediately / at a time. The server does not fetch firmware by itself, with or without internet, and
+  the images carry Zigbee firmware only: the controller firmware package comes from Schneider (partner software
+  centre, account needed). Read its release notes for the allowed upgrade path first. Not done here: the upgrade
+  itself, physical inputs and outputs.
+
