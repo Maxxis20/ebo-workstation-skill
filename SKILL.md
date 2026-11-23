@@ -96,6 +96,9 @@ To check a generated file without the server, start the editor alone and use `Fi
 - `examples/dh-ex2/`: worked example (controller with four modules, plant model in closed loop, graphic, MQTT,
   FUXA view) with the commands to load it. Read it for the patterns; do not copy it when asked to design something
   from a description of your own.
+- `examples/room-sensor/`: one room sensor faceplate drawn twice, as a page and as a click-open box with live
+  values (`Graphic.popup`), a thermometer that changes colour with the value, and a small program for "minutes
+  since the last new value" of a polled device.
 - `examples/ahu01/`: larger worked example (air handling unit: hierarchical blocks, staged PID controllers, alarms,
   simulation, animated graphic with info boxes and season colours, schedules, dashboard, MP-C controller, MQTT /
   FUXA); `deploy.sh` there is the pattern for loading a whole set and binding it from one file.

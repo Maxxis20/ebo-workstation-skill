@@ -889,3 +889,19 @@ creating and exporting are proven, live values are not.
   trend log. A device without COV is polled.
 - The toolbar of the Device Discovery tab sits a few pixels differently from one server to the next (the
   binoculars were at x 500 on one, 516 on another): take a screenshot before clicking by position.
+
+### Graphics: boxes with live content, colour by value (2026-11-23)
+
+- `Graphic.popup(x, y, w, h, draw, side, mark)`: a round mark; a click opens a box whose content is drawn by
+  `draw(p, ox, oy)` with everything a Graphic can draw (values, lamps, bars), a second click closes it. Same
+  form as `info()` (a Component with a hidden Group and an OnMouseClick script). Binds inside a hidden Group
+  keep running, and one bind name may stand in several places of a page.
+- `Graphic.thermometer(x, y, name, lo, hi)`: fill colour and column height set by a script from the value, a
+  straight-line blend cold - mid - hot (`setAttribute("Fill", "#rrggbb")` with a computed colour works).
+  `Graphic.level_lamp(x, y, name, limit)`: two colours by a limit on an analog value (`ConvertValue`).
+- **Loading a graphic again keeps its bindings** when the bind names are the same (`Gfx-Load` on an existing
+  graphic; unlike a program, whose reload drops them). New bind names are simply unbound until `Ws-Bind`.
+- `Gfx-Load` failed once while the graphic's own tab was open in WorkStation: `Tab-Close '<name>'` first.
+- **Age of a polled value**: a device without COV or time stamps gives no "last updated". A small program with
+  `DELR` (value of the cycle before), `TCYC` and an expression counts the seconds since any watched value
+  changed (worked example: `examples/room-sensor`, `make_age.py`).

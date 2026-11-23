@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""tgml.py - write an EBO graphic (TGML) from Python: static shapes, live values, state colours, click-to-change.
+"""tgml.py - write an EBO graphic (TGML) from Python: static shapes, live values, state colours, click-to-change,
+click-open boxes with text (info) or with live content (popup).
 
     g = Graphic(1000, 620)
     g.text(20, 20, "Boiler room", size=20, bold=True)
@@ -302,6 +303,62 @@ class Graphic:
             f'var p=evt.getCurrentTarget().getChild("pop");'
             f'p.setAttribute("Visibility",p.getAttribute("Visibility")=="Visible"?"Hidden":"Visible");}}]]></Script>'
             f'</Component>')
+
+    def popup(self, x, y, w, h, draw, side="right", d=16, mark="i", colour="#00796B"):
+        """Round mark at x, y; a click opens a box w x h with LIVE content, another click (mark or box) closes it.
+        draw(p, ox, oy) fills the box: p is a Graphic, (ox, oy) its top left corner; everything p can draw works
+        in it (value, lamp, bar, state ...). Bind names used in the box are bind names of this graphic like any
+        other, so the same name may also stand elsewhere on the page. side as for info(). Boxes lie on top."""
+        bx, by = {"right": (d + 6, -4), "left": (-w - 6, -4), "below": (-w / 2 + d / 2, d + 6),
+                  "above": (-w / 2 + d / 2, -h - 6)}[side]
+        p = Graphic(w, h)
+        draw(p, bx, by)
+        for n in p.binds:
+            self._bind(n)
+        self.top.append(
+            f'<Component Clip="False" ContentHeight="{d}" ContentWidth="{d}" Height="{d}" Left="{x}" Top="{y}" Width="{d}">'
+            f'<Ellipse Fill="{colour}" Height="{d}" Left="0" Stroke="None" Top="0" Width="{d}"/>'
+            f'<Text FontFamily="{FONT}" FontSize="{d - 5}" FontWeight="Bold" HorizontalAlign="Center" Left="{d / 2}" '
+            f'Stroke="#FFFFFF" Top="2">{escape(mark)}</Text>'
+            f'<Group Name="pop" Visibility="Hidden">'
+            f'<Rectangle Fill="#FFFFFF" Height="{h}" Left="{bx}" RadiusX="6" RadiusY="6" Stroke="#5F6368" StrokeWidth="1.5" '
+            f'Top="{by}" Width="{w}"/>{"".join(p.items + p.top)}</Group>'
+            f'<Script OnMouseClick="clk"><![CDATA[function clk(evt){{evt.preventDefault();'
+            f'var p=evt.getCurrentTarget().getChild("pop");'
+            f'p.setAttribute("Visibility",p.getAttribute("Visibility")=="Visible"?"Hidden":"Visible");}}]]></Script>'
+            f'</Component>')
+        return (x + bx, y + by, w, h)
+
+    def thermometer(self, x, y, name, lo=20.0, hi=25.0, h=44, scale=(10.0, 30.0),
+                    cold="#1A73E8", mid="#1E8E3E", hot="#D93025"):
+        """Thermometer whose colour follows the value in a straight line: cold at lo and below, mid half way,
+        hot at hi and above. The column also rises with the value over scale (bottom .. top of the tube).
+        Size: 14 wide, h + 10 high, top left at x, y."""
+        self._bind(name)
+        rgb = lambda c: ",".join(str(int(c[i:i + 2], 16)) for i in (1, 3, 5))
+        blend = (f'var k=(v-({lo}))/(({hi})-({lo}));if(k<0)k=0;if(k>1)k=1;var a=k<0.5?[{rgb(cold)}]:[{rgb(mid)}];'
+                 f'var b=k<0.5?[{rgb(mid)}]:[{rgb(hot)}];var q=k<0.5?k*2:(k-0.5)*2;var s="#";'
+                 f'for(var i=0;i<3;i++){{var n=Math.round(a[i]+(b[i]-a[i])*q).toString(16);s+=(n.length<2?"0":"")+n;}}'
+                 f'r.setAttribute("Fill",s);')
+        head = 'function signal(evt){var r=evt.getTarget().getParentNode();var v=new Number(evt.getValue());'
+        tube = h - 6                                            # inside height of the tube above the bulb
+        self.rect(x + 3, y, 8, h, fill="#FFFFFF", stroke="#5F6368", radius=4)
+        self.items.append(
+            f'<Rectangle Fill="{mid}" Height="{tube / 2}" Left="{x + 5}" Stroke="None" Top="{y + 2 + tube / 2}" Width="4">'
+            f'<Bind Name="{name}"><Script OnSignalChange="signal"><![CDATA[{head}{blend}'
+            f'var f=(v-({scale[0]}))/(({scale[1]})-({scale[0]}));if(f<0.05)f=0.05;if(f>1)f=1;var hh={tube}*f;'
+            f'r.setAttribute("Height",hh);r.setAttribute("Top",{y + 2 + tube}-hh);}}]]></Script></Bind></Rectangle>')
+        self.items.append(
+            f'<Ellipse Fill="{mid}" Height="14" Left="{x}" Stroke="#5F6368" StrokeWidth="1" Top="{y + h - 4}" Width="14">'
+            f'<Bind Name="{name}"><Script OnSignalChange="signal"><![CDATA[{head}{blend}}}]]></Script></Bind></Ellipse>')
+
+    def level_lamp(self, x, y, name, limit, d=14, below="#D93025", above="#1E8E3E"):
+        """Lamp by an analog value: one colour up to and including limit, the other above it."""
+        self._bind(name)
+        self.items.append(
+            f'<Ellipse Fill="#BDC1C6" Height="{d}" Left="{x}" Stroke="#5F6368" StrokeWidth="1" Top="{y}" Width="{d}">'
+            f'<Bind Attribute="Fill" Name="{name}"><ConvertValue AttributeValue="{below}" SignalLessOrEqualTo="{limit}"/>'
+            f'<ConvertValue AttributeValue="{above}" SignalMoreOrEqualTo="{limit + 0.001}"/></Bind></Ellipse>')
 
     @classmethod
     def from_svg(cls, path):

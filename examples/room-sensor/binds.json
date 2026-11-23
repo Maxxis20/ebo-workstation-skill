@@ -1,0 +1,38 @@
+{
+ "graphic": [
+  [
+   "T",
+   "/Server 1/BACnet/IP Network/Sensor/Application/Temperature/Value"
+  ],
+  [
+   "RH",
+   "/Server 1/BACnet/IP Network/Sensor/Application/Humidity/Value"
+  ],
+  [
+   "VDD",
+   "/Server 1/BACnet/IP Network/Sensor/Application/Battery/Value"
+  ],
+  [
+   "AGE",
+   "/Server 1/Room101_Age/Age_Min"
+  ],
+  [
+   "STALE",
+   "/Server 1/Room101_Age/Stale"
+  ]
+ ],
+ "age_program": [
+  [
+   "V1",
+   "/Server 1/BACnet/IP Network/Sensor/Application/Temperature/Value"
+  ],
+  [
+   "V2",
+   "/Server 1/BACnet/IP Network/Sensor/Application/Humidity/Value"
+  ],
+  [
+   "V3",
+   "/Server 1/BACnet/IP Network/Sensor/Application/Battery/Value"
+  ]
+ ]
+}

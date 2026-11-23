@@ -12,6 +12,8 @@ import os, sys, json, math, textwrap, argparse
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "..", "scripts"))
 from tgml import Graphic
+sys.path.insert(0, os.path.join(HERE, "..", "room-sensor"))
+import roomface                                             # the room sensor faceplate, shared with examples/room-sensor
 
 DEG = "\xb0C"
 # --- the one table: bind name, target, label, decimals (None = binary / state), unit --------------------------------
@@ -573,6 +575,7 @@ class HMI:
             self.lamp(x + 12, yy + 1, f"{b}_BAD", d=14, on=ALM, off="#FFFFFF")
             self.t(x + 32, yy + 1, f"TE10.{i}", size=13, bold=True); self.v(x + 96, yy, b)
             self.info(x + 168, yy, b, prefer=("above", "right"))
+            self.room_popup(x + 190, yy, i)
         self.t(x + 220, y + 36, "Room mean", size=12, colour=GREY); self.v(x + 220, y + 52, "ROOM_AVG", size=16)
         yy = y + 112
         self.g.line(x + 12, yy - 6, x + 330, yy - 6, EDGE, 1)
@@ -580,6 +583,19 @@ class HMI:
         self.st(x + 80, yy + 1, "HS10", "PRESSED", "released", size=12)
         self.t(x + 12, yy + 24, "Extended run", size=12, colour=GREY)
         self.st(x + 112, yy + 24, "HS10_EXT", "ACTIVE", "off", size=12)
+
+    def room_popup(self, x, y, i):
+        """Green "T" mark: opens the room sensor faceplate (examples/room-sensor/roomface.py) with this sensor's
+        live temperature, the room mean, its fault flag and its alarm lamp. No new bind names: all four are on
+        the page already."""
+        b = f"TE10_{i}"; kw = dict(mean="ROOM_AVG", bad=f"{b}_BAD", alarm=f"{b}_Alm")
+        for n in (b, *kw.values()):
+            assert n in self.table, n
+        h = roomface.height(**kw)
+        box = self.g.popup(x, y, roomface.W, h, lambda p, ox, oy: roomface.face(p, ox, oy, f"TE10.{i}", b, **kw),
+                           side="above", mark="T")
+        assert box[0] >= 4 and box[1] >= 4 and box[0] + box[2] <= W - 4 and box[1] + box[3] <= H - 4, box
+        self.popups.append((f"{b} room sensor", "above", box))
 
     def outdoor(self, x, y):
         self.panel(x, y, 250, 166, "Outdoor and safety")
