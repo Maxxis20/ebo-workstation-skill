@@ -872,3 +872,20 @@ creating and exporting are proven, live values are not.
   reload of the program.
 - **After changes**: a blue arrow on the device or a point means it has not gone to the controller yet
   (`Device > Download ...`).
+
+### A third-party BACnet/IP device on a server (2026-11-23)
+
+- Device Discovery (server root tab, type `BACnet devices`, binoculars = Discover all) lists it, also a device
+  behind a BACnet router (shown under `Network_1/<gateway>/Network_<n>`). The server and the device must be in
+  one broadcast domain when the device has no BBMD; a firewall between them has to pass UDP 47808 both ways,
+  the device's answers arrive as new flows.
+- **Host it**: drag the discovered row onto `<server>/BACnet/IP Network` (`Drag`). A box says "Upload is
+  required to host objects in device."; after OK the device is there as `bacnet.DeviceProxy` with an empty
+  `Application`.
+- **Bring its objects in**: right-click the device, `Device > Upload all objects`, `Progress` ... Done. The
+  device's objects appear under `Application` with the device's own names, analog inputs as
+  `bacnet.pointproxy.analog.Input` ("BACnet Analog Input (Generic)") with value, unit and status flags.
+- Use them like any value: bind `<device>/Application/<object>` . `Value` into a program input, a graphic or a
+  trend log. A device without COV is polled.
+- The toolbar of the Device Discovery tab sits a few pixels differently from one server to the next (the
+  binoculars were at x 500 on one, 516 on another): take a screenshot before clicking by position.
