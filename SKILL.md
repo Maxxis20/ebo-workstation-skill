@@ -1,6 +1,6 @@
 ---
 name: ebo-workstation
-description: Drive Schneider EcoStruxure Building Operation (EBO 7.1 WorkStation, Enterprise Server, the Function Block editor / Menta) on the Windows machine it is installed on, without hand clicking - create Function Block programs, load their logic from a generated .aut text file, save, read live values back, build and bind graphics, publish values over MQTT; also EBO servers run as containers (Enterprise Server, Edge Server) and bindings between two servers. Use when the task is to build, change, inspect or verify an EBO Function Block program or graphic, to read an EBO export xml, or when the user mentions Schneider EBO, EcoStruxure Building Operation, WorkStation, Enterprise Server, SmartX, AS-P, Edge Server, EBO-Servers containers, Menta or .aut files.
+description: Drive Schneider EcoStruxure Building Operation (EBO 7.1 WorkStation, Enterprise Server, the Function Block editor / Menta) on the Windows machine it is installed on, without hand clicking - create Function Block programs, load their logic from a generated .aut text file, save, read live values back, build and bind graphics, publish values over MQTT and take values from an MQTT broker (also LoRaWAN sensors through a ChirpStack-format network server); also EBO servers run as containers (Enterprise Server, Edge Server) and bindings between two servers. Use when the task is to build, change, inspect or verify an EBO Function Block program or graphic, to read an EBO export xml, or when the user mentions Schneider EBO, EcoStruxure Building Operation, WorkStation, Enterprise Server, SmartX, AS-P, Edge Server, EBO-Servers containers, Menta or .aut files.
 ---
 
 # EBO WorkStation by script
@@ -9,7 +9,10 @@ Working (2026-11-22, EBO 7.1.1): a Function Block program described in Python be
 clean right-angle layout, is created on the Enterprise Server, imported in the Function Block editor, compiled,
 and checked from an export, all by script. Also by script: bindings between objects, and a graphic (HMI)
 generated from Python, loaded and bound. Values go out over MQTT too (EBO MQTT client, Mosquitto and FUXA on
-the same machine): findings, section MQTT.
+the same machine): findings, section MQTT. And values come in from a broker (works, 2026-11-24): MQTT clients that
+subscribe and map a JSON message to server values by JSON pointers, also the one-message-many-values uplinks of a
+LoRaWAN network server in ChirpStack format, with units, staleness and a stale alarm: findings, section "MQTT
+subscription", `objects.py` `mqtt_subscriber()` / `value(..., unit=, foreign=)`, `examples/lora-mqtt/`.
 
 Read `reference/findings.md` before touching WorkStation: what the machine needs, the rules (one command at a
 time, the driver owns keyboard and mouse while it runs), what each driver function does, the `.aut` format with its traps (pin numbers, wire
@@ -99,6 +102,9 @@ To check a generated file without the server, start the editor alone and use `Fi
 - `examples/room-sensor/`: one room sensor faceplate drawn twice, as a page and as a click-open box with live
   values (`Graphic.popup`), a thermometer that changes colour with the value, and a small program for "minutes
   since the last new value" of a polled device.
+- `examples/lora-mqtt/`: values of a LoRaWAN sensor from a ChirpStack-format broker into EBO (one MQTT client per
+  value, device EUI as foreign address, units, uplink counter for staleness, stale alarm); `make.py` writes the
+  import files.
 - `examples/ahu01/`: larger worked example (air handling unit: hierarchical blocks, staged PID controllers, alarms,
   simulation, animated graphic with info boxes and season colours, schedules, dashboard, MP-C controller, MQTT /
   FUXA); `deploy.sh` there is the pattern for loading a whole set and binding it from one file.

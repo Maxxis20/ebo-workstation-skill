@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ObjectSet ExportMode="Special" Note="TypesFirst" Version="7.1.1.132">
+  <MetaInformation>
+    <ExportMode Value="Special" />
+    <RuntimeVersion Value="7.1.1.132" />
+    <SourceVersion Value="7.1.1.132" />
+    <ServerFullPath Value="/Server 1" />
+  </MetaInformation>
+  <ExportedObjects>
+    <OI NAME="Stale_Alarm" TYPE="alarm.ChangeOfStateAlarm">
+      <PI Name="AlarmMessage" Value="Sensor01: no uplink for more than 30 min" />
+      <PI Name="ResetMessage" Value="Sensor01: reporting again" />
+      <PI Name="AlarmPriority" Value="100" />
+      <PI Name="ResetPriority" Value="100" />
+      <PI Name="TimeDelayToOffNormal" Value="0" />
+      <PI Name="MonitoredVariable">
+        <Reference DeltaFilter="0" Object="../../Sensor01_Age" Retransmit="0" TransferRate="10" Property="Stale" />
+      </PI>
+    </OI>
+  </ExportedObjects>
+</ObjectSet>

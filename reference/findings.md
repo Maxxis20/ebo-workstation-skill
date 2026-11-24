@@ -263,8 +263,8 @@ that blocks inbound 1881 (FUXA 1.3.5 ignores `uiHost`).
     Payload with `@(Value)` is the plain number (`59.266933441162109`).
   - The Status field of the client kept showing Offline in the open property page while the broker log showed it
     connected; trust the broker log.
-  - Not tried: the other direction (Allow subscription on the group, MQTT Points under the client), retained
-    messages, last will, JSON payloads.
+  - The other direction (broker -> EBO) works: section "MQTT subscription: values from a broker into EBO".
+    Not tried: retained messages, last will, JSON payloads on publish.
 - **Driver**: `Mq-Client parent name [host] [format]`, `Mq-Group client name points [seconds]` with points =
   `@(@(@('Prog','MODULE'),'Signal'), ...)`, `Mq-Points points` (adds to the group page on screen), `Mq-Listed`
   (paths in its Data points list), `Dp-Pick` (one row of the picker), `Prop-*` helpers. Both functions reuse an
@@ -299,21 +299,147 @@ that blocks inbound 1881 (FUXA 1.3.5 ignores `uiHost`).
   "Automatic logoff". The field is locked for this built-in group (type default would be 10 minutes; choices 1
   minute ... 2 hours, Never). Not changed. `ebo.sh logon` before a block of work costs nothing when already on.
 
+## MQTT data groups from a file, and a delete that hit the parent (2026-11-22)
+
+- A Data Group is `iot.DataGroup` with `<PI Name="DataPoints">` holding one `<Reference Object= Property=
+  DeltaFilter="0" Retransmit="0" TransferRate="10"/>` per point (Object relative to the group), and the values
+  EnableInterval, EventDriven, Interval. `objects.py` `mqtt_group()` writes it; import below the MQTT client
+  (`ObjectSet(parent='/Server 1/IoT/Broker')`). 92 points in three groups came in in 40 s and all 92 topics
+  arrived. The MQTT client itself (`iot.StandardMQTT`: URL, EnableTLS, ValueFormat) comes back from its own
+  Special export the same way.
+- Picking data points in the dialog (`Mq-Group` / `Mq-Points`) is only safe for small modules: on modules with 60
+  to 70 signals it picked neighbouring rows (32 of 92 right, 26 wrong ones added).
+- **`Ws-Delete` deleted the parent twice**: three deletes in a row under one node, the tree still refreshing, the
+  click that gives the tree focus landed on the parent row, and DEL removed the whole MQTT client. Since then
+  `Ws-Delete` presses DEL only when the wanted item is the selected one, retries when the item is not found for a
+  moment, and refuses a path that ends in a slash. Six deletes in a row under one folder then left the parent alone.
+  Before deleting several children of an object that cannot be rebuilt from a generator, export it first.
+
+## MQTT subscription: values from a broker into EBO (works, 2026-11-23)
+
+Seen on EBO 7.1.1.132 Enterprise Server, Mosquitto on the same machine, all objects made from import files.
+
+- **Where it lives**: on the MQTT client (`iot.StandardMQTT`), tab Subscription: `SubscriptionTopic`, `SubQoS`, and
+  JSON pointers `JsonPtrPointID` (default `/pointId`), `JsonPtrValue` (default `/value`), `JsonPtrCommandRoot`
+  (an object or an array of command objects), `JsonPtrCustomData1/2`, `JsonPtrCommandData1/2`. Response settings
+  (`SendResponse`, `ResponseTopic`, `ResponseFormat`) not tried. The Data Group (`iot.DataGroup`) has
+  `AllowSubscription` (**must be Yes**), its own `SubscriptionTopic`, `MaxAllowedUpdateRate`, `MinAllowedValue`,
+  `MaxAllowedValue` (those four not tried).
+- A subscribed message is a "command": the point id pointer names a data point of a group with Allow subscription
+  = Yes, the value pointer gives the value, and the value is written to that data point (a server analog value
+  `server.point.AV` in the tests). **Both pointers hold for the whole client**, not per group or per point.
+- Point ids EBO accepts (each seen to write the value):
+  - the id the keyword `@(PointId)` publishes, form `nspg:<22 chars>.<22 chars>//Value`;
+  - the full property path with leading slash, `/Server 1/Folder/name/Value`. **Without the leading slash the
+    message is ignored**;
+  - the target object's Foreign address (`ForeignAddress`, a property every object has; in an import file
+    `<PI Name="ForeignAddress" Value="..."/>` on the value; the keyword `@(ForeignAddress)` publishes it).
+- Not working:
+  - empty `JsonPtrPointID` with a single data point: the client connects and never sends SUBSCRIBE;
+  - topic only on the group, the client's topic empty: no SUBSCRIBE either;
+  - an `iot.point.AV` ("Analog MQTT Value") below the client with a foreign address: imports, took no value.
+- The client subscribes without any publishing group; the SUBSCRIBE shows in the broker log a few seconds after the
+  import. Trust the broker log, as for publishing.
+- **A message with several values and no point id per value** (ChirpStack v4 uplink event from a LoRaWAN network
+  server, topic `application/<app>/device/<devEui>/event/up`, values under `/object/<key>`, device under
+  `/deviceInfo/devEui`): point id pointer `/deviceInfo/devEui`, every target value gets the devEui as Foreign
+  address, and since the value pointer is per client, **one MQTT client per value** (`JsonPtrValue`
+  `/object/temperature`, `/object/humidity`, ...), each with one Data Group (Allow subscription Yes, EventDriven 0,
+  EnableInterval 0, so it publishes nothing) holding its one target. Three clients on one topic, three values with
+  the same foreign address: each client wrote only its own group's point (27 / 23 / 3678 from one message).
+  Limit: 4 MQTT clients per IoT Interface; a second IoT Interface on the same server was accepted, so 4 more values
+  per extra interface. `objects.py` `mqtt_subscriber()` writes client and group; generator
+  `examples/lora-mqtt/make.py` (values file + IoT file, both imported below `/Server 1` with `Ws-Import`).
+- **Import trap: IoT Interface and folder with the same name in one server.** The second import is renamed
+  `<name>_2`, and the data point references of its groups (relative, `../../../<name>/x`) resolve inside the
+  imported set, to the client itself (export shows `Object=".."`): clients connect, nothing subscribes, nothing
+  publishes. Give the interface and the value folder different names.
+- Testing without waiting for a device: `mosquitto_pub.exe -h 127.0.0.1 -t <topic> -f <file>` on the EBO machine,
+  payload in a file (no JSON quoting on the command line).
+- Reading the values in WorkStation: right-click the column header row of a folder's list view > `Add/Remove
+  columns` > tick `Value` (and `Foreign address`); live values then show in the list. The star button in the list
+  toolbar saves the layout (not tried by script). At 1600x1200 with default panes: header right-click at about
+  x 600 y 237, menu item 690,251, dialog check boxes `Value` 649,634, `Foreign address` 649,482, OK 841,759.
+- **Column layout is per folder**: the Value column has to be added again in each folder. Where the dialog has
+  many column choices (a BACnet device's Application folder: `Value` is below the visible part of the list), type
+  `Value` into the dialog's quick filter (click it at about 800,419 at 1600x1200); the one remaining check box is
+  then at 649,464, OK 841,759.
+- **Proven against a real network server broker (2026-11-23)**: a LoRaWAN network server with a ChirpStack-format
+  broker, anonymous, plain TCP 1883, QoS 0, nothing retained, one uplink per 10 minutes. The three clients opened
+  three TCP connections within about 20 s of the import and stayed up. The next uplink (`object` humidity 27,
+  temperature 22.9, vdd 3684) arrived in the three values as 27,00 / 22,90 / 3 684,00; the same sensor read over
+  BACnet/IP from the same network server showed 27,00 % Rh / 22,90 °C / 3 684,00 mV at the same moment: the two
+  ways agree.
+- Nothing is retained on such a broker, so after an import or a server restart the values stay at their initial
+  0 until the next uplink. A value gets a unit only if the import file gives it one (next bullets; BACnet values
+  bring theirs).
+- **Units from the file (2026-11-24)**: attribute on the Value property, `<PI Name="Value" Unit="0x280001"
+  Value="0"/>`; the export gives it back the same way. Codes: section "What production programs showed", Unit
+  codes. `objects.py` `value(..., unit=, foreign=)` and its `UNIT` map write unit and Foreign address.
+- **Trap: a subscribed number into a value whose unit has a prefix is taken as the base unit** (2026-11-24): 3678
+  into a mV value showed 3 678 000 mV. Client property `ScaleToBaseSIUnit` = 0 (default 1) stops it: 3660 then
+  arrived as 3 660 mV. °C and % Rh values were the same either way. `mqtt_subscriber()` always writes
+  `ScaleToBaseSIUnit` 0. `ConvertValuesToSI` left at its default, not tried.
+- Pointers outside `object` work the same (2026-11-24): `/rxInfo/0/rssi` (array index in a JSON pointer) gave the
+  first gateway's radio level (-87), `/fCnt` the uplink counter. Five signals = four clients on one IoT Interface
+  plus a fifth on a second interface; `make.py --signals name=/json/pointer[@unit],...` (default temperature,
+  humidity, vdd, rssi, fcnt) starts `<iot>_2`, `<iot>_3` after every four. All five arrived from one message, on
+  a local Mosquitto and from the real network server broker (22,3 °C, 26 % Rh, 3 678 mV, -87, 7163).
+- **Reading the values by script** (2026-11-24): a Special export of the folder of values (`Ws-Export '<folder>'
+  file 'Special'`, then `ebo.sh get`) holds the live `Value` (and `Unit`) of each `server.point.AV` at the moment
+  of the export, about 20 s per read. That is the scripted read-back, instead of screenshots. The Foreign address
+  is not in that export.
+- The Value column added to a list view was gone after the next log-on: the layout is not kept unless saved (star
+  button, not tried).
+- **Staleness** (2026-11-24): the uplink counter changes with every uplink, also when no reading does, so it is
+  the input for "is the sensor still reporting". The room-sensor age program (`examples/room-sensor/make_age.py`
+  -> `SensorAge.aut`, inputs V1..V3, outputs `Age_Min`, `Stale` after 30 min) loaded with `Fb-Load '/Server 1'
+  '<name>_Age' ...` and bound with `Ws-Bind '<program>' @(@('V1','<folder>/fcnt/Value'),
+  @('V2','<folder>/temperature/Value'),@('V3','<folder>/humidity/Value'))`: 2,4 min after an uplink `Age_Min`
+  showed 2,43 and `Stale` False. With V1 on the counter the program's "last change, not last report" limit does
+  not apply. An alarm on `Stale` from a file (`alarm_state(None, 'Stale_Alarm', '<program>/Stale', text=...)`,
+  `ObjectSet(parent=<value folder>)`; `examples/lora-mqtt/make_alarm.py`) imported. **It trips and
+  resets** (2026-11-24, copy of the set on a broker of our own with the limit at 1 minute: one uplink, 80 s later
+  Alarm state `Alarm`; next uplink, within seconds `Reset`). Alarm state by script or eye: in the list view of the
+  folder holding the alarm, Add/Remove columns > `Alarm state` (check box at 649,558 at 1600x1200).
+- A program's own values in WorkStation: select the program, tab Variables, click the "+" of the first row (about
+  286,332 at 1600x1200): Inputs and Public Signals with live values.
+- Deleting and importing the clients and values again is harmless: the values come back with the next uplink.
+- The EBO machine needs outbound TCP 1883 to the broker only; no inbound rule (unlike BACnet/IP, where answers
+  arrive as new flows).
+- A network server of this kind may forbid outside clients to publish on its uplink topic and feed its own
+  Modbus/BACnet side from that topic: do not test by publishing there. Rehearse on a broker of your own with a
+  copied uplink payload, then point the clients at the real one.
+
+## WebStation in the Brave browser (2026-11-22)
+
+- A graphic shows live values in WebStation, but **clicks on it do nothing** (buttons, values) while Brave Shields
+  has "Block fingerprinting" on, which is the default. Seen with a button of `tgml.py` and reported the same from a
+  production system. Fix per site: lion icon in the address bar > Advanced options > Block fingerprinting off;
+  Shields itself can stay up. Tested three ways on one graphic: default, no click; Shields down, click works;
+  Shields up with fingerprint blocking off, click works. Edge and Chrome do not have the problem.
+- Cause not proven; the likely one is that WebStation finds the clicked element by reading canvas pixels back,
+  which that protection disturbs on purpose.
+
 ## Open
 
-- Read computed public signals back by script (the Variables view through UI Automation). A server value
-  (`server.point.AV`) bound to the signal can be made from a file now, but its value was absent from the export.
+- Read computed public signals of a program back by script (the Variables view through UI Automation). A server
+  value (`server.point.AV`) bound to a program signal can be made from a file, but its value was absent from the
+  export; a server value written by MQTT is present in a Special export (section "MQTT subscription", read by
+  script), so plain server values can be read by script now.
 - Real field devices: download to a connected MP-C / RP-C, live I/O. (Points, terminals and bindings are made.)
 - Clicks on the graphic by script use fixed screen positions (1600x1200, default panes).
 - Script program round trip.
 - TSCH blocks, schedules from a file.
-- Whether alarms made from a file trip (they import and show; trend logs made from a file do record, seen in a
-  dashboard chart).
+- Alarms made from a file: a change of state alarm trips and resets (section "MQTT subscription", stale alarm);
+  range and deviation alarms not yet seen tripping.
 - Navigation between graphics (`Link`), status colours (`ConvertStatus`): seen in production graphics, not
   generated.
 - A component file written by `save_component` was not yet opened from the Graphics Editor's Components pane.
 - Dashboard widgets not tried: point table, pie, heat map, period over period, consumption, Sankey, group.
-- MQTT in the other direction: a value written into EBO from the broker (section MQTT).
+- MQTT subscription (section "MQTT subscription"): response messages (`SendResponse`, `ResponseTopic`),
+  the group's update-rate and min/max filters, string and binary targets, `ConvertValuesToSI`, a command root with
+  an array.
 
 ## The driver (scripts/ebo.sh, win/lib.ps1, win/ebo.ps1), 2026-11-21
 
@@ -466,6 +592,11 @@ programs, 15 graphics, about 150 alarms, 230 trend logs). Read with `scripts/ebo
   an output).
 - **Unit codes** seen: `0x10001` none, `0x280001` °C, `0x200001` %, `0x200002` ppm, `0x230002` Pa, `0x2e0007` s;
   `0xf0001` on air flows and `0x170001` on humidity (exact unit not checked). Tried: the import takes the codes.
+  Structure (2026-11-24): code = prefix << 24 | category id << 16 | unit id, ids from `Enterprise
+  Server\definitions\system\units\*.xml` (120 categories): Temperature 40 (°C 1, K 2, °F 3), Percentage 32 (% 1,
+  ppm 2), Humidity 23 (% Rh 1, so `0x170001` is % Rh), Voltage 50 (V 1, `0x320001`); prefix `0xfd` = milli, so mV
+  = `0xfd320001`, ms = `0xfd2e0007` (used in the type definitions). No dBm unit. On a server value: `Unit` attribute
+  of the Value PI (hex digits upper case in the export).
 - After a save the file also has `[Ral]` (ends with `1,1000`: cycle time in ms), `[Entr]` (one `@"name",...`
   line per RI, `$"name",...` per BI), `[Dev]`, `[Print]`. None of them is needed in a file to import.
 - Habits worth copying: modules named `Inputs`, `Outputs`, `Alarms`, `SP`, then one per loop; every setpoint a
@@ -594,7 +725,7 @@ A dashboard is shown by WebStation only; WorkStation lists its settings. Everyth
 - The WebStation window is set topmost by `Web-Station`: while it is open the WorkStation driver fails (seen
   2026-11-22: `Ws-Delete` reports "not there", `Ws-New` "New Object dialog did not open"). Close it before any
   WorkStation step: `Get-Process msedge | ? { $_.MainWindowTitle -match 'Building Operation' } | % {
-  [void]$_.CloseMainWindow() }`. `ebo/examples/ahu01/deploy.sh` does.
+  [void]$_.CloseMainWindow() }`. `examples/ahu01/deploy.sh` does.
 - In PowerShell a variable `$a` is the same as `$A`: a script line that assigns `$a` destroys the driver's
   `$A` (AutomationElement) for the rest of that call. Do not use `$a`, `$ct`, `$ts` as names in `ebo.sh run`.
 
@@ -692,7 +823,7 @@ Read from the 846 components and 31 snippets shipped with the Graphics Editor
   editor gave it at the save: `TV1_Ctrl . Value <- ../AHU/Outputs . 48551C47-...`. The GUIDs are in the program
   text of an export and survive delete-and-import of the program, not a new save. A reference from an output
   point to a computed public signal is dropped at import without a message.
-- Worked through for a whole unit, by script: `ebo/examples/ahu01/deploy_mpc.sh` (device, program, 39 points, 73
+- Worked through for a whole unit, by script: `examples/ahu01/deploy_mpc.sh` (device, program, 39 points, 73
   bindings, read back from an export; about 5 minutes).
 - Not possible to check without the device: download, the live values, the alarms.
 

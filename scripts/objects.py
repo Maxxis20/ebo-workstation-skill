@@ -55,10 +55,20 @@ class ObjectSet:
     def folder(self, name, where=None):
         return self.obj(where, "system.base.Folder", name)
 
-    def value(self, where, name, value=0, kind="AV", source=None):
-        """Server value: AV analog, BV binary, SV string. source: a target the value follows."""
-        return self.obj(where, "server.point." + kind, name, None if source else {"Value": value},
-                        {"Value": source} if source else None)
+    def value(self, where, name, value=0, kind="AV", source=None, unit=None, foreign=None):
+        """Server value: AV analog, BV binary, SV string. source: a target the value follows. unit: a text of
+        UNIT or an EBO unit code ('0x280001'). foreign: Foreign address (a point id for MQTT subscription)."""
+        e = self.obj(where, "server.point." + kind, name, None if source else {"Value": value},
+                     {"Value": source} if source else None)
+        if unit:
+            e.find("PI[@Name='Value']").set("Unit", self.UNIT.get(unit, unit))
+        if foreign:
+            ET.SubElement(e, "PI", {"Name": "ForeignAddress", "Value": foreign})
+        return e
+
+    # unit code = prefix (0xfd milli, 0x03 kilo) << 24 | category id << 16 | unit id (definitions/system/units)
+    UNIT = {"\xb0C": "0x280001", "%": "0x200001", "%RH": "0x170001", "ppm": "0x200002", "Pa": "0x230002",
+            "s": "0x2e0007", "V": "0x320001", "mV": "0xfd320001"}
 
     def trend_log(self, where, name, target, seconds=60, size=20000):
         """Interval trend log of one signal."""
@@ -142,6 +152,22 @@ class ObjectSet:
         for k, v in (("EnableInterval", 1), ("EventDriven", int(event_driven)), ("Interval", seconds)):
             ET.SubElement(e, "PI", {"Name": k, "Value": str(v)})
         return e
+
+    def mqtt_subscriber(self, where, name, host, topic, target, value_ptr, id_ptr="/pointId", group="In"):
+        """MQTT client (iot.StandardMQTT) that takes one value from the broker, with its one Data Group: Allow
+        subscription on, interval and event publishing off, so it sends nothing. where: an IoT Interface element of
+        this set (iot.IoTInterface, at most 4 clients each), or None with ObjectSet(parent='/Server 1/IoT').
+        target: absolute path '/Server 1/Folder/name/Value'. A message on `topic` is written to the target when the
+        JSON pointer id_ptr gives its point id (its foreign address, its full path or its nspg id) and value_ptr its
+        value; both pointers hold for the whole client, so one client per value (findings, "MQTT subscription")."""
+        c = self.obj(where, "iot.StandardMQTT", name, {
+            "URL": host, "EnableTLS": 0, "Enabled": 1, "ValueFormat": "@(Value)",
+            "SubscriptionTopic": topic, "JsonPtrPointID": id_ptr, "JsonPtrValue": value_ptr,
+            "ScaleToBaseSIUnit": 0})
+        g = self.mqtt_group(c, group, [target], event_driven=False)
+        g.find("PI[@Name='EnableInterval']").set("Value", "0")
+        ET.SubElement(g, "PI", {"Name": "AllowSubscription", "Value": "1"})
+        return c
 
     # --- dashboards (shown in WebStation; WorkStation only lists their settings) -------------------------------
     W = "client.dashboard.widgets."

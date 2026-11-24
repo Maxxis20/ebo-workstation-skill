@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ObjectSet ExportMode="Special" Note="TypesFirst" Version="7.1.1.132">
+  <MetaInformation>
+    <ExportMode Value="Special" />
+    <RuntimeVersion Value="7.1.1.132" />
+    <SourceVersion Value="7.1.1.132" />
+    <ServerFullPath Value="/Server 1" />
+  </MetaInformation>
+  <ExportedObjects>
+    <OI NAME="LoRa" TYPE="iot.IoTInterface">
+      <OI NAME="temperature" TYPE="iot.StandardMQTT">
+        <PI Name="URL" Value="127.0.0.1" />
+        <PI Name="EnableTLS" Value="0" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="ValueFormat" Value="@(Value)" />
+        <PI Name="SubscriptionTopic" Value="application/default/device/0011223344556677/event/up" />
+        <PI Name="JsonPtrPointID" Value="/deviceInfo/devEui" />
+        <PI Name="JsonPtrValue" Value="/object/temperature" />
+        <PI Name="ScaleToBaseSIUnit" Value="0" />
+        <OI NAME="In" TYPE="iot.DataGroup">
+          <PI Name="DataPoints">
+            <Reference DeltaFilter="0" Object="../../../Sensor01/temperature" Property="Value" Retransmit="0" TransferRate="10" />
+          </PI>
+          <PI Name="EnableInterval" Value="0" />
+          <PI Name="EventDriven" Value="0" />
+          <PI Name="Interval" Value="10" />
+          <PI Name="AllowSubscription" Value="1" />
+        </OI>
+      </OI>
+      <OI NAME="humidity" TYPE="iot.StandardMQTT">
+        <PI Name="URL" Value="127.0.0.1" />
+        <PI Name="EnableTLS" Value="0" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="ValueFormat" Value="@(Value)" />
+        <PI Name="SubscriptionTopic" Value="application/default/device/0011223344556677/event/up" />
+        <PI Name="JsonPtrPointID" Value="/deviceInfo/devEui" />
+        <PI Name="JsonPtrValue" Value="/object/humidity" />
+        <PI Name="ScaleToBaseSIUnit" Value="0" />
+        <OI NAME="In" TYPE="iot.DataGroup">
+          <PI Name="DataPoints">
+            <Reference DeltaFilter="0" Object="../../../Sensor01/humidity" Property="Value" Retransmit="0" TransferRate="10" />
+          </PI>
+          <PI Name="EnableInterval" Value="0" />
+          <PI Name="EventDriven" Value="0" />
+          <PI Name="Interval" Value="10" />
+          <PI Name="AllowSubscription" Value="1" />
+        </OI>
+      </OI>
+      <OI NAME="vdd" TYPE="iot.StandardMQTT">
+        <PI Name="URL" Value="127.0.0.1" />
+        <PI Name="EnableTLS" Value="0" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="ValueFormat" Value="@(Value)" />
+        <PI Name="SubscriptionTopic" Value="application/default/device/0011223344556677/event/up" />
+        <PI Name="JsonPtrPointID" Value="/deviceInfo/devEui" />
+        <PI Name="JsonPtrValue" Value="/object/vdd" />
+        <PI Name="ScaleToBaseSIUnit" Value="0" />
+        <OI NAME="In" TYPE="iot.DataGroup">
+          <PI Name="DataPoints">
+            <Reference DeltaFilter="0" Object="../../../Sensor01/vdd" Property="Value" Retransmit="0" TransferRate="10" />
+          </PI>
+          <PI Name="EnableInterval" Value="0" />
+          <PI Name="EventDriven" Value="0" />
+          <PI Name="Interval" Value="10" />
+          <PI Name="AllowSubscription" Value="1" />
+        </OI>
+      </OI>
+      <OI NAME="rssi" TYPE="iot.StandardMQTT">
+        <PI Name="URL" Value="127.0.0.1" />
+        <PI Name="EnableTLS" Value="0" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="ValueFormat" Value="@(Value)" />
+        <PI Name="SubscriptionTopic" Value="application/default/device/0011223344556677/event/up" />
+        <PI Name="JsonPtrPointID" Value="/deviceInfo/devEui" />
+        <PI Name="JsonPtrValue" Value="/rxInfo/0/rssi" />
+        <PI Name="ScaleToBaseSIUnit" Value="0" />
+        <OI NAME="In" TYPE="iot.DataGroup">
+          <PI Name="DataPoints">
+            <Reference DeltaFilter="0" Object="../../../Sensor01/rssi" Property="Value" Retransmit="0" TransferRate="10" />
+          </PI>
+          <PI Name="EnableInterval" Value="0" />
+          <PI Name="EventDriven" Value="0" />
+          <PI Name="Interval" Value="10" />
+          <PI Name="AllowSubscription" Value="1" />
+        </OI>
+      </OI>
+    </OI>
+    <OI NAME="LoRa_2" TYPE="iot.IoTInterface">
+      <OI NAME="fcnt" TYPE="iot.StandardMQTT">
+        <PI Name="URL" Value="127.0.0.1" />
+        <PI Name="EnableTLS" Value="0" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="ValueFormat" Value="@(Value)" />
+        <PI Name="SubscriptionTopic" Value="application/default/device/0011223344556677/event/up" />
+        <PI Name="JsonPtrPointID" Value="/deviceInfo/devEui" />
+        <PI Name="JsonPtrValue" Value="/fCnt" />
+        <PI Name="ScaleToBaseSIUnit" Value="0" />
+        <OI NAME="In" TYPE="iot.DataGroup">
+          <PI Name="DataPoints">
+            <Reference DeltaFilter="0" Object="../../../Sensor01/fcnt" Property="Value" Retransmit="0" TransferRate="10" />
+          </PI>
+          <PI Name="EnableInterval" Value="0" />
+          <PI Name="EventDriven" Value="0" />
+          <PI Name="Interval" Value="10" />
+          <PI Name="AllowSubscription" Value="1" />
+        </OI>
+      </OI>
+    </OI>
+  </ExportedObjects>
+</ObjectSet>

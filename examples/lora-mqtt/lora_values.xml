@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ObjectSet ExportMode="Special" Note="TypesFirst" Version="7.1.1.132">
+  <MetaInformation>
+    <ExportMode Value="Special" />
+    <RuntimeVersion Value="7.1.1.132" />
+    <SourceVersion Value="7.1.1.132" />
+    <ServerFullPath Value="/Server 1" />
+  </MetaInformation>
+  <ExportedObjects>
+    <OI NAME="Sensor01" TYPE="system.base.Folder">
+      <OI NAME="temperature" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" Unit="0x280001" />
+        <PI Name="ForeignAddress" Value="0011223344556677" />
+      </OI>
+      <OI NAME="humidity" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" Unit="0x170001" />
+        <PI Name="ForeignAddress" Value="0011223344556677" />
+      </OI>
+      <OI NAME="vdd" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" Unit="0xfd320001" />
+        <PI Name="ForeignAddress" Value="0011223344556677" />
+      </OI>
+      <OI NAME="rssi" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="0011223344556677" />
+      </OI>
+      <OI NAME="fcnt" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="0011223344556677" />
+      </OI>
+    </OI>
+  </ExportedObjects>
+</ObjectSet>

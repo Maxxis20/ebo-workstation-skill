@@ -9,7 +9,9 @@ One drawing (`roomface.py`) used twice:
   mark): live temperature, room mean, sensor fault, alarm lamp. `Graphic.popup()` in `tgml.py` does that.
 - `make_age.py` writes `SensorAge.aut`, the small program behind "Last new value": seconds since any of three
   watched values changed. For devices that are polled and carry no time stamp. It is the last change, not the
-  last report: a reading that repeats all three numbers does not reset it.
+  last report: a reading that repeats all three numbers does not reset it. For a sensor that reports a counter
+  (the LoRaWAN uplink counter over MQTT), bind V1 to the counter and the age becomes "since the last report":
+  see `../lora-mqtt` (Staleness).
 
 ```bash
 python3 make_age.py

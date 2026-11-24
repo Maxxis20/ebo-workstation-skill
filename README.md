@@ -2,13 +2,13 @@
 
 Lets an AI coding agent (Claude Code) program EBO 7.1 for you: you describe the plant, the agent writes the
 Function Block program, loads it into the Enterprise Server through WorkStation, compiles it, binds it, draws an
-operator graphic and can publish values over MQTT. It works the real WorkStation through its user interface, the
+operator graphic and can publish values over MQTT or take them from an MQTT broker. It works the real WorkStation through its user interface, the
 same dialogs you would click.
 
 What is in the skill:
 
 - `reference/findings.md`: how WorkStation and the Function Block editor behave when driven from outside, the
-  `.aut` program text format with its traps, bindings, graphics (TGML), MQTT, the servers as containers
+  `.aut` program text format with its traps, bindings, graphics (TGML), MQTT both ways, the servers as containers
   (Enterprise Server, Edge Server) and bindings between two servers.
 - `scripts/ebo.sh` + `scripts/win/`: the driver. PowerShell that works WorkStation by UI Automation.
 - `scripts/aut.py`: Function Block program generator with automatic layout and wire routing.
@@ -19,6 +19,8 @@ What is in the skill:
   cooling stage in 20 hierarchical blocks and 33 alarms, plant simulation, animated operator graphic with info
   boxes, weekly schedules, trend logs and dashboard, the same program prepared in an MP-C controller, MQTT and a
   FUXA view. `deploy.sh` there loads the lot. How it runs: `examples/ahu01/README.md`.
+- `examples/lora-mqtt/`: values of a LoRaWAN sensor from an MQTT broker fed by a network server in ChirpStack
+  format, into EBO server values with units, plus a "sensor stopped reporting" alarm.
 
 ![Air handling unit example: the operator graphic](examples/ahu01/AHU01-HMI_preview.png)
 
@@ -35,7 +37,7 @@ Everything on one Windows machine, your laptop is fine:
   must be the same build. Licences and Schneider's EULA apply there just the same.
 - Claude Code for Windows (it brings Git Bash, which runs `ebo.sh`).
 - Python 3.
-- For the MQTT part only: Mosquitto on `127.0.0.1:1883`, and FUXA (`npm install -g @frangoteam/fuxa`) on
+- For the MQTT part only: Mosquitto on `127.0.0.1:1883` (also the broker to rehearse subscriptions on), and FUXA (`npm install -g @frangoteam/fuxa`) on
   `http://127.0.0.1:1881/` if you want the web view.
 
 ## Install
@@ -46,6 +48,9 @@ In Git Bash:
 git clone https://github.com/Maxxis20/ebo-workstation-skill ~/.claude/skills/ebo-workstation
 cd ~/.claude/skills/ebo-workstation
 ```
+
+To update later: `git -C ~/.claude/skills/ebo-workstation pull`, or tell Claude "update the EBO skill". The driver
+runs straight from that folder, so nothing else needs redoing.
 
 That is all you must do by hand. Start Claude Code and say what you want, for example "check that the EBO skill
 is ready on this machine" or straight away "build a Function Block program in EBO for an air handling unit
