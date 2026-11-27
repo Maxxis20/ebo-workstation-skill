@@ -16,6 +16,8 @@ Everything is generated from Python and loaded into EcoStruxure Building Operati
 
 The table lives in `steps.py`; program, graphic and tests read it from there.
 
+![The four tests on the operator graphic, one frame per screenshot](test-out/fan-sequence.gif)
+
 ## What it ran on
 
 An EcoStruxure Building Operation 7.1.1.132 **Enterprise Server only**, with WorkStation on the same Windows
@@ -57,8 +59,8 @@ values of the cycle before. 112 blocks, cycle 500 ms.
 | `make_hmi.py` -> `FanSeq.tgml`, `hmi_binds.json` | the graphic: header (unit state, step, time, mode, Reset, emergency stop), plant, test switches, steps list |
 | `make_objects.py` -> `FanSeq-cmd.xml`, `FanSeq-iot.xml`, `binds.json` | command values (folder Cmd), MQTT client (commands in, trace out), every binding |
 | `deploy.sh` | all of it onto a server, bound: about 7 minutes |
-| `run_tests.sh`, `seqtest.ps1`, `analyze.py` | the four test scenarios: commands by MQTT, trace by MQTT, screenshots, timeline |
-| `test-out/` | timelines, screenshots of the graphic and of the alarm list from the last run (results: `TESTS.md`) |
+| `run_tests.sh`, `seqtest.ps1`, `analyze.py`, `make_gif.py` | the four test scenarios: commands by MQTT, trace by MQTT, screenshots, timeline |
+| `test-out/` | timelines, screenshots of the graphic and of the alarm list from the last run, `fan-sequence.gif` made from the graphic ones (results: `TESTS.md`) |
 
 ## On a server
 

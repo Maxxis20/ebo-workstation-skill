@@ -27,3 +27,4 @@ for t in $TESTS; do
   done
   echo "== $t"; python3 analyze.py "$OUT/$t.txt" "$OUT/$t.act" | tee "$OUT/$t-timeline.txt"
 done
+python3 make_gif.py "$OUT"                     # test-out/fan-sequence.gif from the screenshots of the graphic
