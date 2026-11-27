@@ -1,0 +1,17 @@
+# spot price bridge beside the EBO container es1 (host network like es1). Broker on loopback only: nothing is
+# exposed to the LAN; es1 (host network) reaches it at 127.0.0.1:1883.
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.0.20
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+  spotd:
+    build: .
+    image: local/spotd:1
+    network_mode: host
+    restart: unless-stopped
+    depends_on: [mosquitto]
+    volumes:
+      - ./config.json:/cfg/config.json:ro

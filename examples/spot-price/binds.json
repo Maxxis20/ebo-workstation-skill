@@ -1,0 +1,1332 @@
+[
+[
+"SpotPrice/SPOT/Inputs",
+"Valid",
+"/Server 1/SpotPrice/Spot/valid/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Beat",
+"/Server 1/SpotPrice/Spot/beat/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Hour",
+"/Server 1/SpotPrice/Spot/hour/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Price",
+"/Server 1/SpotPrice/Spot/now/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Rank",
+"/Server 1/SpotPrice/Spot/rank/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Known",
+"/Server 1/SpotPrice/Spot/known/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Ctl_On",
+"/Server 1/SpotPrice/Set/Ctl_On/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Mode",
+"/Server 1/SpotPrice/Set/Mode/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"N_Cheap",
+"/Server 1/SpotPrice/Set/N_Cheap/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"N_Block",
+"/Server 1/SpotPrice/Set/N_Block/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Block_Above",
+"/Server 1/SpotPrice/Set/Block_Above/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Force_Below",
+"/Server 1/SpotPrice/Set/Force_Below/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Res",
+"/Server 1/SpotPrice/Set/Res/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Price15",
+"/Server 1/SpotPrice/Spot/now15/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Quarter",
+"/Server 1/SpotPrice/Spot/quarter/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Known15",
+"/Server 1/SpotPrice/Spot/known15/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Unit_MWh",
+"/Server 1/SpotPrice/Set/Unit_MWh/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Day_Avg",
+"/Server 1/SpotPrice/Spot/avg/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Day_Min",
+"/Server 1/SpotPrice/Spot/min/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Day_Max",
+"/Server 1/SpotPrice/Spot/max/Value"
+],
+[
+"SpotPrice/SPOT/Inputs",
+"Normal_Demand",
+"/Server 1/SpotPrice/Set/Normal_Demand/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H0",
+"/Server 1/SpotPrice/Spot/h0/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H1",
+"/Server 1/SpotPrice/Spot/h1/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H2",
+"/Server 1/SpotPrice/Spot/h2/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H3",
+"/Server 1/SpotPrice/Spot/h3/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H4",
+"/Server 1/SpotPrice/Spot/h4/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H5",
+"/Server 1/SpotPrice/Spot/h5/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H6",
+"/Server 1/SpotPrice/Spot/h6/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H7",
+"/Server 1/SpotPrice/Spot/h7/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H8",
+"/Server 1/SpotPrice/Spot/h8/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H9",
+"/Server 1/SpotPrice/Spot/h9/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H10",
+"/Server 1/SpotPrice/Spot/h10/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H11",
+"/Server 1/SpotPrice/Spot/h11/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H12",
+"/Server 1/SpotPrice/Spot/h12/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H13",
+"/Server 1/SpotPrice/Spot/h13/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H14",
+"/Server 1/SpotPrice/Spot/h14/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H15",
+"/Server 1/SpotPrice/Spot/h15/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H16",
+"/Server 1/SpotPrice/Spot/h16/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H17",
+"/Server 1/SpotPrice/Spot/h17/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H18",
+"/Server 1/SpotPrice/Spot/h18/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H19",
+"/Server 1/SpotPrice/Spot/h19/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H20",
+"/Server 1/SpotPrice/Spot/h20/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H21",
+"/Server 1/SpotPrice/Spot/h21/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H22",
+"/Server 1/SpotPrice/Spot/h22/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"H23",
+"/Server 1/SpotPrice/Spot/h23/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R0",
+"/Server 1/SpotPrice/Spot/r0/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R1",
+"/Server 1/SpotPrice/Spot/r1/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R2",
+"/Server 1/SpotPrice/Spot/r2/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R3",
+"/Server 1/SpotPrice/Spot/r3/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R4",
+"/Server 1/SpotPrice/Spot/r4/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R5",
+"/Server 1/SpotPrice/Spot/r5/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R6",
+"/Server 1/SpotPrice/Spot/r6/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R7",
+"/Server 1/SpotPrice/Spot/r7/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R8",
+"/Server 1/SpotPrice/Spot/r8/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R9",
+"/Server 1/SpotPrice/Spot/r9/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R10",
+"/Server 1/SpotPrice/Spot/r10/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R11",
+"/Server 1/SpotPrice/Spot/r11/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R12",
+"/Server 1/SpotPrice/Spot/r12/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R13",
+"/Server 1/SpotPrice/Spot/r13/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R14",
+"/Server 1/SpotPrice/Spot/r14/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R15",
+"/Server 1/SpotPrice/Spot/r15/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R16",
+"/Server 1/SpotPrice/Spot/r16/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R17",
+"/Server 1/SpotPrice/Spot/r17/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R18",
+"/Server 1/SpotPrice/Spot/r18/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R19",
+"/Server 1/SpotPrice/Spot/r19/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R20",
+"/Server 1/SpotPrice/Spot/r20/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R21",
+"/Server 1/SpotPrice/Spot/r21/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R22",
+"/Server 1/SpotPrice/Spot/r22/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"R23",
+"/Server 1/SpotPrice/Spot/r23/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U0",
+"/Server 1/SpotPrice/Spot/u0/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U1",
+"/Server 1/SpotPrice/Spot/u1/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U2",
+"/Server 1/SpotPrice/Spot/u2/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U3",
+"/Server 1/SpotPrice/Spot/u3/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U4",
+"/Server 1/SpotPrice/Spot/u4/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U5",
+"/Server 1/SpotPrice/Spot/u5/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U6",
+"/Server 1/SpotPrice/Spot/u6/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U7",
+"/Server 1/SpotPrice/Spot/u7/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U8",
+"/Server 1/SpotPrice/Spot/u8/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U9",
+"/Server 1/SpotPrice/Spot/u9/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U10",
+"/Server 1/SpotPrice/Spot/u10/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U11",
+"/Server 1/SpotPrice/Spot/u11/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U12",
+"/Server 1/SpotPrice/Spot/u12/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U13",
+"/Server 1/SpotPrice/Spot/u13/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U14",
+"/Server 1/SpotPrice/Spot/u14/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U15",
+"/Server 1/SpotPrice/Spot/u15/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U16",
+"/Server 1/SpotPrice/Spot/u16/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U17",
+"/Server 1/SpotPrice/Spot/u17/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U18",
+"/Server 1/SpotPrice/Spot/u18/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U19",
+"/Server 1/SpotPrice/Spot/u19/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U20",
+"/Server 1/SpotPrice/Spot/u20/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U21",
+"/Server 1/SpotPrice/Spot/u21/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U22",
+"/Server 1/SpotPrice/Spot/u22/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U23",
+"/Server 1/SpotPrice/Spot/u23/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U24",
+"/Server 1/SpotPrice/Spot/u24/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U25",
+"/Server 1/SpotPrice/Spot/u25/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U26",
+"/Server 1/SpotPrice/Spot/u26/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U27",
+"/Server 1/SpotPrice/Spot/u27/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U28",
+"/Server 1/SpotPrice/Spot/u28/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U29",
+"/Server 1/SpotPrice/Spot/u29/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U30",
+"/Server 1/SpotPrice/Spot/u30/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U31",
+"/Server 1/SpotPrice/Spot/u31/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U32",
+"/Server 1/SpotPrice/Spot/u32/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U33",
+"/Server 1/SpotPrice/Spot/u33/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U34",
+"/Server 1/SpotPrice/Spot/u34/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"U35",
+"/Server 1/SpotPrice/Spot/u35/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q0",
+"/Server 1/SpotPrice/Spot/q0/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q1",
+"/Server 1/SpotPrice/Spot/q1/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q2",
+"/Server 1/SpotPrice/Spot/q2/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q3",
+"/Server 1/SpotPrice/Spot/q3/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q4",
+"/Server 1/SpotPrice/Spot/q4/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q5",
+"/Server 1/SpotPrice/Spot/q5/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q6",
+"/Server 1/SpotPrice/Spot/q6/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q7",
+"/Server 1/SpotPrice/Spot/q7/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q8",
+"/Server 1/SpotPrice/Spot/q8/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q9",
+"/Server 1/SpotPrice/Spot/q9/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q10",
+"/Server 1/SpotPrice/Spot/q10/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q11",
+"/Server 1/SpotPrice/Spot/q11/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q12",
+"/Server 1/SpotPrice/Spot/q12/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q13",
+"/Server 1/SpotPrice/Spot/q13/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q14",
+"/Server 1/SpotPrice/Spot/q14/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q15",
+"/Server 1/SpotPrice/Spot/q15/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q16",
+"/Server 1/SpotPrice/Spot/q16/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q17",
+"/Server 1/SpotPrice/Spot/q17/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q18",
+"/Server 1/SpotPrice/Spot/q18/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q19",
+"/Server 1/SpotPrice/Spot/q19/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q20",
+"/Server 1/SpotPrice/Spot/q20/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q21",
+"/Server 1/SpotPrice/Spot/q21/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q22",
+"/Server 1/SpotPrice/Spot/q22/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q23",
+"/Server 1/SpotPrice/Spot/q23/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q24",
+"/Server 1/SpotPrice/Spot/q24/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q25",
+"/Server 1/SpotPrice/Spot/q25/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q26",
+"/Server 1/SpotPrice/Spot/q26/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q27",
+"/Server 1/SpotPrice/Spot/q27/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q28",
+"/Server 1/SpotPrice/Spot/q28/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q29",
+"/Server 1/SpotPrice/Spot/q29/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q30",
+"/Server 1/SpotPrice/Spot/q30/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q31",
+"/Server 1/SpotPrice/Spot/q31/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q32",
+"/Server 1/SpotPrice/Spot/q32/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q33",
+"/Server 1/SpotPrice/Spot/q33/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q34",
+"/Server 1/SpotPrice/Spot/q34/Value"
+],
+[
+"SpotPrice/SPOT/Prices",
+"Q35",
+"/Server 1/SpotPrice/Spot/q35/Value"
+],
+[
+"SpotPrice/SPOT/Block",
+"Blk1",
+"/Server 1/SpotPrice/Spot/blk1/Value"
+],
+[
+"SpotPrice/SPOT/Block",
+"Blk2",
+"/Server 1/SpotPrice/Spot/blk2/Value"
+],
+[
+"SpotPrice/SPOT/Block",
+"Blk3",
+"/Server 1/SpotPrice/Spot/blk3/Value"
+],
+[
+"SpotPrice/SPOT/Block",
+"Blk4",
+"/Server 1/SpotPrice/Spot/blk4/Value"
+],
+[
+"SpotPrice/SPOT/Block",
+"Blk5",
+"/Server 1/SpotPrice/Spot/blk5/Value"
+],
+[
+"SpotPrice/SPOT/Block",
+"Blk6",
+"/Server 1/SpotPrice/Spot/blk6/Value"
+],
+[
+"SpotPrice/SPOT/Block",
+"Blk7",
+"/Server 1/SpotPrice/Spot/blk7/Value"
+],
+[
+"SpotPrice/SPOT/Block",
+"Blk8",
+"/Server 1/SpotPrice/Spot/blk8/Value"
+],
+[
+"SpotPrice/SPOT/Block",
+"Blk9",
+"/Server 1/SpotPrice/Spot/blk9/Value"
+],
+[
+"SpotPrice/SPOT/Block",
+"Blk10",
+"/Server 1/SpotPrice/Spot/blk10/Value"
+],
+[
+"SpotPrice/SPOT/Block",
+"Blk11",
+"/Server 1/SpotPrice/Spot/blk11/Value"
+],
+[
+"SpotPrice/SPOT/Block",
+"Blk12",
+"/Server 1/SpotPrice/Spot/blk12/Value"
+],
+[
+"SpotPrice/Graphic",
+"REASON",
+"/Server 1/SpotPrice/SPOT/Ctl/Reason"
+],
+[
+"SpotPrice/Graphic",
+"LOAD",
+"/Server 1/SpotPrice/SPOT/Ctl/Load_Cmd"
+],
+[
+"SpotPrice/Graphic",
+"AL_INV",
+"/Server 1/SpotPrice/SPOT/Alarms/Price_Invalid"
+],
+[
+"SpotPrice/Graphic",
+"AL_STOP",
+"/Server 1/SpotPrice/SPOT/Alarms/Bridge_Stopped"
+],
+[
+"SpotPrice/Graphic",
+"PRICE",
+"/Server 1/SpotPrice/SPOT/Hmi/Disp_Price"
+],
+[
+"SpotPrice/Graphic",
+"UNIT",
+"/Server 1/SpotPrice/Set/Unit_MWh/Value"
+],
+[
+"SpotPrice/Graphic",
+"RES15",
+"/Server 1/SpotPrice/SPOT/Ctl/Res15"
+],
+[
+"SpotPrice/Graphic",
+"RANK",
+"/Server 1/SpotPrice/SPOT/Inputs/Rank"
+],
+[
+"SpotPrice/Graphic",
+"D_AVG",
+"/Server 1/SpotPrice/SPOT/Hmi/Disp_Avg"
+],
+[
+"SpotPrice/Graphic",
+"D_MIN",
+"/Server 1/SpotPrice/SPOT/Hmi/Disp_Min"
+],
+[
+"SpotPrice/Graphic",
+"D_MAX",
+"/Server 1/SpotPrice/SPOT/Hmi/Disp_Max"
+],
+[
+"SpotPrice/Graphic",
+"VALID",
+"/Server 1/SpotPrice/SPOT/Inputs/Valid"
+],
+[
+"SpotPrice/Graphic",
+"BEAT_AGE",
+"/Server 1/SpotPrice/SPOT/Ctl/Beat_Age"
+],
+[
+"SpotPrice/Graphic",
+"KNOWN",
+"/Server 1/SpotPrice/SPOT/Inputs/Known"
+],
+[
+"SpotPrice/Graphic",
+"U0",
+"/Server 1/SpotPrice/SPOT/Hmi/G0"
+],
+[
+"SpotPrice/Graphic",
+"C0",
+"/Server 1/SpotPrice/SPOT/Hmi/U0"
+],
+[
+"SpotPrice/Graphic",
+"L0",
+"/Server 1/SpotPrice/SPOT/Hmi/L0"
+],
+[
+"SpotPrice/Graphic",
+"U1",
+"/Server 1/SpotPrice/SPOT/Hmi/G1"
+],
+[
+"SpotPrice/Graphic",
+"C1",
+"/Server 1/SpotPrice/SPOT/Hmi/U1"
+],
+[
+"SpotPrice/Graphic",
+"U2",
+"/Server 1/SpotPrice/SPOT/Hmi/G2"
+],
+[
+"SpotPrice/Graphic",
+"C2",
+"/Server 1/SpotPrice/SPOT/Hmi/U2"
+],
+[
+"SpotPrice/Graphic",
+"U3",
+"/Server 1/SpotPrice/SPOT/Hmi/G3"
+],
+[
+"SpotPrice/Graphic",
+"C3",
+"/Server 1/SpotPrice/SPOT/Hmi/U3"
+],
+[
+"SpotPrice/Graphic",
+"L3",
+"/Server 1/SpotPrice/SPOT/Hmi/L3"
+],
+[
+"SpotPrice/Graphic",
+"U4",
+"/Server 1/SpotPrice/SPOT/Hmi/G4"
+],
+[
+"SpotPrice/Graphic",
+"C4",
+"/Server 1/SpotPrice/SPOT/Hmi/U4"
+],
+[
+"SpotPrice/Graphic",
+"U5",
+"/Server 1/SpotPrice/SPOT/Hmi/G5"
+],
+[
+"SpotPrice/Graphic",
+"C5",
+"/Server 1/SpotPrice/SPOT/Hmi/U5"
+],
+[
+"SpotPrice/Graphic",
+"U6",
+"/Server 1/SpotPrice/SPOT/Hmi/G6"
+],
+[
+"SpotPrice/Graphic",
+"C6",
+"/Server 1/SpotPrice/SPOT/Hmi/U6"
+],
+[
+"SpotPrice/Graphic",
+"L6",
+"/Server 1/SpotPrice/SPOT/Hmi/L6"
+],
+[
+"SpotPrice/Graphic",
+"U7",
+"/Server 1/SpotPrice/SPOT/Hmi/G7"
+],
+[
+"SpotPrice/Graphic",
+"C7",
+"/Server 1/SpotPrice/SPOT/Hmi/U7"
+],
+[
+"SpotPrice/Graphic",
+"U8",
+"/Server 1/SpotPrice/SPOT/Hmi/G8"
+],
+[
+"SpotPrice/Graphic",
+"C8",
+"/Server 1/SpotPrice/SPOT/Hmi/U8"
+],
+[
+"SpotPrice/Graphic",
+"U9",
+"/Server 1/SpotPrice/SPOT/Hmi/G9"
+],
+[
+"SpotPrice/Graphic",
+"C9",
+"/Server 1/SpotPrice/SPOT/Hmi/U9"
+],
+[
+"SpotPrice/Graphic",
+"L9",
+"/Server 1/SpotPrice/SPOT/Hmi/L9"
+],
+[
+"SpotPrice/Graphic",
+"U10",
+"/Server 1/SpotPrice/SPOT/Hmi/G10"
+],
+[
+"SpotPrice/Graphic",
+"C10",
+"/Server 1/SpotPrice/SPOT/Hmi/U10"
+],
+[
+"SpotPrice/Graphic",
+"U11",
+"/Server 1/SpotPrice/SPOT/Hmi/G11"
+],
+[
+"SpotPrice/Graphic",
+"C11",
+"/Server 1/SpotPrice/SPOT/Hmi/U11"
+],
+[
+"SpotPrice/Graphic",
+"U12",
+"/Server 1/SpotPrice/SPOT/Hmi/G12"
+],
+[
+"SpotPrice/Graphic",
+"C12",
+"/Server 1/SpotPrice/SPOT/Hmi/U12"
+],
+[
+"SpotPrice/Graphic",
+"L12",
+"/Server 1/SpotPrice/SPOT/Hmi/L12"
+],
+[
+"SpotPrice/Graphic",
+"U13",
+"/Server 1/SpotPrice/SPOT/Hmi/G13"
+],
+[
+"SpotPrice/Graphic",
+"C13",
+"/Server 1/SpotPrice/SPOT/Hmi/U13"
+],
+[
+"SpotPrice/Graphic",
+"U14",
+"/Server 1/SpotPrice/SPOT/Hmi/G14"
+],
+[
+"SpotPrice/Graphic",
+"C14",
+"/Server 1/SpotPrice/SPOT/Hmi/U14"
+],
+[
+"SpotPrice/Graphic",
+"U15",
+"/Server 1/SpotPrice/SPOT/Hmi/G15"
+],
+[
+"SpotPrice/Graphic",
+"C15",
+"/Server 1/SpotPrice/SPOT/Hmi/U15"
+],
+[
+"SpotPrice/Graphic",
+"L15",
+"/Server 1/SpotPrice/SPOT/Hmi/L15"
+],
+[
+"SpotPrice/Graphic",
+"U16",
+"/Server 1/SpotPrice/SPOT/Hmi/G16"
+],
+[
+"SpotPrice/Graphic",
+"C16",
+"/Server 1/SpotPrice/SPOT/Hmi/U16"
+],
+[
+"SpotPrice/Graphic",
+"U17",
+"/Server 1/SpotPrice/SPOT/Hmi/G17"
+],
+[
+"SpotPrice/Graphic",
+"C17",
+"/Server 1/SpotPrice/SPOT/Hmi/U17"
+],
+[
+"SpotPrice/Graphic",
+"U18",
+"/Server 1/SpotPrice/SPOT/Hmi/G18"
+],
+[
+"SpotPrice/Graphic",
+"C18",
+"/Server 1/SpotPrice/SPOT/Hmi/U18"
+],
+[
+"SpotPrice/Graphic",
+"L18",
+"/Server 1/SpotPrice/SPOT/Hmi/L18"
+],
+[
+"SpotPrice/Graphic",
+"U19",
+"/Server 1/SpotPrice/SPOT/Hmi/G19"
+],
+[
+"SpotPrice/Graphic",
+"C19",
+"/Server 1/SpotPrice/SPOT/Hmi/U19"
+],
+[
+"SpotPrice/Graphic",
+"U20",
+"/Server 1/SpotPrice/SPOT/Hmi/G20"
+],
+[
+"SpotPrice/Graphic",
+"C20",
+"/Server 1/SpotPrice/SPOT/Hmi/U20"
+],
+[
+"SpotPrice/Graphic",
+"U21",
+"/Server 1/SpotPrice/SPOT/Hmi/G21"
+],
+[
+"SpotPrice/Graphic",
+"C21",
+"/Server 1/SpotPrice/SPOT/Hmi/U21"
+],
+[
+"SpotPrice/Graphic",
+"L21",
+"/Server 1/SpotPrice/SPOT/Hmi/L21"
+],
+[
+"SpotPrice/Graphic",
+"U22",
+"/Server 1/SpotPrice/SPOT/Hmi/G22"
+],
+[
+"SpotPrice/Graphic",
+"C22",
+"/Server 1/SpotPrice/SPOT/Hmi/U22"
+],
+[
+"SpotPrice/Graphic",
+"U23",
+"/Server 1/SpotPrice/SPOT/Hmi/G23"
+],
+[
+"SpotPrice/Graphic",
+"C23",
+"/Server 1/SpotPrice/SPOT/Hmi/U23"
+],
+[
+"SpotPrice/Graphic",
+"U24",
+"/Server 1/SpotPrice/SPOT/Hmi/G24"
+],
+[
+"SpotPrice/Graphic",
+"C24",
+"/Server 1/SpotPrice/SPOT/Hmi/U24"
+],
+[
+"SpotPrice/Graphic",
+"L24",
+"/Server 1/SpotPrice/SPOT/Hmi/L24"
+],
+[
+"SpotPrice/Graphic",
+"U25",
+"/Server 1/SpotPrice/SPOT/Hmi/G25"
+],
+[
+"SpotPrice/Graphic",
+"C25",
+"/Server 1/SpotPrice/SPOT/Hmi/U25"
+],
+[
+"SpotPrice/Graphic",
+"U26",
+"/Server 1/SpotPrice/SPOT/Hmi/G26"
+],
+[
+"SpotPrice/Graphic",
+"C26",
+"/Server 1/SpotPrice/SPOT/Hmi/U26"
+],
+[
+"SpotPrice/Graphic",
+"U27",
+"/Server 1/SpotPrice/SPOT/Hmi/G27"
+],
+[
+"SpotPrice/Graphic",
+"C27",
+"/Server 1/SpotPrice/SPOT/Hmi/U27"
+],
+[
+"SpotPrice/Graphic",
+"L27",
+"/Server 1/SpotPrice/SPOT/Hmi/L27"
+],
+[
+"SpotPrice/Graphic",
+"U28",
+"/Server 1/SpotPrice/SPOT/Hmi/G28"
+],
+[
+"SpotPrice/Graphic",
+"C28",
+"/Server 1/SpotPrice/SPOT/Hmi/U28"
+],
+[
+"SpotPrice/Graphic",
+"U29",
+"/Server 1/SpotPrice/SPOT/Hmi/G29"
+],
+[
+"SpotPrice/Graphic",
+"C29",
+"/Server 1/SpotPrice/SPOT/Hmi/U29"
+],
+[
+"SpotPrice/Graphic",
+"U30",
+"/Server 1/SpotPrice/SPOT/Hmi/G30"
+],
+[
+"SpotPrice/Graphic",
+"C30",
+"/Server 1/SpotPrice/SPOT/Hmi/U30"
+],
+[
+"SpotPrice/Graphic",
+"L30",
+"/Server 1/SpotPrice/SPOT/Hmi/L30"
+],
+[
+"SpotPrice/Graphic",
+"U31",
+"/Server 1/SpotPrice/SPOT/Hmi/G31"
+],
+[
+"SpotPrice/Graphic",
+"C31",
+"/Server 1/SpotPrice/SPOT/Hmi/U31"
+],
+[
+"SpotPrice/Graphic",
+"U32",
+"/Server 1/SpotPrice/SPOT/Hmi/G32"
+],
+[
+"SpotPrice/Graphic",
+"C32",
+"/Server 1/SpotPrice/SPOT/Hmi/U32"
+],
+[
+"SpotPrice/Graphic",
+"U33",
+"/Server 1/SpotPrice/SPOT/Hmi/G33"
+],
+[
+"SpotPrice/Graphic",
+"C33",
+"/Server 1/SpotPrice/SPOT/Hmi/U33"
+],
+[
+"SpotPrice/Graphic",
+"L33",
+"/Server 1/SpotPrice/SPOT/Hmi/L33"
+],
+[
+"SpotPrice/Graphic",
+"U34",
+"/Server 1/SpotPrice/SPOT/Hmi/G34"
+],
+[
+"SpotPrice/Graphic",
+"C34",
+"/Server 1/SpotPrice/SPOT/Hmi/U34"
+],
+[
+"SpotPrice/Graphic",
+"U35",
+"/Server 1/SpotPrice/SPOT/Hmi/G35"
+],
+[
+"SpotPrice/Graphic",
+"C35",
+"/Server 1/SpotPrice/SPOT/Hmi/U35"
+],
+[
+"SpotPrice/Graphic",
+"L_BLOCK",
+"/Server 1/SpotPrice/Set/Block_Above/Value"
+],
+[
+"SpotPrice/Graphic",
+"L_FORCE",
+"/Server 1/SpotPrice/Set/Force_Below/Value"
+],
+[
+"SpotPrice/Graphic",
+"CTL",
+"/Server 1/SpotPrice/Set/Ctl_On/Value"
+],
+[
+"SpotPrice/Graphic",
+"RES",
+"/Server 1/SpotPrice/Set/Res/Value"
+],
+[
+"SpotPrice/Graphic",
+"MODE",
+"/Server 1/SpotPrice/Set/Mode/Value"
+],
+[
+"SpotPrice/Graphic",
+"N_CHEAP",
+"/Server 1/SpotPrice/Set/N_Cheap/Value"
+],
+[
+"SpotPrice/Graphic",
+"N_BLOCK",
+"/Server 1/SpotPrice/Set/N_Block/Value"
+],
+[
+"SpotPrice/Graphic",
+"NORMAL",
+"/Server 1/SpotPrice/Set/Normal_Demand/Value"
+],
+[
+"SpotPrice/Graphic",
+"BMODE",
+"/Server 1/SpotPrice/SPOT/Ctl/Block_Mode"
+],
+[
+"SpotPrice/Graphic",
+"N_PRICE",
+"/Server 1/SpotPrice/SPOT/Hmi/Disp_N_Price"
+],
+[
+"SpotPrice/Graphic",
+"PLANNED",
+"/Server 1/SpotPrice/SPOT/Plan/Planned"
+],
+[
+"SpotPrice/Graphic",
+"P_WAIT",
+"/Server 1/SpotPrice/SPOT/Plan/Plan_Wait"
+],
+[
+"SpotPrice/Graphic",
+"P_LEFT",
+"/Server 1/SpotPrice/SPOT/Plan/Plan_Left"
+],
+[
+"SpotPrice/Graphic",
+"INBLOCK",
+"/Server 1/SpotPrice/SPOT/Plan/In_Block"
+],
+[
+"SpotPrice/Graphic",
+"B_IN",
+"/Server 1/SpotPrice/SPOT/Block/Best_In"
+]
+]

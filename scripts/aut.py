@@ -262,6 +262,9 @@ class Program:
     def block(self, typ, name="", params=(), unit="", desc="", public=False, module="", inputs=None,
               rw=None, backup=None):
         """rw / backup: the R/W and Backup check boxes; None keeps what the block type usually carries."""
+        for what, text in (("unit", unit), ("description", desc), ("name", name)):
+            if "'" in text:      # .aut strings are in single quotes: one inside ends it (the check stops at that line)
+                raise ValueError(f"block {name}: no single quote (') in the {what}: {text}")
         params = list(params)
         if typ in IO_DEFAULT and len(params) != len(IO_DEFAULT[typ]):
             head, params = params, list(IO_DEFAULT[typ])            # RI: a single value given = filter time constant

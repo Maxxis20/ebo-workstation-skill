@@ -1,0 +1,918 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ObjectSet ExportMode="Special" Note="TypesFirst" Version="7.1.1.132">
+  <MetaInformation>
+    <ExportMode Value="Special" />
+    <RuntimeVersion Value="7.1.1.132" />
+    <SourceVersion Value="7.1.1.132" />
+    <ServerFullPath Value="/Server 1" />
+  </MetaInformation>
+  <ExportedObjects>
+    <OI NAME="Spot" TYPE="system.base.Folder">
+      <OI NAME="valid" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.valid" />
+      </OI>
+      <OI NAME="beat" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.beat" />
+      </OI>
+      <OI NAME="hour" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.hour" />
+      </OI>
+      <OI NAME="quarter" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.quarter" />
+      </OI>
+      <OI NAME="now" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.now" />
+      </OI>
+      <OI NAME="now15" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.now15" />
+      </OI>
+      <OI NAME="now_total" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.now_total" />
+      </OI>
+      <OI NAME="rank" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.rank" />
+      </OI>
+      <OI NAME="avg" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.avg" />
+      </OI>
+      <OI NAME="min" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.min" />
+      </OI>
+      <OI NAME="max" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.max" />
+      </OI>
+      <OI NAME="known" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.known" />
+      </OI>
+      <OI NAME="known15" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.known15" />
+      </OI>
+      <OI NAME="tomorrow_ok" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.tomorrow_ok" />
+      </OI>
+      <OI NAME="age_s" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.age_s" />
+      </OI>
+      <OI NAME="h0" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h0" />
+      </OI>
+      <OI NAME="h1" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h1" />
+      </OI>
+      <OI NAME="h2" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h2" />
+      </OI>
+      <OI NAME="h3" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h3" />
+      </OI>
+      <OI NAME="h4" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h4" />
+      </OI>
+      <OI NAME="h5" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h5" />
+      </OI>
+      <OI NAME="h6" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h6" />
+      </OI>
+      <OI NAME="h7" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h7" />
+      </OI>
+      <OI NAME="h8" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h8" />
+      </OI>
+      <OI NAME="h9" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h9" />
+      </OI>
+      <OI NAME="h10" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h10" />
+      </OI>
+      <OI NAME="h11" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h11" />
+      </OI>
+      <OI NAME="h12" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h12" />
+      </OI>
+      <OI NAME="h13" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h13" />
+      </OI>
+      <OI NAME="h14" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h14" />
+      </OI>
+      <OI NAME="h15" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h15" />
+      </OI>
+      <OI NAME="h16" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h16" />
+      </OI>
+      <OI NAME="h17" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h17" />
+      </OI>
+      <OI NAME="h18" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h18" />
+      </OI>
+      <OI NAME="h19" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h19" />
+      </OI>
+      <OI NAME="h20" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h20" />
+      </OI>
+      <OI NAME="h21" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h21" />
+      </OI>
+      <OI NAME="h22" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h22" />
+      </OI>
+      <OI NAME="h23" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.h23" />
+      </OI>
+      <OI NAME="r0" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r0" />
+      </OI>
+      <OI NAME="r1" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r1" />
+      </OI>
+      <OI NAME="r2" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r2" />
+      </OI>
+      <OI NAME="r3" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r3" />
+      </OI>
+      <OI NAME="r4" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r4" />
+      </OI>
+      <OI NAME="r5" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r5" />
+      </OI>
+      <OI NAME="r6" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r6" />
+      </OI>
+      <OI NAME="r7" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r7" />
+      </OI>
+      <OI NAME="r8" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r8" />
+      </OI>
+      <OI NAME="r9" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r9" />
+      </OI>
+      <OI NAME="r10" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r10" />
+      </OI>
+      <OI NAME="r11" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r11" />
+      </OI>
+      <OI NAME="r12" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r12" />
+      </OI>
+      <OI NAME="r13" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r13" />
+      </OI>
+      <OI NAME="r14" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r14" />
+      </OI>
+      <OI NAME="r15" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r15" />
+      </OI>
+      <OI NAME="r16" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r16" />
+      </OI>
+      <OI NAME="r17" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r17" />
+      </OI>
+      <OI NAME="r18" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r18" />
+      </OI>
+      <OI NAME="r19" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r19" />
+      </OI>
+      <OI NAME="r20" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r20" />
+      </OI>
+      <OI NAME="r21" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r21" />
+      </OI>
+      <OI NAME="r22" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r22" />
+      </OI>
+      <OI NAME="r23" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.r23" />
+      </OI>
+      <OI NAME="u0" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u0" />
+      </OI>
+      <OI NAME="u1" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u1" />
+      </OI>
+      <OI NAME="u2" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u2" />
+      </OI>
+      <OI NAME="u3" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u3" />
+      </OI>
+      <OI NAME="u4" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u4" />
+      </OI>
+      <OI NAME="u5" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u5" />
+      </OI>
+      <OI NAME="u6" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u6" />
+      </OI>
+      <OI NAME="u7" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u7" />
+      </OI>
+      <OI NAME="u8" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u8" />
+      </OI>
+      <OI NAME="u9" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u9" />
+      </OI>
+      <OI NAME="u10" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u10" />
+      </OI>
+      <OI NAME="u11" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u11" />
+      </OI>
+      <OI NAME="u12" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u12" />
+      </OI>
+      <OI NAME="u13" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u13" />
+      </OI>
+      <OI NAME="u14" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u14" />
+      </OI>
+      <OI NAME="u15" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u15" />
+      </OI>
+      <OI NAME="u16" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u16" />
+      </OI>
+      <OI NAME="u17" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u17" />
+      </OI>
+      <OI NAME="u18" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u18" />
+      </OI>
+      <OI NAME="u19" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u19" />
+      </OI>
+      <OI NAME="u20" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u20" />
+      </OI>
+      <OI NAME="u21" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u21" />
+      </OI>
+      <OI NAME="u22" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u22" />
+      </OI>
+      <OI NAME="u23" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u23" />
+      </OI>
+      <OI NAME="u24" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u24" />
+      </OI>
+      <OI NAME="u25" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u25" />
+      </OI>
+      <OI NAME="u26" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u26" />
+      </OI>
+      <OI NAME="u27" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u27" />
+      </OI>
+      <OI NAME="u28" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u28" />
+      </OI>
+      <OI NAME="u29" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u29" />
+      </OI>
+      <OI NAME="u30" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u30" />
+      </OI>
+      <OI NAME="u31" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u31" />
+      </OI>
+      <OI NAME="u32" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u32" />
+      </OI>
+      <OI NAME="u33" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u33" />
+      </OI>
+      <OI NAME="u34" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u34" />
+      </OI>
+      <OI NAME="u35" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u35" />
+      </OI>
+      <OI NAME="u36" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u36" />
+      </OI>
+      <OI NAME="u37" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u37" />
+      </OI>
+      <OI NAME="u38" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u38" />
+      </OI>
+      <OI NAME="u39" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u39" />
+      </OI>
+      <OI NAME="u40" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u40" />
+      </OI>
+      <OI NAME="u41" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u41" />
+      </OI>
+      <OI NAME="u42" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u42" />
+      </OI>
+      <OI NAME="u43" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u43" />
+      </OI>
+      <OI NAME="u44" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u44" />
+      </OI>
+      <OI NAME="u45" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u45" />
+      </OI>
+      <OI NAME="u46" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u46" />
+      </OI>
+      <OI NAME="u47" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.u47" />
+      </OI>
+      <OI NAME="blk1" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.blk1" />
+      </OI>
+      <OI NAME="blk2" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.blk2" />
+      </OI>
+      <OI NAME="blk3" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.blk3" />
+      </OI>
+      <OI NAME="blk4" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.blk4" />
+      </OI>
+      <OI NAME="blk5" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.blk5" />
+      </OI>
+      <OI NAME="blk6" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.blk6" />
+      </OI>
+      <OI NAME="blk7" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.blk7" />
+      </OI>
+      <OI NAME="blk8" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.blk8" />
+      </OI>
+      <OI NAME="blk9" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.blk9" />
+      </OI>
+      <OI NAME="blk10" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.blk10" />
+      </OI>
+      <OI NAME="blk11" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.blk11" />
+      </OI>
+      <OI NAME="blk12" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.blk12" />
+      </OI>
+      <OI NAME="q0" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q0" />
+      </OI>
+      <OI NAME="q1" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q1" />
+      </OI>
+      <OI NAME="q2" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q2" />
+      </OI>
+      <OI NAME="q3" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q3" />
+      </OI>
+      <OI NAME="q4" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q4" />
+      </OI>
+      <OI NAME="q5" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q5" />
+      </OI>
+      <OI NAME="q6" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q6" />
+      </OI>
+      <OI NAME="q7" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q7" />
+      </OI>
+      <OI NAME="q8" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q8" />
+      </OI>
+      <OI NAME="q9" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q9" />
+      </OI>
+      <OI NAME="q10" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q10" />
+      </OI>
+      <OI NAME="q11" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q11" />
+      </OI>
+      <OI NAME="q12" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q12" />
+      </OI>
+      <OI NAME="q13" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q13" />
+      </OI>
+      <OI NAME="q14" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q14" />
+      </OI>
+      <OI NAME="q15" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q15" />
+      </OI>
+      <OI NAME="q16" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q16" />
+      </OI>
+      <OI NAME="q17" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q17" />
+      </OI>
+      <OI NAME="q18" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q18" />
+      </OI>
+      <OI NAME="q19" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q19" />
+      </OI>
+      <OI NAME="q20" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q20" />
+      </OI>
+      <OI NAME="q21" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q21" />
+      </OI>
+      <OI NAME="q22" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q22" />
+      </OI>
+      <OI NAME="q23" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q23" />
+      </OI>
+      <OI NAME="q24" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q24" />
+      </OI>
+      <OI NAME="q25" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q25" />
+      </OI>
+      <OI NAME="q26" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q26" />
+      </OI>
+      <OI NAME="q27" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q27" />
+      </OI>
+      <OI NAME="q28" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q28" />
+      </OI>
+      <OI NAME="q29" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q29" />
+      </OI>
+      <OI NAME="q30" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q30" />
+      </OI>
+      <OI NAME="q31" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q31" />
+      </OI>
+      <OI NAME="q32" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q32" />
+      </OI>
+      <OI NAME="q33" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q33" />
+      </OI>
+      <OI NAME="q34" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q34" />
+      </OI>
+      <OI NAME="q35" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q35" />
+      </OI>
+      <OI NAME="q36" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q36" />
+      </OI>
+      <OI NAME="q37" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q37" />
+      </OI>
+      <OI NAME="q38" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q38" />
+      </OI>
+      <OI NAME="q39" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q39" />
+      </OI>
+      <OI NAME="q40" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q40" />
+      </OI>
+      <OI NAME="q41" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q41" />
+      </OI>
+      <OI NAME="q42" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q42" />
+      </OI>
+      <OI NAME="q43" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q43" />
+      </OI>
+      <OI NAME="q44" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q44" />
+      </OI>
+      <OI NAME="q45" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q45" />
+      </OI>
+      <OI NAME="q46" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q46" />
+      </OI>
+      <OI NAME="q47" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q47" />
+      </OI>
+      <OI NAME="q48" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q48" />
+      </OI>
+      <OI NAME="q49" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q49" />
+      </OI>
+      <OI NAME="q50" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q50" />
+      </OI>
+      <OI NAME="q51" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q51" />
+      </OI>
+      <OI NAME="q52" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q52" />
+      </OI>
+      <OI NAME="q53" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q53" />
+      </OI>
+      <OI NAME="q54" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q54" />
+      </OI>
+      <OI NAME="q55" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q55" />
+      </OI>
+      <OI NAME="q56" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q56" />
+      </OI>
+      <OI NAME="q57" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q57" />
+      </OI>
+      <OI NAME="q58" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q58" />
+      </OI>
+      <OI NAME="q59" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q59" />
+      </OI>
+      <OI NAME="q60" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q60" />
+      </OI>
+      <OI NAME="q61" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q61" />
+      </OI>
+      <OI NAME="q62" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q62" />
+      </OI>
+      <OI NAME="q63" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q63" />
+      </OI>
+      <OI NAME="q64" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q64" />
+      </OI>
+      <OI NAME="q65" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q65" />
+      </OI>
+      <OI NAME="q66" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q66" />
+      </OI>
+      <OI NAME="q67" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q67" />
+      </OI>
+      <OI NAME="q68" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q68" />
+      </OI>
+      <OI NAME="q69" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q69" />
+      </OI>
+      <OI NAME="q70" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q70" />
+      </OI>
+      <OI NAME="q71" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q71" />
+      </OI>
+      <OI NAME="q72" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q72" />
+      </OI>
+      <OI NAME="q73" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q73" />
+      </OI>
+      <OI NAME="q74" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q74" />
+      </OI>
+      <OI NAME="q75" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q75" />
+      </OI>
+      <OI NAME="q76" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q76" />
+      </OI>
+      <OI NAME="q77" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q77" />
+      </OI>
+      <OI NAME="q78" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q78" />
+      </OI>
+      <OI NAME="q79" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q79" />
+      </OI>
+      <OI NAME="q80" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q80" />
+      </OI>
+      <OI NAME="q81" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q81" />
+      </OI>
+      <OI NAME="q82" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q82" />
+      </OI>
+      <OI NAME="q83" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q83" />
+      </OI>
+      <OI NAME="q84" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q84" />
+      </OI>
+      <OI NAME="q85" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q85" />
+      </OI>
+      <OI NAME="q86" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q86" />
+      </OI>
+      <OI NAME="q87" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q87" />
+      </OI>
+      <OI NAME="q88" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q88" />
+      </OI>
+      <OI NAME="q89" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q89" />
+      </OI>
+      <OI NAME="q90" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q90" />
+      </OI>
+      <OI NAME="q91" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q91" />
+      </OI>
+      <OI NAME="q92" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q92" />
+      </OI>
+      <OI NAME="q93" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q93" />
+      </OI>
+      <OI NAME="q94" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q94" />
+      </OI>
+      <OI NAME="q95" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+        <PI Name="ForeignAddress" Value="spot.q95" />
+      </OI>
+    </OI>
+    <OI NAME="Set" TYPE="system.base.Folder">
+      <OI NAME="Ctl_On" TYPE="server.point.AV">
+        <PI Name="Value" Value="1" />
+      </OI>
+      <OI NAME="Mode" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+      </OI>
+      <OI NAME="N_Cheap" TYPE="server.point.AV">
+        <PI Name="Value" Value="6" />
+      </OI>
+      <OI NAME="N_Block" TYPE="server.point.AV">
+        <PI Name="Value" Value="5" />
+      </OI>
+      <OI NAME="Block_Above" TYPE="server.point.AV">
+        <PI Name="Value" Value="20" />
+      </OI>
+      <OI NAME="Force_Below" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+      </OI>
+      <OI NAME="Normal_Demand" TYPE="server.point.AV">
+        <PI Name="Value" Value="1" />
+      </OI>
+      <OI NAME="Res" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+      </OI>
+      <OI NAME="Unit_MWh" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+      </OI>
+    </OI>
+  </ExportedObjects>
+</ObjectSet>

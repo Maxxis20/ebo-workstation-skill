@@ -1,0 +1,47 @@
+    0.0  ACTION      layout graphic at 250,221,1078,730
+    0.1  block mode  0
+    0.1  planned     0
+    0.3  ACTION      set Ctl_On 1
+    0.3  ACTION      set Mode 0
+    0.3  ACTION      set N_Cheap 6
+    0.3  ACTION      set N_Block 3
+    0.3  ACTION      set Block_Above 20
+    0.4  ACTION      set Force_Below 0
+    0.4  ACTION      set Normal_Demand 1
+    0.4  ACTION      set Res 0
+    0.4  ACTION      set Unit_MWh 0
+    1.2  ACTION      fake q_1220
+    7.1  REASON      2  not chosen
+    7.1  LOAD        0
+    7.1  no price    0
+    7.1  chosen      0
+    7.1  stale       0
+    7.1  in block    0
+    7.1  plan left   3
+    7.1  plan wait   8
+    7.1  best in     8
+    7.1  replan      0
+    7.1  valid       1
+    7.1  N-th price  9
+    7.1  known       30
+    7.1  hour        18
+    7.1  rank        22
+    7.1  price       12
+    9.1  rank        15
+    9.1  price       13.75
+    9.1  known       12
+    9.1  hour        12
+    9.1  plan wait   7
+    9.1  best in     9
+    9.1  N-th price  8.5
+   10.1  N-th price  4.5
+   25.3  ACTION      shot 1-hourly
+   27.1  REASON      3  above block limit
+   27.3  ACTION      set Res 1
+   45.3  ACTION      shot 2-quarters
+   47.3  ACTION      set Unit_MWh 1
+   55.2  ACTION      shot 3-eur-mwh
+   57.3  ACTION      set Unit_MWh 0
+   58.1  REASON      2  not chosen
+   58.3  ACTION      set Res 0
+   60.2  ACTION      end

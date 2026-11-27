@@ -1,0 +1,882 @@
+{
+ "inputs": [
+  {
+   "module": "Inputs",
+   "tag": "Valid",
+   "source": "Spot/valid"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Beat",
+   "source": "Spot/beat"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Hour",
+   "source": "Spot/hour"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Price",
+   "source": "Spot/now"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Rank",
+   "source": "Spot/rank"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Known",
+   "source": "Spot/known"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Ctl_On",
+   "source": "Set/Ctl_On"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Mode",
+   "source": "Set/Mode"
+  },
+  {
+   "module": "Inputs",
+   "tag": "N_Cheap",
+   "source": "Set/N_Cheap"
+  },
+  {
+   "module": "Inputs",
+   "tag": "N_Block",
+   "source": "Set/N_Block"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Block_Above",
+   "source": "Set/Block_Above"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Force_Below",
+   "source": "Set/Force_Below"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Res",
+   "source": "Set/Res"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Price15",
+   "source": "Spot/now15"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Quarter",
+   "source": "Spot/quarter"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Known15",
+   "source": "Spot/known15"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Unit_MWh",
+   "source": "Set/Unit_MWh"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Day_Avg",
+   "source": "Spot/avg"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Day_Min",
+   "source": "Spot/min"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Day_Max",
+   "source": "Spot/max"
+  },
+  {
+   "module": "Inputs",
+   "tag": "Normal_Demand",
+   "source": "Set/Normal_Demand"
+  },
+  {
+   "module": "Prices",
+   "tag": "H0",
+   "source": "Spot/h0"
+  },
+  {
+   "module": "Prices",
+   "tag": "H1",
+   "source": "Spot/h1"
+  },
+  {
+   "module": "Prices",
+   "tag": "H2",
+   "source": "Spot/h2"
+  },
+  {
+   "module": "Prices",
+   "tag": "H3",
+   "source": "Spot/h3"
+  },
+  {
+   "module": "Prices",
+   "tag": "H4",
+   "source": "Spot/h4"
+  },
+  {
+   "module": "Prices",
+   "tag": "H5",
+   "source": "Spot/h5"
+  },
+  {
+   "module": "Prices",
+   "tag": "H6",
+   "source": "Spot/h6"
+  },
+  {
+   "module": "Prices",
+   "tag": "H7",
+   "source": "Spot/h7"
+  },
+  {
+   "module": "Prices",
+   "tag": "H8",
+   "source": "Spot/h8"
+  },
+  {
+   "module": "Prices",
+   "tag": "H9",
+   "source": "Spot/h9"
+  },
+  {
+   "module": "Prices",
+   "tag": "H10",
+   "source": "Spot/h10"
+  },
+  {
+   "module": "Prices",
+   "tag": "H11",
+   "source": "Spot/h11"
+  },
+  {
+   "module": "Prices",
+   "tag": "H12",
+   "source": "Spot/h12"
+  },
+  {
+   "module": "Prices",
+   "tag": "H13",
+   "source": "Spot/h13"
+  },
+  {
+   "module": "Prices",
+   "tag": "H14",
+   "source": "Spot/h14"
+  },
+  {
+   "module": "Prices",
+   "tag": "H15",
+   "source": "Spot/h15"
+  },
+  {
+   "module": "Prices",
+   "tag": "H16",
+   "source": "Spot/h16"
+  },
+  {
+   "module": "Prices",
+   "tag": "H17",
+   "source": "Spot/h17"
+  },
+  {
+   "module": "Prices",
+   "tag": "H18",
+   "source": "Spot/h18"
+  },
+  {
+   "module": "Prices",
+   "tag": "H19",
+   "source": "Spot/h19"
+  },
+  {
+   "module": "Prices",
+   "tag": "H20",
+   "source": "Spot/h20"
+  },
+  {
+   "module": "Prices",
+   "tag": "H21",
+   "source": "Spot/h21"
+  },
+  {
+   "module": "Prices",
+   "tag": "H22",
+   "source": "Spot/h22"
+  },
+  {
+   "module": "Prices",
+   "tag": "H23",
+   "source": "Spot/h23"
+  },
+  {
+   "module": "Prices",
+   "tag": "R0",
+   "source": "Spot/r0"
+  },
+  {
+   "module": "Prices",
+   "tag": "R1",
+   "source": "Spot/r1"
+  },
+  {
+   "module": "Prices",
+   "tag": "R2",
+   "source": "Spot/r2"
+  },
+  {
+   "module": "Prices",
+   "tag": "R3",
+   "source": "Spot/r3"
+  },
+  {
+   "module": "Prices",
+   "tag": "R4",
+   "source": "Spot/r4"
+  },
+  {
+   "module": "Prices",
+   "tag": "R5",
+   "source": "Spot/r5"
+  },
+  {
+   "module": "Prices",
+   "tag": "R6",
+   "source": "Spot/r6"
+  },
+  {
+   "module": "Prices",
+   "tag": "R7",
+   "source": "Spot/r7"
+  },
+  {
+   "module": "Prices",
+   "tag": "R8",
+   "source": "Spot/r8"
+  },
+  {
+   "module": "Prices",
+   "tag": "R9",
+   "source": "Spot/r9"
+  },
+  {
+   "module": "Prices",
+   "tag": "R10",
+   "source": "Spot/r10"
+  },
+  {
+   "module": "Prices",
+   "tag": "R11",
+   "source": "Spot/r11"
+  },
+  {
+   "module": "Prices",
+   "tag": "R12",
+   "source": "Spot/r12"
+  },
+  {
+   "module": "Prices",
+   "tag": "R13",
+   "source": "Spot/r13"
+  },
+  {
+   "module": "Prices",
+   "tag": "R14",
+   "source": "Spot/r14"
+  },
+  {
+   "module": "Prices",
+   "tag": "R15",
+   "source": "Spot/r15"
+  },
+  {
+   "module": "Prices",
+   "tag": "R16",
+   "source": "Spot/r16"
+  },
+  {
+   "module": "Prices",
+   "tag": "R17",
+   "source": "Spot/r17"
+  },
+  {
+   "module": "Prices",
+   "tag": "R18",
+   "source": "Spot/r18"
+  },
+  {
+   "module": "Prices",
+   "tag": "R19",
+   "source": "Spot/r19"
+  },
+  {
+   "module": "Prices",
+   "tag": "R20",
+   "source": "Spot/r20"
+  },
+  {
+   "module": "Prices",
+   "tag": "R21",
+   "source": "Spot/r21"
+  },
+  {
+   "module": "Prices",
+   "tag": "R22",
+   "source": "Spot/r22"
+  },
+  {
+   "module": "Prices",
+   "tag": "R23",
+   "source": "Spot/r23"
+  },
+  {
+   "module": "Prices",
+   "tag": "U0",
+   "source": "Spot/u0"
+  },
+  {
+   "module": "Prices",
+   "tag": "U1",
+   "source": "Spot/u1"
+  },
+  {
+   "module": "Prices",
+   "tag": "U2",
+   "source": "Spot/u2"
+  },
+  {
+   "module": "Prices",
+   "tag": "U3",
+   "source": "Spot/u3"
+  },
+  {
+   "module": "Prices",
+   "tag": "U4",
+   "source": "Spot/u4"
+  },
+  {
+   "module": "Prices",
+   "tag": "U5",
+   "source": "Spot/u5"
+  },
+  {
+   "module": "Prices",
+   "tag": "U6",
+   "source": "Spot/u6"
+  },
+  {
+   "module": "Prices",
+   "tag": "U7",
+   "source": "Spot/u7"
+  },
+  {
+   "module": "Prices",
+   "tag": "U8",
+   "source": "Spot/u8"
+  },
+  {
+   "module": "Prices",
+   "tag": "U9",
+   "source": "Spot/u9"
+  },
+  {
+   "module": "Prices",
+   "tag": "U10",
+   "source": "Spot/u10"
+  },
+  {
+   "module": "Prices",
+   "tag": "U11",
+   "source": "Spot/u11"
+  },
+  {
+   "module": "Prices",
+   "tag": "U12",
+   "source": "Spot/u12"
+  },
+  {
+   "module": "Prices",
+   "tag": "U13",
+   "source": "Spot/u13"
+  },
+  {
+   "module": "Prices",
+   "tag": "U14",
+   "source": "Spot/u14"
+  },
+  {
+   "module": "Prices",
+   "tag": "U15",
+   "source": "Spot/u15"
+  },
+  {
+   "module": "Prices",
+   "tag": "U16",
+   "source": "Spot/u16"
+  },
+  {
+   "module": "Prices",
+   "tag": "U17",
+   "source": "Spot/u17"
+  },
+  {
+   "module": "Prices",
+   "tag": "U18",
+   "source": "Spot/u18"
+  },
+  {
+   "module": "Prices",
+   "tag": "U19",
+   "source": "Spot/u19"
+  },
+  {
+   "module": "Prices",
+   "tag": "U20",
+   "source": "Spot/u20"
+  },
+  {
+   "module": "Prices",
+   "tag": "U21",
+   "source": "Spot/u21"
+  },
+  {
+   "module": "Prices",
+   "tag": "U22",
+   "source": "Spot/u22"
+  },
+  {
+   "module": "Prices",
+   "tag": "U23",
+   "source": "Spot/u23"
+  },
+  {
+   "module": "Prices",
+   "tag": "U24",
+   "source": "Spot/u24"
+  },
+  {
+   "module": "Prices",
+   "tag": "U25",
+   "source": "Spot/u25"
+  },
+  {
+   "module": "Prices",
+   "tag": "U26",
+   "source": "Spot/u26"
+  },
+  {
+   "module": "Prices",
+   "tag": "U27",
+   "source": "Spot/u27"
+  },
+  {
+   "module": "Prices",
+   "tag": "U28",
+   "source": "Spot/u28"
+  },
+  {
+   "module": "Prices",
+   "tag": "U29",
+   "source": "Spot/u29"
+  },
+  {
+   "module": "Prices",
+   "tag": "U30",
+   "source": "Spot/u30"
+  },
+  {
+   "module": "Prices",
+   "tag": "U31",
+   "source": "Spot/u31"
+  },
+  {
+   "module": "Prices",
+   "tag": "U32",
+   "source": "Spot/u32"
+  },
+  {
+   "module": "Prices",
+   "tag": "U33",
+   "source": "Spot/u33"
+  },
+  {
+   "module": "Prices",
+   "tag": "U34",
+   "source": "Spot/u34"
+  },
+  {
+   "module": "Prices",
+   "tag": "U35",
+   "source": "Spot/u35"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q0",
+   "source": "Spot/q0"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q1",
+   "source": "Spot/q1"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q2",
+   "source": "Spot/q2"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q3",
+   "source": "Spot/q3"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q4",
+   "source": "Spot/q4"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q5",
+   "source": "Spot/q5"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q6",
+   "source": "Spot/q6"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q7",
+   "source": "Spot/q7"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q8",
+   "source": "Spot/q8"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q9",
+   "source": "Spot/q9"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q10",
+   "source": "Spot/q10"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q11",
+   "source": "Spot/q11"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q12",
+   "source": "Spot/q12"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q13",
+   "source": "Spot/q13"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q14",
+   "source": "Spot/q14"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q15",
+   "source": "Spot/q15"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q16",
+   "source": "Spot/q16"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q17",
+   "source": "Spot/q17"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q18",
+   "source": "Spot/q18"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q19",
+   "source": "Spot/q19"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q20",
+   "source": "Spot/q20"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q21",
+   "source": "Spot/q21"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q22",
+   "source": "Spot/q22"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q23",
+   "source": "Spot/q23"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q24",
+   "source": "Spot/q24"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q25",
+   "source": "Spot/q25"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q26",
+   "source": "Spot/q26"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q27",
+   "source": "Spot/q27"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q28",
+   "source": "Spot/q28"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q29",
+   "source": "Spot/q29"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q30",
+   "source": "Spot/q30"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q31",
+   "source": "Spot/q31"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q32",
+   "source": "Spot/q32"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q33",
+   "source": "Spot/q33"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q34",
+   "source": "Spot/q34"
+  },
+  {
+   "module": "Prices",
+   "tag": "Q35",
+   "source": "Spot/q35"
+  },
+  {
+   "module": "Block",
+   "tag": "Blk1",
+   "source": "Spot/blk1"
+  },
+  {
+   "module": "Block",
+   "tag": "Blk2",
+   "source": "Spot/blk2"
+  },
+  {
+   "module": "Block",
+   "tag": "Blk3",
+   "source": "Spot/blk3"
+  },
+  {
+   "module": "Block",
+   "tag": "Blk4",
+   "source": "Spot/blk4"
+  },
+  {
+   "module": "Block",
+   "tag": "Blk5",
+   "source": "Spot/blk5"
+  },
+  {
+   "module": "Block",
+   "tag": "Blk6",
+   "source": "Spot/blk6"
+  },
+  {
+   "module": "Block",
+   "tag": "Blk7",
+   "source": "Spot/blk7"
+  },
+  {
+   "module": "Block",
+   "tag": "Blk8",
+   "source": "Spot/blk8"
+  },
+  {
+   "module": "Block",
+   "tag": "Blk9",
+   "source": "Spot/blk9"
+  },
+  {
+   "module": "Block",
+   "tag": "Blk10",
+   "source": "Spot/blk10"
+  },
+  {
+   "module": "Block",
+   "tag": "Blk11",
+   "source": "Spot/blk11"
+  },
+  {
+   "module": "Block",
+   "tag": "Blk12",
+   "source": "Spot/blk12"
+  }
+ ],
+ "public": [
+  "Ctl/Beat_Age",
+  "Ctl/Stale",
+  "Ctl/No_Price",
+  "Ctl/Res15",
+  "Ctl/Price_Used",
+  "Ctl/Block_Mode",
+  "Ctl/N_Block_Used",
+  "Block/Best_In",
+  "Block/Best_OK",
+  "Plan/Hour_Tick",
+  "Plan/Replan",
+  "Plan/Plan_Wait",
+  "Plan/Plan_Left",
+  "Plan/Known_At_Plan",
+  "Plan/Planned",
+  "Plan/In_Block",
+  "Ctl/Chosen",
+  "Ctl/Reason",
+  "Ctl/Load_Cmd",
+  "Hmi/N_Price",
+  "Hmi/Known_Used",
+  "Hmi/G0",
+  "Hmi/U0",
+  "Hmi/L0",
+  "Hmi/G1",
+  "Hmi/U1",
+  "Hmi/G2",
+  "Hmi/U2",
+  "Hmi/G3",
+  "Hmi/U3",
+  "Hmi/L3",
+  "Hmi/G4",
+  "Hmi/U4",
+  "Hmi/G5",
+  "Hmi/U5",
+  "Hmi/G6",
+  "Hmi/U6",
+  "Hmi/L6",
+  "Hmi/G7",
+  "Hmi/U7",
+  "Hmi/G8",
+  "Hmi/U8",
+  "Hmi/G9",
+  "Hmi/U9",
+  "Hmi/L9",
+  "Hmi/G10",
+  "Hmi/U10",
+  "Hmi/G11",
+  "Hmi/U11",
+  "Hmi/G12",
+  "Hmi/U12",
+  "Hmi/L12",
+  "Hmi/G13",
+  "Hmi/U13",
+  "Hmi/G14",
+  "Hmi/U14",
+  "Hmi/G15",
+  "Hmi/U15",
+  "Hmi/L15",
+  "Hmi/G16",
+  "Hmi/U16",
+  "Hmi/G17",
+  "Hmi/U17",
+  "Hmi/G18",
+  "Hmi/U18",
+  "Hmi/L18",
+  "Hmi/G19",
+  "Hmi/U19",
+  "Hmi/G20",
+  "Hmi/U20",
+  "Hmi/G21",
+  "Hmi/U21",
+  "Hmi/L21",
+  "Hmi/G22",
+  "Hmi/U22",
+  "Hmi/G23",
+  "Hmi/U23",
+  "Hmi/G24",
+  "Hmi/U24",
+  "Hmi/L24",
+  "Hmi/G25",
+  "Hmi/U25",
+  "Hmi/G26",
+  "Hmi/U26",
+  "Hmi/G27",
+  "Hmi/U27",
+  "Hmi/L27",
+  "Hmi/G28",
+  "Hmi/U28",
+  "Hmi/G29",
+  "Hmi/U29",
+  "Hmi/G30",
+  "Hmi/U30",
+  "Hmi/L30",
+  "Hmi/G31",
+  "Hmi/U31",
+  "Hmi/G32",
+  "Hmi/U32",
+  "Hmi/G33",
+  "Hmi/U33",
+  "Hmi/L33",
+  "Hmi/G34",
+  "Hmi/U34",
+  "Hmi/G35",
+  "Hmi/U35",
+  "Hmi/Unit_Factor",
+  "Hmi/Disp_Price",
+  "Hmi/Disp_Avg",
+  "Hmi/Disp_Min",
+  "Hmi/Disp_Max",
+  "Hmi/Disp_N_Price"
+ ]
+}

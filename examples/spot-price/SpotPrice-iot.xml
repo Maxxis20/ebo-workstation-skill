@@ -1,0 +1,323 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ObjectSet ExportMode="Special" Note="TypesFirst" Version="7.1.1.132">
+  <MetaInformation>
+    <ExportMode Value="Special" />
+    <RuntimeVersion Value="7.1.1.132" />
+    <SourceVersion Value="7.1.1.132" />
+    <ServerFullPath Value="/Server 1" />
+  </MetaInformation>
+  <ExportedObjects>
+    <OI NAME="SpotPrice_IoT" TYPE="iot.IoTInterface">
+      <OI NAME="Prices" TYPE="iot.StandardMQTT">
+        <PI Name="URL" Value="127.0.0.1" />
+        <PI Name="EnableTLS" Value="0" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="ValueFormat" Value="@(Value)" />
+        <PI Name="SubscriptionTopic" Value="spot/FI/points" />
+        <PI Name="JsonPtrPointID" Value="/id" />
+        <PI Name="JsonPtrValue" Value="/v" />
+        <PI Name="ScaleToBaseSIUnit" Value="0" />
+        <PI Name="JsonPtrCommandRoot" Value="" />
+        <OI NAME="In" TYPE="iot.DataGroup">
+          <PI Name="DataPoints">
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/valid" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/beat" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/hour" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/quarter" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/now" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/now15" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/now_total" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/rank" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/avg" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/min" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/max" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/known" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/known15" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/tomorrow_ok" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/age_s" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h0" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h1" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h2" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h3" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h4" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h5" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h6" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h7" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h8" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h9" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h10" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h11" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h12" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h13" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h14" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h15" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h16" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h17" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h18" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h19" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h20" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h21" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h22" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/h23" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r0" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r1" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r2" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r3" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r4" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r5" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r6" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r7" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r8" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r9" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r10" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r11" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r12" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r13" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r14" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r15" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r16" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r17" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r18" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r19" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r20" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r21" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r22" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/r23" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u0" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u1" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u2" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u3" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u4" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u5" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u6" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u7" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u8" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u9" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u10" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u11" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u12" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u13" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u14" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u15" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u16" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u17" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u18" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u19" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u20" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u21" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u22" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u23" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u24" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u25" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u26" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u27" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u28" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u29" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u30" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u31" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u32" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u33" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u34" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u35" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u36" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u37" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u38" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u39" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u40" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u41" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u42" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u43" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u44" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u45" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u46" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/u47" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/blk1" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/blk2" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/blk3" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/blk4" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/blk5" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/blk6" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/blk7" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/blk8" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/blk9" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/blk10" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/blk11" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/blk12" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q0" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q1" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q2" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q3" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q4" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q5" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q6" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q7" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q8" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q9" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q10" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q11" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q12" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q13" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q14" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q15" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q16" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q17" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q18" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q19" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q20" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q21" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q22" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q23" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q24" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q25" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q26" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q27" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q28" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q29" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q30" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q31" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q32" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q33" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q34" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q35" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q36" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q37" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q38" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q39" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q40" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q41" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q42" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q43" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q44" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q45" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q46" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q47" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q48" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q49" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q50" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q51" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q52" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q53" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q54" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q55" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q56" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q57" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q58" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q59" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q60" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q61" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q62" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q63" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q64" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q65" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q66" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q67" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q68" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q69" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q70" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q71" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q72" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q73" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q74" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q75" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q76" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q77" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q78" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q79" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q80" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q81" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q82" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q83" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q84" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q85" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q86" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q87" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q88" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q89" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q90" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q91" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q92" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q93" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q94" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Spot/q95" Property="Value" Retransmit="0" TransferRate="10" />
+          </PI>
+          <PI Name="EnableInterval" Value="0" />
+          <PI Name="EventDriven" Value="0" />
+          <PI Name="Interval" Value="10" />
+          <PI Name="AllowSubscription" Value="1" />
+        </OI>
+      </OI>
+      <OI NAME="Test" TYPE="iot.StandardMQTT">
+        <PI Name="URL" Value="127.0.0.1" />
+        <PI Name="EnableTLS" Value="0" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="ValueFormat" Value="@(Value)" />
+        <PI Name="SubscriptionTopic" Value="spotprice/cmd" />
+        <PI Name="JsonPtrPointID" Value="/pointId" />
+        <PI Name="JsonPtrValue" Value="/value" />
+        <PI Name="ScaleToBaseSIUnit" Value="0" />
+        <OI NAME="In" TYPE="iot.DataGroup">
+          <PI Name="DataPoints">
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Set/Ctl_On" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Set/Mode" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Set/N_Cheap" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Set/N_Block" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Set/Block_Above" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Set/Force_Below" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Set/Normal_Demand" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Set/Res" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/Set/Unit_MWh" Property="Value" Retransmit="0" TransferRate="10" />
+          </PI>
+          <PI Name="EnableInterval" Value="0" />
+          <PI Name="EventDriven" Value="0" />
+          <PI Name="Interval" Value="10" />
+          <PI Name="AllowSubscription" Value="1" />
+        </OI>
+        <OI NAME="Out1" TYPE="iot.DataGroup">
+          <PI Name="DataPoints">
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Ctl" Property="Reason" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Ctl" Property="Load_Cmd" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Ctl" Property="No_Price" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Ctl" Property="Stale" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Ctl" Property="Beat_Age" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Ctl" Property="Chosen" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Ctl" Property="Block_Mode" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Ctl" Property="Price_Used" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Ctl" Property="Res15" Retransmit="0" TransferRate="10" />
+          </PI>
+          <PI Name="EnableInterval" Value="1" />
+          <PI Name="EventDriven" Value="1" />
+          <PI Name="Interval" Value="10" />
+        </OI>
+        <OI NAME="Out2" TYPE="iot.DataGroup">
+          <PI Name="DataPoints">
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Plan" Property="Planned" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Plan" Property="Plan_Wait" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Plan" Property="Plan_Left" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Plan" Property="In_Block" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Plan" Property="Replan" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Plan" Property="Hour_Tick" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Block" Property="Best_In" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Block" Property="Best_OK" Retransmit="0" TransferRate="10" />
+          </PI>
+          <PI Name="EnableInterval" Value="1" />
+          <PI Name="EventDriven" Value="1" />
+          <PI Name="Interval" Value="10" />
+        </OI>
+        <OI NAME="Out3" TYPE="iot.DataGroup">
+          <PI Name="DataPoints">
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Inputs" Property="Valid" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Inputs" Property="Beat" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Inputs" Property="Hour" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Inputs" Property="Price" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Inputs" Property="Rank" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Inputs" Property="Known" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../SpotPrice/SPOT/Hmi" Property="N_Price" Retransmit="0" TransferRate="10" />
+          </PI>
+          <PI Name="EnableInterval" Value="1" />
+          <PI Name="EventDriven" Value="1" />
+          <PI Name="Interval" Value="10" />
+        </OI>
+      </OI>
+    </OI>
+  </ExportedObjects>
+</ObjectSet>

@@ -380,6 +380,18 @@ Seen on EBO 7.1.1.132 Enterprise Server, Mosquitto on the same machine, all obje
   into a mV value showed 3 678 000 mV. Client property `ScaleToBaseSIUnit` = 0 (default 1) stops it: 3660 then
   arrived as 3 660 mV. °C and % Rh values were the same either way. `mqtt_subscriber()` always writes
   `ScaleToBaseSIUnit` 0. `ConvertValuesToSI` left at its default, not tried.
+- **Many values from one message with one client: a list of command objects** (works, 2026-11-27). Client
+  property `JsonPtrCommandRoot` points to a JSON array (`""` = the message itself is the array, `/c` = the array
+  under key `c`); `JsonPtrPointID` and `JsonPtrValue` are then read inside each item. Payload
+  `[{"id":"t.a","v":1.5},{"id":"t.b","v":-2.25}]` with `JsonPtrPointID` `/id`, `JsonPtrValue` `/v` wrote both
+  values (targets found by Foreign address, both in the client's group with Allow subscription Yes). An item whose
+  id matches nothing is skipped, the others are still written. One client took 235 items (about 6 kB) into 219 values
+  (spot price example, `examples/spot-price`). This lifts the "one client per value" limit whenever the
+  publisher can send such a list.
+- **Trap: a Special export does not carry Foreign addresses**, so the bind round trip (Special export, `ebox.py
+  bind`, delete, import) gives back values **without** them, and a subscribing client that finds its targets by
+  Foreign address writes nothing, without any message. Put them back into the bound file before the import
+  (`examples/spot-price/add_foreign.py`), or import such values after the round trip.
 - Pointers outside `object` work the same (2026-11-24): `/rxInfo/0/rssi` (array index in a JSON pointer) gave the
   first gateway's radio level (-87), `/fCnt` the uplink counter. Five signals = four clients on one IoT Interface
   plus a fifth on a second interface; `make.py --signals name=/json/pointer[@unit],...` (default temperature,
@@ -851,6 +863,8 @@ a steps list on the graphic, four tests by MQTT). Enterprise Server only, field 
   per pair, one on the trip (priority 1); the server makes alarm objects `<program>/Alarms/Seq_S<k>_R<j>` whose text
   names the step and the requirement. **No single quote in the alarm text**: the .aut string is in single quotes,
   one inside ends it, and the alarm object comes with an empty text without any message (`aut.py` refuses it now).
+  The same in a block's description or unit ("rank of today's hour"): there the check (`Fb-Check`) stops with
+  the line number of that block. `aut.py` refuses a single quote in a name, unit, description or alarm text.
 - **Seeing the alarms**: an **Alarm View** object (`Ws-New '<folder>' 'Alarm View' 'AlarmList'`, opened with
   `Ws-Open`) is a live alarm list; its Quick filter (top of the view) narrows it to one folder's sources. Window >
   Alarms was ticked on this machine but showed no pane.

@@ -1,0 +1,53 @@
+   -0.8  REASON      2  not chosen
+   -0.8  LOAD        0
+   -0.8  no price    0
+   -0.8  block mode  1
+   -0.8  chosen      0
+   -0.8  stale       0
+   -0.8  valid       1
+   -0.8  N-th price  9
+   -0.8  known       30
+   -0.8  hour        18
+   -0.8  rank        22
+   -0.8  price       12
+   -0.8  in block    0
+   -0.8  plan left   3
+   -0.8  planned     1
+   -0.8  plan wait   8
+   -0.8  best in     8
+   -0.8  replan      0
+    0.0  ACTION      layout graphic at 250,221,1078,730
+    0.2  planned     0
+    0.2  block mode  0
+    0.3  ACTION      set Ctl_On 1
+    0.3  ACTION      set Mode 0
+    0.3  ACTION      set N_Cheap 6
+    0.3  ACTION      set N_Block 3
+    0.4  ACTION      set Block_Above 20
+    0.4  ACTION      set Force_Below 0
+    0.4  ACTION      set Normal_Demand 1
+    0.4  ACTION      set Res 0
+    0.4  ACTION      set Unit_MWh 0
+    1.3  ACTION      fake n_1230
+   11.2  rank        13
+   11.2  known       12
+   11.2  hour        12
+   11.2  N-th price  4.5
+   11.2  best in     9
+   11.2  plan wait   7
+   20.3  ACTION      shot 1-ok
+   22.3  ACTION      fake n_1230_dead
+   41.2  valid       0
+   41.2  REASON      5  no price data
+   41.2  no price    1
+   41.2  LOAD        1
+   60.3  ACTION      shot 2-invalid
+   62.3  ACTION      alarms al1-active
+   88.3  ACTION      fake n_1230
+   91.2  valid       1
+   91.2  no price    0
+   91.2  REASON      2  not chosen
+   91.2  LOAD        0
+  112.3  ACTION      shot 3-back
+  114.3  ACTION      alarms al2-reset
+  136.2  ACTION      end
