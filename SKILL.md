@@ -108,5 +108,8 @@ To check a generated file without the server, start the editor alone and use `Fi
 - `examples/ahu01/`: larger worked example (air handling unit: hierarchical blocks, staged PID controllers, alarms,
   simulation, animated graphic with info boxes and season colours, schedules, dashboard, MP-C controller, MQTT /
   FUXA); `deploy.sh` there is the pattern for loading a whole set and binding it from one file.
+- `examples/fan-sequence/`: start / stop sequence as a step chain (fan and damper, five steps, requirements with
+  settle and supervision times, sequence alarm naming step and requirement, trip, step durations), a steps list on
+  the graphic, and four tests driven by MQTT with timelines and screenshots (findings, "Step chain").
 
 The WorkStation automation API needs an SDK licence key; do not work around it.

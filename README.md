@@ -21,6 +21,10 @@ What is in the skill:
   FUXA view. `deploy.sh` there loads the lot. How it runs: `examples/ahu01/README.md`.
 - `examples/lora-mqtt/`: values of a LoRaWAN sensor from an MQTT broker fed by a network server in ChirpStack
   format, into EBO server values with units, plus a "sensor stopped reporting" alarm.
+- `examples/fan-sequence/`: a start / stop sequence (step chain) for a fan with a shut-off damper: numbered steps
+  with requirements, settle and supervision times, a sequence alarm that names the step and the requirement, an
+  ordered stop, a trip, step durations, and an operator graphic that lists every step with its live status. Four
+  test scenarios run by MQTT; results and screenshots in `examples/fan-sequence/TESTS.md`.
 
 ![Air handling unit example: the operator graphic](examples/ahu01/AHU01-HMI_preview.png)
 

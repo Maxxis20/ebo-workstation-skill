@@ -1,0 +1,47 @@
+    0.0  ACTION      pub Mode 0
+    0.0  ACTION      pub Fault_Damper 0
+    0.1  ACTION      pub Fault_Fan 0
+    0.1  ACTION      pub E_Stop 0
+    1.0  ACTION      pub Reset 58862
+    1.6  alarm req   1
+    1.6  alarm step  1
+    1.6  duration    D1 = 6.0 s
+    1.6  duration    D2 = 7.0 s
+    1.6  duration    D3 = 281.0 s
+    1.6  duration    D4 = 8.0 s
+    1.6  duration    D5 = 15.0 s
+    4.0  ACTION      shot 0-start
+    4.6  demand      1
+    4.6  step        1
+    5.0  ACTION      pub Mode 1
+    5.6  damper cmd  1
+   10.6  duration    D1 = 6.0 s
+   10.6  step        2
+   11.6  fan cmd     1
+   13.6  fan fdb     1
+   17.6  duration    D2 = 7.0 s
+   17.6  step        3
+   25.0  ACTION      shot 1-run
+   25.6  fan fdb     0
+   26.0  ACTION      pub Fault_Fan 1
+   29.0  ACTION      shot 2-lost
+   29.6  alarm step  3
+   29.6  duration    D3 = 12.0 s
+   29.6  seq alarm   1
+   29.6  step        4
+   30.6  fan cmd     0
+   33.6  duration    D4 = 4.0 s
+   33.6  step        5
+   34.0  ACTION      shot 3-alarm
+   36.0  ACTION      alarms al1-active
+   44.6  damper cmd  0
+   48.6  duration    D5 = 15.0 s
+   48.6  step        0
+   70.6  demand      0
+   70.6  seq alarm   0
+   70.9  ACTION      shot 4-stopped
+   71.0  ACTION      pub Fault_Fan 0
+   71.0  ACTION      pub Mode 0
+   71.0  ACTION      pub Reset 58863
+   71.0  ACTION      alarms al2-reset
+   92.6  ACTION      end

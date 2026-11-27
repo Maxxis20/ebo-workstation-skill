@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ObjectSet ExportMode="Special" Note="TypesFirst" Version="7.1.1.132">
+  <MetaInformation>
+    <ExportMode Value="Special" />
+    <RuntimeVersion Value="7.1.1.132" />
+    <SourceVersion Value="7.1.1.132" />
+    <ServerFullPath Value="/Server 1" />
+  </MetaInformation>
+  <ExportedObjects>
+    <OI NAME="FanSeq_IoT" TYPE="iot.IoTInterface">
+      <OI NAME="Mqtt" TYPE="iot.StandardMQTT">
+        <PI Name="URL" Value="127.0.0.1" />
+        <PI Name="EnableTLS" Value="0" />
+        <PI Name="Enabled" Value="1" />
+        <PI Name="ValueFormat" Value="@(Value)" />
+        <PI Name="SubscriptionTopic" Value="fanseq/cmd" />
+        <PI Name="JsonPtrPointID" Value="/pointId" />
+        <PI Name="JsonPtrValue" Value="/value" />
+        <PI Name="ScaleToBaseSIUnit" Value="0" />
+        <OI NAME="In" TYPE="iot.DataGroup">
+          <PI Name="DataPoints">
+            <Reference DeltaFilter="0" Object="../../../FanSeq/Cmd/Mode" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/Cmd/Auto_Demand" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/Cmd/E_Stop" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/Cmd/Reset" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/Cmd/Fault_Damper" Property="Value" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/Cmd/Fault_Fan" Property="Value" Retransmit="0" TransferRate="10" />
+          </PI>
+          <PI Name="EnableInterval" Value="0" />
+          <PI Name="EventDriven" Value="0" />
+          <PI Name="Interval" Value="10" />
+          <PI Name="AllowSubscription" Value="1" />
+        </OI>
+        <OI NAME="Out1" TYPE="iot.DataGroup">
+          <PI Name="DataPoints">
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="Step" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="Step_Time" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="RQ_AT" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="FBAD" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="Sup_Time" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="Seq_Alarm" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="AL_Step" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="AL_Req" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="Trip" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="Demand" Retransmit="0" TransferRate="10" />
+          </PI>
+          <PI Name="EnableInterval" Value="1" />
+          <PI Name="EventDriven" Value="1" />
+          <PI Name="Interval" Value="10" />
+        </OI>
+        <OI NAME="Out2" TYPE="iot.DataGroup">
+          <PI Name="DataPoints">
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="D1" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="D2" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="D3" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="D4" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Seq" Property="D5" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Outputs" Property="Damper_Cmd" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Outputs" Property="Fan_Cmd" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Sim" Property="Damper_Pos" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Sim" Property="Fan_Fdb" Retransmit="0" TransferRate="10" />
+            <Reference DeltaFilter="0" Object="../../../FanSeq/SEQ/Sim" Property="Duct_Pressure" Retransmit="0" TransferRate="10" />
+          </PI>
+          <PI Name="EnableInterval" Value="1" />
+          <PI Name="EventDriven" Value="1" />
+          <PI Name="Interval" Value="10" />
+        </OI>
+      </OI>
+    </OI>
+  </ExportedObjects>
+</ObjectSet>

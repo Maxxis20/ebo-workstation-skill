@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ObjectSet ExportMode="Special" Note="TypesFirst" Version="7.1.1.132">
+  <MetaInformation>
+    <ExportMode Value="Special" />
+    <RuntimeVersion Value="7.1.1.132" />
+    <SourceVersion Value="7.1.1.132" />
+    <ServerFullPath Value="/Server 1" />
+  </MetaInformation>
+  <ExportedObjects>
+    <OI NAME="Cmd" TYPE="system.base.Folder">
+      <OI NAME="Mode" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+      </OI>
+      <OI NAME="Auto_Demand" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+      </OI>
+      <OI NAME="E_Stop" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+      </OI>
+      <OI NAME="Reset" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+      </OI>
+      <OI NAME="Fault_Damper" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+      </OI>
+      <OI NAME="Fault_Fan" TYPE="server.point.AV">
+        <PI Name="Value" Value="0" />
+      </OI>
+    </OI>
+  </ExportedObjects>
+</ObjectSet>

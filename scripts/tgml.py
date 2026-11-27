@@ -87,6 +87,67 @@ class Graphic:
         self.items.append(f'<Ellipse Fill="{off}" Height="{d}" Left="{x}" Stroke="#5F6368" StrokeWidth="1" Top="{y}" '
                           f'Width="{d}">{self._fill_bind(name, on, off)}</Ellipse>')
 
+    # --- by an integer state (0, 1, 2 ...), and buttons that write (from the start / stop steps example) -----------
+    def text_by(self, x, y, name, cases, size=13, bold=True, colour="#202124", align="Left", default=""):
+        """Text and its colour chosen by an integer value: cases = [(value, text, colour), ...]; other values show
+        `default`."""
+        self._bind(name)
+        m = ",".join(f'"{v}":["{escape(t)}","{c}"]' for v, t, c in cases)
+        self.items.append(
+            f'<Text FontFamily="{FONT}" FontSize="{size}" FontWeight="{"Bold" if bold else "Normal"}" '
+            f'HorizontalAlign="{align}" Left="{x}" Stroke="{colour}" Top="{y}"><Bind Name="{name}">'
+            f'<Script OnSignalChange="signal"><![CDATA[function signal(evt){{var t=evt.getTarget().getParentNode();'
+            f'var m={{{m}}};var k=String(Math.round(new Number(evt.getValue())));var e=m[k];'
+            f'if(e){{t.setAttribute("Content",e[0]);t.setAttribute("Stroke",e[1]);}}else{{t.setAttribute("Content","{default}");}}'
+            f'}}]]></Script></Bind>{escape(default) or "-"}</Text>')
+
+    def fill_by(self, name, colours):
+        """Bind element for inside a shape: Fill by an integer value, colours = {value: colour}."""
+        self._bind(name)
+        cv = "".join(f'<ConvertValue AttributeValue="{c}" SignalEqualTo="{v}"/>' for v, c in colours.items())
+        return f'<Bind Attribute="Fill" Name="{name}">{cv}</Bind>'
+
+    def rect_by(self, x, y, w, h, name, colours, stroke="#C4C7C5", radius=6):
+        """Rectangle filled by an integer value, colours = {value: colour}; the first colour until a value comes."""
+        base = list(colours.values())[0]
+        self.items.append(f'<Rectangle Fill="{base}" Height="{h}" Left="{x}" RadiusX="{radius}" RadiusY="{radius}" '
+                          f'Stroke="{stroke}" StrokeWidth="1" Top="{y}" Width="{w}">{self.fill_by(name, colours)}</Rectangle>')
+
+    def circle_by(self, x, y, d, name, colours):
+        """Circle filled by an integer value, colours = {value: colour}."""
+        base = list(colours.values())[0]
+        self.items.append(f'<Ellipse Fill="{base}" Height="{d}" Left="{x}" Stroke="None" Top="{y}" Width="{d}">'
+                          f'{self.fill_by(name, colours)}</Ellipse>')
+
+    def button(self, x, y, w, h, name, label, js_click, sel=None):
+        """Button that writes to the bound value when clicked: js_click is script with b (the Bind element) and v (the
+        value now), e.g. "setValue(b.getFullBindName(),v+1);". sel=(value, colour): filled while the value equals it.
+        No dialog: the value is written at once."""
+        self._bind(name)
+        hl = (f'var on=(Math.round(parseFloat(c.getAttribute("Val")))=={sel[0]});'
+              f'r.setAttribute("Fill",on?"{sel[1]}":"#FFFFFF");tx.setAttribute("Stroke",on?"#FFFFFF":"#202124");') if sel else ""
+        self.items.append(
+            f'<Component Clip="False" ContentHeight="{h}" ContentWidth="{w}" Height="{h}" Left="{x}" Top="{y}" Val="0" '
+            f'Width="{w}"><Bind Name="{name}"/>'
+            f'<Rectangle Fill="#FFFFFF" Height="{h}" Left="0" RadiusX="4" RadiusY="4" Stroke="#5F6368" StrokeWidth="1" '
+            f'Top="0" Width="{w}"/>'
+            f'<Text FontFamily="{FONT}" FontSize="14" FontWeight="Bold" HorizontalAlign="Center" Left="{w / 2}" '
+            f'Stroke="#202124" Top="{h / 2 - 9}">{escape(label)}</Text>'
+            f'<Script OnMouseClick="clk" OnSignalChange="sig"><![CDATA[function sig(evt){{var c=evt.getCurrentTarget();'
+            f'c.setAttribute("Val",String(evt.getValue()));var r=c.getElementsByTagName("Rectangle").item(0);'
+            f'var tx=c.getElementsByTagName("Text").item(0);{hl}}}'
+            f'function clk(evt){{evt.preventDefault();var c=evt.getCurrentTarget();'
+            f'var b=c.getElementsByTagName("Bind").item(0);var v=parseFloat(c.getAttribute("Val"));{js_click}}}'
+            f']]></Script></Component>')
+
+    def set_button(self, x, y, w, h, name, value, label, colour="#0B57D0"):
+        """Writes `value`; filled while the value is that (one button per choice: Off / On / Auto)."""
+        self.button(x, y, w, h, name, label, f"setValue(b.getFullBindName(),{value});", sel=(value, colour))
+
+    def toggle(self, x, y, w, h, name, label, colour):
+        """Writes 1 when 0 and 0 when 1; filled while 1."""
+        self.button(x, y, w, h, name, label, "setValue(b.getFullBindName(),v>0.5?0:1);", sel=(1, colour))
+
     def pump(self, x, y, name, d=44, left=False, direction=None):
         """Circle with a triangle that shows the flow direction: direction "right" (default), "left", "up" or "down"
         (left=True is the older way to say "left"). Colour by the value: 0 grey (stopped), 1 green (running), 2 and

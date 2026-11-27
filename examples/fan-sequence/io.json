@@ -1,0 +1,87 @@
+{
+ "inputs": [
+  {
+   "tag": "Mode",
+   "module": "Inputs",
+   "desc": "0 Off, 1 On, 2 Auto"
+  },
+  {
+   "tag": "Auto_Demand",
+   "module": "Inputs",
+   "desc": "demand in Auto (time schedule stand-in)"
+  },
+  {
+   "tag": "E_Stop",
+   "module": "Inputs",
+   "desc": "emergency stop pressed"
+  },
+  {
+   "tag": "Reset",
+   "module": "Inputs",
+   "desc": "counter: each change resets"
+  },
+  {
+   "tag": "Fault_Damper",
+   "module": "Inputs",
+   "desc": "test: damper does not open"
+  },
+  {
+   "tag": "Fault_Fan",
+   "module": "Inputs",
+   "desc": "test: fan feedback lost"
+  }
+ ],
+ "public": [
+  "Inputs/Reset_Pulse",
+  "Inputs/E_Stop_On",
+  "Seq/Trip",
+  "Seq/Demand",
+  "Outputs/Damper_Cmd",
+  "Outputs/Fan_Cmd",
+  "Sim/Damper_Pos",
+  "Sim/Damper_Open",
+  "Sim/Damper_Closed",
+  "Sim/Fan_Fdb",
+  "Sim/Duct_Pressure",
+  "Seq/RQ1",
+  "Seq/RQ2",
+  "Seq/N_Req",
+  "Seq/T_Max",
+  "Seq/T_Settle",
+  "Seq/FBAD",
+  "Seq/RQ_AT",
+  "Seq/Seq_Alarm",
+  "Seq/AL_Step",
+  "Seq/AL_Req",
+  "Seq/Step",
+  "Seq/Step_Time",
+  "Seq/Sup_Time",
+  "Seq/Settle_Time",
+  "Seq/D1",
+  "Seq/D2",
+  "Seq/D3",
+  "Seq/D4",
+  "Seq/D5",
+  "Hmi/ST1",
+  "Hmi/SHOW1",
+  "Hmi/RS1_1",
+  "Hmi/ST2",
+  "Hmi/SHOW2",
+  "Hmi/RS2_1",
+  "Hmi/RS2_2",
+  "Hmi/ST3",
+  "Hmi/SHOW3",
+  "Hmi/RS3_1",
+  "Hmi/RS3_2",
+  "Hmi/ST4",
+  "Hmi/SHOW4",
+  "Hmi/RS4_1",
+  "Hmi/RS4_2",
+  "Hmi/ST5",
+  "Hmi/SHOW5",
+  "Hmi/RS5_1",
+  "Hmi/RS5_2",
+  "Hmi/Unit_State",
+  "Hmi/Sup_Pct"
+ ]
+}

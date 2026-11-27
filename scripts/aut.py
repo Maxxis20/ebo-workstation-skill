@@ -377,6 +377,8 @@ class Program:
     def alarm(self, name, src, text="", delay_on=0, delay_off=0, priority=0, module="", desc=""):
         """ALARM block on a binary signal. On the server it becomes an alarm object below the module, named as the
         block, with `text` as its message."""
+        if "'" in text:      # the .aut string is in single quotes: one inside ends it, and the server shows no text
+            raise ValueError(f"alarm {name}: no single quote (') in the alarm text: {text}")
         a = self.block("ALARM", name, [delay_on, delay_off, priority, text], desc=desc, public=True, module=module)
         self.wire(src, a)
         return a

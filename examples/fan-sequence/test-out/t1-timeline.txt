@@ -1,0 +1,34 @@
+    0.0  ACTION      pub Mode 0
+    0.0  ACTION      pub Fault_Damper 0
+    0.1  ACTION      pub Fault_Fan 0
+    0.1  ACTION      pub E_Stop 0
+    1.0  ACTION      pub Reset 55952
+    4.0  ACTION      shot 0-start
+    4.8  demand      1
+    4.8  step        1
+    5.0  ACTION      pub Mode 1
+    5.8  damper cmd  1
+    8.0  ACTION      shot 1-step1
+   10.8  duration    D1 = 6.0 s
+   10.8  step        2
+   11.8  fan cmd     1
+   13.8  fan fdb     1
+   14.0  ACTION      shot 2-step2
+   17.8  duration    D2 = 7.0 s
+   17.8  step        3
+   24.0  ACTION      shot 3-run
+   29.8  demand      0
+   29.8  duration    D3 = 12.0 s
+   29.8  step        4
+   30.0  ACTION      pub Mode 0
+   30.8  fan cmd     0
+   32.8  fan fdb     0
+   35.0  ACTION      shot 4-step4
+   37.8  duration    D4 = 8.0 s
+   37.8  step        5
+   45.0  ACTION      shot 5-step5
+   48.8  damper cmd  0
+   52.8  duration    D5 = 15.0 s
+   52.8  step        0
+   62.0  ACTION      shot 6-idle
+   63.0  ACTION      end

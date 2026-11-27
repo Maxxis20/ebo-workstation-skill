@@ -827,6 +827,52 @@ Read from the 846 components and 31 snippets shipped with the Graphics Editor
   bindings, read back from an export; about 5 minutes).
 - Not possible to check without the device: download, the live values, the alarms.
 
+## Step chain (start / stop sequence) in a Function Block program (works, 2026-11-26)
+
+Worked example: `examples/fan-sequence` (fan + shut-off damper, 5 steps, supervision, sequence alarm, trip,
+a steps list on the graphic, four tests by MQTT). Enterprise Server only, field simulated in the program.
+
+- **The chain is expressions closed through one-cycle delays.** `DELI` holds last cycle's step, `DELR` the timers,
+  `DELB` the latches; every cycle computes the new step, step time, settle time and check pointer from those. One
+  XPI does the step: `t?0:(A=0?(p&!q?1:0):(r?4:(s?(A=5?0:A+1):A)))` (t trip, A step, p demand, q alarm held, r jump
+  to the first stop step, s step finished). The timers restart when the step changes (`Step <> Prev_Step`,
+  `Prev_Step` being the `DELI`). A step's requirement count, settle and supervision time come from one nested
+  expression per quantity on the step (`N_Req`, `T_Settle`, `T_Max`).
+- **Requirement pointer (`RQ_AT`)**: one requirement forward per cycle while met, back at once to the first one not
+  met; the step is finished when every requirement has held for its settle time. The supervision timer runs while
+  a requirement is not met (in the run step it restarts when all are met again); at `T_Max` the alarm latches the
+  step and the first requirement not met (`AL_Step`, `AL_Req`).
+- **Expression rules met on the way** (on top of "The .aut format"): at most 8 inputs and 60 characters per
+  expression; input letters in sort order, capitals first (`A B ... p q r`), else the pins are wired in a
+  different order than meant (`aut.py` refuses such an expression).
+- **Trip**: drop the commands in the command expressions themselves (`Fan_Cmd = !Trip & ...`), not through the
+  chain: the chain reaches step 0 one cycle later.
+- **An alarm object per step and requirement**: an ALARM block on `Seq_Alarm & AL_Step=k & AL_Req=j` (priority 2)
+  per pair, one on the trip (priority 1); the server makes alarm objects `<program>/Alarms/Seq_S<k>_R<j>` whose text
+  names the step and the requirement. **No single quote in the alarm text**: the .aut string is in single quotes,
+  one inside ends it, and the alarm object comes with an empty text without any message (`aut.py` refuses it now).
+- **Seeing the alarms**: an **Alarm View** object (`Ws-New '<folder>' 'Alarm View' 'AlarmList'`, opened with
+  `Ws-Open`) is a live alarm list; its Quick filter (top of the view) narrows it to one folder's sources. Window >
+  Alarms was ticked on this machine but showed no pane.
+- **Test by MQTT** (`examples/fan-sequence/run_tests.sh`, `seqtest.ps1`): commands go in through the MQTT client's
+  subscription (`{"pointId":"/Server 1/<folder>/Cmd/<name>/Value","value":v}` on one topic, `mosquitto_pub -f` with
+  the message in a file), the program's signals come out through data groups, `mosquitto_sub -F "%I %t %p"` writes
+  them with their time. `%U` (sub-second time) is refused on Windows ("not supported"): the trace has whole
+  seconds. With a Finnish (decimal comma) locale `Get-Date -UFormat %s` gives a comma: use
+  `[DateTimeOffset]::UtcNow.ToUnixTimeSeconds()`.
+- **Do not name a variable `$a`, `$ts` or `$ct` in code that calls the driver**: PowerShell names ignore case, and
+  `lib.ps1` keeps the UI Automation classes in `$A`, `$TS`, `$CT`. A loop variable `$a` hid `$A` from every driver
+  function called in the loop, which then failed with "You cannot call a method on a null-valued expression".
+- A `mosquitto_sub` left running by a broken run keeps writing into the same trace file (NUL bytes, doubled
+  lines): stop any left over before a new trace.
+- **WorkStation logs off after 5 idle minutes**, and a new log-on closes the open tabs: log on and open the graphic
+  right before each test. The graphic follows the program about 1 s behind.
+- **Graphic helpers in `tgml.py`** for this kind of panel: `text_by` (text and colour by an integer state),
+  `rect_by` / `circle_by` / `fill_by` (fill by an integer state), `button` (writes on click, no dialog:
+  `setValue(b.getFullBindName(), v)` in the script), `set_button` (one per choice, filled while chosen) and `toggle`.
+- `alarm_lamp()` (blinking) never showed lit in a screenshot: the capture tends to land in the hidden half of the
+  blink. For a lamp that must show in a picture use `lamp()` with an alarm colour.
+
 ## Servers in containers, and more than one server (2026-11-23)
 
 Schneider publishes the EBO servers as Linux container images: repository

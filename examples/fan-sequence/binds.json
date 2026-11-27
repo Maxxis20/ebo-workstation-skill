@@ -1,0 +1,247 @@
+[
+[
+"FanSeq/SEQ/Inputs",
+"Mode",
+"/Server 1/FanSeq/Cmd/Mode/Value"
+],
+[
+"FanSeq/SEQ/Inputs",
+"Auto_Demand",
+"/Server 1/FanSeq/Cmd/Auto_Demand/Value"
+],
+[
+"FanSeq/SEQ/Inputs",
+"E_Stop",
+"/Server 1/FanSeq/Cmd/E_Stop/Value"
+],
+[
+"FanSeq/SEQ/Inputs",
+"Reset",
+"/Server 1/FanSeq/Cmd/Reset/Value"
+],
+[
+"FanSeq/SEQ/Inputs",
+"Fault_Damper",
+"/Server 1/FanSeq/Cmd/Fault_Damper/Value"
+],
+[
+"FanSeq/SEQ/Inputs",
+"Fault_Fan",
+"/Server 1/FanSeq/Cmd/Fault_Fan/Value"
+],
+[
+"FanSeq/Graphic",
+"UNIT_ST",
+"/Server 1/FanSeq/SEQ/Hmi/Unit_State"
+],
+[
+"FanSeq/Graphic",
+"STEP",
+"/Server 1/FanSeq/SEQ/Seq/Step"
+],
+[
+"FanSeq/Graphic",
+"STEP_T",
+"/Server 1/FanSeq/SEQ/Seq/Step_Time"
+],
+[
+"FanSeq/Graphic",
+"MODE",
+"/Server 1/FanSeq/Cmd/Mode/Value"
+],
+[
+"FanSeq/Graphic",
+"AUTO",
+"/Server 1/FanSeq/Cmd/Auto_Demand/Value"
+],
+[
+"FanSeq/Graphic",
+"RESET",
+"/Server 1/FanSeq/Cmd/Reset/Value"
+],
+[
+"FanSeq/Graphic",
+"ESTOP",
+"/Server 1/FanSeq/Cmd/E_Stop/Value"
+],
+[
+"FanSeq/Graphic",
+"TRIP",
+"/Server 1/FanSeq/SEQ/Seq/Trip"
+],
+[
+"FanSeq/Graphic",
+"SEQ_ALM",
+"/Server 1/FanSeq/SEQ/Seq/Seq_Alarm"
+],
+[
+"FanSeq/Graphic",
+"DMP_POS",
+"/Server 1/FanSeq/SEQ/Sim/Damper_Pos"
+],
+[
+"FanSeq/Graphic",
+"DMP_CMD",
+"/Server 1/FanSeq/SEQ/Outputs/Damper_Cmd"
+],
+[
+"FanSeq/Graphic",
+"DMP_OPEN",
+"/Server 1/FanSeq/SEQ/Sim/Damper_Open"
+],
+[
+"FanSeq/Graphic",
+"DMP_CLOSED",
+"/Server 1/FanSeq/SEQ/Sim/Damper_Closed"
+],
+[
+"FanSeq/Graphic",
+"FAN_FDB",
+"/Server 1/FanSeq/SEQ/Sim/Fan_Fdb"
+],
+[
+"FanSeq/Graphic",
+"FAN_CMD",
+"/Server 1/FanSeq/SEQ/Outputs/Fan_Cmd"
+],
+[
+"FanSeq/Graphic",
+"PRES",
+"/Server 1/FanSeq/SEQ/Sim/Duct_Pressure"
+],
+[
+"FanSeq/Graphic",
+"DEMAND",
+"/Server 1/FanSeq/SEQ/Seq/Demand"
+],
+[
+"FanSeq/Graphic",
+"SUP_PCT",
+"/Server 1/FanSeq/SEQ/Hmi/Sup_Pct"
+],
+[
+"FanSeq/Graphic",
+"SUP_T",
+"/Server 1/FanSeq/SEQ/Seq/Sup_Time"
+],
+[
+"FanSeq/Graphic",
+"RQ_AT",
+"/Server 1/FanSeq/SEQ/Seq/RQ_AT"
+],
+[
+"FanSeq/Graphic",
+"F_DAMPER",
+"/Server 1/FanSeq/Cmd/Fault_Damper/Value"
+],
+[
+"FanSeq/Graphic",
+"F_FAN",
+"/Server 1/FanSeq/Cmd/Fault_Fan/Value"
+],
+[
+"FanSeq/Graphic",
+"AL_STEP",
+"/Server 1/FanSeq/SEQ/Seq/AL_Step"
+],
+[
+"FanSeq/Graphic",
+"AL_REQ",
+"/Server 1/FanSeq/SEQ/Seq/AL_Req"
+],
+[
+"FanSeq/Graphic",
+"ST1",
+"/Server 1/FanSeq/SEQ/Hmi/ST1"
+],
+[
+"FanSeq/Graphic",
+"SHOW1",
+"/Server 1/FanSeq/SEQ/Hmi/SHOW1"
+],
+[
+"FanSeq/Graphic",
+"RS1_1",
+"/Server 1/FanSeq/SEQ/Hmi/RS1_1"
+],
+[
+"FanSeq/Graphic",
+"ST2",
+"/Server 1/FanSeq/SEQ/Hmi/ST2"
+],
+[
+"FanSeq/Graphic",
+"SHOW2",
+"/Server 1/FanSeq/SEQ/Hmi/SHOW2"
+],
+[
+"FanSeq/Graphic",
+"RS2_1",
+"/Server 1/FanSeq/SEQ/Hmi/RS2_1"
+],
+[
+"FanSeq/Graphic",
+"RS2_2",
+"/Server 1/FanSeq/SEQ/Hmi/RS2_2"
+],
+[
+"FanSeq/Graphic",
+"ST3",
+"/Server 1/FanSeq/SEQ/Hmi/ST3"
+],
+[
+"FanSeq/Graphic",
+"SHOW3",
+"/Server 1/FanSeq/SEQ/Hmi/SHOW3"
+],
+[
+"FanSeq/Graphic",
+"RS3_1",
+"/Server 1/FanSeq/SEQ/Hmi/RS3_1"
+],
+[
+"FanSeq/Graphic",
+"RS3_2",
+"/Server 1/FanSeq/SEQ/Hmi/RS3_2"
+],
+[
+"FanSeq/Graphic",
+"ST4",
+"/Server 1/FanSeq/SEQ/Hmi/ST4"
+],
+[
+"FanSeq/Graphic",
+"SHOW4",
+"/Server 1/FanSeq/SEQ/Hmi/SHOW4"
+],
+[
+"FanSeq/Graphic",
+"RS4_1",
+"/Server 1/FanSeq/SEQ/Hmi/RS4_1"
+],
+[
+"FanSeq/Graphic",
+"RS4_2",
+"/Server 1/FanSeq/SEQ/Hmi/RS4_2"
+],
+[
+"FanSeq/Graphic",
+"ST5",
+"/Server 1/FanSeq/SEQ/Hmi/ST5"
+],
+[
+"FanSeq/Graphic",
+"SHOW5",
+"/Server 1/FanSeq/SEQ/Hmi/SHOW5"
+],
+[
+"FanSeq/Graphic",
+"RS5_1",
+"/Server 1/FanSeq/SEQ/Hmi/RS5_1"
+],
+[
+"FanSeq/Graphic",
+"RS5_2",
+"/Server 1/FanSeq/SEQ/Hmi/RS5_2"
+]
+]
